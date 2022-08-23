@@ -1,0 +1,58 @@
+{
+  "toggles": [
+    {
+      "variable": "boolean_toggle",
+      "value": {
+        "bool": {
+          "value": true
+        }
+      }
+    },
+    {
+      "variable": "integer_toggle",
+      "value": {
+        "int": {
+          "value": 42
+        }
+      }
+    },
+    {
+      "variable": "numerical_toggle",
+      "value": {
+        "number": {
+            "value": 3.1416
+        }
+      }
+    },
+    {
+      "variable": "string_toggle",
+      "value": {
+        "string": {
+          "value": "Hello World"
+        }
+      }
+    }
+  ],
+  "metadata": [
+    {
+      "variable": "boolean_toggle",
+      "group": "group_1",
+      "description": "Boolean toggle",
+    },
+    {
+      "variable": "integer_toggle",
+      "group": "group_1",
+      "description": "Integer toggle",
+    },
+    {
+      "variable": "numerical_toggle",
+      "group": "group_2",
+      "description": "Numerical toggle",
+    },
+    {
+      "variable": "string_toggle",
+      "group": "group_2",
+      "description": "String toggle",
+    }
+  ]
+}
