@@ -4,35 +4,36 @@ import Foundation
 
 final public class ToggleManager {
     
-    private var mutableValueProvider: MutableValueProvider?
-    private var nullableValueProviders: [NullableValueProvider]
-    private var valueProvider: ValueProvider
+    var mutableValueProvider: MutableValueProvider?
+    var optionalValueProviders: [OptionalValueProvider]
+    var valueProvider: ValueProvider
     
-    private let queue = DispatchQueue(label: "com.albertodebortoli.toggles", attributes: .concurrent)
-    private let cache = Cache<Toggle.Variable, Toggle.Value>()
+    let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
+    private let cache = Cache<Variable, Value>()
     
     public init(mutableValueProvider: MutableValueProvider? = nil,
-                nullableValueProviders: [NullableValueProvider] = [],
-                valueProvider: ValueProvider) {
+                optionalValueProviders: [OptionalValueProvider] = [],
+                dataSourceUrl: URL) throws {
         self.mutableValueProvider = mutableValueProvider
-        self.nullableValueProviders = nullableValueProviders
-        self.valueProvider = valueProvider
+        self.optionalValueProviders = optionalValueProviders
+        self.valueProvider = try LocalValueProvider(jsonURL: dataSourceUrl)
     }
 }
 
-extension ToggleManager: ValueProvider {
-    public func value(for variable: Toggle.Variable) -> Toggle.Value {
+extension ToggleManager {
+    
+    public func value(for variable: Variable) -> Value {
         if let cached = cache[variable] { return cached }
         let value = fetchValue(for: variable)
         cache[variable] = value
         return value
     }
     
-    private func fetchValue(for variable: Toggle.Variable) -> Toggle.Value {
+    private func fetchValue(for variable: Variable) -> Value {
         queue.sync {
-            if let value = mutableValueProvider?.nullableValue(for: variable) { return value }
-            for provider in nullableValueProviders {
-                if let value = provider.nullableValue(for: variable) {
+            if let value = mutableValueProvider?.optionalValue(for: variable) { return value }
+            for provider in optionalValueProviders {
+                if let value = provider.optionalValue(for: variable) {
                     return value
                 }
             }
@@ -41,20 +42,20 @@ extension ToggleManager: ValueProvider {
     }
 }
 
-extension ToggleManager: MutableValueProvider {
+extension ToggleManager {
     
-    public func nullableValue(for variable: Toggle.Variable) -> Toggle.Value? {
+    public func optionalValue(for variable: Variable) -> Value? {
         value(for: variable)
     }
     
-    public func set(_ value: Toggle.Value, for variable: Toggle.Variable) {
+    public func set(_ value: Value, for variable: Variable) {
         cache[variable] = value
         queue.async(flags: .barrier) {
             self.mutableValueProvider?.set(value, for: variable)
         }
     }
     
-    public func delete(_ variable: Toggle.Variable) {
+    public func delete(_ variable: Variable) {
         cache[variable] = nil
         queue.async(flags: .barrier) {
             self.mutableValueProvider?.delete(variable)
@@ -69,7 +70,7 @@ extension ToggleManager {
 }
 
 extension ToggleManager {
-    func set(_ dictionary: [Toggle.Variable: Toggle.Value]) {
+    func set(_ dictionary: [Variable: Value]) {
         for (key, value) in dictionary {
             set(value, for: key)
         }
