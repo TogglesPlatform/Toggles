@@ -1,12 +1,14 @@
-//  NullableLocalValueProvider.swift
+//  OptionalLocalValueProvider.swift
 
 import Foundation
 
-class NullableLocalValueProvider: NullableValueProvider {
+public class OptionalLocalValueProvider: OptionalValueProvider {
     
-    private let toggles: [Toggle.Variable: Toggle.Value]
+    public var name: String { "Optional Local" }
     
-    init(jsonURL: URL) throws {
+    private let toggles: [Variable: Value]
+    
+    public init(jsonURL: URL) throws {
         let content = try Data(contentsOf: jsonURL)
         let dataSource = try JSONDecoder().decode(DataSource.self, from: content)
         self.toggles = Dictionary(grouping: dataSource.toggles, by: \.variable)
@@ -14,7 +16,7 @@ class NullableLocalValueProvider: NullableValueProvider {
             .mapValues { $0.value }
     }
     
-    func nullableValue(for variable: Toggle.Variable) -> Toggle.Value? {
+    public func optionalValue(for variable: Variable) -> Value? {
         toggles[variable]
     }
 }
