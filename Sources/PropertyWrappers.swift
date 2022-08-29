@@ -32,13 +32,13 @@ public struct ToggleProperty<T: RawType> {
         set {
             switch newValue {
             case is Bool:
-                manager.set(.bool(value: newValue as! Bool), for: variable)
+                manager.set(.bool(newValue as! Bool), for: variable)
             case is Int:
-                manager.set(.int(value: newValue as! Int), for: variable)
+                manager.set(.int(newValue as! Int), for: variable)
             case is Double:
-                manager.set(.number(value: newValue as! Double), for: variable)
+                manager.set(.number(newValue as! Double), for: variable)
             case is String:
-                manager.set(.string(value: newValue as! String), for: variable)
+                manager.set(.string(newValue as! String), for: variable)
             default:
                 assertionFailure("Wrapped value is not a known raw type conforming to RawType")
             }
