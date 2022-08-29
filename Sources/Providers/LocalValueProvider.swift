@@ -4,7 +4,9 @@ import Foundation
 
 class LocalValueProvider: ValueProvider {
     
-    private let toggles: [Toggle.Variable: Toggle.Value]
+    public var name: String { "Local" }
+    
+    private let toggles: [Variable: Value]
     
     init(jsonURL: URL) throws {
         let content = try Data(contentsOf: jsonURL)
@@ -14,7 +16,7 @@ class LocalValueProvider: ValueProvider {
             .mapValues { $0.value }
     }
     
-    func value(for variable: Toggle.Variable) -> Toggle.Value {
+    func value(for variable: Variable) -> Value {
         toggles[variable]!
     }
 }
