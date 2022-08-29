@@ -6,21 +6,26 @@ private let userDefaultsKeyPrefix = "com.toggles"
 
 public class UserDefaultsProvider: MutableValueProvider {
     
+    public var name: String { "UserDefaults" }
+    
     private let userDefaults: UserDefaults
     
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
     
-    public func nullableValue(for variable: Toggle.Variable) -> Toggle.Value? {
-        userDefaults.value(forKey: key(for: variable)) as? Toggle.Value
+    public func optionalValue(for variable: Variable) -> Value? {
+        let data = userDefaults.value(forKey: key(for: variable)) as? Data
+        guard let data = data else { return nil }
+        return try! PropertyListDecoder().decode(Value?.self, from: data)
     }
     
-    public func set(_ value: Toggle.Value, for variable: Toggle.Variable) {
-        userDefaults.set(value, forKey: key(for: variable))
+    public func set(_ value: Value, for variable: Variable) {
+        let data = try! PropertyListEncoder().encode(value)
+        userDefaults.set(data, forKey: key(for: variable))
     }
     
-    public func delete(_ variable: Toggle.Variable) {
+    public func delete(_ variable: Variable) {
         userDefaults.set(nil, forKey: key(for: variable))
     }
     
