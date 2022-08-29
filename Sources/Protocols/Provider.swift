@@ -2,15 +2,19 @@
 
 import Foundation
 
-public protocol ValueProvider {
-    func value(for variable: Toggle.Variable) -> Toggle.Value
+public protocol Nameable {
+    var name: String { get }
 }
 
-public protocol NullableValueProvider {
-    func nullableValue(for variable: Toggle.Variable) -> Toggle.Value?
+protocol ValueProvider: Nameable {
+    func value(for variable: Variable) -> Value
 }
 
-public protocol MutableValueProvider: NullableValueProvider {
-    func set(_ value: Toggle.Value, for variable: Toggle.Variable)
-    func delete(_ variable: Toggle.Variable)
+public protocol OptionalValueProvider: Nameable {
+    func optionalValue(for variable: Variable) -> Value?
+}
+
+public protocol MutableValueProvider: OptionalValueProvider {
+    func set(_ value: Value, for variable: Variable)
+    func delete(_ variable: Variable)
 }
