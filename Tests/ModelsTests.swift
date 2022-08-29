@@ -3,67 +3,54 @@ import XCTest
 
 final class ModelsTests: XCTestCase {
     
-    private let booleanToggle = Toggle(variable: "boolean_toggle", value: .bool(value: true))
-    private let integerToggle = Toggle(variable: "integer_toggle", value: .int(value: 42))
-    private let numericalToggle = Toggle(variable: "numerical_toggle", value: .number(value: 3.1416))
-    private let stringToggle = Toggle(variable: "string_toggle", value: .string(value: "Hello World"))
-    
-    private func makeToggles() -> [Toggle] {
-        [
-            booleanToggle,
-            integerToggle,
-            numericalToggle,
-            stringToggle
-        ]
-    }
-    
-    private let booleanToggleMetadata = ToggleMetadata(variable: "boolean_toggle", description: "Boolean toggle", group: "group_1")
-    private let integerToggleMetadata = ToggleMetadata(variable: "integer_toggle", description: "Integer toggle", group: "group_1")
-    private let numericalToggleMetadata = ToggleMetadata(variable: "numerical_toggle", description: "Numerical toggle", group: "group_2")
-    private let stringToggleMetadata = ToggleMetadata(variable: "string_toggle", description: "String toggle", group: "group_2")
-    
-    private func makeMetadata() -> [ToggleMetadata] {
-        [
-            booleanToggleMetadata,
-            integerToggleMetadata,
-            numericalToggleMetadata,
-            stringToggleMetadata
-        ]
-    }
+    private let factory = ToggleFactory()
     
     func test_contract() throws {
         let url = Bundle.toggles.url(forResource: "contract", withExtension: "json")!
         let data = try Data(contentsOf: url)
         let dataSourceFromFile = try JSONDecoder().decode(DataSource.self, from: data)
-        let targetDataSource = DataSource(toggles: makeToggles(), metadata: makeMetadata())
+        let targetDataSource = DataSource(toggles: factory.makeToggles())
         XCTAssertEqual(dataSourceFromFile, targetDataSource)
     }
     
-    func test_toggle_bool_accessor() throws {
-        XCTAssertEqual(booleanToggle.value.boolValue, true)
-        XCTAssertNil(integerToggle.value.boolValue)
-        XCTAssertNil(numericalToggle.value.boolValue)
-        XCTAssertNil(stringToggle.value.boolValue)
+    func test_toggleBoolAccessor() throws {
+        XCTAssertEqual(factory.booleanToggle.value.boolValue, true)
+        XCTAssertNil(factory.integerToggle.value.boolValue)
+        XCTAssertNil(factory.numericalToggle.value.boolValue)
+        XCTAssertNil(factory.stringToggle.value.boolValue)
     }
     
-    func test_toggle_int_accessor() throws {
-        XCTAssertNil(booleanToggle.value.intValue)
-        XCTAssertEqual(integerToggle.value.intValue, 42)
-        XCTAssertNil(numericalToggle.value.intValue)
-        XCTAssertNil(stringToggle.value.intValue)
+    func test_toggleIntAccessor() throws {
+        XCTAssertNil(factory.booleanToggle.value.intValue)
+        XCTAssertEqual(factory.integerToggle.value.intValue, 42)
+        XCTAssertNil(factory.numericalToggle.value.intValue)
+        XCTAssertNil(factory.stringToggle.value.intValue)
     }
     
-    func test_toggle_double_accessor() throws {
-        XCTAssertNil(booleanToggle.value.doubleValue)
-        XCTAssertNil(integerToggle.value.doubleValue)
-        XCTAssertEqual(numericalToggle.value.doubleValue, 3.1416)
-        XCTAssertNil(stringToggle.value.doubleValue)
+    func test_toggleDoubleAccessor() throws {
+        XCTAssertNil(factory.booleanToggle.value.doubleValue)
+        XCTAssertNil(factory.integerToggle.value.doubleValue)
+        XCTAssertEqual(factory.numericalToggle.value.doubleValue, 3.1416)
+        XCTAssertNil(factory.stringToggle.value.doubleValue)
     }
     
-    func test_toggle_string_accessor() throws {
-        XCTAssertNil(booleanToggle.value.stringValue)
-        XCTAssertNil(integerToggle.value.stringValue)
-        XCTAssertNil(numericalToggle.value.stringValue)
-        XCTAssertEqual(stringToggle.value.stringValue, "Hello World")
+    func test_toggleStringAccessor() throws {
+        XCTAssertNil(factory.booleanToggle.value.stringValue)
+        XCTAssertNil(factory.integerToggle.value.stringValue)
+        XCTAssertNil(factory.numericalToggle.value.stringValue)
+        XCTAssertEqual(factory.stringToggle.value.stringValue, "Hello World")
+    }
+    
+    func test_measureToggleCreation() throws {
+        measure {
+            _ = DataSource(toggles: factory.makeToggles(count: 100000))
+        }
+    }
+    
+    func test_measureToggleEncoding() throws {
+        let dataSource = DataSource(toggles: factory.makeToggles(count: 100000))
+        measure {
+            _ = try! JSONEncoder().encode(dataSource)
+        }
     }
 }
