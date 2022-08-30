@@ -9,7 +9,8 @@ struct ToggleDetailView: View {
     
     @State private var textValue: String = ""
     @State private var isValidInput: Bool = false
-    @State private var valueSaved: Bool = false
+    @State private var refresh: Bool = false
+    @State private var valueOverridden: Bool = false
 
     init(manager: ToggleManager, toggle: Toggle) {
         self.manager = manager
@@ -28,6 +29,15 @@ struct ToggleDetailView: View {
             overrideValueSection
         }
         .navigationTitle(toggle.metadata.description)
+        .onAppear {
+            textValue = manager.value(for: toggle.variable).description
+        }
+        .onChange(of: textValue) { newValue in
+            isValidInput = isInputValid(newValue)
+        }
+        .onChange(of: refresh) { newValue in
+            valueOverridden = true
+        }
     }
     
     var toggleInformationSection: some View {
@@ -67,14 +77,8 @@ struct ToggleDetailView: View {
         Section {
             HStack {
                 TextField("Override value", text: $textValue)
-                    .onAppear {
-                        textValue = manager.value(for: toggle.variable).description
-                    }
-                    .onChange(of: textValue) {  newValue in
-                        isValidInput = isInputValid(newValue)
-                    }
                 Spacer()
-                saveButtonView
+                overrideButtonView
             }
         } header: {
             Text("Override value")
@@ -90,7 +94,7 @@ struct ToggleDetailView: View {
                         .font(.caption)
                         .foregroundColor(.red)
                 }
-                if valueSaved {
+                if valueOverridden {
                     Spacer()
                     Label("Value overridden", systemImage: "checkmark")
                 }
@@ -98,14 +102,14 @@ struct ToggleDetailView: View {
         }
     }
     
-    var saveButtonView: some View {
-        Button("Save") {
+    var overrideButtonView: some View {
+        Button("Override") {
             if textValue.isEmpty {
                 manager.delete(toggle.variable)
             } else {
                 manager.set(overridingValue(for: textValue), for: toggle.variable)
             }
-            valueSaved = true
+            refresh.toggle()
         }
         .disabled(!isValidInput)
     }
