@@ -22,9 +22,26 @@ struct ToggleDetailView: View {
     
     var listView: some View {
         List {
+            toggleInformationSection
             providersSection
             currentValueSection
             overrideValueSection
+        }
+        .navigationTitle(toggle.metadata.description)
+    }
+    
+    var toggleInformationSection: some View {
+        Section(header: Text("Informations")) {
+            HStack {
+                Text("Variable")
+                Spacer()
+                Text(toggle.variable)
+            }
+            HStack {
+                Text("Value type")
+                Spacer()
+                Text(toggle.value.typeDescription)
+            }
         }
     }
     

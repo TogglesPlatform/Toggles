@@ -19,6 +19,19 @@ extension Value {
         }
     }
     
+    var typeDescription: String {
+        switch self {
+        case .bool:
+            return "Bool"
+        case .int:
+            return "Int"
+        case .number:
+            return "Double"
+        case .string:
+            return "String"
+        }
+    }
+    
     var sfSymbolId: SFSymbolId {
         switch self {
         case .bool:
