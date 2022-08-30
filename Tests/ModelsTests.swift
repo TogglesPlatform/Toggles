@@ -53,4 +53,12 @@ final class ModelsTests: XCTestCase {
             _ = try! JSONEncoder().encode(dataSource)
         }
     }
+    
+    func test_measureToggleDecoding() throws {
+        let dataSource = DataSource(toggles: factory.makeToggles(count: 100000))
+        let data = try! JSONEncoder().encode(dataSource)
+        measure {
+            _ = try! JSONDecoder().decode(DataSource.self, from: data)
+        }
+    }
 }
