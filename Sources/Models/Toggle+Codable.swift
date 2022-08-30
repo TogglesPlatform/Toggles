@@ -51,5 +51,6 @@ extension Toggle: Codable {
         case .string(let value):
             try container.encode(value, forKey: .string)
         }
+        try container.encode(metadata, forKey: .metadata)
     }
 }
