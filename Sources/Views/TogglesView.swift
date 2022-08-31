@@ -99,6 +99,8 @@ public struct TogglesView: View {
     
     let manager: ToggleManager
     let groups: [Group]
+    
+    @State private var showingOptions = false
 
     public init(manager: ToggleManager, dataSourceUrl: URL) throws {
         self.manager = manager
@@ -129,6 +131,18 @@ public struct TogglesView: View {
             .listStyle(.insetGrouped)
             .accessibilityLabel("Toggles list")
             .navigationTitle("Toggles")
+            .toolbar {
+                Button {
+                    showingOptions = true
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+                .confirmationDialog("Select an action", isPresented: $showingOptions) {
+                    Button("Clear overrides & cache") {
+                        manager.removeOverrides()
+                    }
+                }
+            }
         }
     }
 }
