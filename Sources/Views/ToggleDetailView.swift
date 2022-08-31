@@ -7,6 +7,7 @@ struct ToggleDetailView: View {
     let manager: ToggleManager
     let toggle: Toggle
     
+    @State private var boolValue: Bool = false
     @State private var textValue: String = ""
     @State private var isValidInput: Bool = false
     @State private var refresh: Bool = false
@@ -30,10 +31,16 @@ struct ToggleDetailView: View {
         }
         .navigationTitle(toggle.metadata.description)
         .onAppear {
+            if case .bool(let value) = manager.value(for: toggle.variable) {
+                boolValue = value
+            }
             textValue = manager.value(for: toggle.variable).description
         }
         .onChange(of: textValue) { newValue in
-            isValidInput = isInputValid(newValue)
+            isValidInput = isBooleanToggle ? true : isInputValid(newValue)
+        }
+        .onChange(of: boolValue) { newValue in
+            textValue = newValue ? "t" : "f"
         }
         .onChange(of: refresh) { newValue in
             valueOverridden = true
@@ -41,7 +48,7 @@ struct ToggleDetailView: View {
     }
     
     var toggleInformationSection: some View {
-        Section(header: Text("Informations")) {
+        Section(header: Text("Information")) {
             HStack {
                 Text("Variable")
                 Spacer()
@@ -52,11 +59,17 @@ struct ToggleDetailView: View {
                 Spacer()
                 Text(toggle.value.typeDescription)
             }
+            HStack {
+                Text("Group")
+                Spacer()
+                Text(toggle.metadata.group)
+            }
         }
     }
     
     var providersSection: some View {
-        Section(header: Text("Providers")) {
+        Section(header: Text("Providers"),
+                footer: Text("The providers are listed in priority order.")) {
             ForEach(manager.stackTrace(for: toggle.variable), id: \.0) { trace in
                 HStack {
                     Text(trace.0)
@@ -76,7 +89,16 @@ struct ToggleDetailView: View {
     var overrideValueSection: some View {
         Section {
             HStack {
-                TextField("Override value", text: $textValue)
+                if isBooleanToggle {
+                    SwiftUI.Toggle(isOn: $boolValue) {
+                        EmptyView()
+                    }
+                    .frame(width: 1, height: 1, alignment: .leading)
+                }
+                else {
+                    TextField("Override value", text: $textValue)
+                        .keyboardType(keyboardType)
+                }
                 Spacer()
                 overrideButtonView
             }
@@ -84,15 +106,19 @@ struct ToggleDetailView: View {
             Text("Override value")
         } footer: {
             HStack {
-                if isValidInput {
-                    Label("Valid value", systemImage: "checkmark.diamond")
-                        .font(.caption)
-                        .foregroundColor(.green)
-                }
-                else {
-                    Label("Invalid value", systemImage: "multiply.circle")
-                        .font(.caption)
-                        .foregroundColor(.red)
+                switch toggle.value {
+                case .bool: EmptyView()
+                default:
+                    if isValidInput {
+                        Label("Valid input", systemImage: "checkmark.diamond")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    }
+                    else {
+                        Label("Invalid input", systemImage: "multiply.circle")
+                            .font(.caption)
+                            .foregroundColor(.red)
+                    }
                 }
                 if valueOverridden {
                     Spacer()
@@ -104,11 +130,7 @@ struct ToggleDetailView: View {
     
     var overrideButtonView: some View {
         Button("Override") {
-            if textValue.isEmpty {
-                manager.delete(toggle.variable)
-            } else {
-                manager.set(overridingValue(for: textValue), for: toggle.variable)
-            }
+            manager.set(overridingValue(for: textValue), for: toggle.variable)
             refresh.toggle()
         }
         .disabled(!isValidInput)
@@ -139,6 +161,26 @@ struct ToggleDetailView: View {
         case .string:
             return .string(input)
         }
+    }
+    
+    private var keyboardType: UIKeyboardType {
+        switch toggle.value {
+        case .bool:
+            return .default
+        case .int:
+            return .numberPad
+        case .number:
+            return .decimalPad
+        case .string:
+            return .default
+        }
+    }
+    
+    private var isBooleanToggle: Bool {
+        if case .bool = toggle.value {
+            return true
+        }
+        return false
     }
 }
 
