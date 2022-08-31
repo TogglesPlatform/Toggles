@@ -64,7 +64,8 @@ extension ToggleManager {
 }
 
 extension ToggleManager {
-    public func evictCache() {
+    public func removeOverrides() {
+        mutableValueProvider?.deleteAll()
         cache.evict()
     }
 }

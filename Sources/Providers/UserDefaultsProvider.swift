@@ -23,15 +23,47 @@ public class UserDefaultsProvider: MutableValueProvider {
     public func set(_ value: Value, for variable: Variable) {
         let data = try! PropertyListEncoder().encode(value)
         userDefaults.set(data, forKey: key(for: variable))
+        addSavedVariable(variable)
     }
     
     public func delete(_ variable: Variable) {
-        userDefaults.set(nil, forKey: key(for: variable))
+        userDefaults.removeObject(forKey: key(for: variable))
+        removeSavedVariable(variable)
+    }
+    
+    public func deleteAll() {
+        savedVariables.forEach { delete($0) }
     }
     
     // MARK: - Private
     
     private func key(for identifier: String) -> String {
         [userDefaultsKeyPrefix, identifier].joined(separator: ".")
+    }
+}
+
+extension UserDefaultsProvider {
+    
+    enum Constants: String {
+        case savedVariables
+    }
+    
+    private var savedVariables: [Variable] {
+        guard let variables = userDefaults.value(forKey: Constants.savedVariables.rawValue) as? String else { return [] }
+        return variables
+            .split(separator: ",")
+            .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+    }
+    
+    private func addSavedVariable(_ variable: Variable) {
+        var variables = savedVariables
+        variables.append(variable)
+        userDefaults.set(variables.joined(separator: ","), forKey: Constants.savedVariables.rawValue)
+    }
+    
+    private func removeSavedVariable(_ variable: Variable) {
+        var variables = savedVariables
+        variables.removeAll { $0 == variable }
+        userDefaults.set(variables.joined(separator: ","), forKey: Constants.savedVariables.rawValue)
     }
 }
