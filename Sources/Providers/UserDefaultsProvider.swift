@@ -32,7 +32,10 @@ public class UserDefaultsProvider: MutableValueProvider {
     }
     
     public func deleteAll() {
-        savedVariables.forEach { delete($0) }
+        savedVariables.forEach {
+            userDefaults.removeObject(forKey: key(for: $0))
+        }
+        wipeSavedVariables()
     }
     
     // MARK: - Private
@@ -53,6 +56,10 @@ extension UserDefaultsProvider {
         return variables
             .split(separator: ",")
             .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+    }
+    
+    private func wipeSavedVariables() {
+        userDefaults.removeObject(forKey: Constants.savedVariables.rawValue)
     }
     
     private func addSavedVariable(_ variable: Variable) {
