@@ -13,16 +13,13 @@ struct ToggleDetailView: View {
     @State private var refresh: Bool = false
     @State private var valueOverridden: Bool = false
 
-    init(manager: ToggleManager, toggle: Toggle) {
-        self.manager = manager
-        self.toggle = toggle
-    }
+    @Binding var refreshParent: Bool
     
     var body: some View {
         listView
     }
     
-    var listView: some View {
+    private var listView: some View {
         List {
             toggleInformationSection
             providersSection
@@ -47,7 +44,7 @@ struct ToggleDetailView: View {
         }
     }
     
-    var toggleInformationSection: some View {
+    private var toggleInformationSection: some View {
         Section(header: Text("Information")) {
             HStack {
                 Text("Variable")
@@ -67,7 +64,7 @@ struct ToggleDetailView: View {
         }
     }
     
-    var providersSection: some View {
+    private var providersSection: some View {
         Section(header: Text("Providers"),
                 footer: Text("The providers are listed in priority order.")) {
             ForEach(manager.stackTrace(for: toggle.variable), id: \.0) { trace in
@@ -80,13 +77,13 @@ struct ToggleDetailView: View {
         }
     }
     
-    var currentValueSection: some View {
+    private var currentValueSection: some View {
         Section(header: Text("Current returned value"))  {
             Text(manager.value(for: toggle.variable).description)
         }
     }
     
-    var overrideValueSection: some View {
+    private var overrideValueSection: some View {
         Section {
             HStack {
                 if isBooleanToggle {
@@ -128,10 +125,11 @@ struct ToggleDetailView: View {
         }
     }
     
-    var overrideButtonView: some View {
+    private var overrideButtonView: some View {
         Button("Override") {
             manager.set(overridingValue(for: textValue), for: toggle.variable)
             refresh.toggle()
+            refreshParent.toggle()
         }
         .disabled(!isValidInput)
     }
@@ -196,6 +194,6 @@ struct ToggleDetailView_Previews: PreviewProvider {
                                          dataSourceUrl: dataSourceUrl)
         let content = try! Data(contentsOf: dataSourceUrl)
         let dataSource = try! JSONDecoder().decode(DataSource.self, from: content)
-        ToggleDetailView(manager: manager, toggle: dataSource.toggles[0])
+        ToggleDetailView(manager: manager, toggle: dataSource.toggles[0], refreshParent: .constant(true))
     }
 }
