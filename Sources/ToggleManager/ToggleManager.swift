@@ -1,5 +1,6 @@
 //  ToggleManager.swift
 
+import Combine
 import Foundation
 
 final public class ToggleManager {
@@ -9,8 +10,9 @@ final public class ToggleManager {
     var valueProvider: ValueProvider
     
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
-    private let cache = Cache<Variable, Value>()
-    
+    let cache = Cache<Variable, Value>()
+    var subjectsRefs = [Variable: ToggleValueSubject]()
+
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 optionalValueProviders: [OptionalValueProvider] = [],
                 dataSourceUrl: URL) throws {
@@ -23,7 +25,7 @@ final public class ToggleManager {
 extension ToggleManager {
     
     public func value(for variable: Variable) -> Value {
-        if let cached = cache[variable] { return cached }
+        if let cachedValue = cache[variable] { return cachedValue }
         let value = fetchValue(for: variable)
         cache[variable] = value
         return value
@@ -59,21 +61,6 @@ extension ToggleManager {
         cache[variable] = nil
         queue.async(flags: .barrier) {
             self.mutableValueProvider?.delete(variable)
-        }
-    }
-}
-
-extension ToggleManager {
-    public func removeOverrides() {
-        mutableValueProvider?.deleteAll()
-        cache.evict()
-    }
-}
-
-extension ToggleManager {
-    func set(_ dictionary: [Variable: Value]) {
-        for (key, value) in dictionary {
-            set(value, for: key)
         }
     }
 }

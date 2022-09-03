@@ -2,11 +2,11 @@
 
 import Foundation
 
-typealias ProviderName = String
-typealias Trace = (ProviderName, Value?)
-
 extension ToggleManager {
-    
+
+    typealias ProviderName = String
+    typealias Trace = (ProviderName, Value?)
+
     func stackTrace(for variable: Variable) -> [Trace] {
         queue.sync {
             var trace: [Trace] = []
