@@ -17,5 +17,6 @@ public protocol OptionalValueProvider: Nameable {
 public protocol MutableValueProvider: OptionalValueProvider {
     func set(_ value: Value, for variable: Variable)
     func delete(_ variable: Variable)
-    func deleteAll()
+    func deleteAll() -> [Variable]
+    var overrides: [Variable] { get }
 }

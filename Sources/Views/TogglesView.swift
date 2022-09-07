@@ -26,7 +26,7 @@ public struct TogglesView: View {
         }
     }
     
-    private struct Group: Comparable, Identifiable {
+    private struct Group: Equatable, Comparable, Identifiable {
         let title: String
         let toggles: [Toggle]
         
@@ -41,12 +41,16 @@ public struct TogglesView: View {
     public let dataSourceUrl: URL
     
     @State private var groups: [Group] = []
-    @State private var refresh: Bool = false
+    @Binding private var refresh: Bool
     @State private var showingOptions = false
+    @State private var presentDeleteAlert = false
+    @State private var shouldShowToolbarButton = false
+    @State private var overriddenVariables: [Variable] = []
 
-    public init(manager: ToggleManager, dataSourceUrl: URL) {
+    public init(manager: ToggleManager, dataSourceUrl: URL, refresh: Binding<Bool>) {
         self.manager = manager
         self.dataSourceUrl = dataSourceUrl
+        self._refresh = refresh
     }
 
     public var body: some View {
@@ -65,14 +69,17 @@ public struct TogglesView: View {
             .accessibilityLabel("Toggles list")
             .navigationTitle("Toggles")
             .toolbar {
-                toolbar
+                if shouldShowToolbarButton {
+                    toolbar
+                }
             }
-            .onChange(of: refresh) { newValue in
-                groups = loadGroups()
+            .onChange(of: refresh) { _ in
+                shouldShowToolbarButton = manager.hasOverrides
             }
         }
         .onAppear {
             groups = loadGroups()
+            shouldShowToolbarButton = manager.hasOverrides
         }
     }
     
@@ -93,8 +100,17 @@ public struct TogglesView: View {
         }
         .confirmationDialog("Select an action", isPresented: $showingOptions) {
             Button("Clear overrides & cache") {
-                manager.removeOverrides()
+                overriddenVariables = manager.removeOverrides()
+                presentDeleteAlert = true
             }
+        }
+        .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
+            Button("OK!", role: .cancel) {
+                shouldShowToolbarButton = manager.hasOverrides
+            }
+        } message: {
+            let variables = overriddenVariables.joined(separator: "\n")
+            Text("The overrides for the following variables have been deleted:\n\n\(variables)")
         }
     }
     
@@ -115,6 +131,6 @@ struct TogglesView_Previews: PreviewProvider {
         let mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
                                          dataSourceUrl: dataSourceUrl)
-        return TogglesView(manager: manager, dataSourceUrl: dataSourceUrl)
+        return TogglesView(manager: manager, dataSourceUrl: dataSourceUrl, refresh: .constant(true))
     }
 }

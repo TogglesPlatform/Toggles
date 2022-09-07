@@ -34,14 +34,9 @@ struct ToggleDetailView: View {
             textValue = manager.value(for: toggle.variable).description
         }
         .onChange(of: textValue) { newValue in
-            isValidInput = isBooleanToggle ? true : isInputValid(newValue)
+            isValidInput = isInputValid(newValue)
         }
-        .onChange(of: boolValue) { newValue in
-            textValue = newValue ? "t" : "f"
-        }
-        .onChange(of: refresh) { newValue in
-            valueOverridden = true
-        }
+        .onChange(of: refresh) { _ in }
     }
     
     private var toggleInformationSection: some View {
@@ -91,6 +86,9 @@ struct ToggleDetailView: View {
                         EmptyView()
                     }
                     .frame(width: 1, height: 1, alignment: .leading)
+                    .onChange(of: boolValue) { newValue in
+                        textValue = newValue ? "t" : "f"
+                    }
                 }
                 else {
                     TextField("Override value", text: $textValue)
@@ -103,9 +101,7 @@ struct ToggleDetailView: View {
             Text("Override value")
         } footer: {
             HStack {
-                switch toggle.value {
-                case .bool: EmptyView()
-                default:
+                if toggleNeedsValidation {
                     if isValidInput {
                         Label("Valid input", systemImage: "checkmark.diamond")
                             .font(.caption)
@@ -120,6 +116,7 @@ struct ToggleDetailView: View {
                 if valueOverridden {
                     Spacer()
                     Label("Value overridden", systemImage: "checkmark")
+                        .font(.caption)
                 }
             }
         }
@@ -128,8 +125,12 @@ struct ToggleDetailView: View {
     private var overrideButtonView: some View {
         Button("Override") {
             manager.set(overridingValue(for: textValue), for: toggle.variable)
+            valueOverridden = true
             refresh.toggle()
             refreshParent.toggle()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                valueOverridden = false
+            }
         }
         .disabled(!isValidInput)
     }
@@ -179,6 +180,12 @@ struct ToggleDetailView: View {
             return true
         }
         return false
+    }
+    
+    private var toggleNeedsValidation: Bool {
+        if case .bool = toggle.value { return false }
+        if case .string = toggle.value { return false }
+        return true
     }
 }
 

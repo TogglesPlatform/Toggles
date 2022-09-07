@@ -31,11 +31,17 @@ public class UserDefaultsProvider: MutableValueProvider {
         removeSavedVariable(variable)
     }
     
-    public func deleteAll() {
-        savedVariables.forEach {
+    public func deleteAll() -> [Variable] {
+        let variables = savedVariables
+        variables.forEach {
             userDefaults.removeObject(forKey: key(for: $0))
         }
         wipeSavedVariables()
+        return variables
+    }
+    
+    public var overrides: [Variable] {
+        savedVariables
     }
     
     // MARK: - Private
