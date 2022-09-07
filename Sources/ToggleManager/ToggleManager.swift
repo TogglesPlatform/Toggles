@@ -11,7 +11,7 @@ final public class ToggleManager {
     
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
     let cache = Cache<Variable, Value>()
-    var subjectsRefs = [Variable: ToggleValueSubject]()
+    var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
 
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 optionalValueProviders: [OptionalValueProvider] = [],
