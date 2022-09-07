@@ -16,6 +16,8 @@ extension Value {
             return String(value)
         case .string(let value):
             return value
+        case .encrypted(let value):
+            return value
         }
     }
     
@@ -28,6 +30,8 @@ extension Value {
         case .number:
             return "Double"
         case .string:
+            return "String"
+        case .encrypted:
             return "String"
         }
     }
@@ -42,6 +46,8 @@ extension Value {
             return "number.square.fill"
         case .string:
             return "textformat"
+        case .encrypted:
+            return "eye.slash"
         }
     }
 }

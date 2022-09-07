@@ -14,6 +14,7 @@ extension Toggle: Codable {
         case int
         case number
         case string
+        case encrypted
         case metadata
     }
     
@@ -31,7 +32,11 @@ extension Toggle: Codable {
         }
         else if let stringValue = try? values.decode(String.self, forKey: .string) {
             self.value = .string(stringValue)
-        } else {
+        }
+        else if let encryptedValue = try? values.decode(String.self, forKey: .encrypted) {
+            self.value = .encrypted(encryptedValue)
+        }
+        else {
             throw CodingError.missingValue
         }
         metadata = try values.decode(Metadata.self, forKey: .metadata)
@@ -50,6 +55,8 @@ extension Toggle: Codable {
             try container.encode(value, forKey: .number)
         case .string(let value):
             try container.encode(value, forKey: .string)
+        case .encrypted(let value):
+            try container.encode(value, forKey: .encrypted)
         }
         try container.encode(metadata, forKey: .metadata)
     }
