@@ -31,7 +31,7 @@ public class UserDefaultsProvider: MutableValueProvider {
         removeSavedVariable(variable)
     }
     
-    public func deleteAll() -> [Variable] {
+    public func deleteAll() -> Set<Variable> {
         let variables = savedVariables
         variables.forEach {
             userDefaults.removeObject(forKey: key(for: $0))
@@ -40,7 +40,7 @@ public class UserDefaultsProvider: MutableValueProvider {
         return variables
     }
     
-    public var overrides: [Variable] {
+    public var overrides: Set<Variable> {
         savedVariables
     }
     
@@ -57,11 +57,11 @@ extension UserDefaultsProvider {
         case savedVariables
     }
     
-    private var savedVariables: [Variable] {
+    private var savedVariables: Set<Variable> {
         guard let variables = userDefaults.value(forKey: Constants.savedVariables.rawValue) as? String else { return [] }
-        return variables
+        return Set(variables
             .split(separator: ",")
-            .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+            .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) })
     }
     
     private func wipeSavedVariables() {
@@ -70,13 +70,13 @@ extension UserDefaultsProvider {
     
     private func addSavedVariable(_ variable: Variable) {
         var variables = savedVariables
-        variables.append(variable)
+        variables.insert(variable)
         userDefaults.set(variables.joined(separator: ","), forKey: Constants.savedVariables.rawValue)
     }
     
     private func removeSavedVariable(_ variable: Variable) {
         var variables = savedVariables
-        variables.removeAll { $0 == variable }
+        variables.remove(variable)
         userDefaults.set(variables.joined(separator: ","), forKey: Constants.savedVariables.rawValue)
     }
 }

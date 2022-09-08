@@ -26,7 +26,7 @@ public struct TogglesView: View {
         }
     }
     
-    private struct Group: Equatable, Comparable, Identifiable {
+    private struct Group: Identifiable {
         let title: String
         let toggles: [Toggle]
         
@@ -41,16 +41,16 @@ public struct TogglesView: View {
     public let dataSourceUrl: URL
     
     @State private var groups: [Group] = []
-    @Binding private var refresh: Bool
+    @State private var refresh: Bool = false
     @State private var showingOptions = false
     @State private var presentDeleteAlert = false
-    @State private var shouldShowToolbarButton = false
-    @State private var overriddenVariables: [Variable] = []
+    @State private var shouldShowToolbarView = false
+    @State private var overriddenVariables: Set<Variable> = []
 
-    public init(manager: ToggleManager, dataSourceUrl: URL, refresh: Binding<Bool>) {
+    public init(manager: ToggleManager, dataSourceUrl: URL) {
         self.manager = manager
         self.dataSourceUrl = dataSourceUrl
-        self._refresh = refresh
+        self._groups = State(initialValue: loadGroups())
     }
 
     public var body: some View {
@@ -69,17 +69,17 @@ public struct TogglesView: View {
             .accessibilityLabel("Toggles list")
             .navigationTitle("Toggles")
             .toolbar {
-                if shouldShowToolbarButton {
-                    toolbar
+                if shouldShowToolbarView {
+                    toolbarView
                 }
             }
             .onChange(of: refresh) { _ in
-                shouldShowToolbarButton = manager.hasOverrides
+                shouldShowToolbarView = manager.hasOverrides
             }
         }
         .onAppear {
-            groups = loadGroups()
-            shouldShowToolbarButton = manager.hasOverrides
+            refresh.toggle()
+            shouldShowToolbarView = manager.hasOverrides
         }
     }
     
@@ -87,12 +87,12 @@ public struct TogglesView: View {
         NavigationLink {
             ToggleDetailView(manager: manager, toggle: toggle, refreshParent: $refresh)
         } label: {
-            ToggleRow(toggle: toggle.byUpdatingValue(manager.value(for: toggle.variable)))
+            ToggleRow(toggle: toggle)
                 .accessibilityLabel(toggle.accessibilityLabel)
         }
     }
     
-    private var toolbar: some View {
+    private var toolbarView: some View {
         Button {
             showingOptions = true
         } label: {
@@ -106,7 +106,7 @@ public struct TogglesView: View {
         }
         .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
             Button("OK!", role: .cancel) {
-                shouldShowToolbarButton = manager.hasOverrides
+                shouldShowToolbarView = manager.hasOverrides
             }
         } message: {
             let variables = overriddenVariables.joined(separator: "\n")
@@ -131,6 +131,6 @@ struct TogglesView_Previews: PreviewProvider {
         let mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
                                          dataSourceUrl: dataSourceUrl)
-        return TogglesView(manager: manager, dataSourceUrl: dataSourceUrl, refresh: .constant(true))
+        return TogglesView(manager: manager, dataSourceUrl: dataSourceUrl)
     }
 }

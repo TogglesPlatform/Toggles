@@ -9,8 +9,8 @@ extension ToggleManager {
         return !mutableValueProvider.overrides.isEmpty
     }
     
-    public func removeOverrides() -> [Variable] {
-        cache.evict()
+    public func removeOverrides() -> Set<Variable> {
+        defer { cache.evict() }
         return mutableValueProvider?.deleteAll() ?? []
     }
 }
