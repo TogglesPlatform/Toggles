@@ -1,10 +1,10 @@
-//  LocalValueProvider.swift
+//  DefaultValueProvider.swift
 
 import Foundation
 
-class LocalValueProvider: ValueProvider {
+class DefaultValueProvider: ValueProvider {
     
-    public var name: String { "Local" }
+    public var name: String { "Default" }
     
     private let toggles: [Variable: Value]
     
@@ -17,6 +17,10 @@ class LocalValueProvider: ValueProvider {
     }
     
     func value(for variable: Variable) -> Value {
-        toggles[variable]!
+        let value = toggles[variable]!
+        if case .none = value {
+            assertionFailure("Found .none value for variable \(variable) in \(name) provider.")
+        }
+        return value
     }
 }

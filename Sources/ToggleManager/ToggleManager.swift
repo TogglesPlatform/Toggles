@@ -18,7 +18,7 @@ final public class ToggleManager {
                 dataSourceUrl: URL) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
-        self.defaultValueProvider = try LocalValueProvider(jsonURL: dataSourceUrl)
+        self.defaultValueProvider = try DefaultValueProvider(jsonURL: dataSourceUrl)
     }
 }
 

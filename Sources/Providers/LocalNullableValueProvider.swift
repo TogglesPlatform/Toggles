@@ -1,10 +1,10 @@
-//  LocalNullableValueProvider.swift
+//  LocalValueProvider.swift
 
 import Foundation
 
-public class LocalNullableValueProvider: ValueProvider {
+public class LocalValueProvider: ValueProvider {
     
-    public var name: String { "Local Nullable" }
+    public var name: String { "Local" }
     
     private let toggles: [Variable: Value]
     
