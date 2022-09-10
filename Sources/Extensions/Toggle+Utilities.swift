@@ -9,7 +9,7 @@ extension Toggle {
 }
 
 extension Toggle {
-    func byUpdatingValue(_ value2: Value) -> Toggle {
-        Toggle(variable: variable, value: value2, metadata: metadata)
+    func byUpdatingValue(_ value: Value) -> Toggle {
+        Toggle(variable: variable, value: value, metadata: metadata)
     }
 }
