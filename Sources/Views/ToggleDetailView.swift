@@ -1,5 +1,6 @@
 //  ToggleDetailView.swift
 
+import Combine
 import SwiftUI
 
 struct ToggleDetailView: View {
@@ -14,6 +15,17 @@ struct ToggleDetailView: View {
     @State private var valueOverridden: Bool = false
 
     @Binding var refreshParent: Bool
+    
+    @ObservedObject var toggleObservable: ToggleObservable
+    
+    init(manager: ToggleManager, toggle: Toggle, refreshParent: Binding<Bool>) {
+        self.manager = manager
+        self.toggle = toggle
+        self._refreshParent = refreshParent
+        self.toggleObservable = ToggleObservable(manager: manager, variable: toggle.variable)
+    }
+    
+    var cancellables = Set<AnyCancellable>()
     
     var body: some View {
         listView
@@ -62,11 +74,11 @@ struct ToggleDetailView: View {
     private var providersSection: some View {
         Section(header: Text("Providers"),
                 footer: Text("The providers are listed in priority order.")) {
-            ForEach(manager.stackTrace(for: toggle.variable), id: \.0) { trace in
+            ForEach(manager.stackTrace(for: toggle.variable)) { trace in
                 HStack {
-                    Text(trace.0)
+                    Text(trace.providerName)
                     Spacer()
-                    Text(trace.1?.description ?? "nil")
+                    Text(trace.value.description)
                 }
             }
         }
@@ -74,7 +86,16 @@ struct ToggleDetailView: View {
     
     private var currentValueSection: some View {
         Section(header: Text("Current returned value"))  {
-            Text(manager.value(for: toggle.variable).description)
+            HStack {
+                Text("Via the getter")
+                Spacer()
+                Text(manager.value(for: toggle.variable).description)
+            }
+            HStack {
+                Text("Via the publisher")
+                Spacer()
+                Text(toggleObservable.value.description)
+            }
         }
     }
     
