@@ -33,6 +33,14 @@
       }
     },
     {
+      "variable": "encrypted_toggle",
+      "encrypted": "encrypted message",
+      "metadata": {
+        "group": "group_2",
+        "description": "Encrypted toggle"
+      }
+    },
+    {
       "variable": "boolean_toggle_2",
       "bool": true,
       "metadata": {
