@@ -5,24 +5,29 @@ import Foundation
 extension ToggleManager {
 
     typealias ProviderName = String
-    typealias Trace = (ProviderName, Value?)
+    
+    struct Trace: Identifiable {
+        var id: String { providerName }
+        let providerName: ProviderName
+        let value: Value
+    }
 
     func stackTrace(for variable: Variable) -> [Trace] {
         queue.sync {
             var trace: [Trace] = []
             
             if let mutableValueProvider = mutableValueProvider {
-                let value = mutableValueProvider.optionalValue(for: variable)
-                trace.append((mutableValueProvider.name, value))
+                let value = mutableValueProvider.value(for: variable)
+                trace.append(Trace(providerName: mutableValueProvider.name, value: value))
             }
             
             trace += optionalValueProviders.map { provider -> Trace in
-                let value = provider.optionalValue(for: variable)
-                return (provider.name, value)
+                let value = provider.value(for: variable)
+                return Trace(providerName: provider.name, value: value)
             }
             
             let value = valueProvider.value(for: variable)
-            trace.append((valueProvider.name, value))
+            trace.append(Trace(providerName: valueProvider.name, value: value))
             
             return trace
         }
