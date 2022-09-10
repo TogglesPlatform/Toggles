@@ -1,4 +1,4 @@
-//  PropertyWrappers.swift
+//  ToggleProperty.swift
 
 import Foundation
 
@@ -11,10 +11,10 @@ extension String: RawType {}
 
 @propertyWrapper
 public struct ToggleProperty<T: RawType> {
-    let variable: String
+    let variable: Variable
     let manager: ToggleManager
-
-    public init(variable: String, manager: ToggleManager) {
+    
+    public init(manager: ToggleManager, variable: Variable) {
         self.variable = variable
         self.manager = manager
     }
