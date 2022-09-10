@@ -153,6 +153,7 @@ struct ToggleDetailView: View {
     private var overrideButtonView: some View {
         Button("Override") {
             manager.set(overridingValue(for: textValue), for: toggle.variable)
+            manager.reactToConfigurationChanges()
             valueOverridden = true
             refresh.toggle()
             refreshParent.toggle()
@@ -232,11 +233,9 @@ struct ToggleDetailView: View {
 
 struct ToggleDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSourceUrl = Bundle.module.url(forResource: "contract", withExtension: "json")!
-        
+        let dataSourceUrl = Bundle.module.url(forResource: "PreviewDataSource", withExtension: "json")!
         let mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
-        let valueProviders = [try! LocalNullableValueProvider(jsonURL: dataSourceUrl)]
-        
+        let valueProviders = [try! LocalValueProvider(jsonURL: dataSourceUrl)]
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
                                          valueProviders: valueProviders,
                                          dataSourceUrl: dataSourceUrl)

@@ -3,7 +3,18 @@
 import SwiftUI
 
 public struct TogglesView: View {
+    
+    private struct Group: Identifiable {
+        let title: String
+        let toggles: [Toggle]
         
+        public var id: String { title }
+        
+        static func < (lhs: TogglesView.Group, rhs: TogglesView.Group) -> Bool {
+            lhs.title < rhs.title
+        }
+    }
+    
     private struct ToggleRow: View {
         var toggle: Toggle
 
@@ -23,17 +34,6 @@ public struct TogglesView: View {
                 Text(toggle.value.description)
                     .multilineTextAlignment(.trailing)
             }
-        }
-    }
-    
-    private struct Group: Identifiable {
-        let title: String
-        let toggles: [Toggle]
-        
-        public var id: String { title }
-        
-        static func < (lhs: TogglesView.Group, rhs: TogglesView.Group) -> Bool {
-            lhs.title < rhs.title
         }
     }
     
@@ -101,13 +101,13 @@ public struct TogglesView: View {
         .confirmationDialog("Select an action", isPresented: $showingOptions) {
             Button("Clear overrides & cache") {
                 overriddenVariables = manager.removeOverrides()
+                manager.reactToConfigurationChanges()
                 presentDeleteAlert = true
             }
         }
         .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
             Button("OK!", role: .cancel) {
                 shouldShowToolbarView = manager.hasOverrides
-                refresh.toggle()
             }
         } message: {
             let variables = overriddenVariables.joined(separator: "\n")
@@ -128,7 +128,7 @@ public struct TogglesView: View {
 
 struct TogglesView_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSourceUrl = Bundle.module.url(forResource: "contract", withExtension: "json")!
+        let dataSourceUrl = Bundle.module.url(forResource: "PreviewDataSource", withExtension: "json")!
         let mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
                                          dataSourceUrl: dataSourceUrl)
