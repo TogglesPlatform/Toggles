@@ -107,6 +107,7 @@ public struct TogglesView: View {
         .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
             Button("OK!", role: .cancel) {
                 shouldShowToolbarView = manager.hasOverrides
+                refresh.toggle()
             }
         } message: {
             let variables = overriddenVariables.joined(separator: "\n")
