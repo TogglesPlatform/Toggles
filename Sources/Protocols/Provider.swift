@@ -13,6 +13,6 @@ public protocol ValueProvider: Nameable {
 public protocol MutableValueProvider: ValueProvider {
     func set(_ value: Value, for variable: Variable)
     func delete(_ variable: Variable)
-    func deleteAll() -> Set<Variable>
-    var overrides: Set<Variable> { get }
+    func deleteAll()
+    var variables: Set<Variable> { get }
 }
