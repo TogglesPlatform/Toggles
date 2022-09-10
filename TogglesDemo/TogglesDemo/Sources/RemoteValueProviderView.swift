@@ -35,11 +35,11 @@ The values in the new configuration are generated randomly.
 
 struct RemoteValueProviderView_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSource = Bundle.main.url(forResource: "contract", withExtension: "json")!
-        let provider = try! RemoteValueProvider(jsonURL: dataSource)
+        let datasource = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
+        let provider = try! RemoteValueProvider(jsonURL: datasource)
         let manager = try! ToggleManager(mutableValueProvider: nil,
                                          valueProviders: [provider],
-                                         dataSourceUrl: dataSource)
+                                         datasourceUrl: datasource)
         RemoteValueProviderView(provider: provider, manager: manager)
     }
 }

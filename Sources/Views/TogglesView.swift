@@ -38,7 +38,7 @@ public struct TogglesView: View {
     }
     
     public let manager: ToggleManager
-    public let dataSourceUrl: URL
+    public let datasourceUrl: URL
     
     @State private var groups: [Group] = []
     @State private var refresh: Bool = false
@@ -47,9 +47,9 @@ public struct TogglesView: View {
     @State private var shouldShowToolbarView = false
     @State private var overriddenVariables: Set<Variable> = []
 
-    public init(manager: ToggleManager, dataSourceUrl: URL) {
+    public init(manager: ToggleManager, datasourceUrl: URL) {
         self.manager = manager
-        self.dataSourceUrl = dataSourceUrl
+        self.datasourceUrl = datasourceUrl
         self._groups = State(initialValue: loadGroups())
     }
 
@@ -116,11 +116,11 @@ public struct TogglesView: View {
     }
     
     private func loadGroups() -> [Group] {
-        guard let content = try? Data(contentsOf: dataSourceUrl),
-              let dataSource = try? JSONDecoder().decode(DataSource.self, from: content) else {
+        guard let content = try? Data(contentsOf: datasourceUrl),
+              let datasource = try? JSONDecoder().decode(Datasource.self, from: content) else {
             return []
         }
-        return Dictionary(grouping: dataSource.toggles, by: \.metadata.group)
+        return Dictionary(grouping: datasource.toggles, by: \.metadata.group)
             .map { Group(title: $0, toggles: $1.sorted(by: <)) }
             .sorted(by: <)
     }
@@ -128,10 +128,10 @@ public struct TogglesView: View {
 
 struct TogglesView_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSourceUrl = Bundle.module.url(forResource: "PreviewDataSource", withExtension: "json")!
+        let datasourceUrl = Bundle.module.url(forResource: "PreviewDatasource", withExtension: "json")!
         let mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
-                                         dataSourceUrl: dataSourceUrl)
-        return TogglesView(manager: manager, dataSourceUrl: dataSourceUrl)
+                                         datasourceUrl: datasourceUrl)
+        return TogglesView(manager: manager, datasourceUrl: datasourceUrl)
     }
 }

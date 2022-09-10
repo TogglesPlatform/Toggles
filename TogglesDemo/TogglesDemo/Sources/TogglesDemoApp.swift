@@ -10,13 +10,13 @@ struct TogglesDemoApp: App {
     let viewModel: ViewModel
     
     init() {
-        viewModel = try! ViewModel(dataSourceUrl: Bundle.main.url(forResource: "contract", withExtension: "json")!)
+        viewModel = try! ViewModel(datasourceUrl: Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!)
     }
     
     var body: some Scene {
         WindowGroup {
             TabView {
-                TogglesView(manager: viewModel.manager, dataSourceUrl: viewModel.dataSourceUrl)
+                TogglesView(manager: viewModel.manager, datasourceUrl: viewModel.datasourceUrl)
                     .tabItem {
                         Label("Toggles", systemImage: "switch.2")
                     }

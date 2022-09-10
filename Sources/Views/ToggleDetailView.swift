@@ -233,14 +233,14 @@ struct ToggleDetailView: View {
 
 struct ToggleDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let dataSourceUrl = Bundle.module.url(forResource: "PreviewDataSource", withExtension: "json")!
+        let datasourceUrl = Bundle.module.url(forResource: "PreviewDatasource", withExtension: "json")!
         let mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
-        let valueProviders = [try! LocalValueProvider(jsonURL: dataSourceUrl)]
+        let valueProviders = [try! LocalValueProvider(jsonURL: datasourceUrl)]
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
                                          valueProviders: valueProviders,
-                                         dataSourceUrl: dataSourceUrl)
-        let content = try! Data(contentsOf: dataSourceUrl)
-        let dataSource = try! JSONDecoder().decode(DataSource.self, from: content)
-        ToggleDetailView(manager: manager, toggle: dataSource.toggles[0], refreshParent: .constant(true))
+                                         datasourceUrl: datasourceUrl)
+        let content = try! Data(contentsOf: datasourceUrl)
+        let datasource = try! JSONDecoder().decode(Datasource.self, from: content)
+        ToggleDetailView(manager: manager, toggle: datasource.toggles[0], refreshParent: .constant(true))
     }
 }

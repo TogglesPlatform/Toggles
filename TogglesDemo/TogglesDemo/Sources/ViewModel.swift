@@ -6,19 +6,19 @@ import Toggles
 
 class ViewModel {
     
-    let dataSourceUrl: URL
+    let datasourceUrl: URL
     let mutableValueProvider: MutableValueProvider
     let remoteValueProvider: RemoteValueProvider
     let localValueProvider: ValueProvider
     let manager: ToggleManager
     
-    init(dataSourceUrl: URL) throws {
-        self.dataSourceUrl = dataSourceUrl
+    init(datasourceUrl: URL) throws {
+        self.datasourceUrl = datasourceUrl
         mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
-        remoteValueProvider = try RemoteValueProvider(jsonURL: dataSourceUrl)
-        localValueProvider = try LocalValueProvider(jsonURL: dataSourceUrl)
+        remoteValueProvider = try RemoteValueProvider(jsonURL: datasourceUrl)
+        localValueProvider = try LocalValueProvider(jsonURL: datasourceUrl)
         manager = try ToggleManager(mutableValueProvider: mutableValueProvider,
                                     valueProviders: [remoteValueProvider, localValueProvider],
-                                    dataSourceUrl: dataSourceUrl)
+                                    datasourceUrl: datasourceUrl)
     }
 }

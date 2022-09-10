@@ -15,10 +15,10 @@ final public class ToggleManager {
 
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 valueProviders: [ValueProvider] = [],
-                dataSourceUrl: URL) throws {
+                datasourceUrl: URL) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
-        self.defaultValueProvider = try DefaultValueProvider(jsonURL: dataSourceUrl)
+        self.defaultValueProvider = try DefaultValueProvider(jsonURL: datasourceUrl)
     }
 }
 

@@ -11,10 +11,10 @@
 		D30641F728CC24660051BCBD /* RemoteValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F328CC24660051BCBD /* RemoteValueProvider.swift */; };
 		D30641F828CC24660051BCBD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F428CC24660051BCBD /* ViewModel.swift */; };
 		D30641F928CC24660051BCBD /* TogglesDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F528CC24660051BCBD /* TogglesDemoApp.swift */; };
-		D34E806128BC2A0B007CCCB6 /* contract.json in Resources */ = {isa = PBXBuildFile; fileRef = D34E806028BC2A0B007CCCB6 /* contract.json */; };
 		D3D0631928B6C68B003110E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D0631828B6C68B003110E2 /* Assets.xcassets */; };
 		D3D0631C28B6C68B003110E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D0631B28B6C68B003110E2 /* Preview Assets.xcassets */; };
 		D3D4C81028B6C92600F4B9D8 /* Toggles in Frameworks */ = {isa = PBXBuildFile; productRef = D3D4C80F28B6C92600F4B9D8 /* Toggles */; };
+		D3D8E90728CD556600B0D5E8 /* DemoDatasource.json in Resources */ = {isa = PBXBuildFile; fileRef = D3D8E90628CD556600B0D5E8 /* DemoDatasource.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,11 +22,11 @@
 		D30641F328CC24660051BCBD /* RemoteValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteValueProvider.swift; sourceTree = "<group>"; };
 		D30641F428CC24660051BCBD /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D30641F528CC24660051BCBD /* TogglesDemoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TogglesDemoApp.swift; sourceTree = "<group>"; };
-		D34E806028BC2A0B007CCCB6 /* contract.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contract.json; sourceTree = "<group>"; };
 		D3D0631128B6C68A003110E2 /* TogglesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TogglesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D0631828B6C68B003110E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3D0631B28B6C68B003110E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D3D0632E28B6C8CF003110E2 /* Toggles */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Toggles; path = ..; sourceTree = "<group>"; };
+		D3D8E90628CD556600B0D5E8 /* DemoDatasource.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DemoDatasource.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +55,7 @@
 		D34E805B28BC1FCA007CCCB6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D34E806028BC2A0B007CCCB6 /* contract.json */,
+				D3D8E90628CD556600B0D5E8 /* DemoDatasource.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -175,7 +175,7 @@
 			files = (
 				D3D0631C28B6C68B003110E2 /* Preview Assets.xcassets in Resources */,
 				D3D0631928B6C68B003110E2 /* Assets.xcassets in Resources */,
-				D34E806128BC2A0B007CCCB6 /* contract.json in Resources */,
+				D3D8E90728CD556600B0D5E8 /* DemoDatasource.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,11 +6,11 @@ final class ModelsTests: XCTestCase {
     private let factory = ToggleFactory()
     
     func test_contract() throws {
-        let url = Bundle.toggles.url(forResource: "contract", withExtension: "json")!
+        let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
         let data = try Data(contentsOf: url)
-        let dataSourceFromFile = try JSONDecoder().decode(DataSource.self, from: data)
-        let targetDataSource = DataSource(toggles: factory.makeToggles())
-        XCTAssertEqual(dataSourceFromFile, targetDataSource)
+        let datasourceFromFile = try JSONDecoder().decode(Datasource.self, from: data)
+        let targetDatasource = Datasource(toggles: factory.makeToggles())
+        XCTAssertEqual(datasourceFromFile, targetDatasource)
     }
     
     func test_toggleBoolAccessor() throws {
@@ -43,22 +43,22 @@ final class ModelsTests: XCTestCase {
     
     func test_measureToggleCreation() throws {
         measure {
-            _ = DataSource(toggles: factory.makeToggles(count: 100000))
+            _ = Datasource(toggles: factory.makeToggles(count: 10000))
         }
     }
     
     func test_measureToggleEncoding() throws {
-        let dataSource = DataSource(toggles: factory.makeToggles(count: 100000))
+        let datasource = Datasource(toggles: factory.makeToggles(count: 10000))
         measure {
-            _ = try! JSONEncoder().encode(dataSource)
+            _ = try! JSONEncoder().encode(datasource)
         }
     }
     
     func test_measureToggleDecoding() throws {
-        let dataSource = DataSource(toggles: factory.makeToggles(count: 100000))
-        let data = try! JSONEncoder().encode(dataSource)
+        let datasource = Datasource(toggles: factory.makeToggles(count: 10000))
+        let data = try! JSONEncoder().encode(datasource)
         measure {
-            _ = try! JSONDecoder().decode(DataSource.self, from: data)
+            _ = try! JSONDecoder().decode(Datasource.self, from: data)
         }
     }
 }
