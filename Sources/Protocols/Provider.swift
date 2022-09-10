@@ -1,7 +1,5 @@
 //  Provider.swift
 
-import Foundation
-
 public protocol Nameable {
     var name: String { get }
 }
