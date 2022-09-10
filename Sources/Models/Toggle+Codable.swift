@@ -47,6 +47,8 @@ extension Toggle: Codable {
         try container.encode(variable, forKey: .variable)
         
         switch value {
+        case .none:
+            break
         case .bool(let value):
             try container.encode(value, forKey: .bool)
         case .int(let value):

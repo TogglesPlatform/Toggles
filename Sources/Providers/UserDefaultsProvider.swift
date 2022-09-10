@@ -14,10 +14,10 @@ public class UserDefaultsProvider: MutableValueProvider {
         self.userDefaults = userDefaults
     }
     
-    public func optionalValue(for variable: Variable) -> Value? {
+    public func value(for variable: Variable) -> Value {
         let data = userDefaults.value(forKey: key(for: variable)) as? Data
-        guard let data = data else { return nil }
-        return try! PropertyListDecoder().decode(Value?.self, from: data)
+        guard let data = data else { return .none }
+        return try! PropertyListDecoder().decode(Value.self, from: data)
     }
     
     public func set(_ value: Value, for variable: Variable) {

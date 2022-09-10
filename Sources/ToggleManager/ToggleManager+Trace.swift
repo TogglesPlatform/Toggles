@@ -21,13 +21,13 @@ extension ToggleManager {
                 trace.append(Trace(providerName: mutableValueProvider.name, value: value))
             }
             
-            trace += optionalValueProviders.map { provider -> Trace in
+            trace += valueProviders.map { provider -> Trace in
                 let value = provider.value(for: variable)
                 return Trace(providerName: provider.name, value: value)
             }
             
-            let value = valueProvider.value(for: variable)
-            trace.append(Trace(providerName: valueProvider.name, value: value))
+            let value = defaultValueProvider.value(for: variable)
+            trace.append(Trace(providerName: defaultValueProvider.name, value: value))
             
             return trace
         }

@@ -6,19 +6,19 @@ import Foundation
 final public class ToggleManager {
     
     var mutableValueProvider: MutableValueProvider?
-    var optionalValueProviders: [OptionalValueProvider]
-    var valueProvider: ValueProvider
+    var valueProviders: [ValueProvider]
+    var defaultValueProvider: ValueProvider
     
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
     let cache = Cache<Variable, Value>()
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
 
     public init(mutableValueProvider: MutableValueProvider? = nil,
-                optionalValueProviders: [OptionalValueProvider] = [],
+                valueProviders: [ValueProvider] = [],
                 dataSourceUrl: URL) throws {
         self.mutableValueProvider = mutableValueProvider
-        self.optionalValueProviders = optionalValueProviders
-        self.valueProvider = try LocalValueProvider(jsonURL: dataSourceUrl)
+        self.valueProviders = valueProviders
+        self.defaultValueProvider = try LocalValueProvider(jsonURL: dataSourceUrl)
     }
 }
 
@@ -33,22 +33,21 @@ extension ToggleManager {
     
     private func fetchValue(for variable: Variable) -> Value {
         queue.sync {
-            if let value = mutableValueProvider?.optionalValue(for: variable) { return value }
-            for provider in optionalValueProviders {
-                if let value = provider.optionalValue(for: variable) {
+            if let value = mutableValueProvider?.value(for: variable), value != .none {
+                return value
+            }
+            for provider in valueProviders {
+                let value = provider.value(for: variable)
+                if value != .none {
                     return value
                 }
             }
-            return valueProvider.value(for: variable)
+            return defaultValueProvider.value(for: variable)
         }
     }
 }
 
 extension ToggleManager {
-    
-    public func optionalValue(for variable: Variable) -> Value? {
-        value(for: variable)
-    }
     
     public func set(_ value: Value, for variable: Variable) {
         cache[variable] = value

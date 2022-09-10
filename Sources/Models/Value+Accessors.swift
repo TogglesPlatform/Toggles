@@ -18,9 +18,14 @@ public extension Value {
         guard case let .number(v) = self else { return nil }
         return v
     }
-
+    
     var stringValue: String? {
         guard case let .string(v) = self else { return nil }
+        return v
+    }
+    
+    var encryptedValue: String? {
+        guard case let .encrypted(v) = self else { return nil }
         return v
     }
 }

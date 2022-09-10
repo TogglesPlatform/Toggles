@@ -8,6 +8,8 @@ extension Value {
     
     var description: String {
         switch self {
+        case .none:
+            return "null"
         case .bool(let value):
             return String(value)
         case .int(let value):
@@ -23,6 +25,8 @@ extension Value {
     
     var typeDescription: String {
         switch self {
+        case .none:
+            return "null"
         case .bool:
             return "Bool"
         case .int:
@@ -38,6 +42,8 @@ extension Value {
     
     var sfSymbolId: SFSymbolId {
         switch self {
+        case .none:
+            return "circle.dotted"
         case .bool:
             return "switch.2"
         case .int:

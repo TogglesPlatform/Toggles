@@ -1,10 +1,10 @@
-//  OptionalLocalValueProvider.swift
+//  LocalNullableValueProvider.swift
 
 import Foundation
 
-public class OptionalLocalValueProvider: OptionalValueProvider {
+public class LocalNullableValueProvider: ValueProvider {
     
-    public var name: String { "Optional Local" }
+    public var name: String { "Local Nullable" }
     
     private let toggles: [Variable: Value]
     
@@ -16,7 +16,7 @@ public class OptionalLocalValueProvider: OptionalValueProvider {
             .mapValues { $0.value }
     }
     
-    public func optionalValue(for variable: Variable) -> Value? {
-        toggles[variable]
+    public func value(for variable: Variable) -> Value {
+        toggles[variable] ?? .none
     }
 }

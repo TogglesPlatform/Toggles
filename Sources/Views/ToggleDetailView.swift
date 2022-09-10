@@ -78,7 +78,14 @@ struct ToggleDetailView: View {
                 HStack {
                     Text(trace.providerName)
                     Spacer()
-                    Text(trace.value.description)
+                    if case .none = trace.value {
+                        Text(trace.value.description)
+                            .font(.body)
+                            .italic()
+                    } else {
+                        Text(trace.value.description)
+                            .font(.body)
+                    }
                 }
             }
         }
@@ -159,6 +166,8 @@ struct ToggleDetailView: View {
     private func isInputValid(_ input: String) -> Bool {
         guard !input.isEmpty else { return true }
         switch toggle.value {
+        case .none:
+            return false
         case .bool:
             return input.boolValue != nil
         case .int:
@@ -174,6 +183,8 @@ struct ToggleDetailView: View {
     
     private func overridingValue(for input: String) -> Value {
         switch toggle.value {
+        case .none:
+            return .none
         case .bool:
             return .bool(input.boolValue ?? false)
         case .int:
@@ -189,6 +200,8 @@ struct ToggleDetailView: View {
     
     private var keyboardType: UIKeyboardType {
         switch toggle.value {
+        case .none:
+            return .default
         case .bool:
             return .default
         case .int:
@@ -222,10 +235,10 @@ struct ToggleDetailView_Previews: PreviewProvider {
         let dataSourceUrl = Bundle.module.url(forResource: "contract", withExtension: "json")!
         
         let mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
-        let optionalValueProviders = [try! OptionalLocalValueProvider(jsonURL: dataSourceUrl)]
+        let valueProviders = [try! LocalNullableValueProvider(jsonURL: dataSourceUrl)]
         
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
-                                         optionalValueProviders: optionalValueProviders,
+                                         valueProviders: valueProviders,
                                          dataSourceUrl: dataSourceUrl)
         let content = try! Data(contentsOf: dataSourceUrl)
         let dataSource = try! JSONDecoder().decode(DataSource.self, from: content)
