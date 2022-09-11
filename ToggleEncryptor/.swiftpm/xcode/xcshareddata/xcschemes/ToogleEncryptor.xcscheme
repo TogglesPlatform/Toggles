@@ -98,7 +98,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--value TestValue"
+            argument = "--value &quot;Secure Value&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

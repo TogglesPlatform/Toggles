@@ -3,12 +3,12 @@
 import Foundation
 
 public enum Algorithm: String {
-    case chaCha20Poly1305 = "chaChaPoly"
+    case chaCha20Poly1305
 }
 
 public typealias Key = String
 
-public struct DecryptionConfiguration {
+public struct CypherConfiguration {
     let algorithm: Algorithm
     let key: Key
     

@@ -8,7 +8,7 @@ final public class ToggleManager {
     var mutableValueProvider: MutableValueProvider?
     var valueProviders: [ValueProvider]
     var defaultValueProvider: ValueProvider
-    var decryptionConfiguration: DecryptionConfiguration?
+    var cypherConfiguration: CypherConfiguration?
     
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
     let cache = Cache<Variable, Value>()
@@ -17,21 +17,27 @@ final public class ToggleManager {
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 valueProviders: [ValueProvider] = [],
                 datasourceUrl: URL,
-                decryptionConfiguration: DecryptionConfiguration? = nil) throws {
+                cypherConfiguration: CypherConfiguration? = nil) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
         self.defaultValueProvider = try DefaultValueProvider(jsonURL: datasourceUrl)
-        self.decryptionConfiguration = decryptionConfiguration
+        self.cypherConfiguration = cypherConfiguration
     }
 }
 
 extension ToggleManager {
     
+    enum FetchError: Error {
+        case missingCypherConfiguration
+    }
+    
     public func value(for variable: Variable) -> Value {
-        if let cachedValue = cache[variable] { return cachedValue }
+        if let cachedValue = cache[variable] {
+            return decryptedValue(for: cachedValue)
+        }
         let value = fetchValue(for: variable)
         cache[variable] = value
-        return value
+        return decryptedValue(for: value)
     }
     
     private func fetchValue(for variable: Variable) -> Value {
@@ -53,6 +59,7 @@ extension ToggleManager {
 extension ToggleManager {
     
     public func set(_ value: Value, for variable: Variable) {
+        let value = encryptedValue(for: value)
         cache[variable] = value
         queue.async(flags: .barrier) {
             self.mutableValueProvider?.set(value, for: variable)

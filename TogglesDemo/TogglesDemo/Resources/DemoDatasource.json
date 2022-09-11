@@ -34,7 +34,7 @@
     },
     {
       "variable": "encrypted_toggle",
-      "encrypted": "NdvDEjhkq1kxeDevqXM/RTxe0zxkAspTTyOWMdjVvASeFxl/8w==",
+      "secure": "eDUxAQXW6dobqAMxhZIJLkyQKb8+36bFHc36eabacXDahMipVnGy/Q==",
       "metadata": {
         "group": "group_2",
         "description": "Encrypted toggle"

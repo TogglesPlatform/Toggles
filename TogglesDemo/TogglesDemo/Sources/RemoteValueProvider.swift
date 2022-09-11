@@ -34,8 +34,10 @@ public class RemoteValueProvider: ValueProvider {
                 return .number(Double(Int(arc4random()) % 100) + Double((Int(arc4random()) % 100)) / 100)
             case .string:
                 return .string(Int(arc4random()) % 2 == 0 ? "Hello World" : "Ciao mondo")
-            case .encrypted:
-                return .encrypted(Int(arc4random()) % 2  == 0 ? "€ncrypted" : "3ncrypted")
+            case .secure:
+                return .secure(Int(arc4random()) % 2  == 0 ?
+                               "YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK" :
+                                "xvuqELiuOMgSB6TvnU9V350uXV81GSd/SXvp8oFP42xyHswSww==")
             }
         }
         completion()

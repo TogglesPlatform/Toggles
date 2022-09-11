@@ -177,7 +177,7 @@ struct ToggleDetailView: View {
             return Double(input) != nil
         case .string:
             return true
-        case .encrypted:
+        case .secure:
             return true
         }
     }
@@ -194,8 +194,8 @@ struct ToggleDetailView: View {
             return .number(Double(input) ?? 0.0)
         case .string:
             return .string(input)
-        case .encrypted:
-            return .encrypted(input)
+        case .secure:
+            return .secure(input)
         }
     }
     
@@ -211,7 +211,7 @@ struct ToggleDetailView: View {
             return .decimalPad
         case .string:
             return .default
-        case .encrypted:
+        case .secure:
             return .default
         }
     }
@@ -226,7 +226,7 @@ struct ToggleDetailView: View {
     private var toggleNeedsValidation: Bool {
         if case .bool = toggle.value { return false }
         if case .string = toggle.value { return false }
-        if case .encrypted = toggle.value { return false }
+        if case .secure = toggle.value { return false }
         return true
     }
 }

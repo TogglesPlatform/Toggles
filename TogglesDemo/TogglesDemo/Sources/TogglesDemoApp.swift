@@ -12,8 +12,8 @@ struct TogglesDemoApp: App {
     
     init() {
         let datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
-        let decryptionConfiguration = DecryptionConfiguration(algorithm: .chaCha20Poly1305, key: key)
-        viewModel = try! ViewModel(datasourceUrl: datasourceUrl, decryptionConfiguration: decryptionConfiguration)
+        let cypherConfiguration = CypherConfiguration(algorithm: .chaCha20Poly1305, key: key)
+        viewModel = try! ViewModel(datasourceUrl: datasourceUrl, cypherConfiguration: cypherConfiguration)
     }
     
     var body: some Scene {

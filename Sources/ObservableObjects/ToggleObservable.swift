@@ -24,7 +24,7 @@ public class ToggleObservable: ObservableObject {
     var stringValue: String = ""
     
     @Published
-    var encryptedValue: String = ""
+    var secureValue: String = ""
     
     init(manager: ToggleManager, variable: Variable) {
         self.manager = manager
@@ -46,8 +46,8 @@ public class ToggleObservable: ObservableObject {
                     self.numberValue = value
                 case .string(let value):
                     self.stringValue = value
-                case .encrypted(let value):
-                    self.encryptedValue = value
+                case .secure(let value):
+                    self.secureValue = value
                 }
             }
             .store(in: &cancellables)

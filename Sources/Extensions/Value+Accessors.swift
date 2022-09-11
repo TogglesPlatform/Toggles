@@ -25,7 +25,7 @@ public extension Value {
     }
     
     var encryptedValue: String? {
-        guard case let .encrypted(v) = self else { return nil }
+        guard case let .secure(v) = self else { return nil }
         return v
     }
 }
