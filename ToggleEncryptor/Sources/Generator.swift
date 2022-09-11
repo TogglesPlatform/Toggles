@@ -7,7 +7,7 @@ import Foundation
 struct Generator: ParsableCommand {
     
     @Option(name: .long, help: "The algorithm to use.")
-    var algorithm: String
+    var algorithm: Algorithm
     
     @Option(name: .long, help: "The key to use for the algorithm.")
     var key: String
@@ -15,19 +15,17 @@ struct Generator: ParsableCommand {
     @Option(name: .long, help: "The value to encrypt.")
     var value: String
     
-    enum Algorithm: String {
+    enum Algorithm: String, ExpressibleByArgument {
         case chaCha20Poly1305 = "chaChaPoly"
     }
     
     mutating func run() throws {
         switch algorithm {
-        case Algorithm.chaCha20Poly1305.rawValue:
+        case .chaCha20Poly1305:
             let encryptor = ChaCha20Poly1305Encryptor(key: key)
             let encryptedValue = try encryptor.encrypt(value)
             print("Plaintext value: \"\(value)\"")
             print("Encrypted value: \"\(encryptedValue)\"")
-        default:
-            throw ValidationError("Unrecognized or unsupported algorithm \(algorithm).")
         }
     }
 }
