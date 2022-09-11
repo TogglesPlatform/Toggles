@@ -8,9 +8,12 @@ import Toggles
 struct TogglesDemoApp: App {
     
     let viewModel: ViewModel
+    let key = "AyUcYw-qWebYF-z0nWZ4"
     
     init() {
-        viewModel = try! ViewModel(datasourceUrl: Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!)
+        let datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
+        let decryptionConfiguration = DecryptionConfiguration(algorithm: .chaCha20Poly1305, key: key)
+        viewModel = try! ViewModel(datasourceUrl: datasourceUrl, decryptionConfiguration: decryptionConfiguration)
     }
     
     var body: some Scene {

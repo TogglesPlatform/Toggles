@@ -12,13 +12,14 @@ class ViewModel {
     let localValueProvider: ValueProvider
     let manager: ToggleManager
     
-    init(datasourceUrl: URL) throws {
+    init(datasourceUrl: URL, decryptionConfiguration: DecryptionConfiguration) throws {
         self.datasourceUrl = datasourceUrl
         mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
         remoteValueProvider = try RemoteValueProvider(jsonURL: datasourceUrl)
         localValueProvider = try LocalValueProvider(jsonURL: datasourceUrl)
         manager = try ToggleManager(mutableValueProvider: mutableValueProvider,
                                     valueProviders: [remoteValueProvider, localValueProvider],
-                                    datasourceUrl: datasourceUrl)
+                                    datasourceUrl: datasourceUrl,
+                                    decryptionConfiguration: decryptionConfiguration)
     }
 }

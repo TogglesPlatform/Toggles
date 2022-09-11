@@ -8,6 +8,7 @@ final public class ToggleManager {
     var mutableValueProvider: MutableValueProvider?
     var valueProviders: [ValueProvider]
     var defaultValueProvider: ValueProvider
+    var decryptionConfiguration: DecryptionConfiguration?
     
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
     let cache = Cache<Variable, Value>()
@@ -15,10 +16,12 @@ final public class ToggleManager {
 
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 valueProviders: [ValueProvider] = [],
-                datasourceUrl: URL) throws {
+                datasourceUrl: URL,
+                decryptionConfiguration: DecryptionConfiguration? = nil) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
         self.defaultValueProvider = try DefaultValueProvider(jsonURL: datasourceUrl)
+        self.decryptionConfiguration = decryptionConfiguration
     }
 }
 
