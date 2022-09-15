@@ -1,0 +1,22 @@
+//  {{ className }}.swift
+
+import Foundation
+
+public class {{ className }} {
+    
+    private let manager: ToggleManager
+    
+    public init(manager: ToggleManager) {
+        self.manager = manager
+    }
+}
+
+extension {{ className }} {
+{% for accessorInfo in accessorInfos %}
+    public var {{ accessorInfo.propertyName }}: {{ accessorInfo.type }} {
+        get { manager.value(for: {{ enumName }}.{{ accessorInfo.constant.name }}).{{ accessorInfo.toggleType }}Value! }
+        set { manager.set(.{{ accessorInfo.toggleType }}(value: newValue), for: {{ enumName }}.{{ accessorInfo.constant.name }}) }
+    }
+{% endfor %}
+}
+

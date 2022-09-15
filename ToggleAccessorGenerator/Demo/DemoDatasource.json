@@ -1,0 +1,32 @@
+{
+  "toggles": [
+    {
+      "variable": "apple_pay_enabled",
+      "bool": true,
+      "metadata": {
+        "propertyName": "isApplePayEnabled"
+      }
+    },
+    {
+      "variable": "retry_attempts",
+      "int": 42,
+      "metadata": {
+        "propertyName": "retryAttempts"
+      }
+    },
+    {
+      "variable": "pi",
+      "number": 3.1416,
+      "metadata": {
+        "propertyName": "piGreco"
+      }
+    },
+    {
+      "variable": "text_value",
+      "string": "Hello World",
+      "metadata": {
+        "propertyName": "personalisedTextValue"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+//  {{ enumName }}.swift
+
+import Foundation
+
+public struct {{ enumName }} {
+{% for constant in constants %}
+    public static let {{ constant.name }} = "{{ constant.value }}"
+{% endfor %}
+}
