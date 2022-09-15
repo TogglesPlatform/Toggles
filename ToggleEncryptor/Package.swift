@@ -9,6 +9,10 @@ let package = Package(
         .iOS(.v15),
         .macOS(.v12)
     ],
+    products: [
+        .executable(name: "toogleencryptor",
+                    targets: ["ToogleEncryptor"])
+    ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.0.0"))
     ],

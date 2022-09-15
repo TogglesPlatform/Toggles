@@ -22,10 +22,12 @@ struct Generator: ParsableCommand {
     mutating func run() throws {
         switch algorithm {
         case .chaCha20Poly1305:
-            let encryptor = ChaCha20Poly1305Encryptor(key: key)
+            let encryptor = ChaCha20Poly1305(key: key)
             let encryptedValue = try encryptor.encrypt(value)
+            let decryptedValue = try encryptor.decrypt(encryptedValue)
             print("Plaintext value: \"\(value)\"")
             print("Encrypted value: \"\(encryptedValue)\"")
+            print("Decrypted value: \"\(decryptedValue)\"")
         }
     }
 }
