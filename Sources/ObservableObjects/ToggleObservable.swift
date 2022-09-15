@@ -9,24 +9,24 @@ public class ToggleObservable: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
     
     @Published
-    var value: Value = .none
+    public var value: Value = .none
     
     @Published
-    var boolValue: Bool = false
+    public var boolValue: Bool = false
     
     @Published
-    var intValue: Int = 0
+    public var intValue: Int = 0
     
     @Published
-    var numberValue: Double = 0.0
+    public var numberValue: Double = 0.0
     
     @Published
-    var stringValue: String = ""
+    public var stringValue: String = ""
     
     @Published
-    var secureValue: String = ""
+    public var secureValue: String = ""
     
-    init(manager: ToggleManager, variable: Variable) {
+    public init(manager: ToggleManager, variable: Variable) {
         self.manager = manager
         subscribe(on: variable)
     }
