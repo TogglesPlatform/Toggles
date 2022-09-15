@@ -1,6 +1,7 @@
 //  DataSourceLoader.swift
 
 import Foundation
+import Stencil
 
 struct Constant {
     let name: String
@@ -17,11 +18,34 @@ struct AccessorInfo {
 
 class DataSourceLoader {
     
+    private enum LoaderError: Error {
+        case foundDuplicateVariables([Toggle.Variable])
+        case foundDuplicatePropertyNames([String])
+    }
+    
     private let datasource: Datasource
     
     init(jsonURL: URL) throws {
         let content = try Data(contentsOf: jsonURL)
         datasource = try JSONDecoder().decode(Datasource.self, from: content)
+        try validate()
+    }
+    
+    private func validate() throws {
+        let duplicateVariables = Dictionary(grouping: datasource.toggles, by: \.variable)
+            .filter { $1.count > 1 }
+            .compactMap { String($0.0) }
+            .map { String($0) }
+        if duplicateVariables.count > 0 {
+            throw LoaderError.foundDuplicateVariables(duplicateVariables)
+        }
+        
+        let duplicatePropertyNames = Dictionary(grouping: datasource.toggles, by: \.metadata.propertyName)
+            .filter { $1.count > 1 }
+            .compactMap { $0.0 }
+        if duplicatePropertyNames.count > 0 {
+            throw LoaderError.foundDuplicatePropertyNames(duplicatePropertyNames)
+        }
     }
     
     func loadConstants() throws -> [Constant] {

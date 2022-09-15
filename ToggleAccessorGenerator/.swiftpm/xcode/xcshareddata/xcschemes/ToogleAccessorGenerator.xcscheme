@@ -90,7 +90,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--data-source-path /Users/alberto/src/ToggleAccessorGenerator/Demo/DemoDatasource.json"
+            argument = "--data-source-path /Users/alberto/src/Toggles/ToggleAccessorGenerator/Demo/DemoDatasource.json"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -102,15 +102,15 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--accessor-template-path /Users/alberto/src/ToggleAccessorGenerator/Templates/Accessor.stencil"
+            argument = "--accessor-template-path /Users/alberto/src/Toggles/ToggleAccessorGenerator/Templates/Accessor.stencil"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--constants-template-path /Users/alberto/src/ToggleAccessorGenerator/Templates/Constants.stencil"
+            argument = "--constants-template-path /Users/alberto/src/Toggles/ToggleAccessorGenerator/Templates/Constants.stencil"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--output-path /Users/alberto/src/ToggleAccessorGenerator/GeneratedCode"
+            argument = "--output-path /Users/alberto/src/Toggles/ToggleAccessorGenerator/GeneratedCode"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
