@@ -71,38 +71,6 @@
         "group": "group_2",
         "description": "String toggle"
       }
-    },
-    {
-      "variable": "boolean_toggle_2",
-      "bool": true,
-      "metadata": {
-        "group": "",
-        "description": "Boolean toggle"
-      }
-    },
-    {
-      "variable": "integer_toggle_2",
-      "int": 42,
-      "metadata": {
-        "group": "",
-        "description": "Integer toggle"
-      }
-    },
-    {
-      "variable": "numerical_toggle_2",
-      "number": 3.1416,
-      "metadata": {
-        "group": "",
-        "description": "Numerical toggle"
-      }
-    },
-    {
-      "variable": "string_toggle_2",
-      "string": "Hello World",
-      "metadata": {
-        "group": "",
-        "description": "String toggle"
-      }
     }
   ]
 }
