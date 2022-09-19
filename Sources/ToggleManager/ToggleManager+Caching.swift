@@ -5,8 +5,10 @@ import Foundation
 extension ToggleManager {
     
     public var hasOverrides: Bool {
-        guard let mutableValueProvider = mutableValueProvider else { return false }
-        return !mutableValueProvider.variables.isEmpty
+        queue.sync {
+            guard let mutableValueProvider = mutableValueProvider else { return false }
+            return !mutableValueProvider.variables.isEmpty
+        }
     }
     
     @discardableResult
@@ -23,15 +25,6 @@ extension ToggleManager {
     func getCachedValue(for variable: Variable) -> Value? {
         queue.sync {
             cache[variable]
-        }
-    }
-}
-
-extension ToggleManager {
-    
-    func set(_ dictionary: [Variable: Value]) {
-        for (key, value) in dictionary {
-            set(value, for: key)
         }
     }
 }

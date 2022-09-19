@@ -2,10 +2,14 @@
 
 extension ToggleManager {
     
-    func encryptedValue(for value: Value) -> Value {
+    enum FetchError: Error {
+        case missingCypherConfiguration
+    }
+    
+    func writeValue(for value: Value) throws -> Value {
         switch value {
         case .secure(let plaintextValue):
-            let encryptedValue: String = (try? encrypt(plaintextValue)) ?? "<corrupted value>"
+            let encryptedValue: String = try encrypt(plaintextValue)
             return .secure(encryptedValue)
         default:
             return value
@@ -23,10 +27,10 @@ extension ToggleManager {
         }
     }
     
-    func decryptedValue(for value: Value) -> Value {
+    func readValue(for value: Value) throws -> Value {
         switch value {
         case .secure(let encryptedValue):
-            let decryptedValue: String = (try? decrypt(encryptedValue)) ?? "<corrupted value>"
+            let decryptedValue: String = try decrypt(encryptedValue)
             return .secure(decryptedValue)
         default:
             return value

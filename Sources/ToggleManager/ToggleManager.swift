@@ -27,31 +27,29 @@ final public class ToggleManager {
 
 extension ToggleManager {
     
-    enum FetchError: Error {
-        case missingCypherConfiguration
-    }
-    
     public func value(for variable: Variable) -> Value {
         queue.sync {
-            if let cachedValue = cache[variable] {
-                return decryptedValue(for: cachedValue)
-            }
-
-            if let value = mutableValueProvider?.value(for: variable), value != .none {
-                cache[variable] = value
-                return decryptedValue(for: value)
-            }
-            for provider in valueProviders {
-                let value = provider.value(for: variable)
-                if value != .none {
-                    cache[variable] = value
-                    return decryptedValue(for: value)
-                }
-            }
-            let value = defaultValueProvider.value(for: variable)
-            cache[variable] = value
-            return decryptedValue(for: value)
+            nonSyncValue(for: variable)
         }
+    }
+    
+    internal func nonSyncValue(for variable: Variable) -> Value {
+        let value = cache[variable] ?? fetchValueFromProviders(for: variable)
+        cache[variable] = value
+        return try! readValue(for: value)
+    }
+    
+    private func fetchValueFromProviders(for variable: Variable) -> Value {
+        if let value = mutableValueProvider?.value(for: variable), value != .none {
+            return value
+        }
+        for provider in valueProviders {
+            let value = provider.value(for: variable)
+            if value != .none {
+                return value
+            }
+        }
+        return defaultValueProvider.value(for: variable)
     }
 }
 
@@ -59,10 +57,18 @@ extension ToggleManager {
     
     public func set(_ value: Value, for variable: Variable) {
         queue.async(flags: .barrier) {
-            guard let mutableValueProvider = self.mutableValueProvider else { return }
-            let value = self.encryptedValue(for: value)
-            self.cache[variable] = value
-            mutableValueProvider.set(value, for: variable)
+            guard let mutableValueProvider = self.mutableValueProvider else {
+//                assertionFailure("No MutableValueProvider available. Cannot call `set(_, for:)` on \(self).")
+                return
+            }
+            guard value != .none else {
+//                assertionFailure("Cannot set `.none` value.")
+                return
+            }
+            let writeValue = try! self.writeValue(for: value)
+            self.cache[variable] = writeValue
+            mutableValueProvider.set(writeValue, for: variable)
+            self.subjectsRefs[variable]?.send(value)
         }
     }
     
@@ -71,6 +77,17 @@ extension ToggleManager {
             guard let mutableValueProvider = self.mutableValueProvider else { return }
             self.cache[variable] = nil
             mutableValueProvider.delete(variable)
+            self.subjectsRefs[variable]?.send(completion: .finished)
+            self.subjectsRefs[variable] = nil
+        }
+    }
+}
+
+extension ToggleManager {
+    
+    func set(_ dictionary: [Variable: Value]) {
+        for (key, value) in dictionary {
+            set(value, for: key)
         }
     }
 }
