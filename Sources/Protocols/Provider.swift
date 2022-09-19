@@ -1,10 +1,7 @@
 //  Provider.swift
 
-public protocol Nameable {
+public protocol ValueProvider {
     var name: String { get }
-}
-
-public protocol ValueProvider: Nameable {
     func value(for variable: Variable) -> Value
 }
 
