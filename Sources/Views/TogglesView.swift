@@ -65,7 +65,9 @@ public struct TogglesView: View {
                     .accessibilityLabel(group.title)
                 }
             }
+#if os(iOS)
             .listStyle(.insetGrouped)
+#endif
             .accessibilityLabel("Toggles list")
             .navigationTitle("Toggles")
             .toolbar {

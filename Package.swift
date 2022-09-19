@@ -6,7 +6,8 @@ import PackageDescription
 let package = Package(
     name: "Toggles",
     platforms: [
-        .iOS(.v15)
+        .iOS(.v15),
+        .macOS(.v12)
     ],
     products: [
         .library(

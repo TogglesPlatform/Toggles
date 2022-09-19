@@ -2,6 +2,9 @@
 
 import Combine
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
 
 struct ToggleDetailView: View {
     
@@ -120,7 +123,9 @@ struct ToggleDetailView: View {
                 }
                 else {
                     TextField("Override value", text: $textValue)
+#if os(iOS)
                         .keyboardType(keyboardType)
+#endif
                 }
                 Spacer()
                 overrideButtonView
@@ -199,6 +204,7 @@ struct ToggleDetailView: View {
         }
     }
     
+#if os(iOS)
     private var keyboardType: UIKeyboardType {
         switch toggle.value {
         case .none:
@@ -215,6 +221,7 @@ struct ToggleDetailView: View {
             return .default
         }
     }
+#endif
     
     private var isBooleanToggle: Bool {
         if case .bool = toggle.value {
