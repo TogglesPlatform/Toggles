@@ -9,22 +9,22 @@ public class ToggleObservable: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
     
     @Published
-    public var value: Value = .none
+    public var value: Value!
     
     @Published
-    public var boolValue: Bool = false
+    public var boolValue: Bool!
     
     @Published
-    public var intValue: Int = 0
+    public var intValue: Int!
     
     @Published
-    public var numberValue: Double = 0.0
+    public var numberValue: Double!
     
     @Published
-    public var stringValue: String = ""
+    public var stringValue: String!
     
     @Published
-    public var secureValue: String = ""
+    public var secureValue: String!
     
     public init(manager: ToggleManager, variable: Variable) {
         self.manager = manager
@@ -36,8 +36,6 @@ public class ToggleObservable: ObservableObject {
             .sink { value in
                 self.value = value
                 switch value {
-                case .none:
-                    break
                 case .bool(let value):
                     self.boolValue = value
                 case .int(let value):

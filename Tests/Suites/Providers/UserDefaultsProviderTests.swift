@@ -25,7 +25,7 @@ final class PersistentValueProviderTests: XCTestCase {
     
     func test_set() {
         let variable = "test_variable"
-        XCTAssertEqual(persistentValueProvider.value(for: variable), .none)
+        XCTAssertNil(persistentValueProvider.value(for: variable))
         persistentValueProvider.set(.int(42), for: variable)
         XCTAssertEqual(persistentValueProvider.value(for: variable), .int(42))
     }
@@ -34,7 +34,7 @@ final class PersistentValueProviderTests: XCTestCase {
         let variable = "test_variable"
         persistentValueProvider.set(.int(42), for: variable)
         persistentValueProvider.delete(variable)
-        XCTAssertEqual(persistentValueProvider.value(for: variable), .none)
+        XCTAssertNil(persistentValueProvider.value(for: variable))
     }
     
     func test_deleteAll() {
@@ -43,8 +43,8 @@ final class PersistentValueProviderTests: XCTestCase {
         persistentValueProvider.set(.int(42), for: variable1)
         persistentValueProvider.set(.string("Hello World"), for: variable2)
         persistentValueProvider.deleteAll()
-        XCTAssertEqual(persistentValueProvider.value(for: variable1), .none)
-        XCTAssertEqual(persistentValueProvider.value(for: variable2), .none)
+        XCTAssertNil(persistentValueProvider.value(for: variable1))
+        XCTAssertNil(persistentValueProvider.value(for: variable2))
     }
     
     func test_variablesAfterSet() {

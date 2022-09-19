@@ -4,12 +4,6 @@
 
 class ToggleFactory {
     
-    func noneToggle() -> Toggle {
-        Toggle(variable: "boolean_toggle",
-               value: .none,
-               metadata: Metadata(description: "Boolean toggle", group: "group_1"))
-    }
-    
     func booleanToggle(_ value: Bool) -> Toggle {
         Toggle(variable: "boolean_toggle",
                value: .bool(value),

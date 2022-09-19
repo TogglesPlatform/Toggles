@@ -38,13 +38,13 @@ final class InMemoryValueProviderTests: XCTestCase {
     
     func test_delete() throws {
         inMemoryValueProvider.delete("integer_toggle")
-        XCTAssertEqual(inMemoryValueProvider.value(for: "integer_toggle"), .none)
+        XCTAssertNil(inMemoryValueProvider.value(for: "integer_toggle"))
     }
     
     func test_deleteAll() throws {
         inMemoryValueProvider.deleteAll()
-        XCTAssertEqual(inMemoryValueProvider.value(for: "integer_toggle"), .none)
-        XCTAssertEqual(inMemoryValueProvider.value(for: "string_toggle"), .none)
+        XCTAssertNil(inMemoryValueProvider.value(for: "integer_toggle"))
+        XCTAssertNil(inMemoryValueProvider.value(for: "string_toggle"))
     }
     
     func test_variable() throws {

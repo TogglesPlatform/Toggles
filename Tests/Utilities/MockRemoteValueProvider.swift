@@ -3,7 +3,7 @@
 import Foundation
 @testable import Toggles
 
-final class MockRemoteValueProvider: ValueProvider {
+final class MockRemoteValueProvider: OptionalValueProvider {
     
     var name: String = "Remote (mock)"
     
@@ -17,15 +17,13 @@ final class MockRemoteValueProvider: ValueProvider {
             .mapValues { $0.value }
     }
     
-    func value(for variable: Variable) -> Value {
-        toggles[variable] ?? .none
+    func value(for variable: Variable) -> Value? {
+        toggles[variable]
     }
     
     func fakeLoadLatestConfiguration(_ completion: () -> Void) {
         self.toggles = toggles.mapValues { value in
             switch value {
-            case .none:
-                return .none
             case .bool(let v):
                 return .bool(!v)
             case .int(let v):

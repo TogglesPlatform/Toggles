@@ -14,7 +14,7 @@ class ViewModel {
     
     let datasourceUrl: URL
     let remoteValueProvider: RemoteValueProvider
-    let localValueProvider: ValueProvider
+    let localValueProvider: OptionalValueProvider
     let cypherConfiguration: CypherConfiguration
     let manager: ToggleManager
     

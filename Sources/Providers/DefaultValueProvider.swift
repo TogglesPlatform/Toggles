@@ -21,10 +21,7 @@ final class DefaultValueProvider: ValueProvider {
     func value(for variable: Variable) -> Value {
         guard let value = toggles[variable] else {
             assertionFailure("Not found value for variable \(variable) in \(name) provider.")
-            return .none
-        }
-        if case .none = value {
-            assertionFailure("Found .none value for variable \(variable) in \(name) provider.")
+            return .bool(false)
         }
         return value
     }

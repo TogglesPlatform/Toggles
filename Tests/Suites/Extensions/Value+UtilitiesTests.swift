@@ -5,10 +5,6 @@ import XCTest
 
 final class Value_UtilitiesTests: XCTestCase {
 
-    func test_noneValueDescription() throws {
-        XCTAssertEqual(Value.none.description, "nil")
-    }
-    
     func test_booleanValueDescription() throws {
         XCTAssertEqual(Value.bool(true).description, "true")
     }
@@ -29,10 +25,6 @@ final class Value_UtilitiesTests: XCTestCase {
         XCTAssertEqual(Value.secure("secret").description, "secret")
     }
     
-    func test_noneValueTypeDescription() throws {
-        XCTAssertEqual(Value.none.typeDescription, "Unkwown")
-    }
-    
     func test_booleanValueTypeDescription() throws {
         XCTAssertEqual(Value.bool(true).typeDescription, "Bool")
     }
@@ -51,10 +43,6 @@ final class Value_UtilitiesTests: XCTestCase {
     
     func test_secureValueTypeDescription() throws {
         XCTAssertEqual(Value.secure("secret").typeDescription, "String")
-    }
-    
-    func test_noneValueSFSybol() throws {
-        XCTAssertEqual(Value.none.sfSymbolId, "circle.dotted")
     }
     
     func test_booleanValueSFSybol() throws {

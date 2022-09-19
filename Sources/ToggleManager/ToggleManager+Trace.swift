@@ -9,7 +9,7 @@ extension ToggleManager {
     struct Trace: Equatable, Identifiable {
         var id: String { providerName }
         let providerName: ProviderName
-        let value: Value
+        let value: Value?
     }
 
     func stackTrace(for variable: Variable) -> [Trace] {

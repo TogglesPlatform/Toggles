@@ -3,7 +3,6 @@
 import Foundation
 
 public enum Value: Equatable, Codable {
-    case none
     case bool(Bool)
     case int(Int)
     case number(Double)

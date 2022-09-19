@@ -3,7 +3,7 @@
 import Foundation
 import Toggles
 
-class MockSingleValueProvider: ValueProvider {
+class MockSingleValueProvider: OptionalValueProvider {
     
     var name: String = "SingleValue (mock)"
     
@@ -13,7 +13,7 @@ class MockSingleValueProvider: ValueProvider {
         self.value = value
     }
     
-    func value(for variable: Variable) -> Value {
+    func value(for variable: Variable) -> Value? {
         value
     }
 }

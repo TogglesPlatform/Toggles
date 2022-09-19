@@ -66,25 +66,25 @@ final class ToggleObservableTests: XCTestCase {
         
         toggleObservable.$intValue
             .sink { value in
-                XCTAssertEqual(value, 0)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$numberValue
             .sink { value in
-                XCTAssertEqual(value, 0.0)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$stringValue
             .sink { value in
-                XCTAssertEqual(value, "")
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$secureValue
             .sink { value in
-                XCTAssertEqual(value, "")
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
@@ -137,25 +137,25 @@ final class ToggleObservableTests: XCTestCase {
         
         toggleObservable.$boolValue
             .sink { value in
-                XCTAssertEqual(value, false)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$numberValue
             .sink { value in
-                XCTAssertEqual(value, 0.0)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$stringValue
             .sink { value in
-                XCTAssertEqual(value, "")
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$secureValue
             .sink { value in
-                XCTAssertEqual(value, "")
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
@@ -208,25 +208,25 @@ final class ToggleObservableTests: XCTestCase {
         
         toggleObservable.$boolValue
             .sink { value in
-                XCTAssertEqual(value, false)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$intValue
             .sink { value in
-                XCTAssertEqual(value, 0)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$stringValue
             .sink { value in
-                XCTAssertEqual(value, "")
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$secureValue
             .sink { value in
-                XCTAssertEqual(value, "")
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
@@ -279,25 +279,25 @@ final class ToggleObservableTests: XCTestCase {
         
         toggleObservable.$boolValue
             .sink { value in
-                XCTAssertEqual(value, false)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$intValue
             .sink { value in
-                XCTAssertEqual(value, 0)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$numberValue
             .sink { value in
-                XCTAssertEqual(value, 0.0)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$secureValue
             .sink { value in
-                XCTAssertEqual(value, "")
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
@@ -350,25 +350,25 @@ final class ToggleObservableTests: XCTestCase {
         
         toggleObservable.$boolValue
             .sink { value in
-                XCTAssertEqual(value, false)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$intValue
             .sink { value in
-                XCTAssertEqual(value, 0)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$numberValue
             .sink { value in
-                XCTAssertEqual(value, 0.0)
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         
         toggleObservable.$stringValue
             .sink { value in
-                XCTAssertEqual(value, "")
+                XCTAssertNil(value)
             }
             .store(in: &cancellables)
         

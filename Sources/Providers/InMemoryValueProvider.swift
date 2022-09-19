@@ -12,8 +12,8 @@ final public class InMemoryValueProvider: MutableValueProvider {
         self.storage = datasource
     }
     
-    public func value(for variable: Variable) -> Value {
-        storage[variable] ?? .none
+    public func value(for variable: Variable) -> Value? {
+        storage[variable]
     }
     
     public func set(_ value: Value, for variable: Variable) {

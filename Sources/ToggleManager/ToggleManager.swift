@@ -6,7 +6,7 @@ import Foundation
 final public class ToggleManager {
     
     var mutableValueProvider: MutableValueProvider?
-    var valueProviders: [ValueProvider]
+    var valueProviders: [OptionalValueProvider]
     var defaultValueProvider: ValueProvider
     var cypherConfiguration: CypherConfiguration?
     
@@ -15,7 +15,7 @@ final public class ToggleManager {
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
 
     public init(mutableValueProvider: MutableValueProvider? = nil,
-                valueProviders: [ValueProvider] = [],
+                valueProviders: [OptionalValueProvider] = [],
                 datasourceUrl: URL,
                 cypherConfiguration: CypherConfiguration? = nil) throws {
         self.mutableValueProvider = mutableValueProvider
@@ -40,12 +40,11 @@ extension ToggleManager {
     }
     
     private func fetchValueFromProviders(for variable: Variable) -> Value {
-        if let value = mutableValueProvider?.value(for: variable), value != .none {
+        if let value = mutableValueProvider?.value(for: variable) {
             return value
         }
         for provider in valueProviders {
-            let value = provider.value(for: variable)
-            if value != .none {
+            if let value = provider.value(for: variable) {
                 return value
             }
         }
@@ -59,10 +58,6 @@ extension ToggleManager {
         queue.async(flags: .barrier) {
             guard let mutableValueProvider = self.mutableValueProvider else {
 //                assertionFailure("No MutableValueProvider available. Cannot call `set(_, for:)` on \(self).")
-                return
-            }
-            guard value != .none else {
-//                assertionFailure("Cannot set `.none` value.")
                 return
             }
             let writeValue = try! self.writeValue(for: value)

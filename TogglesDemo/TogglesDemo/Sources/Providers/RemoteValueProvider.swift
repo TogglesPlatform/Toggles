@@ -3,7 +3,7 @@
 import Foundation
 import Toggles
 
-public class RemoteValueProvider: ValueProvider {
+public class RemoteValueProvider: OptionalValueProvider {
     
     public var name: String = "Remote (demo)"
     
@@ -17,15 +17,13 @@ public class RemoteValueProvider: ValueProvider {
             .mapValues { $0.value }
     }
     
-    public func value(for variable: Variable) -> Value {
-        toggles[variable] ?? .none
+    public func value(for variable: Variable) -> Value? {
+        toggles[variable]
     }
     
     public func fakeLoadLatestConfiguration(_ completion: () -> Void) {
         self.toggles = toggles.mapValues { value in
             switch value {
-            case .none:
-                return .none
             case .bool:
                 return .bool(Int(arc4random()) % 2 == 0 ? false : true)
             case .int:

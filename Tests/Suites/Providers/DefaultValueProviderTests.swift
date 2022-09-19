@@ -14,7 +14,7 @@ final class DefaultValueProviderTests: XCTestCase {
     func test_value() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
         let provider = try DefaultValueProvider(jsonURL: url)
-        XCTAssert(provider.value(for: "integer_toggle") != .none)
+        XCTAssertEqual(provider.value(for: "integer_toggle"), .int(42))
     }
     
     func test_duplicatesInDatasourceNotAllowed() throws {

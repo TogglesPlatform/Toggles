@@ -116,13 +116,13 @@ struct ToggleDetailView: View {
                 HStack {
                     Text(trace.providerName)
                     Spacer()
-                    if case .none = trace.value {
-                        Text(trace.value.description)
+                    if let value = trace.value {
+                        Text(value.description)
+                            .font(.body)
+                    } else {
+                        Text("nil")
                             .font(.body)
                             .italic()
-                    } else {
-                        Text(trace.value.description)
-                            .font(.body)
                     }
                 }
             }
@@ -192,8 +192,6 @@ struct ToggleDetailView: View {
     private func isInputValid(_ input: String) -> Bool {
         guard !input.isEmpty else { return true }
         switch toggle.value {
-        case .none:
-            return false
         case .bool:
             return input.boolValue != nil
         case .int:
@@ -209,8 +207,6 @@ struct ToggleDetailView: View {
     
     private func overridingValue(for input: String) -> Value {
         switch toggle.value {
-        case .none:
-            return .none
         case .bool:
             return .bool(input.boolValue ?? false)
         case .int:
@@ -227,8 +223,6 @@ struct ToggleDetailView: View {
 #if os(iOS)
     private var keyboardType: UIKeyboardType {
         switch toggle.value {
-        case .none:
-            return .default
         case .bool:
             return .default
         case .int:
