@@ -7,37 +7,37 @@ final class UserDefaultsProviderTests: XCTestCase {
 
     private var userDefaultsProvider: UserDefaultsProvider!
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() {
+        super.setUp()
         let userDefaults = UserDefaults(suiteName: "testSuite")!
         userDefaultsProvider = UserDefaultsProvider(userDefaults: userDefaults)
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         userDefaultsProvider.deleteAll()
         userDefaultsProvider = nil
-        try super.tearDownWithError()
+        super.tearDown()
     }
     
     func test_name() {
         XCTAssertEqual(userDefaultsProvider.name, "UserDefaults")
     }
 
-    func test_set() throws {
+    func test_set() {
         let variable = "test_variable"
         XCTAssertEqual(userDefaultsProvider.value(for: variable), .none)
         userDefaultsProvider.set(.int(42), for: variable)
         XCTAssertEqual(userDefaultsProvider.value(for: variable), .int(42))
     }
     
-    func test_delete() throws {
+    func test_delete() {
         let variable = "test_variable"
         userDefaultsProvider.set(.int(42), for: variable)
         userDefaultsProvider.delete(variable)
         XCTAssertEqual(userDefaultsProvider.value(for: variable), .none)
     }
     
-    func test_deleteAll() throws {
+    func test_deleteAll() {
         let variable1 = "test_variable_1"
         let variable2 = "test_variable_2"
         userDefaultsProvider.set(.int(42), for: variable1)
@@ -47,7 +47,7 @@ final class UserDefaultsProviderTests: XCTestCase {
         XCTAssertEqual(userDefaultsProvider.value(for: variable2), .none)
     }
     
-    func test_variablesAfterSet() throws {
+    func test_variablesAfterSet() {
         let variable1 = "test_variable_1"
         let variable2 = "test_variable_2"
         userDefaultsProvider.set(.int(42), for: variable1)
@@ -58,7 +58,7 @@ final class UserDefaultsProviderTests: XCTestCase {
         XCTAssert(variables.contains(variable2))
     }
     
-    func test_variablesAfterDelete() throws {
+    func test_variablesAfterDelete() {
         let variable1 = "test_variable_1"
         let variable2 = "test_variable_2"
         userDefaultsProvider.set(.int(42), for: variable1)

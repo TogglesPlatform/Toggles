@@ -167,15 +167,15 @@ final class ToggleObservableTests: XCTestCase {
     func test_numericalObservable() throws {
         let variable = "numerical_toggle"
         let toggleObservable = ToggleObservable(manager: toggleManager, variable: variable)
-
+        
         let valueExpectation = self.expectation(description: #function)
         var receiveValueCount = 0
-
+        
         let rawValueExpectation = self.expectation(description: #function)
         var receiveRawValueCount = 0
         
         let newValue: Double = 108.42
-
+        
         toggleObservable.$value
             .sink { value in
                 receiveValueCount += 1
@@ -190,7 +190,7 @@ final class ToggleObservableTests: XCTestCase {
                 }
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$numberValue
             .sink { value in
                 receiveRawValueCount += 1
@@ -205,48 +205,48 @@ final class ToggleObservableTests: XCTestCase {
                 }
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$boolValue
             .sink { value in
                 XCTAssertEqual(value, false)
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$intValue
             .sink { value in
                 XCTAssertEqual(value, 0)
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$stringValue
             .sink { value in
                 XCTAssertEqual(value, "")
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$secureValue
             .sink { value in
                 XCTAssertEqual(value, "")
             }
             .store(in: &cancellables)
-
+        
         toggleManager.set(.number(newValue), for: variable)
-
+        
         wait(for: [rawValueExpectation, valueExpectation], timeout: 5.0)
     }
-
+    
     func test_stringObservable() throws {
         let variable = "string_toggle"
         let toggleObservable = ToggleObservable(manager: toggleManager, variable: variable)
-
+        
         let valueExpectation = self.expectation(description: #function)
         var receiveValueCount = 0
-
+        
         let rawValueExpectation = self.expectation(description: #function)
         var receiveRawValueCount = 0
         
         let newValue: String = "Ciao Mondo"
-
+        
         toggleObservable.$value
             .sink { value in
                 receiveValueCount += 1
@@ -261,7 +261,7 @@ final class ToggleObservableTests: XCTestCase {
                 }
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$stringValue
             .sink { value in
                 receiveRawValueCount += 1
@@ -276,48 +276,48 @@ final class ToggleObservableTests: XCTestCase {
                 }
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$boolValue
             .sink { value in
                 XCTAssertEqual(value, false)
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$intValue
             .sink { value in
                 XCTAssertEqual(value, 0)
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$numberValue
             .sink { value in
                 XCTAssertEqual(value, 0.0)
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$secureValue
             .sink { value in
                 XCTAssertEqual(value, "")
             }
             .store(in: &cancellables)
-
+        
         toggleManager.set(.string(newValue), for: variable)
-
+        
         wait(for: [rawValueExpectation, valueExpectation], timeout: 5.0)
     }
-
+    
     func test_secureObservable() throws {
         let variable = "secure_toggle"
         let toggleObservable = ToggleObservable(manager: toggleManager, variable: variable)
-
+        
         let valueExpectation = self.expectation(description: #function)
         var receiveValueCount = 0
-
+        
         let rawValueExpectation = self.expectation(description: #function)
         var receiveRawValueCount = 0
         
         let newValue = "secret"
-
+        
         toggleObservable.$value
             .sink { value in
                 receiveValueCount += 1
@@ -332,7 +332,7 @@ final class ToggleObservableTests: XCTestCase {
                 }
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$secureValue
             .sink { value in
                 receiveRawValueCount += 1
@@ -347,33 +347,33 @@ final class ToggleObservableTests: XCTestCase {
                 }
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$boolValue
             .sink { value in
                 XCTAssertEqual(value, false)
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$intValue
             .sink { value in
                 XCTAssertEqual(value, 0)
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$numberValue
             .sink { value in
                 XCTAssertEqual(value, 0.0)
             }
             .store(in: &cancellables)
-
+        
         toggleObservable.$stringValue
             .sink { value in
                 XCTAssertEqual(value, "")
             }
             .store(in: &cancellables)
-
+        
         toggleManager.set(.secure("secret"), for: variable)
-
+        
         wait(for: [rawValueExpectation, valueExpectation], timeout: 5.0)
     }
 }

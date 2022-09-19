@@ -8,17 +8,17 @@ final class ToggleManagerTests: XCTestCase {
     private var userDefaultsProvider: UserDefaultsProvider!
     private var toggleManager: ToggleManager!
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() {
+        super.setUp()
         let userDefaults = UserDefaults(suiteName: "testSuite")!
         userDefaultsProvider = UserDefaultsProvider(userDefaults: userDefaults)
     }
     
-    override func tearDownWithError() throws {
+    override func tearDown() {
         toggleManager.removeOverrides()
         toggleManager = nil
         userDefaultsProvider = nil
-        try super.tearDownWithError()
+        super.tearDown()
     }
     
     // MARK: - DefaultValueProvider
