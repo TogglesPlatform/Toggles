@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "ToogleEncryptor",
+    name: "ToggleCypher",
     platforms: [
         .iOS(.v15),
         .macOS(.v12)
@@ -18,14 +18,14 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "ToogleEncryptor",
+            name: "ToggleCypher",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
             ],
             path: "Sources"),
         .testTarget(
-            name: "ToogleEncryptorTests",
-            dependencies: ["ToogleEncryptor"],
+            name: "ToggleCypherTests",
+            dependencies: ["ToggleCypher"],
             path: "Tests")
     ]
 )

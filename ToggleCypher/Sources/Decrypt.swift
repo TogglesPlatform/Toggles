@@ -1,10 +1,9 @@
-//  Generator.swift
+//  Decrypt.swift
 
 import ArgumentParser
 import Foundation
 
-@main
-struct Generator: ParsableCommand {
+struct Decrypt: ParsableCommand {
     
     @Option(name: .long, help: "The algorithm to use.")
     var algorithm: Algorithm
@@ -22,11 +21,9 @@ struct Generator: ParsableCommand {
     mutating func run() throws {
         switch algorithm {
         case .chaCha20Poly1305:
-            let encryptor = ChaCha20Poly1305(key: key)
-            let encryptedValue = try encryptor.encrypt(value)
-            let decryptedValue = try encryptor.decrypt(encryptedValue)
-            print("Plaintext value: \"\(value)\"")
-            print("Encrypted value: \"\(encryptedValue)\"")
+            let cypher = ChaCha20Poly1305(key: key)
+            let decryptedValue = try cypher.decrypt(value)
+            print("Encrypted value: \"\(value)\"")
             print("Decrypted value: \"\(decryptedValue)\"")
         }
     }

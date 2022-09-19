@@ -90,15 +90,27 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
+            argument = "encrypt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--value &quot;Secure Value&quot;"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "decrypt"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--value &quot;YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK&quot;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "--algorithm chaChaPoly"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--key AyUcYw-qWebYF-z0nWZ4"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--value &quot;Secure Value&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
