@@ -11,7 +11,9 @@ final public class LocalValueProvider: ValueProvider {
     public init(jsonURL: URL) throws {
         let content = try Data(contentsOf: jsonURL)
         let datasource = try JSONDecoder().decode(Datasource.self, from: content)
-        self.toggles = Dictionary(grouping: datasource.toggles, by: \.variable)
+        let groupedToggles = Dictionary(grouping: datasource.toggles, by: \.variable)
+        try TogglesValidator.validate(groupedToggles)
+        self.toggles = groupedToggles
             .mapValues { $0.first! }
             .mapValues { $0.value }
     }
