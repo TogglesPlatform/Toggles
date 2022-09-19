@@ -37,9 +37,12 @@ struct ToggleDetailView: View {
     private var listView: some View {
         List {
             toggleInformationSection
-            providersSection
             currentValueSection
-            overrideValueSection
+            // cacheSection
+            providersSection
+            if manager.mutableValueProvider != nil {
+                overrideValueSection
+            }
         }
         .navigationTitle(toggle.metadata.description)
         .onAppear {
@@ -74,6 +77,38 @@ struct ToggleDetailView: View {
         }
     }
     
+    private var currentValueSection: some View {
+        Section(header: Text("Current returned value")) {
+            HStack {
+                Text("Via the getter")
+                Spacer()
+                Text(manager.value(for: toggle.variable).description)
+            }
+            HStack {
+                Text("Via the publisher")
+                Spacer()
+                Text(toggleObservable.value.description)
+            }
+        }
+    }
+    
+    private var cacheSection: some View {
+        Section(header: Text("Cached value")) {
+            HStack {
+                Text("Cache")
+                Spacer()
+                if let value = manager.getCachedValue(for: toggle.variable) {
+                    Text(value.description)
+                        .font(.body)
+                } else {
+                    Text("nil")
+                        .font(.body)
+                        .italic()
+                }
+            }
+        }
+    }
+    
     private var providersSection: some View {
         Section(header: Text("Providers"),
                 footer: Text("The providers are listed in priority order.")) {
@@ -90,21 +125,6 @@ struct ToggleDetailView: View {
                             .font(.body)
                     }
                 }
-            }
-        }
-    }
-    
-    private var currentValueSection: some View {
-        Section(header: Text("Current returned value"))  {
-            HStack {
-                Text("Via the getter")
-                Spacer()
-                Text(manager.value(for: toggle.variable).description)
-            }
-            HStack {
-                Text("Via the publisher")
-                Spacer()
-                Text(toggleObservable.value.description)
             }
         }
     }
