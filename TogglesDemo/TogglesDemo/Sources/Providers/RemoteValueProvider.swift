@@ -5,7 +5,7 @@ import Toggles
 
 public class RemoteValueProvider: ValueProvider {
     
-    public var name: String { "Remote" }
+    public var name: String = "Remote (demo)"
     
     private var toggles: [Variable: Value]
     
@@ -21,7 +21,7 @@ public class RemoteValueProvider: ValueProvider {
         toggles[variable] ?? .none
     }
     
-    public func fakeFetchLatestConfiguration(_ completion: () -> Void) {
+    public func fakeLoadLatestConfiguration(_ completion: () -> Void) {
         self.toggles = toggles.mapValues { value in
             switch value {
             case .none:

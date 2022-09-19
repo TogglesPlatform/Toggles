@@ -11,10 +11,16 @@
 		D30641F728CC24660051BCBD /* RemoteValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F328CC24660051BCBD /* RemoteValueProvider.swift */; };
 		D30641F828CC24660051BCBD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F428CC24660051BCBD /* ViewModel.swift */; };
 		D30641F928CC24660051BCBD /* TogglesDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F528CC24660051BCBD /* TogglesDemoApp.swift */; };
+		D3C75C2028D7C33600E659ED /* CypherConfiguration+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C75C1F28D7C33600E659ED /* CypherConfiguration+Defaults.swift */; };
+		D3C75C2228D88BD600E659ED /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C75C2128D88BD600E659ED /* DemoView.swift */; };
 		D3D0631928B6C68B003110E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D0631828B6C68B003110E2 /* Assets.xcassets */; };
 		D3D0631C28B6C68B003110E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D0631B28B6C68B003110E2 /* Preview Assets.xcassets */; };
-		D3D4C81028B6C92600F4B9D8 /* Toggles in Frameworks */ = {isa = PBXBuildFile; productRef = D3D4C80F28B6C92600F4B9D8 /* Toggles */; };
 		D3D8E90728CD556600B0D5E8 /* DemoDatasource.json in Resources */ = {isa = PBXBuildFile; fileRef = D3D8E90628CD556600B0D5E8 /* DemoDatasource.json */; };
+		D3F41CFC28D5367C00E56F65 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F41CFA28D5367C00E56F65 /* Constant.swift */; };
+		D3F41CFD28D5367C00E56F65 /* ToggleAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F41CFB28D5367C00E56F65 /* ToggleAccessor.swift */; };
+		D3F41D0A28D53ED500E56F65 /* Toggles in Frameworks */ = {isa = PBXBuildFile; productRef = D3F41D0928D53ED500E56F65 /* Toggles */; };
+		D3F41D0C28D5423200E56F65 /* ToggleAccessorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F41D0B28D5423200E56F65 /* ToggleAccessorView.swift */; };
+		D3F41D0E28D5459E00E56F65 /* ToggleObservablesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F41D0D28D5459E00E56F65 /* ToggleObservablesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,11 +28,17 @@
 		D30641F328CC24660051BCBD /* RemoteValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteValueProvider.swift; sourceTree = "<group>"; };
 		D30641F428CC24660051BCBD /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D30641F528CC24660051BCBD /* TogglesDemoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TogglesDemoApp.swift; sourceTree = "<group>"; };
+		D3C75C1F28D7C33600E659ED /* CypherConfiguration+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CypherConfiguration+Defaults.swift"; path = "TogglesDemo/Sources/CypherConfiguration+Defaults.swift"; sourceTree = SOURCE_ROOT; };
+		D3C75C2128D88BD600E659ED /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
 		D3D0631128B6C68A003110E2 /* TogglesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TogglesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D0631828B6C68B003110E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3D0631B28B6C68B003110E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D3D0632E28B6C8CF003110E2 /* Toggles */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Toggles; path = ..; sourceTree = "<group>"; };
 		D3D8E90628CD556600B0D5E8 /* DemoDatasource.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DemoDatasource.json; sourceTree = "<group>"; };
+		D3F41CFA28D5367C00E56F65 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		D3F41CFB28D5367C00E56F65 /* ToggleAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleAccessor.swift; sourceTree = "<group>"; };
+		D3F41D0828D53ECA00E56F65 /* Toggles */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Toggles; path = ..; sourceTree = "<group>"; };
+		D3F41D0B28D5423200E56F65 /* ToggleAccessorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleAccessorView.swift; sourceTree = "<group>"; };
+		D3F41D0D28D5459E00E56F65 /* ToggleObservablesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleObservablesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3D4C81028B6C92600F4B9D8 /* Toggles in Frameworks */,
+				D3F41D0A28D53ED500E56F65 /* Toggles in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,10 +56,11 @@
 		D30641F128CC24660051BCBD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D30641F228CC24660051BCBD /* RemoteValueProviderView.swift */,
-				D30641F328CC24660051BCBD /* RemoteValueProvider.swift */,
+				D3F41D0F28D548AD00E56F65 /* Views */,
+				D3F41D1028D548C800E56F65 /* Providers */,
 				D30641F428CC24660051BCBD /* ViewModel.swift */,
 				D30641F528CC24660051BCBD /* TogglesDemoApp.swift */,
+				D3C75C2128D88BD600E659ED /* DemoView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -81,6 +94,7 @@
 		D3D0631328B6C68A003110E2 /* TogglesDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D3F41CF928D5367C00E56F65 /* GeneratedCode */,
 				D30641F128CC24660051BCBD /* Sources */,
 				D34E805B28BC1FCA007CCCB6 /* Resources */,
 				D3D0631828B6C68B003110E2 /* Assets.xcassets */,
@@ -107,9 +121,37 @@
 		D3D0632D28B6C8CF003110E2 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				D3D0632E28B6C8CF003110E2 /* Toggles */,
+				D3F41D0828D53ECA00E56F65 /* Toggles */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		D3F41CF928D5367C00E56F65 /* GeneratedCode */ = {
+			isa = PBXGroup;
+			children = (
+				D3F41CFA28D5367C00E56F65 /* Constant.swift */,
+				D3F41CFB28D5367C00E56F65 /* ToggleAccessor.swift */,
+			);
+			path = GeneratedCode;
+			sourceTree = "<group>";
+		};
+		D3F41D0F28D548AD00E56F65 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D30641F228CC24660051BCBD /* RemoteValueProviderView.swift */,
+				D3F41D0D28D5459E00E56F65 /* ToggleObservablesView.swift */,
+				D3F41D0B28D5423200E56F65 /* ToggleAccessorView.swift */,
+				D3C75C1F28D7C33600E659ED /* CypherConfiguration+Defaults.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D3F41D1028D548C800E56F65 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D30641F328CC24660051BCBD /* RemoteValueProvider.swift */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,7 +171,7 @@
 			);
 			name = TogglesDemo;
 			packageProductDependencies = (
-				D3D4C80F28B6C92600F4B9D8 /* Toggles */,
+				D3F41D0928D53ED500E56F65 /* Toggles */,
 			);
 			productName = TogglesDemo;
 			productReference = D3D0631128B6C68A003110E2 /* TogglesDemo.app */;
@@ -188,8 +230,14 @@
 			files = (
 				D30641F628CC24660051BCBD /* RemoteValueProviderView.swift in Sources */,
 				D30641F928CC24660051BCBD /* TogglesDemoApp.swift in Sources */,
+				D3F41CFD28D5367C00E56F65 /* ToggleAccessor.swift in Sources */,
+				D3C75C2228D88BD600E659ED /* DemoView.swift in Sources */,
+				D3F41D0E28D5459E00E56F65 /* ToggleObservablesView.swift in Sources */,
+				D3C75C2028D7C33600E659ED /* CypherConfiguration+Defaults.swift in Sources */,
+				D3F41D0C28D5423200E56F65 /* ToggleAccessorView.swift in Sources */,
 				D30641F728CC24660051BCBD /* RemoteValueProvider.swift in Sources */,
 				D30641F828CC24660051BCBD /* ViewModel.swift in Sources */,
+				D3F41CFC28D5367C00E56F65 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +366,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TogglesDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = ZQPG4YV673;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -346,6 +395,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TogglesDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = ZQPG4YV673;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -390,7 +440,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D3D4C80F28B6C92600F4B9D8 /* Toggles */ = {
+		D3F41D0928D53ED500E56F65 /* Toggles */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Toggles;
 		};

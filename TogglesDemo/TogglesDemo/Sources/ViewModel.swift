@@ -6,20 +6,38 @@ import Toggles
 
 class ViewModel {
     
+    enum SetupConfiguration {
+        case persistent
+        case inMemory
+        case immutable
+    }
+    
     let datasourceUrl: URL
-    let mutableValueProvider: MutableValueProvider
     let remoteValueProvider: RemoteValueProvider
     let localValueProvider: ValueProvider
+    let cypherConfiguration: CypherConfiguration
     let manager: ToggleManager
     
-    init(datasourceUrl: URL, cypherConfiguration: CypherConfiguration) throws {
+    init(datasourceUrl: URL, setupConfiguration: SetupConfiguration, cypherConfiguration: CypherConfiguration) throws {
         self.datasourceUrl = datasourceUrl
-        mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
-        remoteValueProvider = try RemoteValueProvider(jsonURL: datasourceUrl)
-        localValueProvider = try LocalValueProvider(jsonURL: datasourceUrl)
-        manager = try ToggleManager(mutableValueProvider: mutableValueProvider,
-                                    valueProviders: [remoteValueProvider, localValueProvider],
-                                    datasourceUrl: datasourceUrl,
-                                    cypherConfiguration: cypherConfiguration)
+        self.remoteValueProvider = try RemoteValueProvider(jsonURL: datasourceUrl)
+        self.localValueProvider = try LocalValueProvider(jsonURL: datasourceUrl)
+        self.cypherConfiguration = cypherConfiguration
+        switch setupConfiguration {
+        case .persistent:
+            self.manager = try ToggleManager(mutableValueProvider: UserDefaultsProvider(userDefaults: .standard),
+                                             valueProviders: [remoteValueProvider, localValueProvider],
+                                             datasourceUrl: datasourceUrl,
+                                             cypherConfiguration: cypherConfiguration)
+        case .inMemory:
+            self.manager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                             valueProviders: [remoteValueProvider, localValueProvider],
+                                             datasourceUrl: datasourceUrl,
+                                             cypherConfiguration: cypherConfiguration)
+        case .immutable:
+            self.manager = try ToggleManager(valueProviders: [remoteValueProvider, localValueProvider],
+                                             datasourceUrl: datasourceUrl,
+                                             cypherConfiguration: cypherConfiguration)
+        }
     }
 }

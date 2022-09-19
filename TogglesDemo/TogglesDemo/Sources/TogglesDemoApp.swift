@@ -7,28 +7,37 @@ import Toggles
 @main
 struct TogglesDemoApp: App {
     
-    let viewModel: ViewModel
-    let key = "AyUcYw-qWebYF-z0nWZ4"
+    @State private var setupConfiguration: ViewModel.SetupConfiguration!
     
-    init() {
-        let datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
-        let cypherConfiguration = CypherConfiguration(algorithm: .chaCha20Poly1305, key: key)
-        viewModel = try! ViewModel(datasourceUrl: datasourceUrl, cypherConfiguration: cypherConfiguration)
-    }
+    init() {}
     
     var body: some Scene {
         WindowGroup {
-            TabView {
-                TogglesView(manager: viewModel.manager, datasourceUrl: viewModel.datasourceUrl)
-                    .tabItem {
-                        Label("Toggles", systemImage: "switch.2")
+            if setupConfiguration == nil {
+                Text("")
+                    .alert("Select setup", isPresented: .constant(true)) {
+                        Button("Persistent") {
+                            setupConfiguration = .persistent
+                        }
+                        Button("In Memory") {
+                            setupConfiguration = .inMemory
+                        }
+                        Button("Immutable") {
+                            setupConfiguration = .immutable
+                        }
                     }
-                RemoteValueProviderView(provider: viewModel.remoteValueProvider, manager: viewModel.manager)
-                    .tabItem {
-                        Label("Publishing", systemImage: "wave.3.left")
-                    }
-                
+            }
+            else {
+                DemoView(viewModel: setupViewModel())
             }
         }
+    }
+    
+    private func setupViewModel() -> ViewModel {
+        let datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
+        let cypherConfiguration = CypherConfiguration.chaChaPoly
+        return try! ViewModel(datasourceUrl: datasourceUrl,
+                              setupConfiguration: setupConfiguration,
+                              cypherConfiguration: cypherConfiguration)
     }
 }

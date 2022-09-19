@@ -10,7 +10,7 @@ struct RemoteValueProviderView: View {
     let manager: ToggleManager
     
     let message = """
-This action simulates a new configuration being fetched to demonstrate the use case and how the ToggleView reacts to the changes.
+This action simulates a new configuration being loaded to demonstrate the use case and how the ToggleView reacts to the changes.
 
 The values in the new configuration are generated randomly.
 """
@@ -20,8 +20,8 @@ The values in the new configuration are generated randomly.
             Text("RemoteValueProvider")
                 .font(.title)
                 .padding()
-            Button("Fetch latest configuration (fake)") {
-                provider.fakeFetchLatestConfiguration {
+            Button("Load latest configuration") {
+                provider.fakeLoadLatestConfiguration {
                     manager.reactToConfigurationChanges()
                 }
             }
