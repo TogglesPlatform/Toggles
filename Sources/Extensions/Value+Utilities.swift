@@ -9,7 +9,7 @@ extension Value {
     var description: String {
         switch self {
         case .none:
-            return "null"
+            return "nil"
         case .bool(let value):
             return String(value)
         case .int(let value):
@@ -26,7 +26,7 @@ extension Value {
     var typeDescription: String {
         switch self {
         case .none:
-            return "null"
+            return "Unkwown"
         case .bool:
             return "Bool"
         case .int:

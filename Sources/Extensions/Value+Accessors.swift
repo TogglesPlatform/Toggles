@@ -14,7 +14,7 @@ public extension Value {
         return v
     }
 
-    var doubleValue: Double? {
+    var numberValue: Double? {
         guard case let .number(v) = self else { return nil }
         return v
     }
@@ -24,7 +24,7 @@ public extension Value {
         return v
     }
     
-    var encryptedValue: String? {
+    var secureValue: String? {
         guard case let .secure(v) = self else { return nil }
         return v
     }
