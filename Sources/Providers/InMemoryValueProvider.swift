@@ -6,9 +6,11 @@ final public class InMemoryValueProvider: MutableValueProvider {
     
     public var name: String = "InMemory"
     
-    private var storage = [Variable: Value]()
+    private var storage: [Variable: Value]
     
-    public init() {}
+    public init(datasource: [Variable: Value] = [Variable: Value]()) {
+        self.storage = datasource
+    }
     
     public func value(for variable: Variable) -> Value {
         storage[variable] ?? .none
