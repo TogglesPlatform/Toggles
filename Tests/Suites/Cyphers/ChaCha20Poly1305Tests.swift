@@ -13,9 +13,9 @@ final class ChaCha20Poly1305Tests: XCTestCase {
         cypher = ChaCha20Poly1305(key: "")
     }
     
-    override func tearDown() throws {
+    override func tearDown() {
         cypher = nil
-        super.tearDownWithError()
+        super.tearDown()
     }
     
     func test_encryptAndDecrypt() throws {

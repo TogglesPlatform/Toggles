@@ -20,7 +20,7 @@ final class PersistentValueProviderTests: XCTestCase {
     }
     
     func test_name() {
-        XCTAssertEqual(persistentValueProvider.name, "UserDefaults")
+        XCTAssertEqual(persistentValueProvider.name, "Persistent")
     }
     
     func test_set() {
