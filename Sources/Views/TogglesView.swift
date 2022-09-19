@@ -101,7 +101,7 @@ public struct TogglesView: View {
             Image(systemName: "ellipsis.circle")
         }
         .confirmationDialog("Select an action", isPresented: $showingOptions) {
-            Button("Clear overrides & cache") {
+            Button("Clear overrides") {
                 overriddenVariables = manager.removeOverrides()
                 manager.reactToConfigurationChanges()
                 presentDeleteAlert = true
