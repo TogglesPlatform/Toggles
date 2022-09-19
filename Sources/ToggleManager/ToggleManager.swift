@@ -11,7 +11,7 @@ final public class ToggleManager {
     var cypherConfiguration: CypherConfiguration?
     
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
-    let cache = Cache<Variable, Value>()
+    let cache = ValueCache<Variable, Value>()
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
 
     public init(mutableValueProvider: MutableValueProvider? = nil,
@@ -32,26 +32,25 @@ extension ToggleManager {
     }
     
     public func value(for variable: Variable) -> Value {
-        if let cachedValue = cache[variable] {
-            return decryptedValue(for: cachedValue)
-        }
-        let value = fetchValue(for: variable)
-        cache[variable] = value
-        return decryptedValue(for: value)
-    }
-    
-    private func fetchValue(for variable: Variable) -> Value {
         queue.sync {
+            if let cachedValue = cache[variable] {
+                return decryptedValue(for: cachedValue)
+            }
+
             if let value = mutableValueProvider?.value(for: variable), value != .none {
-                return value
+                cache[variable] = value
+                return decryptedValue(for: value)
             }
             for provider in valueProviders {
                 let value = provider.value(for: variable)
                 if value != .none {
-                    return value
+                    cache[variable] = value
+                    return decryptedValue(for: value)
                 }
             }
-            return defaultValueProvider.value(for: variable)
+            let value = defaultValueProvider.value(for: variable)
+            cache[variable] = value
+            return decryptedValue(for: value)
         }
     }
 }
@@ -59,17 +58,19 @@ extension ToggleManager {
 extension ToggleManager {
     
     public func set(_ value: Value, for variable: Variable) {
-        let value = encryptedValue(for: value)
-        cache[variable] = value
         queue.async(flags: .barrier) {
-            self.mutableValueProvider?.set(value, for: variable)
+            guard let mutableValueProvider = self.mutableValueProvider else { return }
+            let value = self.encryptedValue(for: value)
+            self.cache[variable] = value
+            mutableValueProvider.set(value, for: variable)
         }
     }
     
     public func delete(_ variable: Variable) {
-        cache[variable] = nil
         queue.async(flags: .barrier) {
-            self.mutableValueProvider?.delete(variable)
+            guard let mutableValueProvider = self.mutableValueProvider else { return }
+            self.cache[variable] = nil
+            mutableValueProvider.delete(variable)
         }
     }
 }

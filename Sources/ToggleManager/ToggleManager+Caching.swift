@@ -9,12 +9,21 @@ extension ToggleManager {
         return !mutableValueProvider.variables.isEmpty
     }
     
+    @discardableResult
     public func removeOverrides() -> Set<Variable> {
-        defer { cache.evict() }
-        guard let mutableValueProvider = mutableValueProvider else { return  [] }
-        let variables = mutableValueProvider.variables
-        mutableValueProvider.deleteAll()
-        return variables
+        queue.sync {
+            defer { cache.evict() }
+            guard let mutableValueProvider = mutableValueProvider else { return  [] }
+            let variables = mutableValueProvider.variables
+            mutableValueProvider.deleteAll()
+            return variables
+        }
+    }
+    
+    func getCachedValue(for variable: Variable) -> Value? {
+        queue.sync {
+            cache[variable]
+        }
     }
 }
 

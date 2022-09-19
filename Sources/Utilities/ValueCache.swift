@@ -1,8 +1,8 @@
-//  Cache.swift
+//  ValueCache.swift
 
 import Foundation
 
-final class Cache<Key: Hashable, Value> {
+final class ValueCache<Key: Hashable, Value> {
     private let wrapped = NSCache<WrappedKey, Entry>()
     
     func insert(_ value: Value, forKey key: Key) {
@@ -22,7 +22,7 @@ final class Cache<Key: Hashable, Value> {
     }
 }
 
-private extension Cache {
+private extension ValueCache {
     final class WrappedKey: NSObject {
         private let key: Key
 
@@ -39,7 +39,7 @@ private extension Cache {
     }
 }
 
-private extension Cache {
+private extension ValueCache {
     final class Entry {
         let value: Value
 
@@ -49,7 +49,7 @@ private extension Cache {
     }
 }
 
-extension Cache {
+extension ValueCache {
     subscript(key: Key) -> Value? {
         get { value(forKey: key) }
         set {
