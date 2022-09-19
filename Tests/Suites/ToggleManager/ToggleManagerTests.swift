@@ -5,19 +5,19 @@ import Toggles
 
 final class ToggleManagerTests: XCTestCase {
     
-    private var userDefaultsProvider: UserDefaultsProvider!
+    private var persistentValueProvider: PersistentValueProvider!
     private var toggleManager: ToggleManager!
     
     override func setUp() {
         super.setUp()
         let userDefaults = UserDefaults(suiteName: "testSuite")!
-        userDefaultsProvider = UserDefaultsProvider(userDefaults: userDefaults)
+        persistentValueProvider = PersistentValueProvider(userDefaults: userDefaults)
     }
     
     override func tearDown() {
         toggleManager.removeOverrides()
         toggleManager = nil
-        userDefaultsProvider = nil
+        persistentValueProvider = nil
         super.tearDown()
     }
     
@@ -65,11 +65,11 @@ final class ToggleManagerTests: XCTestCase {
     
     func test_valueOverrideWithUserDefaultValueProvider() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
-        toggleManager = try ToggleManager(mutableValueProvider: userDefaultsProvider, datasourceUrl: url)
+        toggleManager = try ToggleManager(mutableValueProvider: persistentValueProvider, datasourceUrl: url)
         
         // avoiding cache on get
         let variable1 = "variable1"
-        userDefaultsProvider.set(.string("Hello World"), for: variable1)
+        persistentValueProvider.set(.string("Hello World"), for: variable1)
         XCTAssertEqual(toggleManager.value(for: variable1), Value.string("Hello World"))
         toggleManager.delete(variable1)
         
@@ -82,7 +82,7 @@ final class ToggleManagerTests: XCTestCase {
     
     func test_valueDeletionWithUserDefaultValueProvider() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
-        toggleManager = try ToggleManager(mutableValueProvider: userDefaultsProvider, datasourceUrl: url)
+        toggleManager = try ToggleManager(mutableValueProvider: persistentValueProvider, datasourceUrl: url)
         let variable = "integer_toggle"
         toggleManager.set(.string("Hello World"), for: variable)
         toggleManager.delete(variable)
@@ -117,7 +117,7 @@ final class ToggleManagerTests: XCTestCase {
     
     func test_valueOverrideWithUserDefaultValueProviderAndValueProvider() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
-        toggleManager = try ToggleManager(mutableValueProvider: userDefaultsProvider,
+        toggleManager = try ToggleManager(mutableValueProvider: persistentValueProvider,
                                           valueProviders: [MockSingleValueProvider(value: .int(108))],
                                           datasourceUrl: url)
         let variable = "integer_toggle"
@@ -129,7 +129,7 @@ final class ToggleManagerTests: XCTestCase {
     
     func test_valueDeletionWithUserDefaultValueProviderAndValueProvider() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
-        toggleManager = try ToggleManager(mutableValueProvider: userDefaultsProvider,
+        toggleManager = try ToggleManager(mutableValueProvider: persistentValueProvider,
                                           valueProviders: [MockSingleValueProvider(value: .int(108))],
                                           datasourceUrl: url)
         let variable = "integer_toggle"

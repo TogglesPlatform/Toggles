@@ -1,12 +1,12 @@
-//  UserDefaultsProvider.swift
+//  PersistentValueProvider.swift
 
 import Foundation
 
 private let userDefaultsKeyPrefix = "com.toggles"
 
-final public class UserDefaultsProvider: MutableValueProvider {
+final public class PersistentValueProvider: MutableValueProvider {
     
-    public var name: String = "UserDefaults"
+    public var name: String = "Persistent"
     
     private let userDefaults: UserDefaults
     
@@ -49,7 +49,7 @@ final public class UserDefaultsProvider: MutableValueProvider {
     }
 }
 
-extension UserDefaultsProvider {
+extension PersistentValueProvider {
     
     enum Constants: String {
         case savedVariables

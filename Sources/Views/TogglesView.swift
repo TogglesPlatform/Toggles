@@ -131,7 +131,7 @@ public struct TogglesView: View {
 struct TogglesView_Previews: PreviewProvider {
     static var previews: some View {
         let datasourceUrl = Bundle.module.url(forResource: "PreviewDatasource", withExtension: "json")!
-        let mutableValueProvider = UserDefaultsProvider(userDefaults: .standard)
+        let mutableValueProvider = PersistentValueProvider(userDefaults: .standard)
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
                                          datasourceUrl: datasourceUrl)
         return TogglesView(manager: manager, datasourceUrl: datasourceUrl)

@@ -25,7 +25,7 @@ class ViewModel {
         self.cypherConfiguration = cypherConfiguration
         switch setupConfiguration {
         case .persistent:
-            self.manager = try ToggleManager(mutableValueProvider: UserDefaultsProvider(userDefaults: .standard),
+            self.manager = try ToggleManager(mutableValueProvider: PersistentValueProvider(userDefaults: .standard),
                                              valueProviders: [remoteValueProvider, localValueProvider],
                                              datasourceUrl: datasourceUrl,
                                              cypherConfiguration: cypherConfiguration)
