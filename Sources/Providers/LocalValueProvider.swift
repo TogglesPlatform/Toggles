@@ -2,9 +2,9 @@
 
 import Foundation
 
-public class LocalValueProvider: ValueProvider {
+final public class LocalValueProvider: ValueProvider {
     
-    public var name: String { "Local" }
+    public var name: String = "Local"
     
     private let toggles: [Variable: Value]
     

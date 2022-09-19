@@ -2,13 +2,13 @@
 
 import Foundation
 
-class DefaultValueProvider: ValueProvider {
+final class DefaultValueProvider: ValueProvider {
     
-    private enum LoaderError: Error {
+    enum LoaderError: Equatable, Error {
         case foundDuplicateVariables([Variable])
     }
     
-    public var name: String { "Default" }
+    public var name: String = "Default"
     
     private let toggles: [Variable: Value]
     
@@ -23,7 +23,10 @@ class DefaultValueProvider: ValueProvider {
     }
     
     func value(for variable: Variable) -> Value {
-        let value = toggles[variable]!
+        guard let value = toggles[variable] else {
+            assertionFailure("Not found value for variable \(variable) in \(name) provider.")
+            return .none
+        }
         if case .none = value {
             assertionFailure("Found .none value for variable \(variable) in \(name) provider.")
         }
@@ -38,6 +41,7 @@ extension DefaultValueProvider {
             .filter { $1.count > 1 }
             .compactMap { String($0.0) }
             .map { String($0) }
+            .sorted()
         if duplicateVariables.count > 0 {
             throw LoaderError.foundDuplicateVariables(duplicateVariables)
         }

@@ -4,9 +4,9 @@ import Foundation
 
 private let userDefaultsKeyPrefix = "com.toggles"
 
-public class UserDefaultsProvider: MutableValueProvider {
+final public class UserDefaultsProvider: MutableValueProvider {
     
-    public var name: String { "UserDefaults" }
+    public var name: String = "UserDefaults"
     
     private let userDefaults: UserDefaults
     
