@@ -31,6 +31,14 @@
         "group": "group_2",
         "description": "String toggle"
       }
+    },
+    {
+      "variable": "secure_toggle",
+      "secure": "YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK",
+      "metadata": {
+        "group": "group_3",
+        "description": "Secure toggle"
+      }
     }
   ]
 }

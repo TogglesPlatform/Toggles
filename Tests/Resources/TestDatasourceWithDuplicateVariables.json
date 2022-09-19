@@ -1,0 +1,36 @@
+{
+  "toggles": [
+    {
+      "variable": "boolean_toggle",
+      "bool": false,
+      "metadata": {
+        "group": "group_1",
+        "description": "Boolean toggle"
+      }
+    },
+    {
+      "variable": "boolean_toggle",
+      "bool": true,
+      "metadata": {
+        "group": "group_1",
+        "description": "Boolean toggle"
+      }
+    },
+    {
+      "variable": "integer_toggle",
+      "int": 42,
+      "metadata": {
+        "group": "group_1",
+        "description": "Integer toggle"
+      }
+    },
+    {
+      "variable": "integer_toggle",
+      "int": 108,
+      "metadata": {
+        "group": "group_1",
+        "description": "Integer toggle"
+      }
+    }
+  ]
+}
