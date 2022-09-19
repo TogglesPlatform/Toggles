@@ -93,8 +93,8 @@ final class ToggleManagerTests: XCTestCase {
     
     func test_valueOverrideWithValueProvidersNoEffect() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
-        toggleManager = try ToggleManager(valueProviders: [SingleValueMockProvider(value: .int(42)),
-                                                           SingleValueMockProvider(value: .int(108))],
+        toggleManager = try ToggleManager(valueProviders: [MockSingleValueProvider(value: .int(42)),
+                                                           MockSingleValueProvider(value: .int(108))],
                                           datasourceUrl: url)
         let variable = "integer_toggle"
         XCTAssertEqual(toggleManager.value(for: variable), Value.int(42))
@@ -105,8 +105,8 @@ final class ToggleManagerTests: XCTestCase {
     
     func test_valueDeletionWithValueProvidersNoEffect() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
-        toggleManager = try ToggleManager(valueProviders: [SingleValueMockProvider(value: .int(42)),
-                                                           SingleValueMockProvider(value: .int(108))],
+        toggleManager = try ToggleManager(valueProviders: [MockSingleValueProvider(value: .int(42)),
+                                                           MockSingleValueProvider(value: .int(108))],
                                           datasourceUrl: url)
         let variable = "integer_toggle"
         toggleManager.delete(variable)
@@ -118,7 +118,7 @@ final class ToggleManagerTests: XCTestCase {
     func test_valueOverrideWithUserDefaultValueProviderAndValueProvider() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
         toggleManager = try ToggleManager(mutableValueProvider: userDefaultsProvider,
-                                          valueProviders: [SingleValueMockProvider(value: .int(108))],
+                                          valueProviders: [MockSingleValueProvider(value: .int(108))],
                                           datasourceUrl: url)
         let variable = "integer_toggle"
         XCTAssertEqual(toggleManager.value(for: variable), Value.int(108))
@@ -130,7 +130,7 @@ final class ToggleManagerTests: XCTestCase {
     func test_valueDeletionWithUserDefaultValueProviderAndValueProvider() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
         toggleManager = try ToggleManager(mutableValueProvider: userDefaultsProvider,
-                                          valueProviders: [SingleValueMockProvider(value: .int(108))],
+                                          valueProviders: [MockSingleValueProvider(value: .int(108))],
                                           datasourceUrl: url)
         let variable = "integer_toggle"
         toggleManager.set(.string("Hello World"), for: variable)

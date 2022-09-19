@@ -10,8 +10,8 @@ final class ToggleManager_TraceTests: XCTestCase {
     func test_trace() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
         toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
-                                          valueProviders: [SingleValueMockProvider(value: .int(104)),
-                                                           SingleValueMockProvider(value: .int(108))],
+                                          valueProviders: [MockSingleValueProvider(value: .int(104)),
+                                                           MockSingleValueProvider(value: .int(108))],
                                           datasourceUrl: url)
         let variable = "integer_toggle"
         toggleManager.set(.int(1), for: variable)
@@ -22,12 +22,12 @@ final class ToggleManager_TraceTests: XCTestCase {
         XCTAssertEqual(inMemory, ToggleManager.Trace(providerName: "InMemory", value: .int(1)))
         
         let mock1 = trace[1]
-        XCTAssertEqual(mock1.id, "Mock")
-        XCTAssertEqual(mock1, ToggleManager.Trace(providerName: "Mock", value: .int(104)))
+        XCTAssertEqual(mock1.id, "SingleValue (mock)")
+        XCTAssertEqual(mock1, ToggleManager.Trace(providerName: "SingleValue (mock)", value: .int(104)))
         
         let mock2 = trace[2]
-        XCTAssertEqual(mock2.id, "Mock")
-        XCTAssertEqual(mock2, ToggleManager.Trace(providerName: "Mock", value: .int(108)))
+        XCTAssertEqual(mock2.id, "SingleValue (mock)")
+        XCTAssertEqual(mock2, ToggleManager.Trace(providerName: "SingleValue (mock)", value: .int(108)))
         
         let `default` = trace[3]
         XCTAssertEqual(`default`.id, "Default")

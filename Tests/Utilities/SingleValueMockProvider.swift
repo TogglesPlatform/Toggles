@@ -1,11 +1,11 @@
-//  SingleValueMockProvider.swift
+//  MockSingleValueProvider.swift
 
 import Foundation
 import Toggles
 
-class SingleValueMockProvider: ValueProvider {
+class MockSingleValueProvider: ValueProvider {
     
-    var name: String = "Mock"
+    var name: String = "SingleValue (mock)"
     
     private let value: Value
     
