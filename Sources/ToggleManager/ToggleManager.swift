@@ -57,7 +57,7 @@ extension ToggleManager {
     public func set(_ value: Value, for variable: Variable) {
         queue.async(flags: .barrier) {
             guard let mutableValueProvider = self.mutableValueProvider else {
-//                assertionFailure("No MutableValueProvider available. Cannot call `set(_, for:)` on \(self).")
+                assertionFailure("No MutableValueProvider available: unallowed call `set(_, for:)` on \(self).")
                 return
             }
             let writeValue = try! self.writeValue(for: value)
@@ -69,7 +69,10 @@ extension ToggleManager {
     
     public func delete(_ variable: Variable) {
         queue.async(flags: .barrier) {
-            guard let mutableValueProvider = self.mutableValueProvider else { return }
+            guard let mutableValueProvider = self.mutableValueProvider else {
+                assertionFailure("No MutableValueProvider available: unallowed call `delete(_)` on \(self).")
+                return
+            }
             self.cache[variable] = nil
             mutableValueProvider.delete(variable)
             self.subjectsRefs[variable]?.send(completion: .finished)
