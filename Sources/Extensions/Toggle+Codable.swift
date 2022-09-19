@@ -39,7 +39,7 @@ extension Toggle: Codable {
         else {
             throw CodingError.missingValue
         }
-        metadata = try values.decode(Metadata.self, forKey: .metadata)
+        metadata = (try? values.decode(Metadata.self, forKey: .metadata)) ?? Metadata(description: "", group: "")
     }
     
     public func encode(to encoder: Encoder) throws {
