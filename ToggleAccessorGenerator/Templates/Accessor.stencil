@@ -1,6 +1,7 @@
 //  {{ className }}.swift
 
 import Foundation
+import Toggles
 
 public class {{ className }} {
     
@@ -15,7 +16,7 @@ extension {{ className }} {
 {% for accessorInfo in accessorInfos %}
     public var {{ accessorInfo.propertyName }}: {{ accessorInfo.type }} {
         get { manager.value(for: {{ enumName }}.{{ accessorInfo.constant.name }}).{{ accessorInfo.toggleType }}Value! }
-        set { manager.set(.{{ accessorInfo.toggleType }}(value: newValue), for: {{ enumName }}.{{ accessorInfo.constant.name }}) }
+        set { manager.set(.{{ accessorInfo.toggleType }}(newValue), for: {{ enumName }}.{{ accessorInfo.constant.name }}) }
     }
 {% endfor %}
 }

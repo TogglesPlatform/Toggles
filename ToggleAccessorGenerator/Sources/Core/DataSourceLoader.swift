@@ -107,7 +107,7 @@ extension Toggle {
         case .string:
             return "string"
         case .secure:
-            return "string"
+            return "secure"
         }
     }
 }
