@@ -5,6 +5,12 @@ import XCTest
 
 final class LocalValueProviderTests: XCTestCase {
     
+    func test_name() throws {
+        let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
+        let provider = try LocalValueProvider(jsonURL: url)
+        XCTAssertEqual(provider.name, "Local")
+    }
+    
     func test_existingValue() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
         let provider = try LocalValueProvider(jsonURL: url)

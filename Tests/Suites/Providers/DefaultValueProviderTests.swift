@@ -5,6 +5,12 @@ import XCTest
 
 final class DefaultValueProviderTests: XCTestCase {
     
+    func test_name() throws {
+        let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
+        let provider = try DefaultValueProvider(jsonURL: url)
+        XCTAssertEqual(provider.name, "Default")
+    }
+    
     func test_value() throws {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
         let provider = try DefaultValueProvider(jsonURL: url)
