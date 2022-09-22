@@ -14,12 +14,14 @@ public struct Constant {
 
     public static let encryptedToggle = "encrypted_toggle"
 
-    public static let booleanToggle2 = "boolean_toggle_2"
+    public static let enableFeature = "enable_feature"
 
-    public static let integerToggle2 = "integer_toggle_2"
+    public static let retryCount = "retry_count"
 
-    public static let numericalToggle2 = "numerical_toggle_2"
+    public static let piValue = "pi_value"
 
-    public static let stringToggle2 = "string_toggle_2"
+    public static let greetingMessage = "greeting_message"
+
+    public static let apiKey = "api_key"
 
 }

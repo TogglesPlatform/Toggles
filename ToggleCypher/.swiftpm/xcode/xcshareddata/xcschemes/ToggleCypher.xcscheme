@@ -68,7 +68,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--value &quot;secret value&quot;"
+            argument = "--value &quot;MyAPIKeyValue&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

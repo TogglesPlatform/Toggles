@@ -39,24 +39,29 @@ extension ToggleAccessor {
         set { manager.set(.secure(newValue), for: Constant.encryptedToggle) }
     }
 
-    public var booleanToggle2: Bool {
-        get { manager.value(for: Constant.booleanToggle2).boolValue! }
-        set { manager.set(.bool(newValue), for: Constant.booleanToggle2) }
+    public var enableFeature: Bool {
+        get { manager.value(for: Constant.enableFeature).boolValue! }
+        set { manager.set(.bool(newValue), for: Constant.enableFeature) }
     }
 
-    public var integerToggle2: Int {
-        get { manager.value(for: Constant.integerToggle2).intValue! }
-        set { manager.set(.int(newValue), for: Constant.integerToggle2) }
+    public var retryCount: Int {
+        get { manager.value(for: Constant.retryCount).intValue! }
+        set { manager.set(.int(newValue), for: Constant.retryCount) }
     }
 
-    public var numericalToggle2: Double {
-        get { manager.value(for: Constant.numericalToggle2).numberValue! }
-        set { manager.set(.number(newValue), for: Constant.numericalToggle2) }
+    public var piValue: Double {
+        get { manager.value(for: Constant.piValue).numberValue! }
+        set { manager.set(.number(newValue), for: Constant.piValue) }
     }
 
-    public var stringToggle2: String {
-        get { manager.value(for: Constant.stringToggle2).stringValue! }
-        set { manager.set(.string(newValue), for: Constant.stringToggle2) }
+    public var greetingMessage: String {
+        get { manager.value(for: Constant.greetingMessage).stringValue! }
+        set { manager.set(.string(newValue), for: Constant.greetingMessage) }
+    }
+
+    public var apiKey: String {
+        get { manager.value(for: Constant.apiKey).secureValue! }
+        set { manager.set(.secure(newValue), for: Constant.apiKey) }
     }
 
 }

@@ -4,15 +4,15 @@
       "variable": "boolean_toggle",
       "bool": true,
       "metadata": {
-        "group": "group_1",
+        "group": "Raw toggles",
         "description": "Boolean toggle"
       }
     },
     {
       "variable": "integer_toggle",
-      "int": 42,
+      "int": 8,
       "metadata": {
-        "group": "group_1",
+        "group": "Raw toggles",
         "description": "Integer toggle"
       }
     },
@@ -20,7 +20,7 @@
       "variable": "numerical_toggle",
       "number": 3.1416,
       "metadata": {
-        "group": "group_2",
+        "group": "Raw toggles",
         "description": "Numerical toggle"
       }
     },
@@ -28,7 +28,7 @@
       "variable": "string_toggle",
       "string": "Hello World",
       "metadata": {
-        "group": "group_2",
+        "group": "Raw toggles",
         "description": "String toggle"
       }
     },
@@ -36,40 +36,48 @@
       "variable": "encrypted_toggle",
       "secure": "eDUxAQXW6dobqAMxhZIJLkyQKb8+36bFHc36eabacXDahMipVnGy/Q==",
       "metadata": {
-        "group": "group_2",
+        "group": "Raw toggles",
         "description": "Encrypted toggle"
       }
     },
     {
-      "variable": "boolean_toggle_2",
+      "variable": "enable_feature",
       "bool": true,
       "metadata": {
-        "group": "group_1",
-        "description": "Boolean toggle"
+        "group": "Feature toggles",
+        "description": "Enable feature"
       }
     },
     {
-      "variable": "integer_toggle_2",
+      "variable": "retry_count",
       "int": 42,
       "metadata": {
-        "group": "group_1",
-        "description": "Integer toggle"
+        "group": "Feature toggles",
+        "description": "Number of retries"
       }
     },
     {
-      "variable": "numerical_toggle_2",
+      "variable": "pi_value",
       "number": 3.1416,
       "metadata": {
-        "group": "group_2",
-        "description": "Numerical toggle"
+        "group": "Feature toggles",
+        "description": "Pi value"
       }
     },
     {
-      "variable": "string_toggle_2",
+      "variable": "greeting_message",
       "string": "Hello World",
       "metadata": {
-        "group": "group_2",
-        "description": "String toggle"
+        "group": "Feature toggles",
+        "description": "Greeting message"
+      }
+    },
+    {
+      "variable": "api_key",
+      "secure": "viSgsttsEg4+5lmuQj3ibzdrUSZvknLEHtc7APPxlTdyupmuDZIxNhc=",
+      "metadata": {
+        "group": "Feature toggles",
+        "description": "API Key"
       }
     }
   ]

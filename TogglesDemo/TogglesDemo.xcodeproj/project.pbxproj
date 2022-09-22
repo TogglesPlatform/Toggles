@@ -33,7 +33,7 @@
 		D3D0631128B6C68A003110E2 /* TogglesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TogglesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D0631828B6C68B003110E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3D0631B28B6C68B003110E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D3D8E90628CD556600B0D5E8 /* DemoDatasource.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DemoDatasource.json; sourceTree = "<group>"; };
+		D3D8E90628CD556600B0D5E8 /* DemoDatasource.json */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = text.json; path = DemoDatasource.json; sourceTree = "<group>"; };
 		D3F41CFA28D5367C00E56F65 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		D3F41CFB28D5367C00E56F65 /* ToggleAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleAccessor.swift; sourceTree = "<group>"; };
 		D3F41D0828D53ECA00E56F65 /* Toggles */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Toggles; path = ..; sourceTree = "<group>"; };
