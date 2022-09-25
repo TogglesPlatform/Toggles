@@ -36,7 +36,6 @@ class ToggleFactory {
     
     func makeToggles() -> [Toggle] {
         [
-            // noneToggle
             booleanToggle(true),
             integerToggle(42),
             numericalToggle(3.1416),
@@ -47,8 +46,30 @@ class ToggleFactory {
     
     func makeToggles(count: Int) -> [Toggle] {
         (0..<count).map { i in
-            let metadata = Metadata(description: "description \(i)", group: "group \(i)")
-            return Toggle(variable: "variable_\(i)", value: .int(i), metadata: metadata)
+            let modulo = i % 5
+            let metadata = Metadata(description: "Description \(i)", group: "Group \(modulo)")
+            switch modulo {
+            case 0:
+                return Toggle(variable: "\(Value.bool(false).typeDescription)_\(i)",
+                              value: .bool(i%2 == 0),
+                              metadata: metadata)
+            case 1:
+                return Toggle(variable: "\(Value.int(0).typeDescription)_\(i)",
+                              value: .int(i),
+                              metadata: metadata)
+            case 2:
+                return Toggle(variable: "\(Value.number(0.0).typeDescription)_\(i)",
+                              value: .number(Double(i)),
+                              metadata: metadata)
+            case 3:
+                return Toggle(variable: "\(Value.string("").typeDescription)_\(i)",
+                              value: .string("\(i)"),
+                              metadata: metadata)
+            default:
+                return Toggle(variable: "\(Value.secure("").typeDescription)_\(i)",
+                              value: .secure("\(i)"),
+                              metadata: metadata)
+            }
         }
     }
 }
