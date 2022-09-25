@@ -4,17 +4,6 @@ import SwiftUI
 
 public struct TogglesView: View {
     
-    private struct Group: Identifiable {
-        let title: String
-        let toggles: [Toggle]
-        
-        public var id: String { title }
-        
-        static func < (lhs: TogglesView.Group, rhs: TogglesView.Group) -> Bool {
-            lhs.title < rhs.title
-        }
-    }
-    
     private struct ToggleRow: View {
         var toggle: Toggle
 
@@ -130,18 +119,8 @@ public struct TogglesView: View {
     }
     
     private var searchResults: [Group] {
-        guard !searchText.isEmpty else { return groups }
-        return groups.map { group in
-            let toggles = group.toggles.filter { group in
-                let searchValue = searchText.lowercased()
-                let searchMatchesVariable = { group.variable.lowercased().contains(searchValue) }
-                let searchMatchesName = { group.metadata.description.lowercased().contains(searchValue) }
-                let searchMatchesGroup = { group.metadata.group.lowercased().contains(searchValue) }
-                return searchMatchesVariable() || searchMatchesName() || searchMatchesGroup()
-            }
-            return Group(title: group.title, toggles: toggles)
-        }
-        .filter { !$0.toggles.isEmpty }
+        SearchFilter(groups: groups)
+            .searchResults(for: searchText)
     }
 }
 

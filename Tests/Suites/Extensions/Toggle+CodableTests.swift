@@ -50,6 +50,9 @@ final class Toggle_CodableTests: XCTestCase {
         XCTAssertEqual(toggle, decodedToggle)
     }
     
+    // Note: Performance Test Baselines not available for Swift Packages
+    // https://forums.swift.org/t/performance-test-baselines-not-available-for-swift-packages/45621
+    
     func test_measureToggleCreation() {
         measure {
             _ = Datasource(toggles: factory.makeToggles(count: 10000))
