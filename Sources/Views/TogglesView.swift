@@ -40,6 +40,7 @@ public struct TogglesView: View {
     public let manager: ToggleManager
     public let datasourceUrl: URL
     
+    @State private var searchText = ""
     @State private var groups: [Group] = []
     @State private var refresh: Bool = false
     @State private var showingOptions = false
@@ -56,7 +57,7 @@ public struct TogglesView: View {
     public var body: some View {
         NavigationView {
             List {
-                ForEach(groups) { group in
+                ForEach(searchResults) { group in
                     Section(header: Text(group.title)) {
                         ForEach(group.toggles) { toggle in
                             navigationLink(toggle: toggle.byUpdatingValue(manager.value(for: toggle.variable)))
@@ -78,6 +79,7 @@ public struct TogglesView: View {
             .onChange(of: refresh) { _ in
                 shouldShowToolbarView = manager.hasOverrides
             }
+            .searchable(text: $searchText, prompt: "Filter toggles")
         }
         .onAppear {
             refresh.toggle()
@@ -125,6 +127,21 @@ public struct TogglesView: View {
         return Dictionary(grouping: datasource.toggles, by: \.metadata.group)
             .map { Group(title: $0, toggles: $1.sorted(by: <)) }
             .sorted(by: <)
+    }
+    
+    private var searchResults: [Group] {
+        guard !searchText.isEmpty else { return groups }
+        return groups.map { group in
+            let toggles = group.toggles.filter { group in
+                let searchValue = searchText.lowercased()
+                let searchMatchesVariable = { group.variable.lowercased().contains(searchValue) }
+                let searchMatchesName = { group.metadata.description.lowercased().contains(searchValue) }
+                let searchMatchesGroup = { group.metadata.group.lowercased().contains(searchValue) }
+                return searchMatchesVariable() || searchMatchesName() || searchMatchesGroup()
+            }
+            return Group(title: group.title, toggles: toggles)
+        }
+        .filter { !$0.toggles.isEmpty }
     }
 }
 
