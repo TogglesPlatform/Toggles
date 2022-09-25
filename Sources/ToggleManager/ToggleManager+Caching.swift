@@ -4,13 +4,6 @@ import Foundation
 
 extension ToggleManager {
     
-    public var hasOverrides: Bool {
-        queue.sync {
-            guard let mutableValueProvider = mutableValueProvider else { return false }
-            return !mutableValueProvider.variables.isEmpty
-        }
-    }
-    
     @discardableResult
     public func removeOverrides() -> Set<Variable> {
         queue.sync {
@@ -18,6 +11,7 @@ extension ToggleManager {
             guard let mutableValueProvider = mutableValueProvider else { return  [] }
             let variables = mutableValueProvider.variables
             mutableValueProvider.deleteAll()
+            hasOverrides = false
             return variables
         }
     }

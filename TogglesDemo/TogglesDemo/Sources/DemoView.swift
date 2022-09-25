@@ -31,7 +31,6 @@ struct DemoView: View {
 
 struct DemoView_Previews: PreviewProvider {
     static var previews: some View {
-        let datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
         let cypherConfiguration = CypherConfiguration.chaChaPoly
         let demoConfiguration = try! DemoConfiguration(setupConfiguration: .inMemory,
                                                        demoDatasource: .default,

@@ -34,7 +34,7 @@ public struct TogglesView: View {
         }
     }
     
-    public let manager: ToggleManager
+    @ObservedObject public var manager: ToggleManager
     public let datasourceUrl: URL
     
     @State private var searchText = ""
@@ -69,14 +69,17 @@ public struct TogglesView: View {
             .accessibilityLabel("Toggles list")
             .navigationTitle("Toggles")
             .toolbar {
-                if shouldShowToolbarView {
+                if manager.hasOverrides {
                     toolbarView
                 }
             }
             .searchable(text: $searchText, prompt: "Filter toggles")
-        }
-        .onAppear {
-            shouldShowToolbarView = manager.hasOverrides
+            .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
+                Button("OK!", role: .cancel) {}
+            } message: {
+                let variables = overriddenVariables.joined(separator: "\n")
+                Text("The overrides for the following variables have been deleted:\n\n\(variables)")
+            }
         }
     }
     
@@ -98,17 +101,8 @@ public struct TogglesView: View {
         .confirmationDialog("Select an action", isPresented: $showingOptions) {
             Button("Clear overrides") {
                 overriddenVariables = manager.removeOverrides()
-                manager.reactToConfigurationChanges()
                 presentDeleteAlert = true
             }
-        }
-        .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
-            Button("OK!", role: .cancel) {
-                shouldShowToolbarView = manager.hasOverrides
-            }
-        } message: {
-            let variables = overriddenVariables.joined(separator: "\n")
-            Text("The overrides for the following variables have been deleted:\n\n\(variables)")
         }
     }
     

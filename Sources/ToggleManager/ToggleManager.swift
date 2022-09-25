@@ -3,7 +3,7 @@
 import Combine
 import Foundation
 
-final public class ToggleManager {
+final public class ToggleManager: ObservableObject {
     
     var mutableValueProvider: MutableValueProvider?
     var valueProviders: [OptionalValueProvider]
@@ -13,7 +13,9 @@ final public class ToggleManager {
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
     let cache = ValueCache<Variable, Value>()
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
-
+    
+    @Published var hasOverrides: Bool = false
+    
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 valueProviders: [OptionalValueProvider] = [],
                 datasourceUrl: URL,
@@ -65,6 +67,7 @@ extension ToggleManager {
             mutableValueProvider.set(writeValue, for: variable)
             DispatchQueue.main.async {
                 self.subjectsRefs[variable]?.send(value)
+                self.hasOverrides = true
             }
         }
     }
@@ -80,6 +83,7 @@ extension ToggleManager {
             DispatchQueue.main.async {
                 self.subjectsRefs[variable]?.send(completion: .finished)
                 self.subjectsRefs[variable] = nil
+                self.hasOverrides = !mutableValueProvider.variables.isEmpty
             }
         }
     }
