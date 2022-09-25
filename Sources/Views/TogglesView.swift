@@ -53,7 +53,7 @@ public struct TogglesView: View {
                             navigationLink(toggle: toggle.byUpdatingValue(manager.value(for: toggle.variable)))
                         }
                     }
-                    .accessibilityLabel(group.title)
+                    .accessibilityLabel(group.accessibilityLabel)
                 }
             }
 #if os(iOS)
@@ -82,8 +82,8 @@ public struct TogglesView: View {
             ToggleDetailView(manager: manager, toggle: toggle, refreshParent: $refresh)
         } label: {
             ToggleRow(toggle: toggle)
-                .accessibilityLabel(toggle.accessibilityLabel)
         }
+        .accessibilityLabel(toggle.accessibilityLabel)
     }
     
     private var toolbarView: some View {
