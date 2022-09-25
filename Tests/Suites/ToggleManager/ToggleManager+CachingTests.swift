@@ -7,32 +7,6 @@ final class ToggleManager_CachingTests: XCTestCase {
 
     let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
     
-    func test_hasNoMutableValueProviderHenceNoOverrides() throws {
-        let toggleManager = try ToggleManager(datasourceUrl: url)
-        XCTAssertFalse(toggleManager.hasOverrides)
-    }
-    
-    func test_hasNoOverrides() throws {
-        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
-                                              datasourceUrl: url)
-        XCTAssertFalse(toggleManager.hasOverrides)
-    }
-    
-    func test_hasOverrides() throws {
-        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
-                                              datasourceUrl: url)
-        toggleManager.set(.int(42), for: "integer_toggle")
-        XCTAssertTrue(toggleManager.hasOverrides)
-    }
-    
-    func test_removeOverrides() throws {
-        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
-                                              datasourceUrl: url)
-        toggleManager.set(.int(42), for: "integer_toggle")
-        toggleManager.removeOverrides()
-        XCTAssertFalse(toggleManager.hasOverrides)
-    }
-    
     func test_getCachedValueAfterGet() throws {
         let toggleManager = try ToggleManager(datasourceUrl: url)
         let variable = "integer_toggle"
