@@ -15,6 +15,14 @@ final class Toggle_CodableTests: XCTestCase {
         XCTAssertEqual(datasourceFromFile, targetDatasource)
     }
     
+    func test_contractWithNoMetadata() throws {
+        let url = Bundle.toggles.url(forResource: "TestDatasourceWithNoMetadata", withExtension: "json")!
+        let data = try Data(contentsOf: url)
+        let datasourceFromFile = try JSONDecoder().decode(Datasource.self, from: data)
+        let targetDatasource = Datasource(toggles: factory.makeTogglesWithNoMetadata())
+        XCTAssertEqual(datasourceFromFile, targetDatasource)
+    }
+    
     func test_codableBooleanToggle() throws {
         let toggle = Toggle(variable: "var", value: .bool(true), metadata: Metadata(description: "", group: ""))
         let data = try! JSONEncoder().encode(toggle)
