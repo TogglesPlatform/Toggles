@@ -63,7 +63,9 @@ extension ToggleManager {
             let writeValue = try! self.writeValue(for: value)
             self.cache[variable] = writeValue
             mutableValueProvider.set(writeValue, for: variable)
-            self.subjectsRefs[variable]?.send(value)
+            DispatchQueue.main.async {
+                self.subjectsRefs[variable]?.send(value)
+            }
         }
     }
     
@@ -75,8 +77,10 @@ extension ToggleManager {
             }
             self.cache[variable] = nil
             mutableValueProvider.delete(variable)
-            self.subjectsRefs[variable]?.send(completion: .finished)
-            self.subjectsRefs[variable] = nil
+            DispatchQueue.main.async {
+                self.subjectsRefs[variable]?.send(completion: .finished)
+                self.subjectsRefs[variable] = nil
+            }
         }
     }
 }
