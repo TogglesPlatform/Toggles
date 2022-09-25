@@ -18,14 +18,11 @@ struct ToggleDetailView: View {
     @State private var refresh: Bool = false
     @State private var valueOverridden: Bool = false
 
-    @Binding var refreshParent: Bool
-    
     @ObservedObject var toggleObservable: ToggleObservable
     
-    init(manager: ToggleManager, toggle: Toggle, refreshParent: Binding<Bool>) {
+    init(manager: ToggleManager, toggle: Toggle) {
         self.manager = manager
         self.toggle = toggle
-        self._refreshParent = refreshParent
         self.toggleObservable = ToggleObservable(manager: manager, variable: toggle.variable)
         self.inputValidationHelper = InputValidationHelper(toggle: toggle)
     }
@@ -182,7 +179,6 @@ struct ToggleDetailView: View {
             manager.set(inputValidationHelper.overridingValue(for: textValue), for: toggle.variable)
             valueOverridden = true
             refresh.toggle()
-            refreshParent.toggle()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 valueOverridden = false
             }
@@ -201,6 +197,6 @@ struct ToggleDetailView_Previews: PreviewProvider {
                                          datasourceUrl: datasourceUrl)
         let content = try! Data(contentsOf: datasourceUrl)
         let datasource = try! JSONDecoder().decode(Datasource.self, from: content)
-        ToggleDetailView(manager: manager, toggle: datasource.toggles[0], refreshParent: .constant(true))
+        ToggleDetailView(manager: manager, toggle: datasource.toggles[0])
     }
 }

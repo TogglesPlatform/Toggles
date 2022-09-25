@@ -5,8 +5,16 @@ import SwiftUI
 public struct TogglesView: View {
     
     private struct ToggleRow: View {
-        var toggle: Toggle
+        
+        private var toggle: Toggle
 
+        @ObservedObject var toggleObservable: ToggleObservable
+        
+        init(manager: ToggleManager, toggle: Toggle) {
+            self.toggle = toggle
+            self.toggleObservable = ToggleObservable(manager: manager, variable: toggle.variable)
+        }
+        
         var body: some View {
             HStack(alignment: .center) {
                 Image(systemName: toggle.value.sfSymbolId)
@@ -20,7 +28,7 @@ public struct TogglesView: View {
                 }
                 .padding([.all], 5.0)
                 Spacer()
-                Text(toggle.value.description)
+                Text(toggleObservable.value.description)
                     .multilineTextAlignment(.trailing)
             }
         }
@@ -31,7 +39,6 @@ public struct TogglesView: View {
     
     @State private var searchText = ""
     @State private var groups: [Group] = []
-    @State private var refresh: Bool = false
     @State private var showingOptions = false
     @State private var presentDeleteAlert = false
     @State private var shouldShowToolbarView = false
@@ -66,22 +73,18 @@ public struct TogglesView: View {
                     toolbarView
                 }
             }
-            .onChange(of: refresh) { _ in
-                shouldShowToolbarView = manager.hasOverrides
-            }
             .searchable(text: $searchText, prompt: "Filter toggles")
         }
         .onAppear {
-            refresh.toggle()
             shouldShowToolbarView = manager.hasOverrides
         }
     }
     
     private func navigationLink(toggle: Toggle) -> some View {
         NavigationLink {
-            ToggleDetailView(manager: manager, toggle: toggle, refreshParent: $refresh)
+            ToggleDetailView(manager: manager, toggle: toggle)
         } label: {
-            ToggleRow(toggle: toggle)
+            ToggleRow(manager: manager, toggle: toggle)
         }
         .accessibilityLabel(toggle.accessibilityLabel)
     }
