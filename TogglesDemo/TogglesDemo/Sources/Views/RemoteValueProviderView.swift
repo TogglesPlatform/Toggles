@@ -17,6 +17,10 @@ The values in the new configuration are generated randomly.
     
     var body: some View {
         VStack(spacing: 10) {
+            Image(systemName: "wave.3.left")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 60, height: 60)
             Text("RemoteValueProvider")
                 .font(.title)
                 .padding()

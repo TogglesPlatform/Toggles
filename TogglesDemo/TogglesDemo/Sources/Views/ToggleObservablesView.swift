@@ -26,6 +26,10 @@ The view will show the values updating when overrides or new configurations are 
         
     var body: some View {
         VStack(spacing: 10) {
+            Image(systemName: "slowmo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 60, height: 60)
             Text("ToggleObservables showcase")
                 .font(.title)
                 .padding()
