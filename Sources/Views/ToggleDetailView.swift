@@ -178,7 +178,6 @@ struct ToggleDetailView: View {
     private var overrideButtonView: some View {
         Button("Override") {
             manager.set(overridingValue(for: textValue), for: toggle.variable)
-            manager.reactToConfigurationChanges()
             valueOverridden = true
             refresh.toggle()
             refreshParent.toggle()
