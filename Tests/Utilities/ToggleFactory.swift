@@ -34,6 +34,36 @@ class ToggleFactory {
                metadata: Metadata(description: "Secure toggle", group: "group_3"))
     }
     
+    func booleanEmptyMetadataToggle(_ value: Bool) -> Toggle {
+        Toggle(variable: "boolean_toggle",
+               value: .bool(value),
+               metadata: Metadata(description: "", group: ""))
+    }
+    
+    func integerEmptyMetadataToggle(_ value: Int) -> Toggle {
+        Toggle(variable: "integer_toggle",
+               value: .int(value),
+               metadata: Metadata(description: "", group: ""))
+    }
+    
+    func numericalEmptyMetadataToggle(_ value: Double) -> Toggle {
+        Toggle(variable: "numerical_toggle",
+               value: .number(value),
+               metadata: Metadata(description: "", group: ""))
+    }
+    
+    func stringEmptyMetadataToggle(_ value: String) -> Toggle {
+        Toggle(variable: "string_toggle",
+               value: .string(value),
+               metadata: Metadata(description: "", group: ""))
+    }
+    
+    func secureEmptyMetadataToggle(_ value: String) -> Toggle {
+        Toggle(variable: "secure_toggle",
+               value: .secure(value),
+               metadata: Metadata(description: "", group: ""))
+    }
+    
     func makeToggles() -> [Toggle] {
         [
             booleanToggle(true),
@@ -41,6 +71,16 @@ class ToggleFactory {
             numericalToggle(3.1416),
             stringToggle("Hello World"),
             secureToggle("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK")
+        ]
+    }
+    
+    func makeTogglesWithNoMetadata() -> [Toggle] {
+        [
+            booleanEmptyMetadataToggle(true),
+            integerEmptyMetadataToggle(42),
+            numericalEmptyMetadataToggle(3.1416),
+            stringEmptyMetadataToggle("Hello World"),
+            secureEmptyMetadataToggle("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK")
         ]
     }
     

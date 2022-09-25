@@ -10,6 +10,7 @@ struct ToggleDetailView: View {
     
     let manager: ToggleManager
     let toggle: Toggle
+    let inputValidationHelper: InputValidationHelper
     
     @State private var boolValue: Bool = false
     @State private var textValue: String = ""
@@ -26,6 +27,7 @@ struct ToggleDetailView: View {
         self.toggle = toggle
         self._refreshParent = refreshParent
         self.toggleObservable = ToggleObservable(manager: manager, variable: toggle.variable)
+        self.inputValidationHelper = InputValidationHelper(toggle: toggle)
     }
     
     var cancellables = Set<AnyCancellable>()
@@ -52,7 +54,7 @@ struct ToggleDetailView: View {
             textValue = manager.value(for: toggle.variable).description
         }
         .onChange(of: textValue) { newValue in
-            isValidInput = isInputValid(newValue)
+            isValidInput = inputValidationHelper.isInputValid(newValue)
         }
         .onChange(of: refresh) { _ in }
     }
@@ -132,7 +134,7 @@ struct ToggleDetailView: View {
     private var overrideValueSection: some View {
         Section {
             HStack {
-                if isBooleanToggle {
+                if inputValidationHelper.isBooleanToggle {
                     SwiftUI.Toggle(isOn: $boolValue) {
                         EmptyView()
                     }
@@ -144,7 +146,7 @@ struct ToggleDetailView: View {
                 else {
                     TextField("Override value", text: $textValue)
 #if os(iOS)
-                        .keyboardType(keyboardType)
+                        .keyboardType(inputValidationHelper.keyboardType)
 #endif
                 }
                 Spacer()
@@ -154,7 +156,7 @@ struct ToggleDetailView: View {
             Text("Override value")
         } footer: {
             HStack {
-                if toggleNeedsValidation {
+                if inputValidationHelper.toggleNeedsValidation {
                     if isValidInput {
                         Label("Valid input", systemImage: "checkmark.diamond")
                             .font(.caption)
@@ -177,7 +179,7 @@ struct ToggleDetailView: View {
     
     private var overrideButtonView: some View {
         Button("Override") {
-            manager.set(overridingValue(for: textValue), for: toggle.variable)
+            manager.set(inputValidationHelper.overridingValue(for: textValue), for: toggle.variable)
             valueOverridden = true
             refresh.toggle()
             refreshParent.toggle()
@@ -186,68 +188,6 @@ struct ToggleDetailView: View {
             }
         }
         .disabled(!isValidInput)
-    }
-    
-    private func isInputValid(_ input: String) -> Bool {
-        guard !input.isEmpty else { return true }
-        switch toggle.value {
-        case .bool:
-            return input.boolValue != nil
-        case .int:
-            return Int(input) != nil
-        case .number:
-            return Double(input) != nil
-        case .string:
-            return true
-        case .secure:
-            return true
-        }
-    }
-    
-    private func overridingValue(for input: String) -> Value {
-        switch toggle.value {
-        case .bool:
-            return .bool(input.boolValue ?? false)
-        case .int:
-            return .int(Int(input) ?? 0)
-        case .number:
-            return .number(Double(input) ?? 0.0)
-        case .string:
-            return .string(input)
-        case .secure:
-            return .secure(input)
-        }
-    }
-    
-#if os(iOS)
-    private var keyboardType: UIKeyboardType {
-        switch toggle.value {
-        case .bool:
-            return .default
-        case .int:
-            return .numberPad
-        case .number:
-            return .decimalPad
-        case .string:
-            return .default
-        case .secure:
-            return .default
-        }
-    }
-#endif
-    
-    private var isBooleanToggle: Bool {
-        if case .bool = toggle.value {
-            return true
-        }
-        return false
-    }
-    
-    private var toggleNeedsValidation: Bool {
-        if case .bool = toggle.value { return false }
-        if case .string = toggle.value { return false }
-        if case .secure = toggle.value { return false }
-        return true
     }
 }
 
