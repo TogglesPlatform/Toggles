@@ -50,20 +50,20 @@ final class Toggle_CodableTests: XCTestCase {
         XCTAssertEqual(toggle, decodedToggle)
     }
     
-    func test_measureToggleCreation() throws {
+    func test_measureToggleCreation() {
         measure {
             _ = Datasource(toggles: factory.makeToggles(count: 10000))
         }
     }
     
-    func test_measureToggleEncoding() throws {
+    func test_measureToggleEncoding() {
         let datasource = Datasource(toggles: factory.makeToggles(count: 10000))
         measure {
             _ = try! JSONEncoder().encode(datasource)
         }
     }
     
-    func test_measureToggleDecoding() throws {
+    func test_measureToggleDecoding() {
         let datasource = Datasource(toggles: factory.makeToggles(count: 10000))
         let data = try! JSONEncoder().encode(datasource)
         measure {
