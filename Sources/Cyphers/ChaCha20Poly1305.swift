@@ -3,7 +3,7 @@
 import Foundation
 import CryptoKit
 
-final public class ChaCha20Poly1305 {
+struct ChaCha20Poly1305 {
     
     enum CypherError: Error {
         case invalidKey(String)
@@ -11,13 +11,9 @@ final public class ChaCha20Poly1305 {
         case invalidDecryptedData(Data)
     }
 
-    private let key: String
+    let key: String
     
-    public init(key: String) {
-        self.key = key
-    }
-    
-    public func encrypt(_ value: String) throws -> String {
+    func encrypt(_ value: String) throws -> String {
         guard let dataToEncrypt = value.data(using: .utf8) else {
             throw CypherError.invalidValue(value)
         }
@@ -26,7 +22,7 @@ final public class ChaCha20Poly1305 {
         return encryptedData.combined.base64EncodedString()
     }
     
-    public func decrypt(_ value: String) throws -> String {
+    func decrypt(_ value: String) throws -> String {
         guard let base64StringData = Data(base64Encoded: value) else {
             throw CypherError.invalidValue(value)
         }
