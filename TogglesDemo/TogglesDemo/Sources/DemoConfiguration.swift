@@ -1,15 +1,20 @@
-//  ViewModel.swift
+//  DemoConfiguration.swift
 
 import Foundation
 import Combine
 import Toggles
 
-class ViewModel {
+class DemoConfiguration {
     
     enum SetupConfiguration {
         case persistent
         case inMemory
         case immutable
+    }
+    
+    enum DemoDatasource {
+        case `default`
+        case huge
     }
     
     let datasourceUrl: URL
@@ -18,8 +23,15 @@ class ViewModel {
     let cypherConfiguration: CypherConfiguration
     let manager: ToggleManager
     
-    init(datasourceUrl: URL, setupConfiguration: SetupConfiguration, cypherConfiguration: CypherConfiguration) throws {
-        self.datasourceUrl = datasourceUrl
+    init(setupConfiguration: SetupConfiguration,
+         demoDatasource: DemoDatasource,
+         cypherConfiguration: CypherConfiguration) throws {
+        switch demoDatasource {
+        case .default:
+            self.datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
+        case .huge:
+            self.datasourceUrl = Bundle.main.url(forResource: "10kEntriesDemoDatasource", withExtension: "json")!
+        }
         self.remoteValueProvider = try RemoteValueProvider(jsonURL: datasourceUrl)
         self.localValueProvider = try LocalValueProvider(jsonURL: datasourceUrl)
         self.cypherConfiguration = cypherConfiguration

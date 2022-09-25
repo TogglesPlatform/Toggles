@@ -7,7 +7,6 @@ import Toggles
 @main
 struct TogglesDemoApp: App {
     
-    @State private var setupConfiguration: ViewModel.SetupConfiguration!
     
     init() {}
     
@@ -28,16 +27,14 @@ struct TogglesDemoApp: App {
                     }
             }
             else {
-                DemoView(viewModel: setupViewModel())
+                DemoView(viewModel: setupDemoConfiguration())
             }
         }
     }
     
-    private func setupViewModel() -> ViewModel {
-        let datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
-        let cypherConfiguration = CypherConfiguration.chaChaPoly
-        return try! ViewModel(datasourceUrl: datasourceUrl,
-                              setupConfiguration: setupConfiguration,
-                              cypherConfiguration: cypherConfiguration)
+    private func setupDemoConfiguration() -> DemoConfiguration {
+        try! DemoConfiguration(setupConfiguration: setupConfiguration,
+                               demoDatasource: demoDatasource,
+                               cypherConfiguration: CypherConfiguration.chaChaPoly)
     }
 }

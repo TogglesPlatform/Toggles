@@ -5,7 +5,7 @@ import Toggles
 
 struct DemoView: View {
     
-    var viewModel: ViewModel
+    var viewModel: DemoConfiguration
     
     var body: some View {
         TabView {
@@ -33,9 +33,9 @@ struct DemoView_Previews: PreviewProvider {
     static var previews: some View {
         let datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
         let cypherConfiguration = CypherConfiguration.chaChaPoly
-        let viewModel = try! ViewModel(datasourceUrl: datasourceUrl,
-                                       setupConfiguration: .inMemory,
-                                       cypherConfiguration: cypherConfiguration)
-        DemoView(viewModel: viewModel)
+        let demoConfiguration = try! DemoConfiguration(setupConfiguration: .inMemory,
+                                                       demoDatasource: .default,
+                                                       cypherConfiguration: cypherConfiguration)
+        DemoView(viewModel: demoConfiguration)
     }
 }
