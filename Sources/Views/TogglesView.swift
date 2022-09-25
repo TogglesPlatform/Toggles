@@ -40,7 +40,8 @@ public struct TogglesView: View {
     public init(manager: ToggleManager, datasourceUrl: URL) {
         self.manager = manager
         self.datasourceUrl = datasourceUrl
-        self._groups = State(initialValue: loadGroups())
+        let groups = try! GroupLoader.loadGroups(datasourceUrl: datasourceUrl)
+        self._groups = State(initialValue: groups)
     }
 
     public var body: some View {
@@ -106,16 +107,6 @@ public struct TogglesView: View {
             let variables = overriddenVariables.joined(separator: "\n")
             Text("The overrides for the following variables have been deleted:\n\n\(variables)")
         }
-    }
-    
-    private func loadGroups() -> [Group] {
-        guard let content = try? Data(contentsOf: datasourceUrl),
-              let datasource = try? JSONDecoder().decode(Datasource.self, from: content) else {
-            return []
-        }
-        return Dictionary(grouping: datasource.toggles, by: \.metadata.group)
-            .map { Group(title: $0, toggles: $1.sorted(by: <)) }
-            .sorted(by: <)
     }
     
     private var searchResults: [Group] {
