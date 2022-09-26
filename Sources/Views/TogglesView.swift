@@ -57,7 +57,7 @@ public struct TogglesView: View {
                 ForEach(searchResults) { group in
                     Section(header: Text(group.title)) {
                         ForEach(group.toggles) { toggle in
-                            navigationLink(toggle: toggle.byUpdatingValue(manager.value(for: toggle.variable)))
+                            navigationLink(toggle: toggle)
                         }
                     }
                     .accessibilityLabel(group.accessibilityLabel)

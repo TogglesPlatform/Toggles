@@ -3,6 +3,7 @@
 import Foundation
 
 extension Group {
+    
     var accessibilityLabel: String {
         switch toggles.count {
         case 0:
