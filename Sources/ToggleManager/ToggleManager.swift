@@ -38,7 +38,7 @@ extension ToggleManager {
         }
     }
     
-    internal func nonSyncValue(for variable: Variable) -> Value {
+    private func nonSyncValue(for variable: Variable) -> Value {
         let value = cache[variable] ?? fetchValueFromProviders(for: variable)
         cache[variable] = value
         return try! readValue(for: value)
