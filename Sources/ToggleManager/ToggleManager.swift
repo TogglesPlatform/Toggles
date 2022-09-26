@@ -24,6 +24,9 @@ final public class ToggleManager: ObservableObject {
         self.valueProviders = valueProviders
         self.defaultValueProvider = try DefaultValueProvider(jsonURL: datasourceUrl)
         self.cypherConfiguration = cypherConfiguration
+        if let mutableValueProvider = self.mutableValueProvider {
+            self.hasOverrides = !mutableValueProvider.variables.isEmpty
+        }
     }
 }
 

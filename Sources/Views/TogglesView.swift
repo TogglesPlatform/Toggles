@@ -41,7 +41,6 @@ public struct TogglesView: View {
     @State private var groups: [Group] = []
     @State private var showingOptions = false
     @State private var presentDeleteAlert = false
-    @State private var shouldShowToolbarView = false
     @State private var overriddenVariables: Set<Variable> = []
 
     public init(manager: ToggleManager, datasourceUrl: URL) {
