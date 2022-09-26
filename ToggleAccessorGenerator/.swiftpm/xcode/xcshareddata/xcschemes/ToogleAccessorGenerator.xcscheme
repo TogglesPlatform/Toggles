@@ -54,7 +54,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -90,11 +91,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--data-source-path /Users/alberto/src/Toggles/ToggleAccessorGenerator/Demo/DemoDatasource.json"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--data-source-path /Users/alberto/src/Toggles/TogglesDemo/TogglesDemo/Resources/DemoDatasource.json"
+            argument = "--datasource-path &lt;DATASOURCE_PATH&gt;"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -102,23 +99,19 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--constants-enum-name Constant"
+            argument = "--constants-enum-name Constants"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--accessor-template-path /Users/alberto/src/Toggles/ToggleAccessorGenerator/Templates/Accessor.stencil"
+            argument = "--accessor-template-path &lt;ACCESSOR_TEMPLATE_PATH&gt;"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--constants-template-path /Users/alberto/src/Toggles/ToggleAccessorGenerator/Templates/Constants.stencil"
+            argument = "--constants-template-path &lt;CONSTANTS_TEMPLATE_PATH&gt;"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--output-path /Users/alberto/src/Toggles/ToggleAccessorGenerator/GeneratedCode"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--output-path /Users/alberto/src/Toggles/TogglesDemo/TogglesDemo/GeneratedCode"
+            argument = "--output-path &lt;OUTPUT_PATH&gt;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

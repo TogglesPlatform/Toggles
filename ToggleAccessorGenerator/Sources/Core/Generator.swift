@@ -1,7 +1,6 @@
-//  DataSourceLoader.swift
+//  Generator.swift
 
 import Foundation
-import Stencil
 
 struct Constant {
     let name: String
@@ -16,19 +15,47 @@ struct AccessorInfo {
     var toggleType: String
 }
 
-class DataSourceLoader {
+class Generator {
     
-    private enum LoaderError: Error {
+    private enum Constants: String {
+        case className
+        case enumName
+        case accessorInfos
+        case constants
+    }
+    
+    enum LoaderError: Error, Equatable {
         case foundDuplicateVariables([Toggle.Variable])
         case foundDuplicatePropertyNames([String])
     }
     
     private let datasource: Datasource
     
-    init(jsonURL: URL) throws {
-        let content = try Data(contentsOf: jsonURL)
+    init(datasourceUrl: URL) throws {
+        let content = try Data(contentsOf: datasourceUrl)
         datasource = try JSONDecoder().decode(Datasource.self, from: content)
         try validate()
+    }
+    
+    func generateConstants(constantsTemplatePath: String, constantsEnumName: String) throws -> String {
+        let templater = Templater()
+        let constantsTemplateUrl = URL(fileURLWithPath: constantsTemplatePath)
+        let constantsContext: [String: Any] = [
+            Constants.enumName.rawValue: constantsEnumName,
+            Constants.constants.rawValue: loadConstants()
+        ]
+        return try templater.renderTemplate(at: constantsTemplateUrl, with: constantsContext)
+    }
+    
+    func generateAccessor(accessorTemplatePath: String, constantsEnumName: String, accessorClassName: String) throws -> String {
+        let templater = Templater()
+        let accessorTemplateUrl = URL(fileURLWithPath: accessorTemplatePath)
+        let accessorContext: [String: Any] = [
+            Constants.className.rawValue: accessorClassName,
+            Constants.enumName.rawValue: constantsEnumName,
+            Constants.accessorInfos.rawValue: loadAccessorInfos()
+        ]
+        return try templater.renderTemplate(at: accessorTemplateUrl, with: accessorContext)
     }
     
     private func validate() throws {
@@ -40,7 +67,7 @@ class DataSourceLoader {
             throw LoaderError.foundDuplicateVariables(duplicateVariables)
         }
         
-        let duplicatePropertyNames = Dictionary(grouping: datasource.toggles, by: \.metadata.propertyName)
+        let duplicatePropertyNames = Dictionary(grouping: datasource.toggles, by: \.computedPropertyName)
             .filter { $1.count > 1 }
             .compactMap { $0.0 }
         if duplicatePropertyNames.count > 0 {
@@ -48,14 +75,14 @@ class DataSourceLoader {
         }
     }
     
-    func loadConstants() throws -> [Constant] {
+    private func loadConstants() -> [Constant] {
         datasource.toggles.map {
             Constant(name: $0.variable.codeConstantValue,
                      value: $0.variable)
         }
     }
     
-    func loadAccessorInfos() -> [AccessorInfo] {
+    private func loadAccessorInfos() -> [AccessorInfo] {
         datasource.toggles.map { toggle in
             let constant = Constant(name: toggle.variable.codeConstantValue,
                                     value: toggle.variable)
@@ -64,50 +91,6 @@ class DataSourceLoader {
                                 propertyName: toggle.computedPropertyName,
                                 constant: constant,
                                 toggleType: toggle.toggleType)
-        }
-    }
-}
-
-extension Toggle.Variable {
-    var codeConstantValue: String {
-        camelCased()
-    }
-}
-
-extension Toggle {
-    var computedPropertyName: String {
-        metadata.propertyName ?? variable.codeConstantValue
-    }
-}
-
-extension Toggle {
-    var type: String {
-        switch value {
-        case .bool:
-            return "Bool"
-        case .int:
-            return "Int"
-        case .number:
-            return "Double"
-        case .string:
-            return "String"
-        case .secure:
-            return "String"
-        }
-    }
-    
-    var toggleType: String {
-        switch value {
-        case .bool:
-            return "bool"
-        case .int:
-            return "int"
-        case .number:
-            return "number"
-        case .string:
-            return "string"
-        case .secure:
-            return "secure"
         }
     }
 }

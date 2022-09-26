@@ -1,0 +1,24 @@
+{
+  "toggles": [
+    {
+      "variable": "boolean_toggle",
+      "bool": true
+    },
+    {
+      "variable": "integer_toggle",
+      "int": 42
+    },
+    {
+      "variable": "numerical_toggle",
+      "number": 3.1416
+    },
+    {
+      "variable": "string_toggle",
+      "string": "Hello World"
+    },
+    {
+      "variable": "boolean_toggle",
+      "bool": false
+    }
+  ]
+}

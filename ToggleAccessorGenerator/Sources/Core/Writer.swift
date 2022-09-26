@@ -4,7 +4,25 @@ import Foundation
 
 class Writer {
     
-    static func write(_ content: Content, to url: URL) throws {
+    private enum Constants: String {
+        case swift
+    }
+    
+    func saveConstants(_ content: Content, outputPath: String, constantsEnumName: String) throws {
+        let constantsFileName = URL(fileURLWithPath: outputPath)
+            .appendingPathComponent(constantsEnumName)
+            .appendingPathExtension(Constants.swift.rawValue)
+        try write(content, to: constantsFileName)
+    }
+    
+    func saveAccessor(_ content: Content, outputPath: String, accessorClassName: String) throws {
+        let accessorFileName = URL(fileURLWithPath: outputPath)
+            .appendingPathComponent(accessorClassName)
+            .appendingPathExtension(Constants.swift.rawValue)
+        try write(content, to: accessorFileName)
+    }
+    
+    private func write(_ content: Content, to url: URL) throws {
         let existingContent = try? String(contentsOf: url, encoding: .utf8)
         switch (existingContent, content) {
         case (.none, let newContent):
@@ -16,7 +34,7 @@ class Writer {
         }
     }
     
-    private static func writeContent(_ content: String, at url: URL) throws {
+    private func writeContent(_ content: String, at url: URL) throws {
         let fileManager = FileManager.default
         let absolutePathToFolder = url.deletingLastPathComponent().path
         var fileIsDirectory: ObjCBool = true

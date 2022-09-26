@@ -14,13 +14,9 @@ struct Toggle: Equatable {
         case secure(String)
     }
     
-    struct Metadata: Equatable, Decodable {
-        let propertyName: String?
-    }
-    
     let variable: Variable
     let value: Value
-    let metadata: Metadata
+    let propertyName: String?
 }
 
 struct Datasource: Equatable, Decodable {

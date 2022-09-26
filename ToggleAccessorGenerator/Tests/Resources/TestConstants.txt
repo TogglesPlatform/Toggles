@@ -1,8 +1,8 @@
-//  Constant.swift
+//  TestConstants.swift
 
 import Foundation
 
-public struct Constant {
+public struct TestConstants {
 
     public static let booleanToggle = "boolean_toggle"
 

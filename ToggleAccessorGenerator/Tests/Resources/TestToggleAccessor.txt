@@ -1,0 +1,62 @@
+//  TestToggleAccessor.swift
+
+import Foundation
+import Toggles
+
+public class TestToggleAccessor {
+    
+    private let manager: ToggleManager
+    
+    public init(manager: ToggleManager) {
+        self.manager = manager
+    }
+}
+
+extension TestToggleAccessor {
+
+    public var booleanToggle: Bool {
+        get { manager.value(for: TestConstants.booleanToggle).boolValue! }
+        set { manager.set(.bool(newValue), for: TestConstants.booleanToggle) }
+    }
+
+    public var integerToggle: Int {
+        get { manager.value(for: TestConstants.integerToggle).intValue! }
+        set { manager.set(.int(newValue), for: TestConstants.integerToggle) }
+    }
+
+    public var numericalToggle: Double {
+        get { manager.value(for: TestConstants.numericalToggle).numberValue! }
+        set { manager.set(.number(newValue), for: TestConstants.numericalToggle) }
+    }
+
+    public var stringToggle: String {
+        get { manager.value(for: TestConstants.stringToggle).stringValue! }
+        set { manager.set(.string(newValue), for: TestConstants.stringToggle) }
+    }
+
+    public var encryptedToggle: String {
+        get { manager.value(for: TestConstants.encryptedToggle).secureValue! }
+        set { manager.set(.secure(newValue), for: TestConstants.encryptedToggle) }
+    }
+
+    public var userDefinedBooleanToggle: Bool {
+        get { manager.value(for: TestConstants.booleanToggle2).boolValue! }
+        set { manager.set(.bool(newValue), for: TestConstants.booleanToggle2) }
+    }
+
+    public var userDefinedIntegerToggle: Int {
+        get { manager.value(for: TestConstants.integerToggle2).intValue! }
+        set { manager.set(.int(newValue), for: TestConstants.integerToggle2) }
+    }
+
+    public var userDefinedNumericalToggle: Double {
+        get { manager.value(for: TestConstants.numericalToggle2).numberValue! }
+        set { manager.set(.number(newValue), for: TestConstants.numericalToggle2) }
+    }
+
+    public var userDefinedStringToggle: String {
+        get { manager.value(for: TestConstants.stringToggle2).stringValue! }
+        set { manager.set(.string(newValue), for: TestConstants.stringToggle2) }
+    }
+
+}
