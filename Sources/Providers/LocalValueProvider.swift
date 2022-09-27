@@ -2,7 +2,7 @@
 
 import Foundation
 
-final public class LocalValueProvider: OptionalValueProvider {
+final public class LocalValueProvider {
     
     public var name: String = "Local"
     
@@ -17,6 +17,9 @@ final public class LocalValueProvider: OptionalValueProvider {
             .mapValues { $0.first! }
             .mapValues { $0.value }
     }
+}
+
+extension LocalValueProvider: OptionalValueProvider {
     
     public func value(for variable: Variable) -> Value? {
         toggles[variable]

@@ -4,7 +4,7 @@ import Foundation
 
 private let userDefaultsKeyPrefix = "com.toggles"
 
-final public class PersistentValueProvider: MutableValueProvider {
+final public class PersistentValueProvider {
     
     public var name: String = "Persistent"
     
@@ -13,6 +13,9 @@ final public class PersistentValueProvider: MutableValueProvider {
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
+}
+
+extension PersistentValueProvider: MutableValueProvider {
     
     public func value(for variable: Variable) -> Value? {
         guard let data = userDefaults.value(forKey: key(for: variable)) as? Data else { return nil }

@@ -2,7 +2,7 @@
 
 import Foundation
 
-final public class InMemoryValueProvider: MutableValueProvider {
+final public class InMemoryValueProvider {
     
     public var name: String = "InMemory"
     
@@ -11,6 +11,9 @@ final public class InMemoryValueProvider: MutableValueProvider {
     public init(datasource: [Variable: Value] = [Variable: Value]()) {
         self.storage = datasource
     }
+}
+
+extension InMemoryValueProvider: MutableValueProvider {
     
     public func value(for variable: Variable) -> Value? {
         storage[variable]
