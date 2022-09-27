@@ -1,6 +1,5 @@
 //  ToggleDetailView.swift
 
-import Combine
 import SwiftUI
 #if os(iOS)
 import UIKit
@@ -26,8 +25,6 @@ struct ToggleDetailView: View {
         self.toggleObservable = ToggleObservable(manager: manager, variable: toggle.variable)
         self.inputValidationHelper = InputValidationHelper(toggle: toggle)
     }
-    
-    var cancellables = Set<AnyCancellable>()
     
     var body: some View {
         listView
