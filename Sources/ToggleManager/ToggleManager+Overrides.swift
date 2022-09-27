@@ -13,7 +13,7 @@ extension ToggleManager {
     
     @discardableResult
     public func removeOverrides() -> Set<Variable> {
-        queue.sync {
+        queue.sync(flags: .barrier) {
             defer { cache.evict() }
             guard let mutableValueProvider = mutableValueProvider else { return  [] }
             let variables = mutableValueProvider.variables
