@@ -51,5 +51,6 @@ class DemoConfiguration {
                                              datasourceUrl: datasourceUrl,
                                              cypherConfiguration: cypherConfiguration)
         }
+        self.manager.verbose = true
     }
 }

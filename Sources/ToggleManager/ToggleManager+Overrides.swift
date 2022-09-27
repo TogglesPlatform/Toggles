@@ -23,6 +23,7 @@ extension ToggleManager {
                     self.subjectsRefs[variable] = nil
                 }
             }
+            log("Deleting all overrides.")
             mutableValueProvider.deleteAll()
             hasOverrides = false
             return variables

@@ -15,6 +15,7 @@ final public class ToggleManager: ObservableObject {
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
     
     @Published var hasOverrides: Bool = false
+    public var verbose: Bool = false
     
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 valueProviders: [OptionalValueProvider] = [],
@@ -34,7 +35,9 @@ extension ToggleManager {
     
     public func value(for variable: Variable) -> Value {
         queue.sync {
-            nonSyncValue(for: variable)
+            let value = nonSyncValue(for: variable)
+            log("Getting value \(value) for variable \(variable).")
+            return value
         }
     }
     
@@ -60,6 +63,7 @@ extension ToggleManager {
 extension ToggleManager {
     
     public func set(_ value: Value, for variable: Variable) {
+        log("Setting value (\(value) for variable \(variable).")
         queue.async(flags: .barrier) {
             guard let mutableValueProvider = self.mutableValueProvider else {
                 assertionFailure("No MutableValueProvider available: unallowed call `set(_, for:)` on \(self).")
@@ -76,6 +80,7 @@ extension ToggleManager {
     }
     
     public func delete(_ variable: Variable) {
+        log("Deleting variable \(variable).")
         queue.async(flags: .barrier) {
             guard let mutableValueProvider = self.mutableValueProvider else {
                 assertionFailure("No MutableValueProvider available: unallowed call `delete(_)` on \(self).")
