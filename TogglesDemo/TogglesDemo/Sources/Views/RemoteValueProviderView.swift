@@ -17,7 +17,7 @@ The values in the new configuration are generated randomly.
     
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: "wave.3.left")
+            Image(systemName: "icloud.and.arrow.down")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 60, height: 60)

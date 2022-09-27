@@ -36,24 +36,40 @@ The view will show the values updating when overrides or new configurations are 
             Text(message)
                 .padding()
             HStack {
-                Text("Bool")
-                Text(String(booleanObservable.boolValue))
-            }
-            HStack {
-                Text("Int")
-                Text(String(intObservable.intValue))
-            }
-            HStack {
-                Text("Double")
-                Text(String(numericalObservable.numberValue))
-            }
-            HStack {
-                Text("String")
-                Text(stringObservable.stringValue)
-            }
-            HStack {
-                Text("Secure")
-                Text(secureObservable.secureValue)
+                VStack(alignment: .trailing) {
+                    HStack {
+                        Text(Constant.booleanToggle)
+                    }
+                    HStack {
+                        Text(Constant.integerToggle)
+                    }
+                    HStack {
+                        Text(Constant.numericalToggle)
+                    }
+                    HStack {
+                        Text(Constant.stringToggle)
+                    }
+                    HStack {
+                        Text(Constant.encryptedToggle)
+                    }
+                }
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(String(booleanObservable.boolValue))
+                    }
+                    HStack {
+                        Text(String(intObservable.intValue))
+                    }
+                    HStack {
+                        Text(String(numericalObservable.numberValue))
+                    }
+                    HStack {
+                        Text(stringObservable.stringValue)
+                    }
+                    HStack {
+                        Text(secureObservable.secureValue)
+                    }
+                }
             }
         }
     }

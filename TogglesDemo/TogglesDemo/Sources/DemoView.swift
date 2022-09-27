@@ -15,7 +15,7 @@ struct DemoView: View {
                 }
             RemoteValueProviderView(provider: viewModel.remoteValueProvider, manager: viewModel.manager)
                 .tabItem {
-                    Label("Config update", systemImage: "wave.3.left")
+                    Label("Config update", systemImage: "icloud.and.arrow.down")
                 }
             ToggleAccessorView(accessor: ToggleAccessor(manager: viewModel.manager))
                 .tabItem {

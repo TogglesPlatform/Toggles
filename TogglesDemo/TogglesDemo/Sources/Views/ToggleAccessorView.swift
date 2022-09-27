@@ -24,24 +24,40 @@ This view will not show the values updating when overrides or new configurations
             Text(message)
                 .padding()
             HStack {
-                Text("Bool")
-                Text(String(accessor.booleanToggle))
-            }
-            HStack {
-                Text("Int")
-                Text(String(accessor.integerToggle))
-            }
-            HStack {
-                Text("Double")
-                Text(String(accessor.numericalToggle))
-            }
-            HStack {
-                Text("String")
-                Text(accessor.stringToggle)
-            }
-            HStack {
-                Text("Secure")
-                Text(accessor.encryptedToggle)
+                VStack(alignment: .trailing) {
+                    HStack {
+                        Text(Constant.booleanToggle)
+                    }
+                    HStack {
+                        Text(Constant.integerToggle)
+                    }
+                    HStack {
+                        Text(Constant.numericalToggle)
+                    }
+                    HStack {
+                        Text(Constant.stringToggle)
+                    }
+                    HStack {
+                        Text(Constant.encryptedToggle)
+                    }
+                }
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(String(accessor.booleanToggle))
+                    }
+                    HStack {
+                        Text(String(accessor.integerToggle))
+                    }
+                    HStack {
+                        Text(String(accessor.numericalToggle))
+                    }
+                    HStack {
+                        Text(accessor.stringToggle)
+                    }
+                    HStack {
+                        Text(accessor.encryptedToggle)
+                    }
+                }
             }
         }
     }
