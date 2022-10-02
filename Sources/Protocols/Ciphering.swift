@@ -1,8 +1,8 @@
-//  Cyphering.swift
+//  Ciphering.swift
 
 import Foundation
 
-protocol Cyphering {
+protocol Ciphering {
     func encrypt(_ value: String) throws -> String
     func decrypt(_ value: String) throws -> String
 }

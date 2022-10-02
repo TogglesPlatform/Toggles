@@ -3,9 +3,9 @@
 import Foundation
 import CryptoKit
 
-struct ChaCha20Poly1305: Cyphering {
+struct ChaCha20Poly1305: Ciphering {
     
-    enum CypherError: Error {
+    enum CipherError: Error {
         case invalidKey(String)
         case invalidValue(String)
         case invalidDecryptedData(Data)
@@ -15,7 +15,7 @@ struct ChaCha20Poly1305: Cyphering {
     
     func encrypt(_ value: String) throws -> String {
         guard let dataToEncrypt = value.data(using: .utf8) else {
-            throw CypherError.invalidValue(value)
+            throw CipherError.invalidValue(value)
         }
         let symmetricKey = try makeSymmetricKey(key: key)
         let encryptedData = try ChaChaPoly.seal(dataToEncrypt, using: symmetricKey)
@@ -24,20 +24,20 @@ struct ChaCha20Poly1305: Cyphering {
     
     func decrypt(_ value: String) throws -> String {
         guard let base64StringData = Data(base64Encoded: value) else {
-            throw CypherError.invalidValue(value)
+            throw CipherError.invalidValue(value)
         }
         let symmetricKey = try makeSymmetricKey(key: key)
         let sealedBox = try ChaChaPoly.SealedBox(combined: base64StringData)
         let decryptedData = try ChaChaPoly.open(sealedBox, using: symmetricKey)
         guard let base64StringData = String(data: decryptedData, encoding: .utf8) else {
-            throw CypherError.invalidDecryptedData(decryptedData)
+            throw CipherError.invalidDecryptedData(decryptedData)
         }
         return base64StringData
     }
 
     private func makeSymmetricKey(key: String) throws -> SymmetricKey {
         guard let keyData = key.data(using: .utf8) else {
-            throw CypherError.invalidKey(key)
+            throw CipherError.invalidKey(key)
         }
         let hash = SHA256.hash(data: keyData)
         return SymmetricKey(data: hash)

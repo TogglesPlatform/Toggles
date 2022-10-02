@@ -66,9 +66,9 @@ This view will not show the values updating when overrides or new configurations
 struct ToggleAccessorView_Previews: PreviewProvider {
     static var previews: some View {
         let url = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
-        let cypherConfiguration = CypherConfiguration.chaChaPoly
+        let cipherConfiguration = CipherConfiguration.chaChaPoly
         let manager = try! ToggleManager(datasourceUrl: url,
-                                         cypherConfiguration: cypherConfiguration)
+                                         cipherConfiguration: cipherConfiguration)
         let accessor = ToggleAccessor(manager: manager)
         return ToggleAccessorView(accessor: accessor)
     }

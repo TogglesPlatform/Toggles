@@ -1,4 +1,4 @@
-//  DecryptionConfiguration.swift
+//  CipherConfiguration.swift
 
 import Foundation
 
@@ -8,7 +8,7 @@ public enum Algorithm: String {
 
 public typealias Key = String
 
-public struct CypherConfiguration {
+public struct CipherConfiguration {
     let algorithm: Algorithm
     let key: Key
     

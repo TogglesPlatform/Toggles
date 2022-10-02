@@ -14,7 +14,7 @@ final class ToggleObservableTests: XCTestCase {
         let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
         toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
                                           datasourceUrl: url,
-                                          cypherConfiguration: CypherConfiguration.chaChaPoly)
+                                          cipherConfiguration: CipherConfiguration.chaChaPoly)
     }
     
     override func tearDownWithError() throws {

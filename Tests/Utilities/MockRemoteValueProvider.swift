@@ -33,10 +33,10 @@ final class MockRemoteValueProvider: OptionalValueProvider {
             case .string(let v):
                 return .string(v + "!")
             case .secure(let v):
-                let cypher = ChaCha20Poly1305(key: CypherConfiguration.chaChaPoly.key)
-                let decryptedValue = try! cypher.decrypt(v)
+                let cipher = ChaCha20Poly1305(key: CipherConfiguration.chaChaPoly.key)
+                let decryptedValue = try! cipher.decrypt(v)
                 let updatedValue = decryptedValue + "!"
-                return .secure(try! cypher.encrypt(updatedValue))
+                return .secure(try! cipher.encrypt(updatedValue))
             }
         }
         completion()

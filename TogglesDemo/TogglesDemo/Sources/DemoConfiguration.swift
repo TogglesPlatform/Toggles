@@ -20,12 +20,12 @@ class DemoConfiguration {
     let datasourceUrl: URL
     let remoteValueProvider: RemoteValueProvider
     let localValueProvider: OptionalValueProvider
-    let cypherConfiguration: CypherConfiguration
+    let cipherConfiguration: CipherConfiguration
     let manager: ToggleManager
     
     init(setupConfiguration: SetupConfiguration,
          demoDatasource: DemoDatasource,
-         cypherConfiguration: CypherConfiguration) throws {
+         cipherConfiguration: CipherConfiguration) throws {
         switch demoDatasource {
         case .default:
             self.datasourceUrl = Bundle.main.url(forResource: "DemoDatasource", withExtension: "json")!
@@ -34,22 +34,22 @@ class DemoConfiguration {
         }
         self.remoteValueProvider = try RemoteValueProvider(jsonURL: datasourceUrl)
         self.localValueProvider = try LocalValueProvider(jsonURL: datasourceUrl)
-        self.cypherConfiguration = cypherConfiguration
+        self.cipherConfiguration = cipherConfiguration
         switch setupConfiguration {
         case .persistent:
             self.manager = try ToggleManager(mutableValueProvider: PersistentValueProvider(userDefaults: .standard),
                                              valueProviders: [remoteValueProvider, localValueProvider],
                                              datasourceUrl: datasourceUrl,
-                                             cypherConfiguration: cypherConfiguration)
+                                             cipherConfiguration: cipherConfiguration)
         case .inMemory:
             self.manager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
                                              valueProviders: [remoteValueProvider, localValueProvider],
                                              datasourceUrl: datasourceUrl,
-                                             cypherConfiguration: cypherConfiguration)
+                                             cipherConfiguration: cipherConfiguration)
         case .immutable:
             self.manager = try ToggleManager(valueProviders: [remoteValueProvider, localValueProvider],
                                              datasourceUrl: datasourceUrl,
-                                             cypherConfiguration: cypherConfiguration)
+                                             cipherConfiguration: cipherConfiguration)
         }
         self.manager.verbose = true
     }

@@ -1,9 +1,9 @@
-//  ToggleManager+CypheringTests.swift
+//  ToggleManager+CipheringTests.swift
 
 import XCTest
 @testable import Toggles
 
-final class ToggleManager_CypheringTests: XCTestCase {
+final class ToggleManager_CipheringTests: XCTestCase {
 
     let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
     
@@ -15,15 +15,15 @@ final class ToggleManager_CypheringTests: XCTestCase {
     
     func test_writeValueWithSecureValue() throws {
         let toggleManager = try ToggleManager(datasourceUrl: url,
-                                              cypherConfiguration: CypherConfiguration.chaChaPoly)
+                                              cipherConfiguration: CipherConfiguration.chaChaPoly)
         let value = try toggleManager.writeValue(for: .secure("secret"))
         XCTAssertFalse(value.secureValue!.isEmpty)
     }
     
-    func test_writeValueWithSecureValueNoCypherConfiguration() throws {
+    func test_writeValueWithSecureValueNoCipherConfiguration() throws {
         let toggleManager = try ToggleManager(datasourceUrl: url)
         XCTAssertThrowsError(try toggleManager.writeValue(for: .secure("secret"))) { error in
-            XCTAssertEqual(error as! ToggleManager.FetchError, ToggleManager.FetchError.missingCypherConfiguration)
+            XCTAssertEqual(error as! ToggleManager.FetchError, ToggleManager.FetchError.missingCipherConfiguration)
         }
     }
     
@@ -35,15 +35,15 @@ final class ToggleManager_CypheringTests: XCTestCase {
     
     func test_readValueWithSecureValue() throws {
         let toggleManager = try ToggleManager(datasourceUrl: url,
-                                              cypherConfiguration: CypherConfiguration.chaChaPoly)
+                                              cipherConfiguration: CipherConfiguration.chaChaPoly)
         let value = try toggleManager.readValue(for: .secure("eDUxAQXW6dobqAMxhZIJLkyQKb8+36bFHc36eabacXDahMipVnGy/Q=="))
         XCTAssertEqual(value, .secure("Secure Value"))
     }
     
-    func test_readValueWithSecureValueNoCypherConfiguration() throws {
+    func test_readValueWithSecureValueNoCipherConfiguration() throws {
         let toggleManager = try ToggleManager(datasourceUrl: url)
         XCTAssertThrowsError(try toggleManager.readValue(for: .secure("eDUxAQXW6dobqAMxhZIJLkyQKb8+36bFHc36eabacXDahMipVnGy/Q=="))) { error in
-            XCTAssertEqual(error as! ToggleManager.FetchError, ToggleManager.FetchError.missingCypherConfiguration)
+            XCTAssertEqual(error as! ToggleManager.FetchError, ToggleManager.FetchError.missingCipherConfiguration)
         }
     }
 }

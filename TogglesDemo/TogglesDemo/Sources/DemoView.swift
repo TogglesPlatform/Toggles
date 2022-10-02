@@ -31,10 +31,10 @@ struct DemoView: View {
 
 struct DemoView_Previews: PreviewProvider {
     static var previews: some View {
-        let cypherConfiguration = CypherConfiguration.chaChaPoly
+        let cipherConfiguration = CipherConfiguration.chaChaPoly
         let demoConfiguration = try! DemoConfiguration(setupConfiguration: .inMemory,
                                                        demoDatasource: .default,
-                                                       cypherConfiguration: cypherConfiguration)
+                                                       cipherConfiguration: cipherConfiguration)
         DemoView(viewModel: demoConfiguration)
     }
 }

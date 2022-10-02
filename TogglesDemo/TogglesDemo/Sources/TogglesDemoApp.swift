@@ -59,6 +59,6 @@ struct TogglesDemoApp: App {
     private func setupDemoConfiguration() -> DemoConfiguration {
         try! DemoConfiguration(setupConfiguration: setupConfiguration,
                                demoDatasource: demoDatasource,
-                               cypherConfiguration: CypherConfiguration.chaChaPoly)
+                               cipherConfiguration: CipherConfiguration.chaChaPoly)
     }
 }

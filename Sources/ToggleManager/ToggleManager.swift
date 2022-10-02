@@ -8,7 +8,7 @@ final public class ToggleManager: ObservableObject {
     var mutableValueProvider: MutableValueProvider?
     var valueProviders: [OptionalValueProvider]
     var defaultValueProvider: ValueProvider
-    var cypherConfiguration: CypherConfiguration?
+    var cipherConfiguration: CipherConfiguration?
     
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
     let cache = ValueCache<Variable, Value>()
@@ -20,11 +20,11 @@ final public class ToggleManager: ObservableObject {
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 valueProviders: [OptionalValueProvider] = [],
                 datasourceUrl: URL,
-                cypherConfiguration: CypherConfiguration? = nil) throws {
+                cipherConfiguration: CipherConfiguration? = nil) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
         self.defaultValueProvider = try DefaultValueProvider(jsonURL: datasourceUrl)
-        self.cypherConfiguration = cypherConfiguration
+        self.cipherConfiguration = cipherConfiguration
         if let mutableValueProvider = self.mutableValueProvider {
             self.hasOverrides = !mutableValueProvider.variables.isEmpty
         }

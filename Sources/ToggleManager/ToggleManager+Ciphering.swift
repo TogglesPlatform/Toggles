@@ -1,9 +1,9 @@
-//  ToggleManager+Cyphering.swift
+//  ToggleManager+Ciphering.swift
 
 extension ToggleManager {
     
     enum FetchError: Error {
-        case missingCypherConfiguration
+        case missingCipherConfiguration
     }
     
     func writeValue(for value: Value) throws -> Value {
@@ -17,15 +17,15 @@ extension ToggleManager {
     }
     
     private func encrypt(_ value: String) throws -> String {
-        guard let cypherConfiguration = cypherConfiguration else {
-            throw FetchError.missingCypherConfiguration
+        guard let cipherConfiguration = cipherConfiguration else {
+            throw FetchError.missingCipherConfiguration
         }
-        let cypher: Cypher
-        switch cypherConfiguration.algorithm {
+        let cipher: Ciphering
+        switch cipherConfiguration.algorithm {
         case Algorithm.chaCha20Poly1305:
-            cypher = ChaCha20Poly1305(key: cypherConfiguration.key)
+            cipher = ChaCha20Poly1305(key: cipherConfiguration.key)
         }
-        return try cypher.encrypt(value)
+        return try cipher.encrypt(value)
     }
     
     func readValue(for value: Value) throws -> Value {
@@ -39,15 +39,15 @@ extension ToggleManager {
     }
     
     private func decrypt(_ value: String) throws -> String {
-        guard let cypherConfiguration = cypherConfiguration else {
-            throw FetchError.missingCypherConfiguration
+        guard let cipherConfiguration = cipherConfiguration else {
+            throw FetchError.missingCipherConfiguration
         }
-        let cypher: Cypher
-        switch cypherConfiguration.algorithm {
+        let cipher: Ciphering
+        switch cipherConfiguration.algorithm {
         case Algorithm.chaCha20Poly1305:
-            cypher = ChaCha20Poly1305(key: cypherConfiguration.key)
+            cipher = ChaCha20Poly1305(key: cipherConfiguration.key)
         }
-        return try cypher.decrypt(value)
+        return try cipher.decrypt(value)
     }
 }
 

@@ -12,7 +12,7 @@
 		D30641F828CC24660051BCBD /* DemoConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F428CC24660051BCBD /* DemoConfiguration.swift */; };
 		D30641F928CC24660051BCBD /* TogglesDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F528CC24660051BCBD /* TogglesDemoApp.swift */; };
 		D35966BE28E1B47A0068FD1A /* 10kEntriesDemoDatasource.json in Resources */ = {isa = PBXBuildFile; fileRef = D35966BD28E1B47A0068FD1A /* 10kEntriesDemoDatasource.json */; };
-		D3C75C2028D7C33600E659ED /* CypherConfiguration+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C75C1F28D7C33600E659ED /* CypherConfiguration+Defaults.swift */; };
+		D365B53128EA370100FCA175 /* CipherConfiguration+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365B53028EA370100FCA175 /* CipherConfiguration+Defaults.swift */; };
 		D3C75C2228D88BD600E659ED /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C75C2128D88BD600E659ED /* DemoView.swift */; };
 		D3D0631928B6C68B003110E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D0631828B6C68B003110E2 /* Assets.xcassets */; };
 		D3D0631C28B6C68B003110E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D0631B28B6C68B003110E2 /* Preview Assets.xcassets */; };
@@ -30,7 +30,7 @@
 		D30641F428CC24660051BCBD /* DemoConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConfiguration.swift; sourceTree = "<group>"; };
 		D30641F528CC24660051BCBD /* TogglesDemoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TogglesDemoApp.swift; sourceTree = "<group>"; };
 		D35966BD28E1B47A0068FD1A /* 10kEntriesDemoDatasource.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 10kEntriesDemoDatasource.json; sourceTree = "<group>"; };
-		D3C75C1F28D7C33600E659ED /* CypherConfiguration+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CypherConfiguration+Defaults.swift"; path = "TogglesDemo/Sources/CypherConfiguration+Defaults.swift"; sourceTree = SOURCE_ROOT; };
+		D365B53028EA370100FCA175 /* CipherConfiguration+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CipherConfiguration+Defaults.swift"; sourceTree = "<group>"; };
 		D3C75C2128D88BD600E659ED /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
 		D3D0631128B6C68A003110E2 /* TogglesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TogglesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D0631828B6C68B003110E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,11 +58,12 @@
 		D30641F128CC24660051BCBD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D3F41D0F28D548AD00E56F65 /* Views */,
-				D3F41D1028D548C800E56F65 /* Providers */,
+				D365B53028EA370100FCA175 /* CipherConfiguration+Defaults.swift */,
 				D30641F428CC24660051BCBD /* DemoConfiguration.swift */,
-				D30641F528CC24660051BCBD /* TogglesDemoApp.swift */,
 				D3C75C2128D88BD600E659ED /* DemoView.swift */,
+				D3F41D1028D548C800E56F65 /* Providers */,
+				D30641F528CC24660051BCBD /* TogglesDemoApp.swift */,
+				D3F41D0F28D548AD00E56F65 /* Views */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -144,7 +145,6 @@
 				D30641F228CC24660051BCBD /* RemoteValueProviderView.swift */,
 				D3F41D0D28D5459E00E56F65 /* ToggleObservablesView.swift */,
 				D3F41D0B28D5423200E56F65 /* ToggleAccessorView.swift */,
-				D3C75C1F28D7C33600E659ED /* CypherConfiguration+Defaults.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,7 +237,7 @@
 				D3F41CFD28D5367C00E56F65 /* ToggleAccessor.swift in Sources */,
 				D3C75C2228D88BD600E659ED /* DemoView.swift in Sources */,
 				D3F41D0E28D5459E00E56F65 /* ToggleObservablesView.swift in Sources */,
-				D3C75C2028D7C33600E659ED /* CypherConfiguration+Defaults.swift in Sources */,
+				D365B53128EA370100FCA175 /* CipherConfiguration+Defaults.swift in Sources */,
 				D3F41D0C28D5423200E56F65 /* ToggleAccessorView.swift in Sources */,
 				D30641F728CC24660051BCBD /* RemoteValueProvider.swift in Sources */,
 				D30641F828CC24660051BCBD /* DemoConfiguration.swift in Sources */,
