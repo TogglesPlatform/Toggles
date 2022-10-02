@@ -3,7 +3,7 @@
 import Foundation
 import CryptoKit
 
-struct ChaCha20Poly1305 {
+struct ChaCha20Poly1305: Cyphering {
     
     enum CypherError: Error {
         case invalidKey(String)

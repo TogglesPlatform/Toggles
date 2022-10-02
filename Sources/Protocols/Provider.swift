@@ -1,5 +1,7 @@
 //  Provider.swift
 
+import Foundation
+
 protocol ValueProvider {
     var name: String { get }
     func value(for variable: Variable) -> Value

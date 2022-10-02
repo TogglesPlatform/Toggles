@@ -20,11 +20,12 @@ extension ToggleManager {
         guard let cypherConfiguration = cypherConfiguration else {
             throw FetchError.missingCypherConfiguration
         }
+        let cypher: Cypher
         switch cypherConfiguration.algorithm {
         case Algorithm.chaCha20Poly1305:
-            let cypher = ChaCha20Poly1305(key: cypherConfiguration.key)
-            return try cypher.encrypt(value)
+            cypher = ChaCha20Poly1305(key: cypherConfiguration.key)
         }
+        return try cypher.encrypt(value)
     }
     
     func readValue(for value: Value) throws -> Value {
@@ -41,11 +42,12 @@ extension ToggleManager {
         guard let cypherConfiguration = cypherConfiguration else {
             throw FetchError.missingCypherConfiguration
         }
+        let cypher: Cypher
         switch cypherConfiguration.algorithm {
         case Algorithm.chaCha20Poly1305:
-            let cypher = ChaCha20Poly1305(key: cypherConfiguration.key)
-            return try cypher.decrypt(value)
+            cypher = ChaCha20Poly1305(key: cypherConfiguration.key)
         }
+        return try cypher.decrypt(value)
     }
 }
 
