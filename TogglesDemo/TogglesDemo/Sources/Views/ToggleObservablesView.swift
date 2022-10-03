@@ -55,19 +55,19 @@ The view will show the values updating when overrides or new configurations are 
                 }
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(String(booleanObservable.boolValue))
+                        Text(String(booleanObservable.boolValue!))
                     }
                     HStack {
-                        Text(String(intObservable.intValue))
+                        Text(String(intObservable.intValue!))
                     }
                     HStack {
-                        Text(String(numericalObservable.numberValue))
+                        Text(String(numericalObservable.numberValue!))
                     }
                     HStack {
-                        Text(stringObservable.stringValue)
+                        Text(stringObservable.stringValue!)
                     }
                     HStack {
-                        Text(secureObservable.secureValue)
+                        Text(secureObservable.secureValue!)
                     }
                 }
             }

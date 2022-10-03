@@ -9,25 +9,26 @@ public class ToggleObservable: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
     
     @Published
-    public var value: Value!
+    public var value: Value
     
     @Published
-    public var boolValue: Bool!
+    public var boolValue: Bool?
     
     @Published
-    public var intValue: Int!
+    public var intValue: Int?
     
     @Published
-    public var numberValue: Double!
+    public var numberValue: Double?
     
     @Published
-    public var stringValue: String!
+    public var stringValue: String?
     
     @Published
-    public var secureValue: String!
+    public var secureValue: String?
     
     public init(manager: ToggleManager, variable: Variable) {
         self.manager = manager
+        value = .bool(false)
         subscribe(on: variable)
     }
     
