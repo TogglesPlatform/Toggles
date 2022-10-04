@@ -4,10 +4,10 @@ import Foundation
 
 extension ToggleManager {
     
-    public var overriddedVariables: [Variable] {
+    public var overriddedVariables: Set<Variable> {
         queue.sync {
             guard let mutableValueProvider = mutableValueProvider else { return [] }
-            return Array(mutableValueProvider.variables)
+            return mutableValueProvider.variables
         }
     }
     
