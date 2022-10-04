@@ -33,7 +33,7 @@ class DemoConfiguration {
             self.datasourceUrl = Bundle.main.url(forResource: "10kEntriesDemoDatasource", withExtension: "json")!
         }
         self.remoteValueProvider = try RemoteValueProvider(jsonURL: datasourceUrl)
-        self.localValueProvider = try LocalValueProvider(jsonURL: datasourceUrl)
+        self.localValueProvider = try LocalValueProvider(jsonUrl: datasourceUrl)
         self.cipherConfiguration = cipherConfiguration
         switch setupConfiguration {
         case .persistent:

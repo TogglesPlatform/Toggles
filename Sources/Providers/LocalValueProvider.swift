@@ -8,8 +8,8 @@ final public class LocalValueProvider {
     
     private let toggles: [Variable: Value]
     
-    public init(jsonURL: URL) throws {
-        let content = try Data(contentsOf: jsonURL)
+    public init(jsonUrl: URL) throws {
+        let content = try Data(contentsOf: jsonUrl)
         let datasource = try JSONDecoder().decode(Datasource.self, from: content)
         let groupedToggles = Dictionary(grouping: datasource.toggles, by: \.variable)
         try TogglesValidator.validate(groupedToggles)
