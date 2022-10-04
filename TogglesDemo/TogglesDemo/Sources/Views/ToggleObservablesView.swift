@@ -17,11 +17,11 @@ The view will show the values updating when overrides or new configurations are 
     @ObservedObject var secureObservable: ToggleObservable
 
     init(manager: ToggleManager) {
-        self.booleanObservable = ToggleObservable(manager: manager, variable: Constant.booleanToggle)
-        self.intObservable = ToggleObservable(manager: manager, variable: Constant.integerToggle)
-        self.numericObservable = ToggleObservable(manager: manager, variable: Constant.numericToggle)
-        self.stringObservable = ToggleObservable(manager: manager, variable: Constant.stringToggle)
-        self.secureObservable = ToggleObservable(manager: manager, variable: Constant.encryptedToggle)
+        self.booleanObservable = ToggleObservable(manager: manager, variable: Constants.booleanToggle)
+        self.intObservable = ToggleObservable(manager: manager, variable: Constants.integerToggle)
+        self.numericObservable = ToggleObservable(manager: manager, variable: Constants.numericToggle)
+        self.stringObservable = ToggleObservable(manager: manager, variable: Constants.stringToggle)
+        self.secureObservable = ToggleObservable(manager: manager, variable: Constants.encryptedToggle)
     }
         
     var body: some View {
@@ -38,19 +38,19 @@ The view will show the values updating when overrides or new configurations are 
             HStack {
                 VStack(alignment: .trailing) {
                     HStack {
-                        Text(Constant.booleanToggle)
+                        Text(Constants.booleanToggle)
                     }
                     HStack {
-                        Text(Constant.integerToggle)
+                        Text(Constants.integerToggle)
                     }
                     HStack {
-                        Text(Constant.numericToggle)
+                        Text(Constants.numericToggle)
                     }
                     HStack {
-                        Text(Constant.stringToggle)
+                        Text(Constants.stringToggle)
                     }
                     HStack {
-                        Text(Constant.encryptedToggle)
+                        Text(Constants.encryptedToggle)
                     }
                 }
                 VStack(alignment: .leading) {

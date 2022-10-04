@@ -26,19 +26,19 @@ This view will not show the values updating when overrides or new configurations
             HStack {
                 VStack(alignment: .trailing) {
                     HStack {
-                        Text(Constant.booleanToggle)
+                        Text(Constants.booleanToggle)
                     }
                     HStack {
-                        Text(Constant.integerToggle)
+                        Text(Constants.integerToggle)
                     }
                     HStack {
-                        Text(Constant.numericToggle)
+                        Text(Constants.numericToggle)
                     }
                     HStack {
-                        Text(Constant.stringToggle)
+                        Text(Constants.stringToggle)
                     }
                     HStack {
-                        Text(Constant.encryptedToggle)
+                        Text(Constants.encryptedToggle)
                     }
                 }
                 VStack(alignment: .leading) {
