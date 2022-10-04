@@ -8,7 +8,7 @@ public struct Constant {
 
     public static let integerToggle = "integer_toggle"
 
-    public static let numericalToggle = "numerical_toggle"
+    public static let numericToggle = "numeric_toggle"
 
     public static let stringToggle = "string_toggle"
 

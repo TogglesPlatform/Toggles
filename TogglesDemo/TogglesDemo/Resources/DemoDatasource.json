@@ -17,11 +17,11 @@
       }
     },
     {
-      "variable": "numerical_toggle",
+      "variable": "numeric_toggle",
       "number": 3.1416,
       "metadata": {
         "group": "Raw toggles",
-        "description": "Numerical toggle"
+        "description": "Numeric toggle"
       }
     },
     {

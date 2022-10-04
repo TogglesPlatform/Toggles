@@ -37,7 +37,7 @@ final class Toggle_CodableTests: XCTestCase {
         XCTAssertEqual(toggle, decodedToggle)
     }
     
-    func test_codableNumericalToggle() throws {
+    func test_codableNumericToggle() throws {
         let toggle = Toggle(variable: "var", value: .number(3.1416), metadata: Metadata(description: "", group: ""))
         let data = try! JSONEncoder().encode(toggle)
         let decodedToggle = try JSONDecoder().decode(Toggle.self, from: data)

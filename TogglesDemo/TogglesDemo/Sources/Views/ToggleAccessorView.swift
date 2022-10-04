@@ -32,7 +32,7 @@ This view will not show the values updating when overrides or new configurations
                         Text(Constant.integerToggle)
                     }
                     HStack {
-                        Text(Constant.numericalToggle)
+                        Text(Constant.numericToggle)
                     }
                     HStack {
                         Text(Constant.stringToggle)
@@ -49,7 +49,7 @@ This view will not show the values updating when overrides or new configurations
                         Text(String(accessor.integerToggle))
                     }
                     HStack {
-                        Text(String(accessor.numericalToggle))
+                        Text(String(accessor.numericToggle))
                     }
                     HStack {
                         Text(accessor.stringToggle)

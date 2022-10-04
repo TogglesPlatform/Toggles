@@ -16,10 +16,10 @@ class ToggleFactory {
                metadata: Metadata(description: "Integer toggle", group: "group_1"))
     }
     
-    func numericalToggle(_ value: Double) -> Toggle {
-        Toggle(variable: "numerical_toggle",
+    func numericToggle(_ value: Double) -> Toggle {
+        Toggle(variable: "numeric_toggle",
                value: .number(value),
-               metadata: Metadata(description: "Numerical toggle", group: "group_2"))
+               metadata: Metadata(description: "Numeric toggle", group: "group_2"))
     }
     
     func stringToggle(_ value: String) -> Toggle {
@@ -46,8 +46,8 @@ class ToggleFactory {
                metadata: Metadata(description: "", group: ""))
     }
     
-    func numericalEmptyMetadataToggle(_ value: Double) -> Toggle {
-        Toggle(variable: "numerical_toggle",
+    func numericEmptyMetadataToggle(_ value: Double) -> Toggle {
+        Toggle(variable: "numeric_toggle",
                value: .number(value),
                metadata: Metadata(description: "", group: ""))
     }
@@ -68,7 +68,7 @@ class ToggleFactory {
         [
             booleanToggle(true),
             integerToggle(42),
-            numericalToggle(3.1416),
+            numericToggle(3.1416),
             stringToggle("Hello World"),
             secureToggle("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK")
         ]
@@ -78,7 +78,7 @@ class ToggleFactory {
         [
             booleanEmptyMetadataToggle(true),
             integerEmptyMetadataToggle(42),
-            numericalEmptyMetadataToggle(3.1416),
+            numericEmptyMetadataToggle(3.1416),
             stringEmptyMetadataToggle("Hello World"),
             secureEmptyMetadataToggle("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK")
         ]

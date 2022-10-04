@@ -14,7 +14,7 @@ final class GroupLoaderTests: XCTestCase {
                 Toggle(variable: "integer_toggle", value: .int(42), metadata: Metadata(description: "Integer toggle", group: "group_1"))
             ]),
             Group(title: "group_2", toggles: [
-                Toggle(variable: "numerical_toggle", value: .number(3.1416), metadata: Metadata(description: "Numerical toggle", group: "group_2")),
+                Toggle(variable: "numeric_toggle", value: .number(3.1416), metadata: Metadata(description: "Numeric toggle", group: "group_2")),
                 Toggle(variable: "string_toggle", value: .string("Hello World"), metadata: Metadata(description: "String toggle", group: "group_2"))
             ]),
             Group(title: "group_3", toggles: [

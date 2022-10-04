@@ -27,8 +27,8 @@ extension Toggle: Decodable {
         else if let intValue = try? values.decode(Int.self, forKey: .int) {
             self.value = .int(intValue)
         }
-        else if let numberValue = try? values.decode(Double.self, forKey: .number) {
-            self.value = .number(numberValue)
+        else if let doubleValue = try? values.decode(Double.self, forKey: .number) {
+            self.value = .number(doubleValue)
         }
         else if let stringValue = try? values.decode(String.self, forKey: .string) {
             self.value = .string(stringValue)

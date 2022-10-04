@@ -24,9 +24,9 @@ extension TestToggleAccessor {
         set { manager.set(.int(newValue), for: TestConstants.integerToggle) }
     }
 
-    public var numericalToggle: Double {
-        get { manager.value(for: TestConstants.numericalToggle).numberValue! }
-        set { manager.set(.number(newValue), for: TestConstants.numericalToggle) }
+    public var numericToggle: Double {
+        get { manager.value(for: TestConstants.numericToggle).doubleValue! }
+        set { manager.set(.number(newValue), for: TestConstants.numericToggle) }
     }
 
     public var stringToggle: String {
@@ -49,9 +49,9 @@ extension TestToggleAccessor {
         set { manager.set(.int(newValue), for: TestConstants.integerToggle2) }
     }
 
-    public var userDefinedNumericalToggle: Double {
-        get { manager.value(for: TestConstants.numericalToggle2).numberValue! }
-        set { manager.set(.number(newValue), for: TestConstants.numericalToggle2) }
+    public var userDefinedNumericToggle: Double {
+        get { manager.value(for: TestConstants.numericToggle2).doubleValue! }
+        set { manager.set(.number(newValue), for: TestConstants.numericToggle2) }
     }
 
     public var userDefinedStringToggle: String {

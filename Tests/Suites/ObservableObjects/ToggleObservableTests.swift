@@ -164,8 +164,8 @@ final class ToggleObservableTests: XCTestCase {
         wait(for: [rawValueExpectation, valueExpectation], timeout: 5.0)
     }
     
-    func test_numericalObservable() throws {
-        let variable = "numerical_toggle"
+    func test_numericObservable() throws {
+        let variable = "numeric_toggle"
         let toggleObservable = ToggleObservable(manager: toggleManager, variable: variable)
         
         let valueExpectation = self.expectation(description: #function)

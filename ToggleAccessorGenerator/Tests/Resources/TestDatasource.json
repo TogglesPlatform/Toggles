@@ -9,7 +9,7 @@
       "int": 42
     },
     {
-      "variable": "numerical_toggle",
+      "variable": "numeric_toggle",
       "number": 3.1416
     },
     {
@@ -31,9 +31,9 @@
       "propertyName": "userDefinedIntegerToggle"
     },
     {
-      "variable": "numerical_toggle_2",
+      "variable": "numeric_toggle_2",
       "number": 1.618,
-      "propertyName": "userDefinedNumericalToggle"
+      "propertyName": "userDefinedNumericToggle"
     },
     {
       "variable": "string_toggle_2",

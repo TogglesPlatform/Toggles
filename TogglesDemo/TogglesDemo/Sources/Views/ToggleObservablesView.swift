@@ -12,14 +12,14 @@ The view will show the values updating when overrides or new configurations are 
     
     @ObservedObject var booleanObservable: ToggleObservable
     @ObservedObject var intObservable: ToggleObservable
-    @ObservedObject var numericalObservable: ToggleObservable
+    @ObservedObject var numericObservable: ToggleObservable
     @ObservedObject var stringObservable: ToggleObservable
     @ObservedObject var secureObservable: ToggleObservable
 
     init(manager: ToggleManager) {
         self.booleanObservable = ToggleObservable(manager: manager, variable: Constant.booleanToggle)
         self.intObservable = ToggleObservable(manager: manager, variable: Constant.integerToggle)
-        self.numericalObservable = ToggleObservable(manager: manager, variable: Constant.numericalToggle)
+        self.numericObservable = ToggleObservable(manager: manager, variable: Constant.numericToggle)
         self.stringObservable = ToggleObservable(manager: manager, variable: Constant.stringToggle)
         self.secureObservable = ToggleObservable(manager: manager, variable: Constant.encryptedToggle)
     }
@@ -44,7 +44,7 @@ The view will show the values updating when overrides or new configurations are 
                         Text(Constant.integerToggle)
                     }
                     HStack {
-                        Text(Constant.numericalToggle)
+                        Text(Constant.numericToggle)
                     }
                     HStack {
                         Text(Constant.stringToggle)
@@ -61,7 +61,7 @@ The view will show the values updating when overrides or new configurations are 
                         Text(String(intObservable.intValue!))
                     }
                     HStack {
-                        Text(String(numericalObservable.numberValue!))
+                        Text(String(numericObservable.numberValue!))
                     }
                     HStack {
                         Text(stringObservable.stringValue!)

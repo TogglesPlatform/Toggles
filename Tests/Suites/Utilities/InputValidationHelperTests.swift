@@ -38,13 +38,13 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_inputValidNumberTrue() throws {
-        let toggle = factory.numericalEmptyMetadataToggle(3.1416)
+        let toggle = factory.numericEmptyMetadataToggle(3.1416)
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertTrue(inputValidationHelper.isInputValid("30.0"))
     }
     
     func test_inputValidNumberFalse() throws {
-        let toggle = factory.numericalEmptyMetadataToggle(3.1416)
+        let toggle = factory.numericEmptyMetadataToggle(3.1416)
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertFalse(inputValidationHelper.isInputValid("30.0w"))
     }
@@ -77,7 +77,7 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_overridingValueNumber() throws {
-        let toggle = factory.numericalEmptyMetadataToggle(3.1416)
+        let toggle = factory.numericEmptyMetadataToggle(3.1416)
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertEqual(inputValidationHelper.overridingValue(for: "108.12"), .number(108.12))
         XCTAssertEqual(inputValidationHelper.overridingValue(for: "invalid"), .number(0.0))
@@ -109,7 +109,7 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_keyboardTypeNumber() throws {
-        let toggle = factory.numericalEmptyMetadataToggle(3.1416)
+        let toggle = factory.numericEmptyMetadataToggle(3.1416)
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertEqual(inputValidationHelper.keyboardType, .decimalPad)
     }
@@ -140,7 +140,7 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_isBooleanToggleNumber() throws {
-        let toggle = factory.numericalEmptyMetadataToggle(3.1416)
+        let toggle = factory.numericEmptyMetadataToggle(3.1416)
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertFalse(inputValidationHelper.isBooleanToggle)
     }
@@ -170,7 +170,7 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_toggleNeedsValidationNumber() throws {
-        let toggle = factory.numericalEmptyMetadataToggle(3.1416)
+        let toggle = factory.numericEmptyMetadataToggle(3.1416)
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertTrue(inputValidationHelper.toggleNeedsValidation)
     }
