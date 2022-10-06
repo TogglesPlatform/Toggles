@@ -7,7 +7,9 @@ let package = Package(
     name: "Toggles",
     platforms: [
         .iOS(.v15),
-        .macOS(.v12)
+        .macOS(.v12),
+        .watchOS(.v7),
+        .tvOS(.v15)
     ],
     products: [
         .library(
