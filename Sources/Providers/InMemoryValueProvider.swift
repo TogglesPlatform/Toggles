@@ -2,12 +2,17 @@
 
 import Foundation
 
+/// Mutable value provider that stores toggles in memory.
+/// Alterations to toggles are not persisted.
 final public class InMemoryValueProvider {
     
     public var name: String = "InMemory"
     
     private var storage: [Variable: Value]
     
+    /// The default initializer.
+    ///
+    /// - Parameter datasource: The toggles datasource in the form of dictionary of `Variable`s and `Value`s.
     public init(datasource: [Variable: Value] = [Variable: Value]()) {
         self.storage = datasource
     }

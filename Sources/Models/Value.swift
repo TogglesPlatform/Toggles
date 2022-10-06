@@ -2,6 +2,7 @@
 
 import Foundation
 
+/// Value associated with a toggle.
 public enum Value: Equatable, Codable {
     case bool(Bool)
     case int(Int)

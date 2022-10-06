@@ -4,6 +4,7 @@ import Foundation
 
 extension ToggleManager {
     
+    /// Set of variables of overridden toggles if a mutable value provider was provided during initialization, empty set otherwise.
     public var overriddedVariables: Set<Variable> {
         queue.sync {
             guard let mutableValueProvider = mutableValueProvider else { return [] }
@@ -11,6 +12,8 @@ extension ToggleManager {
         }
     }
     
+    /// Removes all overridden toggles in the mutable value provider, if one was provided during initialization.
+    /// This method also clears the cache.
     @discardableResult
     public func removeOverrides() -> Set<Variable> {
         queue.sync(flags: .barrier) {

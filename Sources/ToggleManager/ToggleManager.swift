@@ -3,6 +3,7 @@
 import Combine
 import Foundation
 
+/// Thread-safe facade to interface with toggles.
 final public class ToggleManager: ObservableObject {
     
     var mutableValueProvider: MutableValueProvider?
@@ -15,8 +16,17 @@ final public class ToggleManager: ObservableObject {
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
     
     @Published var hasOverrides: Bool = false
+    
+    /// Set to `true` to enable console logging on CRUD operations.
     public var verbose: Bool = false
     
+    /// The default initializer.
+    ///
+    /// - Parameters:
+    ///   - mutableValueProvider: An optional mutable provider used for setting and deleting toggle values. If provided, this provider is the one with highest priority when searching for a toggle. If not provided, the ToggleManager has a read-only setup.
+    ///   - valueProviders: An array or providers that can retrieve toggle values. The providers must be listed in order of priority.
+    ///   - datasourceUrl: The url to a file containing the datasource used the base. If no mutableValueProvider and no valueProviders are provided, the manager will always return the values from the datasource.
+    ///   - cipherConfiguration: An optional configuration that needs to be provided in the case any toggle is secure (meaning it needs encryption and decryption).
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 valueProviders: [ValueProvider] = [],
                 datasourceUrl: URL,
@@ -33,6 +43,10 @@ final public class ToggleManager: ObservableObject {
 
 extension ToggleManager {
     
+    /// Retrieves the value for a toggle and caches it for subsequents retrievals.
+    ///
+    /// - Parameter variable: The variable of the toggle to retrieve the value for.
+    /// - Returns: The value of the toggle.
     public func value(for variable: Variable) -> Value {
         queue.sync {
             let value = nonSyncValue(for: variable)
@@ -62,6 +76,11 @@ extension ToggleManager {
 
 extension ToggleManager {
     
+    /// Sets the value for a toggle and caches it for subsequents retrievals.
+    ///
+    /// - Parameters:
+    ///   - value: The value to set for the toggle.
+    ///   - variable: The variable of the toggle to set the value to.
     public func set(_ value: Value, for variable: Variable) {
         log("Setting value (\(value) for variable \(variable).")
         queue.async(flags: .barrier) {
@@ -79,6 +98,9 @@ extension ToggleManager {
         }
     }
     
+    /// Deletes a toggle and removes it from the cache.
+    ///
+    /// - Parameter variable: The variable of the toggle to delete.
     public func delete(_ variable: Variable) {
         log("Deleting variable \(variable).")
         queue.async(flags: .barrier) {

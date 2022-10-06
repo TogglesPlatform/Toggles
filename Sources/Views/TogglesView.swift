@@ -2,6 +2,7 @@
 
 import SwiftUI
 
+/// A view showcasing all toggles from a provided datasource.
 public struct TogglesView: View {
     
     private struct ToggleRow: View {
@@ -43,6 +44,11 @@ public struct TogglesView: View {
     @State private var presentDeleteAlert = false
     @State private var overriddenVariables: Set<Variable> = []
 
+    /// The default initializer for the view.
+    /// 
+    /// - Parameters:
+    ///   - manager: The manager used to retrieve and update the toggles. The manager should be setup using the same datasource provded to this view.
+    ///   - datasourceUul: The url to the datasource.
     public init(manager: ToggleManager, datasourceUrl: URL) {
         self.manager = manager
         self.datasourceUrl = datasourceUrl
