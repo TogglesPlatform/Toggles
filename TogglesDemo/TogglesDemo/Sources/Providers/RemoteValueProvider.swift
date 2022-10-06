@@ -3,7 +3,7 @@
 import Foundation
 import Toggles
 
-public class RemoteValueProvider: OptionalValueProvider {
+public class RemoteValueProvider: ValueProvider {
     
     public var name: String = "Remote (demo)"
     

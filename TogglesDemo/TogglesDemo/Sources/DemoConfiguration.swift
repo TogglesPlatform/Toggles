@@ -19,7 +19,7 @@ class DemoConfiguration {
     
     let datasourceUrl: URL
     let remoteValueProvider: RemoteValueProvider
-    let localValueProvider: OptionalValueProvider
+    let localValueProvider: ValueProvider
     let cipherConfiguration: CipherConfiguration
     let manager: ToggleManager
     

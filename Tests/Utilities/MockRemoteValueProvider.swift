@@ -3,7 +3,7 @@
 import Foundation
 @testable import Toggles
 
-final class MockRemoteValueProvider: OptionalValueProvider {
+final class MockRemoteValueProvider: ValueProvider {
     
     var name: String = "Remote (mock)"
     

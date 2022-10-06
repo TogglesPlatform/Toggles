@@ -19,7 +19,7 @@ final public class LocalValueProvider {
     }
 }
 
-extension LocalValueProvider: OptionalValueProvider {
+extension LocalValueProvider: ValueProvider {
     
     public func value(for variable: Variable) -> Value? {
         toggles[variable]

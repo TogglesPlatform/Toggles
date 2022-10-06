@@ -6,7 +6,7 @@ import Foundation
 final public class ToggleManager: ObservableObject {
     
     var mutableValueProvider: MutableValueProvider?
-    var valueProviders: [OptionalValueProvider]
+    var valueProviders: [ValueProvider]
     var defaultValueProvider: DefaultValueProvider
     var cipherConfiguration: CipherConfiguration?
     
@@ -18,7 +18,7 @@ final public class ToggleManager: ObservableObject {
     public var verbose: Bool = false
     
     public init(mutableValueProvider: MutableValueProvider? = nil,
-                valueProviders: [OptionalValueProvider] = [],
+                valueProviders: [ValueProvider] = [],
                 datasourceUrl: URL,
                 cipherConfiguration: CipherConfiguration? = nil) throws {
         self.mutableValueProvider = mutableValueProvider

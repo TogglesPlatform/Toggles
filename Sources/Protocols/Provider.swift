@@ -2,12 +2,12 @@
 
 import Foundation
 
-public protocol OptionalValueProvider {
+public protocol ValueProvider {
     var name: String { get }
     func value(for variable: Variable) -> Value?
 }
 
-public protocol MutableValueProvider: OptionalValueProvider {
+public protocol MutableValueProvider: ValueProvider {
     func set(_ value: Value, for variable: Variable)
     func delete(_ variable: Variable)
     func deleteAll()

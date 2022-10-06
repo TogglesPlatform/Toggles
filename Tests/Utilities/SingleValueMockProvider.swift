@@ -3,7 +3,7 @@
 import Foundation
 import Toggles
 
-class MockSingleValueProvider: OptionalValueProvider {
+class MockSingleValueProvider: ValueProvider {
     
     var name: String = "SingleValue (mock)"
     
