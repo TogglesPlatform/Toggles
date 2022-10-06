@@ -7,7 +7,7 @@ final public class ToggleManager: ObservableObject {
     
     var mutableValueProvider: MutableValueProvider?
     var valueProviders: [OptionalValueProvider]
-    var defaultValueProvider: ValueProvider
+    var defaultValueProvider: DefaultValueProvider
     var cipherConfiguration: CipherConfiguration?
     
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)

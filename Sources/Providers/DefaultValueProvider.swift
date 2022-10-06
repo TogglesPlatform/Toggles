@@ -4,7 +4,7 @@ import Foundation
 
 final class DefaultValueProvider {
     
-    public var name: String = "Default"
+    var name: String = "Default"
     
     private let toggles: [Variable: Value]
     
@@ -17,9 +17,6 @@ final class DefaultValueProvider {
             .mapValues { $0.first! }
             .mapValues { $0.value }
     }
-}
-
-extension DefaultValueProvider: ValueProvider {
     
     func value(for variable: Variable) -> Value {
         guard let value = toggles[variable] else {

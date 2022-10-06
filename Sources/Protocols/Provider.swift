@@ -2,11 +2,6 @@
 
 import Foundation
 
-protocol ValueProvider {
-    var name: String { get }
-    func value(for variable: Variable) -> Value
-}
-
 public protocol OptionalValueProvider {
     var name: String { get }
     func value(for variable: Variable) -> Value?
