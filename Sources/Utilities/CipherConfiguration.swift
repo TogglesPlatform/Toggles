@@ -6,13 +6,13 @@ public enum Algorithm: String {
     case chaCha20Poly1305
 }
 
-public typealias Key = String
+public typealias CipherKey = String
 
 public struct CipherConfiguration {
     let algorithm: Algorithm
-    let key: Key
+    let key: CipherKey
     
-    public init(algorithm: Algorithm, key: Key) {
+    public init(algorithm: Algorithm, key: CipherKey) {
         self.algorithm = algorithm
         self.key = key
     }
