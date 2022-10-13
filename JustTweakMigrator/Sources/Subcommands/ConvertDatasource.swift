@@ -17,8 +17,7 @@ struct ConvertDatasource: ParsableCommand {
         let tweaksDatasource = try JSONDecoder().decode(TweaksDatasource.self, from: data)
         print(tweaksDatasource)
         
-        let converter = Converter()
-        let togglesDatasource = try converter.convert(tweaksDatasource: tweaksDatasource)
+        let togglesDatasource = try Converter.convert(tweaksDatasource: tweaksDatasource)
         print(togglesDatasource)
         
         let togglesDatasourceUrl = URL(fileURLWithPath: outputDatasourceFilePath)

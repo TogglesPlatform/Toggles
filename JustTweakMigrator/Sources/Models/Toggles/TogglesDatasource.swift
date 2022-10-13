@@ -2,6 +2,6 @@
 
 import Foundation
 
-struct TogglesDatasource: Encodable {
+struct TogglesDatasource: Encodable, Equatable {
     let toggles: [Toggle]
 }

@@ -21,6 +21,6 @@ extension TweaksDatasource {
             }
         }
         
-        return fullTweaks
+        return fullTweaks.sorted()
     }
 }

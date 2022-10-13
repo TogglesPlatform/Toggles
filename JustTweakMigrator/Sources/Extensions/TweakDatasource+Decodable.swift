@@ -8,7 +8,7 @@ extension TweaksDatasource: Decodable {
         case missingValue
     }
     
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.singleValueContainer()
         tweaks = try values.decode([TweakFeature: [TweakVariable: Tweak]].self)
     }

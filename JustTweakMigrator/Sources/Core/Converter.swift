@@ -2,13 +2,13 @@
 
 import Foundation
 
-class Converter {
+final class Converter {
     
     enum ConverterError: Error {
         case invalidValue
     }
     
-    func convert(tweaksDatasource: TweaksDatasource) throws -> TogglesDatasource {
+    static func convert(tweaksDatasource: TweaksDatasource) throws -> TogglesDatasource {
         let toggles = try tweaksDatasource.fullTweaks.map {
             let toggleValue: ToggleValue
             switch $0.value {
@@ -33,7 +33,6 @@ class Converter {
             return Toggle(variable: $0.variable, value: toggleValue, metadata: toggleMetadata)
         }
         try TogglesValidator.validate(toggles)
-        let sortedToggles = toggles.sorted()
-        return TogglesDatasource(toggles: sortedToggles)
+        return TogglesDatasource(toggles: toggles.sorted())
     }
 }

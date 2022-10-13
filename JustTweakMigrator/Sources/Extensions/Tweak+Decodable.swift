@@ -17,7 +17,7 @@ extension Tweak: Decodable {
         case generatedPropertyName = "GeneratedPropertyName"
     }
     
-    public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.title = try values.decode(String.self, forKey: .title)
         self.description = try values.decode(String.self, forKey: .description)
