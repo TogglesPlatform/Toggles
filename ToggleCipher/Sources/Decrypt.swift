@@ -21,8 +21,8 @@ struct Decrypt: ParsableCommand {
     mutating func run() throws {
         switch algorithm {
         case .chaCha20Poly1305:
-            let cypher = ChaCha20Poly1305(key: key)
-            let decryptedValue = try cypher.decrypt(value)
+            let cipher = ChaCha20Poly1305(key: key)
+            let decryptedValue = try cipher.decrypt(value)
             print("Encrypted value: \"\(value)\"")
             print("Decrypted value: \"\(decryptedValue)\"")
         }

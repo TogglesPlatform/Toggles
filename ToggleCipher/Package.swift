@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "ToggleCypher",
+    name: "ToggleCipher",
     platforms: [
         .macOS(.v12)
     ],
