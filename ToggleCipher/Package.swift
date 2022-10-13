@@ -6,12 +6,10 @@ import PackageDescription
 let package = Package(
     name: "ToggleCypher",
     platforms: [
-        .iOS(.v15),
         .macOS(.v12)
     ],
     products: [
-        .executable(name: "ToggleCipher",
-                    targets: ["ToggleCipher"])
+        .executable(name: "ToggleCipher", targets: ["ToggleCipher"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.0.0"))
