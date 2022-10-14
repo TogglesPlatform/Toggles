@@ -1,0 +1,78 @@
+{
+  "toggles" : [
+    {
+      "int" : 42,
+      "metadata" : {
+        "description" : "Definitive answer",
+        "group" : "General",
+        "propertyName" : "definitiveAnswer"
+      },
+      "variable" : "answer_to_the_universe"
+    },
+    {
+      "bool" : true,
+      "metadata" : {
+        "description" : "Display Green View",
+        "group" : "UI Customization"
+      },
+      "variable" : "display_green_view"
+    },
+    {
+      "bool" : false,
+      "metadata" : {
+        "description" : "Display Red View",
+        "group" : "UI Customization"
+      },
+      "variable" : "display_red_view"
+    },
+    {
+      "bool" : false,
+      "metadata" : {
+        "description" : "Display Yellow View",
+        "group" : "UI Customization"
+      },
+      "variable" : "display_yellow_view"
+    },
+    {
+      "metadata" : {
+        "description" : "Encrypted definitive answer",
+        "group" : "General",
+        "propertyName" : "definitiveAnswerEncrypted"
+      },
+      "secure" : "24 ton yletinifeD",
+      "variable" : "encrypted_answer_to_the_universe"
+    },
+    {
+      "bool" : false,
+      "metadata" : {
+        "description" : "Greet on app launch",
+        "group" : "General"
+      },
+      "variable" : "greet_on_app_did_become_active"
+    },
+    {
+      "metadata" : {
+        "description" : "Label Text",
+        "group" : "UI Customization"
+      },
+      "string" : "Test value",
+      "variable" : "label_text"
+    },
+    {
+      "metadata" : {
+        "description" : "Red View Alpha Component",
+        "group" : "UI Customization"
+      },
+      "number" : 0.80000000000000004,
+      "variable" : "red_view_alpha_component"
+    },
+    {
+      "bool" : true,
+      "metadata" : {
+        "description" : "Tap to change views color",
+        "group" : "General"
+      },
+      "variable" : "tap_to_change_color_enabled"
+    }
+  ]
+}
