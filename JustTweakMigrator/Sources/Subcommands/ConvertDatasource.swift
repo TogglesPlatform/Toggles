@@ -15,10 +15,20 @@ struct ConvertDatasource: ParsableCommand {
         let tweaksDatasourceUrl = URL(fileURLWithPath: inputDatasourceFilePath)
         let data = try Data(contentsOf: tweaksDatasourceUrl)
         let tweaksDatasource = try JSONDecoder().decode(TweaksDatasource.self, from: data)
-        print(tweaksDatasource)
+        
+        print("*** Converting Tweaks Datasource ***")
+        for (_, togglesByVariable) in tweaksDatasource.tweaks {
+            for (variable, toggle) in togglesByVariable {
+                print(variable + ": " + String(describing: toggle.value))
+            }
+        }
         
         let togglesDatasource = try Converter.convert(tweaksDatasource: tweaksDatasource)
-        print(togglesDatasource)
+        print("\n")
+        print("*** Generated Toggles Datasource ***")
+        for toggle in togglesDatasource.toggles {
+            print(toggle.variable + ": " + String(describing: toggle.value))
+        }
         
         let togglesDatasourceUrl = URL(fileURLWithPath: outputDatasourceFilePath)
         let encoder = JSONEncoder()
