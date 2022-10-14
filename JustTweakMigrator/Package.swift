@@ -24,6 +24,9 @@ let package = Package(
         .testTarget(
             name: "JustTweakMigratorTests",
             dependencies: ["JustTweakMigrator"],
-            path: "Tests")
+            path: "Tests",
+            resources: [
+                .process("Resources")
+            ])
     ]
 )

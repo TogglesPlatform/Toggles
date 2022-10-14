@@ -11,6 +11,12 @@ struct Toggle {
 extension Toggle: Comparable {
     
     static func < (lhs: Toggle, rhs: Toggle) -> Bool {
-        lhs.variable < rhs.variable
+        if lhs.variable != rhs.variable {
+            return lhs.variable < rhs.variable
+        }
+        if lhs.value != rhs.value {
+            return lhs.value < rhs.value
+        }
+        return lhs.metadata < rhs.metadata
     }
 }
