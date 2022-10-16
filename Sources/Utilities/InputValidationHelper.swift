@@ -1,6 +1,8 @@
 //  InputValidationHelper.swift
 
+#if os(iOS)
 import UIKit
+#endif
 
 struct InputValidationHelper {
     
