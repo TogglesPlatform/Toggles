@@ -1,0 +1,45 @@
+name: JustTweakMigrator
+
+on:
+  push:
+    branches: [ main, github-actions ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  test:
+    name: Run tests on ${{ matrix.destination }}
+    runs-on: ${{ matrix.macos }} 
+    strategy:
+      fail-fast: false
+      matrix:
+        macos: ['macos-12']
+        xcode: ['14.0.1']
+        command: ['test']
+        scheme: ['JustTweakMigrator']
+        destination: ['platform=macOS']
+    steps:
+    - name: Switch xcode to ${{ matrix.xcode }}
+      uses: maxim-lobanov/setup-xcode@v1.5.0
+      with:
+        xcode-version: ${{ matrix.xcode }}
+    - name: Show macOS version (${{ matrix.macos }})
+      run: sw_vers
+    - name: Code Checkout
+      uses: actions/checkout@v2
+    - name: Check xcodebuild version
+      run: xcodebuild -version
+    - name: Check xcode embedded SDKs
+      run: xcodebuild -showsdks
+    - name: Show buildable schemes
+      working-directory: ./JustTweakMigrator
+      run: xcodebuild -list
+    - name: Show eligible build destinations for ${{ matrix.scheme }}
+      working-directory: ./JustTweakMigrator
+      run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
+    - name: Run tests for platform ${{ matrix.platform }}
+      working-directory: ./JustTweakMigrator
+      run: xcodebuild ${{ matrix.command }} -scheme ${{ matrix.scheme }} -destination "${{ matrix.destination }}"
