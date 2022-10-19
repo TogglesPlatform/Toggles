@@ -25,7 +25,7 @@ extension TestToggleAccessor {
     }
 
     public var numericToggle: Double {
-        get { manager.value(for: TestConstants.numericToggle).doubleValue! }
+        get { manager.value(for: TestConstants.numericToggle).numberValue! }
         set { manager.set(.number(newValue), for: TestConstants.numericToggle) }
     }
 
@@ -50,7 +50,7 @@ extension TestToggleAccessor {
     }
 
     public var userDefinedNumericToggle: Double {
-        get { manager.value(for: TestConstants.numericToggle2).doubleValue! }
+        get { manager.value(for: TestConstants.numericToggle2).numberValue! }
         set { manager.set(.number(newValue), for: TestConstants.numericToggle2) }
     }
 
