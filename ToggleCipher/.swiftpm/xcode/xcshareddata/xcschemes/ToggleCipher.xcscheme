@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1340"
+   LastUpgradeVersion = "1400"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToggleCypher"
-               BuildableName = "ToggleCypher"
-               BlueprintName = "ToggleCypher"
+               BlueprintIdentifier = "ToggleCipher"
+               BuildableName = "ToggleCipher"
+               BlueprintName = "ToggleCipher"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ToggleCipherTests"
+               BuildableName = "ToggleCipherTests"
+               BlueprintName = "ToggleCipherTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToggleCypherTests"
-               BuildableName = "ToggleCypherTests"
-               BlueprintName = "ToggleCypherTests"
+               BlueprintIdentifier = "ToggleCipherTests"
+               BuildableName = "ToggleCipherTests"
+               BlueprintName = "ToggleCipherTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -49,14 +63,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      viewDebuggingEnabled = "No">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ToggleCypher"
-            BuildableName = "ToggleCypher"
-            BlueprintName = "ToggleCypher"
+            BlueprintIdentifier = "ToggleCipher"
+            BuildableName = "ToggleCipher"
+            BlueprintName = "ToggleCipher"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -67,7 +82,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "decrypt"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--algorithm chaChaPoly"
@@ -83,7 +98,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--value &quot;YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK&quot;"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
@@ -97,9 +112,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ToggleCypher"
-            BuildableName = "ToggleCypher"
-            BlueprintName = "ToggleCypher"
+            BlueprintIdentifier = "ToggleCipher"
+            BuildableName = "ToggleCipher"
+            BlueprintName = "ToggleCipher"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
