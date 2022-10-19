@@ -1,0 +1,43 @@
+name: ToggleAccessorGenerator
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  test:
+    name: Run tests on ${{ matrix.destination }}
+    runs-on: ${{ matrix.macos }} 
+    strategy:
+      fail-fast: false
+      matrix:
+        macos: ['macos-12']
+        xcode: ['14.0.1']
+        command: ['test']
+        scheme: ['ToggleAccessorGenerator']
+        destination: ['platform=macOS']
+    steps:
+    - name: Switch xcode to ${{ matrix.xcode }}
+      run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+    - name: Show macOS version (${{ matrix.macos }})
+      run: sw_vers
+    - name: Code Checkout
+      uses: actions/checkout@v2
+    - name: Check xcodebuild version
+      run: xcodebuild -version
+    - name: Check xcode embedded SDKs
+      run: xcodebuild -showsdks
+    - name: Show buildable schemes
+      working-directory: ./ToggleAccessorGenerator
+      run: xcodebuild -list
+    - name: Show eligible build destinations for ${{ matrix.scheme }}
+      working-directory: ./ToggleAccessorGenerator
+      run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
+    - name: Run tests for platform ${{ matrix.platform }}
+      working-directory: ./ToggleAccessorGenerator
+      run: xcodebuild ${{ matrix.command }} -scheme ${{ matrix.scheme }} -destination "${{ matrix.destination }}"
