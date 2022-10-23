@@ -61,15 +61,41 @@ let welcomeText = manager.value(for: "welcome_text").stringValue
 
 There's a lot more to it: from code generation to observing toggle value changes.
 
-Please refer to the DocC documentation and articles provided for more information.
-
-## Demo app
-
-A demo app showcasing all the features is available and we encourage the reader to play with it. 
-
-![Toggles view in Demo app](Sources/Toggles.docc/Resources/DemoApp_iPad.png)
+Please refer to the DocC documentation and articles provided and inspect the demo app for more information.
 
 
-## License
+## Topics
 
-Toggles is released under the Apache 2 license. See [LICENSE](LICENSE) for details.
+### Articles
+
+- <doc:Core>
+- <doc:UI>
+- <doc:Tools>
+
+### Models
+
+- ``Toggle``
+- ``Datasource``
+- ``Metadata``
+- ``Variable``
+- ``Value``
+
+### Providers
+
+- ``ValueProvider``
+- ``MutableValueProvider``
+- ``LocalValueProvider``
+- ``InMemoryValueProvider``
+- ``PersistentValueProvider``
+
+### Facades
+
+- ``ToggleManager``
+
+### Ciphering
+
+- ``CipherConfiguration``
+
+### Observables
+
+- ``ToggleObservable``
