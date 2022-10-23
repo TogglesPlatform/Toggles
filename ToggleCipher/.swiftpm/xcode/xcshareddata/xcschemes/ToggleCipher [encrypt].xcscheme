@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1340"
+   LastUpgradeVersion = "1400"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToogleAccessorGenerator"
-               BuildableName = "ToogleAccessorGenerator"
-               BlueprintName = "ToogleAccessorGenerator"
+               BlueprintIdentifier = "ToggleCipher"
+               BuildableName = "ToggleCipher"
+               BlueprintName = "ToggleCipher"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,23 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToogleAccessorGeneratorTests"
-               BuildableName = "ToogleAccessorGeneratorTests"
-               BlueprintName = "ToogleAccessorGeneratorTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToogleAccessorGenerator_ToogleAccessorGeneratorTests"
-               BuildableName = "ToogleAccessorGenerator_ToogleAccessorGeneratorTests"
-               BlueprintName = "ToogleAccessorGenerator_ToogleAccessorGeneratorTests"
+               BlueprintIdentifier = "ToggleCipherTests"
+               BuildableName = "ToggleCipherTests"
+               BlueprintName = "ToggleCipherTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -54,16 +40,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToogleAccessorGeneratorTests"
-               BuildableName = "ToogleAccessorGeneratorTests"
-               BlueprintName = "ToogleAccessorGeneratorTests"
+               BlueprintIdentifier = "ToggleCipherTests"
+               BuildableName = "ToggleCipherTests"
+               BlueprintName = "ToggleCipherTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -78,40 +63,33 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      viewDebuggingEnabled = "No">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ToogleAccessorGenerator"
-            BuildableName = "ToogleAccessorGenerator"
-            BlueprintName = "ToogleAccessorGenerator"
+            BlueprintIdentifier = "ToggleCipher"
+            BuildableName = "ToggleCipher"
+            BlueprintName = "ToggleCipher"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--datasource-path &lt;DATASOURCE_PATH&gt;"
+            argument = "encrypt"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--accessor-class-name ToggleAccessor"
+            argument = "--algorithm chaChaPoly"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--constants-enum-name Constants"
+            argument = "--key &quot;AyUcYw-qWebYF-z0nWZ4&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--accessor-template-path &lt;ACCESSOR_TEMPLATE_PATH&gt;"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--constants-template-path &lt;CONSTANTS_TEMPLATE_PATH&gt;"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--output-path &lt;OUTPUT_PATH&gt;"
+            argument = "--value &quot;MyAPIKeyValue&quot;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -126,9 +104,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ToogleAccessorGenerator"
-            BuildableName = "ToogleAccessorGenerator"
-            BlueprintName = "ToogleAccessorGenerator"
+            BlueprintIdentifier = "ToggleCipher"
+            BuildableName = "ToggleCipher"
+            BlueprintName = "ToggleCipher"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>

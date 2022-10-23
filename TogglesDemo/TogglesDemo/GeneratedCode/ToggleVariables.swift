@@ -1,8 +1,8 @@
-//  Constants.swift
+//  ToggleVariables.swift
 
 import Foundation
 
-public struct Constants {
+public struct ToggleVariables {
 
     public static let booleanToggle = "boolean_toggle"
 
