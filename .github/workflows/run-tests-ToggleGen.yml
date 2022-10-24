@@ -1,4 +1,4 @@
-name: ToggleAccessorGenerator
+name: ToggleGen
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         macos: ['macos-12']
         xcode: ['14.0.1']
         command: ['test']
-        scheme: ['ToggleAccessorGenerator']
+        scheme: ['ToggleGen']
         destination: ['platform=macOS']
     steps:
     - name: Switch xcode to ${{ matrix.xcode }}
@@ -35,11 +35,11 @@ jobs:
     - name: Check xcode embedded SDKs
       run: xcodebuild -showsdks
     - name: Show buildable schemes
-      working-directory: ./ToggleAccessorGenerator
+      working-directory: ./ToggleGen
       run: xcodebuild -list
     - name: Show eligible build destinations for ${{ matrix.scheme }}
-      working-directory: ./ToggleAccessorGenerator
+      working-directory: ./ToggleGen
       run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
     - name: Run tests for platform ${{ matrix.platform }}
-      working-directory: ./ToggleAccessorGenerator
+      working-directory: ./ToggleGen
       run: xcodebuild ${{ matrix.command }} -scheme ${{ matrix.scheme }} -destination "${{ matrix.destination }}"

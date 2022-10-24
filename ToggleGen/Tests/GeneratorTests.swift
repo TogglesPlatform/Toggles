@@ -1,7 +1,7 @@
 //  GeneratorTests.swift
 
 import XCTest
-@testable import ToggleAccessorGenerator
+@testable import ToggleGen
 
 final class GeneratorTests: XCTestCase {
 

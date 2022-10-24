@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "ToggleAccessorGenerator",
+    name: "ToggleGen",
     platforms: [
         .iOS(.v15),
         .macOS(.v12)
     ],
     products: [
-        .executable(name: "ToggleAccessorGenerator",
-                    targets: ["ToggleAccessorGenerator"])
+        .executable(name: "ToggleGen",
+                    targets: ["ToggleGen"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.0.0")),
@@ -19,15 +19,15 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "ToggleAccessorGenerator",
+            name: "ToggleGen",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Stencil", package: "Stencil"),
             ],
             path: "Sources"),
         .testTarget(
-            name: "ToggleAccessorGeneratorTests",
-            dependencies: ["ToggleAccessorGenerator"],
+            name: "ToggleGenTests",
+            dependencies: ["ToggleGen"],
             path: "Tests",
             resources: [.process("Resources")])
     ]

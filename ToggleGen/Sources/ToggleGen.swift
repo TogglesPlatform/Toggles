@@ -1,10 +1,10 @@
-//  ToggleAccessorGenerator.swift
+//  ToggleGen.swift
 
 import ArgumentParser
 import Foundation
 
 @main
-struct ToggleAccessorGenerator: ParsableCommand {
+struct ToggleGen: ParsableCommand {
     
     @Option(name: .long, help: "The path of the template to use to generate the variables.")
     var variablesTemplatePath: String
