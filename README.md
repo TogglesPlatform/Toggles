@@ -61,7 +61,7 @@ let welcomeText = manager.value(for: "welcome_text").stringValue
 
 There's a lot more to it: from code generation to observing toggle value changes.
 
-Please refer to the DocC documentation and articles provided for more information.
+Please refer to the [DocC documentation](https://albertodebortoli.github.io/Toggles/documentation/toggles/) and articles provided for more information.
 
 ## Demo app
 
