@@ -21,7 +21,7 @@ class Generator {
         case className
         case enumName
         case accessorInfos
-        case constants
+        case variables
     }
     
     enum LoaderError: Error, Equatable {
@@ -37,22 +37,22 @@ class Generator {
         try validate()
     }
     
-    func generateConstants(constantsTemplatePath: String, constantsEnumName: String) throws -> String {
+    func generateVariables(variablesTemplatePath: String, variablesEnumName: String) throws -> String {
         let templater = Templater()
-        let constantsTemplateUrl = URL(fileURLWithPath: constantsTemplatePath)
-        let constantsContext: [String: Any] = [
-            Constants.enumName.rawValue: constantsEnumName,
-            Constants.constants.rawValue: loadConstants()
+        let variablesTemplateUrl = URL(fileURLWithPath: variablesTemplatePath)
+        let variablesContext: [String: Any] = [
+            Constants.enumName.rawValue: variablesEnumName,
+            Constants.variables.rawValue: loadVariables()
         ]
-        return try templater.renderTemplate(at: constantsTemplateUrl, with: constantsContext)
+        return try templater.renderTemplate(at: variablesTemplateUrl, with: variablesContext)
     }
     
-    func generateAccessor(accessorTemplatePath: String, constantsEnumName: String, accessorClassName: String) throws -> String {
+    func generateAccessor(accessorTemplatePath: String, variablesEnumName: String, accessorClassName: String) throws -> String {
         let templater = Templater()
         let accessorTemplateUrl = URL(fileURLWithPath: accessorTemplatePath)
         let accessorContext: [String: Any] = [
             Constants.className.rawValue: accessorClassName,
-            Constants.enumName.rawValue: constantsEnumName,
+            Constants.enumName.rawValue: variablesEnumName,
             Constants.accessorInfos.rawValue: loadAccessorInfos()
         ]
         return try templater.renderTemplate(at: accessorTemplateUrl, with: accessorContext)
@@ -75,16 +75,16 @@ class Generator {
         }
     }
     
-    private func loadConstants() -> [Constant] {
+    private func loadVariables() -> [Constant] {
         datasource.toggles.map {
-            Constant(name: $0.variable.codeConstantValue,
+            Constant(name: $0.variable.codeVariableValue,
                      value: $0.variable)
         }
     }
     
     private func loadAccessorInfos() -> [AccessorInfo] {
         datasource.toggles.map { toggle in
-            let constant = Constant(name: toggle.variable.codeConstantValue,
+            let constant = Constant(name: toggle.variable.codeVariableValue,
                                     value: toggle.variable)
             return AccessorInfo(variable: toggle.variable,
                                 type: toggle.type,

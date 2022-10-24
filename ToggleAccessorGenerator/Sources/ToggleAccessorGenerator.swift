@@ -6,14 +6,14 @@ import Foundation
 @main
 struct ToggleAccessorGenerator: ParsableCommand {
     
-    @Option(name: .long, help: "The path of the template to use to generate the constants.")
-    var constantsTemplatePath: String
+    @Option(name: .long, help: "The path of the template to use to generate the variables.")
+    var variablesTemplatePath: String
     
     @Option(name: .long, help: "The path of the template to use to generate the accessor.")
     var accessorTemplatePath: String
     
-    @Option(name: .long, help: "The name of the constants enum to generate.")
-    var constantsEnumName: String
+    @Option(name: .long, help: "The name of the variables enum to generate.")
+    var variablesEnumName: String
     
     @Option(name: .long, help: "The name of the accessor class to generate.")
     var accessorClassName: String
@@ -27,15 +27,15 @@ struct ToggleAccessorGenerator: ParsableCommand {
     mutating func run() throws {
         let datasourceUrl = URL(fileURLWithPath: datasourcePath)
         let generator = try Generator(datasourceUrl: datasourceUrl)
-        let constantsContent = try generator.generateConstants(constantsTemplatePath: constantsTemplatePath,
-                                                               constantsEnumName: constantsEnumName)
+        let variablesContent = try generator.generateVariables(variablesTemplatePath: variablesTemplatePath,
+                                                               variablesEnumName: variablesEnumName)
         let accessorContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplatePath,
-                                                             constantsEnumName: constantsEnumName,
+                                                             variablesEnumName: variablesEnumName,
                                                              accessorClassName: accessorClassName)
         let writer = Writer()
-        try writer.saveConstants(constantsContent,
+        try writer.saveVariables(variablesContent,
                                  outputPath: outputPath,
-                                 constantsEnumName: constantsEnumName)
+                                 variablesEnumName: variablesEnumName)
         try writer.saveAccessor(accessorContent,
                                 outputPath: outputPath,
                                 accessorClassName: accessorClassName)

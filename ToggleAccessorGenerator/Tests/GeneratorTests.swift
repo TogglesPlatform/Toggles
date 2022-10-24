@@ -5,14 +5,14 @@ import XCTest
 
 final class GeneratorTests: XCTestCase {
 
-    func test_constantsContent() throws {
+    func test_variablesContent() throws {
         let datasourceUrl = Bundle.module.url(forResource: "TestDatasource", withExtension: "json")!
         let generator = try Generator(datasourceUrl: datasourceUrl)
-        let constantsTemplateUrl = Bundle.module.path(forResource: "Constants", ofType: "stencil")!
-        let generatedContent = try generator.generateConstants(constantsTemplatePath: constantsTemplateUrl,
-                                                               constantsEnumName: "TestConstants")
-        let constantsUrl = Bundle.module.url(forResource: "TestConstants", withExtension: "txt")!
-        let expectedContent = try String(contentsOf: constantsUrl)
+        let variablesTemplateUrl = Bundle.module.path(forResource: "Variables", ofType: "stencil")!
+        let generatedContent = try generator.generateVariables(variablesTemplatePath: variablesTemplateUrl,
+                                                               variablesEnumName: "TestVariables")
+        let variablesUrl = Bundle.module.url(forResource: "TestVariables", withExtension: "txt")!
+        let expectedContent = try String(contentsOf: variablesUrl)
         XCTAssertEqual(generatedContent, expectedContent)
     }
     
@@ -21,10 +21,10 @@ final class GeneratorTests: XCTestCase {
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let accessorTemplateUrl = Bundle.module.path(forResource: "Accessor", ofType: "stencil")!
         let generatedContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplateUrl,
-                                                              constantsEnumName: "TestConstants",
+                                                              variablesEnumName: "TestVariables",
                                                               accessorClassName: "TestToggleAccessor")
-        let constantsUrl = Bundle.module.url(forResource: "TestToggleAccessor", withExtension: "txt")!
-        let expectedContent = try String(contentsOf: constantsUrl)
+        let variablesUrl = Bundle.module.url(forResource: "TestToggleAccessor", withExtension: "txt")!
+        let expectedContent = try String(contentsOf: variablesUrl)
         XCTAssertEqual(generatedContent, expectedContent)
     }
     

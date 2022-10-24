@@ -11,7 +11,6 @@
 		D30641F728CC24660051BCBD /* RemoteValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F328CC24660051BCBD /* RemoteValueProvider.swift */; };
 		D30641F828CC24660051BCBD /* DemoConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F428CC24660051BCBD /* DemoConfiguration.swift */; };
 		D30641F928CC24660051BCBD /* TogglesDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30641F528CC24660051BCBD /* TogglesDemoApp.swift */; };
-		D31B3D8F28ECECB600BE5B81 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B3D8E28ECECB600BE5B81 /* Constants.swift */; };
 		D35966BE28E1B47A0068FD1A /* 10kEntriesDemoDatasource.json in Resources */ = {isa = PBXBuildFile; fileRef = D35966BD28E1B47A0068FD1A /* 10kEntriesDemoDatasource.json */; };
 		D36232C2290605540090D56F /* ToggleVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36232C1290605540090D56F /* ToggleVariables.swift */; };
 		D365B53128EA370100FCA175 /* CipherConfiguration+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365B53028EA370100FCA175 /* CipherConfiguration+Defaults.swift */; };
@@ -30,7 +29,6 @@
 		D30641F328CC24660051BCBD /* RemoteValueProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteValueProvider.swift; sourceTree = "<group>"; };
 		D30641F428CC24660051BCBD /* DemoConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConfiguration.swift; sourceTree = "<group>"; };
 		D30641F528CC24660051BCBD /* TogglesDemoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TogglesDemoApp.swift; sourceTree = "<group>"; };
-		D31B3D8E28ECECB600BE5B81 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D35966BD28E1B47A0068FD1A /* 10kEntriesDemoDatasource.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 10kEntriesDemoDatasource.json; sourceTree = "<group>"; };
 		D36232C1290605540090D56F /* ToggleVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleVariables.swift; sourceTree = "<group>"; };
 		D365B53028EA370100FCA175 /* CipherConfiguration+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CipherConfiguration+Defaults.swift"; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				D36232C1290605540090D56F /* ToggleVariables.swift */,
-				D31B3D8E28ECECB600BE5B81 /* Constants.swift */,
 				D3F41CFB28D5367C00E56F65 /* ToggleAccessor.swift */,
 			);
 			path = GeneratedCode;
@@ -241,7 +238,6 @@
 				D3F41CFD28D5367C00E56F65 /* ToggleAccessor.swift in Sources */,
 				D3C75C2228D88BD600E659ED /* DemoView.swift in Sources */,
 				D3F41D0E28D5459E00E56F65 /* ToggleObservablesView.swift in Sources */,
-				D31B3D8F28ECECB600BE5B81 /* Constants.swift in Sources */,
 				D365B53128EA370100FCA175 /* CipherConfiguration+Defaults.swift in Sources */,
 				D3F41D0C28D5423200E56F65 /* ToggleAccessorView.swift in Sources */,
 				D30641F728CC24660051BCBD /* RemoteValueProvider.swift in Sources */,

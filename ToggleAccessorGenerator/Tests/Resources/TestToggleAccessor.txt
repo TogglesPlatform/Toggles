@@ -15,48 +15,48 @@ public class TestToggleAccessor {
 extension TestToggleAccessor {
 
     public var booleanToggle: Bool {
-        get { manager.value(for: TestConstants.booleanToggle).boolValue! }
-        set { manager.set(.bool(newValue), for: TestConstants.booleanToggle) }
+        get { manager.value(for: TestVariables.booleanToggle).boolValue! }
+        set { manager.set(.bool(newValue), for: TestVariables.booleanToggle) }
     }
 
     public var integerToggle: Int {
-        get { manager.value(for: TestConstants.integerToggle).intValue! }
-        set { manager.set(.int(newValue), for: TestConstants.integerToggle) }
+        get { manager.value(for: TestVariables.integerToggle).intValue! }
+        set { manager.set(.int(newValue), for: TestVariables.integerToggle) }
     }
 
     public var numericToggle: Double {
-        get { manager.value(for: TestConstants.numericToggle).numberValue! }
-        set { manager.set(.number(newValue), for: TestConstants.numericToggle) }
+        get { manager.value(for: TestVariables.numericToggle).numberValue! }
+        set { manager.set(.number(newValue), for: TestVariables.numericToggle) }
     }
 
     public var stringToggle: String {
-        get { manager.value(for: TestConstants.stringToggle).stringValue! }
-        set { manager.set(.string(newValue), for: TestConstants.stringToggle) }
+        get { manager.value(for: TestVariables.stringToggle).stringValue! }
+        set { manager.set(.string(newValue), for: TestVariables.stringToggle) }
     }
 
     public var encryptedToggle: String {
-        get { manager.value(for: TestConstants.encryptedToggle).secureValue! }
-        set { manager.set(.secure(newValue), for: TestConstants.encryptedToggle) }
+        get { manager.value(for: TestVariables.encryptedToggle).secureValue! }
+        set { manager.set(.secure(newValue), for: TestVariables.encryptedToggle) }
     }
 
     public var userDefinedBooleanToggle: Bool {
-        get { manager.value(for: TestConstants.booleanToggle2).boolValue! }
-        set { manager.set(.bool(newValue), for: TestConstants.booleanToggle2) }
+        get { manager.value(for: TestVariables.booleanToggle2).boolValue! }
+        set { manager.set(.bool(newValue), for: TestVariables.booleanToggle2) }
     }
 
     public var userDefinedIntegerToggle: Int {
-        get { manager.value(for: TestConstants.integerToggle2).intValue! }
-        set { manager.set(.int(newValue), for: TestConstants.integerToggle2) }
+        get { manager.value(for: TestVariables.integerToggle2).intValue! }
+        set { manager.set(.int(newValue), for: TestVariables.integerToggle2) }
     }
 
     public var userDefinedNumericToggle: Double {
-        get { manager.value(for: TestConstants.numericToggle2).numberValue! }
-        set { manager.set(.number(newValue), for: TestConstants.numericToggle2) }
+        get { manager.value(for: TestVariables.numericToggle2).numberValue! }
+        set { manager.set(.number(newValue), for: TestVariables.numericToggle2) }
     }
 
     public var userDefinedStringToggle: String {
-        get { manager.value(for: TestConstants.stringToggle2).stringValue! }
-        set { manager.set(.string(newValue), for: TestConstants.stringToggle2) }
+        get { manager.value(for: TestVariables.stringToggle2).stringValue! }
+        set { manager.set(.string(newValue), for: TestVariables.stringToggle2) }
     }
 
 }

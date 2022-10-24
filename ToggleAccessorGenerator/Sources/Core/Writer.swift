@@ -8,11 +8,11 @@ class Writer {
         case swift
     }
     
-    func saveConstants(_ content: Content, outputPath: String, constantsEnumName: String) throws {
-        let constantsFileName = URL(fileURLWithPath: outputPath)
-            .appendingPathComponent(constantsEnumName)
+    func saveVariables(_ content: Content, outputPath: String, variablesEnumName: String) throws {
+        let vriablesFileName = URL(fileURLWithPath: outputPath)
+            .appendingPathComponent(variablesEnumName)
             .appendingPathExtension(Constants.swift.rawValue)
-        try write(content, to: constantsFileName)
+        try write(content, to: vriablesFileName)
     }
     
     func saveAccessor(_ content: Content, outputPath: String, accessorClassName: String) throws {

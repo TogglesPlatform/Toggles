@@ -1,8 +1,8 @@
-//  TestConstants.swift
+//  TestVariables.swift
 
 import Foundation
 
-public struct TestConstants {
+public struct TestVariables {
 
     public static let booleanToggle = "boolean_toggle"
 

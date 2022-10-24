@@ -3,7 +3,7 @@
 import Foundation
 
 extension Toggle.Variable {
-    var codeConstantValue: String {
+    var codeVariableValue: String {
         camelCased()
     }
 }
@@ -13,7 +13,7 @@ extension Toggle {
         if let propertyName = propertyName {
             return propertyName
         }
-        return variable.codeConstantValue
+        return variable.codeVariableValue
     }
 }
 
