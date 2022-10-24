@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToggleAccessorGenerator"
-               BuildableName = "ToggleAccessorGenerator"
-               BlueprintName = "ToggleAccessorGenerator"
+               BlueprintIdentifier = "ToggleGen"
+               BuildableName = "ToggleGen"
+               BlueprintName = "ToggleGen"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToggleAccessorGeneratorTests"
-               BuildableName = "ToggleAccessorGeneratorTests"
-               BlueprintName = "ToggleAccessorGeneratorTests"
+               BlueprintIdentifier = "ToggleGenTests"
+               BuildableName = "ToggleGenTests"
+               BlueprintName = "ToggleGenTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ToggleAccessorGeneratorTests"
-               BuildableName = "ToggleAccessorGeneratorTests"
-               BlueprintName = "ToggleAccessorGeneratorTests"
+               BlueprintIdentifier = "ToggleGenTests"
+               BuildableName = "ToggleGenTests"
+               BlueprintName = "ToggleGenTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -68,9 +68,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ToggleAccessorGenerator"
-            BuildableName = "ToggleAccessorGenerator"
-            BlueprintName = "ToggleAccessorGenerator"
+            BlueprintIdentifier = "ToggleGen"
+            BuildableName = "ToggleGen"
+            BlueprintName = "ToggleGen"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -110,9 +110,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ToggleAccessorGenerator"
-            BuildableName = "ToggleAccessorGenerator"
-            BlueprintName = "ToggleAccessorGenerator"
+            BlueprintIdentifier = "ToggleGen"
+            BuildableName = "ToggleGen"
+            BlueprintName = "ToggleGen"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
