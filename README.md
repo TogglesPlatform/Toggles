@@ -1,11 +1,16 @@
-# Toggles
+<p align="center">
+<img src="Resources/logo-no-background.png" width="400" height="376" />
+</p>
+
+## Toggles
+
+Toggles is an elegant and powerful solution to feature flagging for Apple platforms.
 
 ![Toggles CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-Toggles.yml/badge.svg)
 ![ToggleGen CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-ToggleGen.yml/badge.svg)
 ![ToggleCipher CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-ToggleCipher.yml/badge.svg)
 ![JustTweakMigrator CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-JustTweakMigrator.yml/badge.svg)
 
-Toggles is a clean and elegant solution to feature flagging for Apple platforms.
 
 ## Overview
 
