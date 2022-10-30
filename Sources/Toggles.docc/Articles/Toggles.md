@@ -1,6 +1,6 @@
 # Toggles
 
-Toggles is a clean and elegant solution to feature flagging for Apple platforms.
+Toggles is an elegant and powerful solution to feature flagging for Apple platforms.
 
 ## Overview
 
