@@ -13,7 +13,7 @@ on:
 
 jobs:
   test:
-    name: Run tests on ${{ matrix.destination }}
+    name: Run tests for ${{ matrix.destination }}
     runs-on: ${{ matrix.macos }} 
     strategy:
       fail-fast: false
@@ -40,6 +40,6 @@ jobs:
     - name: Show eligible build destinations for ${{ matrix.scheme }}
       working-directory: ./JustTweakMigrator
       run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
-    - name: Run tests for platform ${{ matrix.platform }}
+    - name: Run tests for destination ${{ matrix.destination }}
       working-directory: ./JustTweakMigrator
       run: xcodebuild ${{ matrix.command }} -scheme ${{ matrix.scheme }} -destination "${{ matrix.destination }}"
