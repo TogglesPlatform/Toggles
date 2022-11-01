@@ -5,18 +5,18 @@
 import Foundation
 import Toggles
 
-public class {{ className }} {
+{{ accessControl }} class {{ className }} {
     
     private(set) var manager: ToggleManager
     
-    public init(manager: ToggleManager) {
+    {{ accessControl }} init(manager: ToggleManager) {
         self.manager = manager
     }
 }
 
 extension {{ className }} {
 {% for accessorInfo in accessorInfos %}
-    public var {{ accessorInfo.propertyName }}: {{ accessorInfo.type }} {
+    {{ accessControl }} var {{ accessorInfo.propertyName }}: {{ accessorInfo.type }} {
         get { manager.value(for: {{ enumName }}.{{ accessorInfo.constant.name }}).{{ accessorInfo.toggleType }}Value! }
         set { manager.set(.{{ accessorInfo.toggleType }}(newValue), for: {{ enumName }}.{{ accessorInfo.constant.name }}) }
     }

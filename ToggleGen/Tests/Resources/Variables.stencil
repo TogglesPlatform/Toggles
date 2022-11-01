@@ -4,9 +4,9 @@
 
 import Foundation
 
-public struct {{ enumName }} {
+{{ accessControl }} struct {{ enumName }} {
 {% for variable in variables %}
-    public static let {{ variable.name }} = "{{ variable.value }}"
+    {{ accessControl }} static let {{ variable.name }} = "{{ variable.value }}"
 {% endfor %}
 }
 

@@ -1,0 +1,66 @@
+//  TestToggleAccessor.swift
+
+// swiftlint:disable file_length
+
+import Foundation
+import Toggles
+
+open class TestToggleAccessor {
+    
+    private(set) var manager: ToggleManager
+    
+    open init(manager: ToggleManager) {
+        self.manager = manager
+    }
+}
+
+extension TestToggleAccessor {
+
+    open var booleanToggle: Bool {
+        get { manager.value(for: TestVariables.booleanToggle).boolValue! }
+        set { manager.set(.bool(newValue), for: TestVariables.booleanToggle) }
+    }
+
+    open var integerToggle: Int {
+        get { manager.value(for: TestVariables.integerToggle).intValue! }
+        set { manager.set(.int(newValue), for: TestVariables.integerToggle) }
+    }
+
+    open var numericToggle: Double {
+        get { manager.value(for: TestVariables.numericToggle).numberValue! }
+        set { manager.set(.number(newValue), for: TestVariables.numericToggle) }
+    }
+
+    open var stringToggle: String {
+        get { manager.value(for: TestVariables.stringToggle).stringValue! }
+        set { manager.set(.string(newValue), for: TestVariables.stringToggle) }
+    }
+
+    open var encryptedToggle: String {
+        get { manager.value(for: TestVariables.encryptedToggle).secureValue! }
+        set { manager.set(.secure(newValue), for: TestVariables.encryptedToggle) }
+    }
+
+    open var userDefinedBooleanToggle: Bool {
+        get { manager.value(for: TestVariables.booleanToggle2).boolValue! }
+        set { manager.set(.bool(newValue), for: TestVariables.booleanToggle2) }
+    }
+
+    open var userDefinedIntegerToggle: Int {
+        get { manager.value(for: TestVariables.integerToggle2).intValue! }
+        set { manager.set(.int(newValue), for: TestVariables.integerToggle2) }
+    }
+
+    open var userDefinedNumericToggle: Double {
+        get { manager.value(for: TestVariables.numericToggle2).numberValue! }
+        set { manager.set(.number(newValue), for: TestVariables.numericToggle2) }
+    }
+
+    open var userDefinedStringToggle: String {
+        get { manager.value(for: TestVariables.stringToggle2).stringValue! }
+        set { manager.set(.string(newValue), for: TestVariables.stringToggle2) }
+    }
+
+}
+
+// swiftlint:enable file_length

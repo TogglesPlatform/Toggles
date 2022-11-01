@@ -2,6 +2,8 @@
 
 import Foundation
 
+typealias Content = String
+
 class Writer {
     
     private enum Constants: String {
