@@ -6,6 +6,10 @@ struct Toggle: Equatable {
 
     typealias Variable = String
 
+    struct ToggleMetadata: Equatable, Decodable {
+        let propertyName: String?
+    }
+
     enum Value: Equatable, Decodable {
         case bool(Bool)
         case int(Int)
@@ -16,7 +20,7 @@ struct Toggle: Equatable {
     
     let variable: Variable
     let value: Value
-    let propertyName: String?
+    let metadata: ToggleMetadata?
 }
 
 struct Datasource: Equatable, Decodable {

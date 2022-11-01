@@ -23,22 +23,30 @@
     {
       "variable": "boolean_toggle_2",
       "bool": true,
-      "propertyName": "userDefinedBooleanToggle"
+      "metadata": {
+        "propertyName": "userDefinedBooleanToggle"
+      }
     },
     {
       "variable": "integer_toggle_2",
       "int": 108,
-      "propertyName": "userDefinedIntegerToggle"
+      "metadata": {
+        "propertyName": "userDefinedIntegerToggle"
+        }
     },
     {
       "variable": "numeric_toggle_2",
       "number": 1.618,
-      "propertyName": "userDefinedNumericToggle"
+      "metadata": {
+        "propertyName": "userDefinedNumericToggle"
+        }
     },
     {
       "variable": "string_toggle_2",
       "string": "Ciao Mondo",
-      "propertyName": "userDefinedStringToggle"
+      "metadata": {
+        "propertyName": "userDefinedStringToggle"
+      }
     }
   ]
 }

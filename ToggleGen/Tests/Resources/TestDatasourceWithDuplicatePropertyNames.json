@@ -3,7 +3,9 @@
     {
       "variable": "boolean_toggle",
       "bool": true,
-      "propertyName": "userDefinedBooleanToggle"
+      "metadata": {
+        "propertyName": "userDefinedBooleanToggle"
+      }
     },
     {
       "variable": "integer_toggle",
@@ -20,7 +22,9 @@
     {
       "variable": "boolean_toggle_2",
       "bool": true,
-      "propertyName": "userDefinedBooleanToggle"
+      "metadata": {
+        "propertyName": "userDefinedBooleanToggle"
+      }
     }
   ]
 }

@@ -15,7 +15,7 @@ extension Toggle: Decodable {
         case number
         case string
         case secure
-        case propertyName
+        case metadata
     }
     
     public init(from decoder: Decoder) throws {
@@ -39,6 +39,6 @@ extension Toggle: Decodable {
         else {
             throw CodingError.missingValue
         }
-        propertyName = try values.decodeIfPresent(String.self, forKey: .propertyName)
+        metadata = try values.decodeIfPresent(Toggle.ToggleMetadata.self, forKey: .metadata)
     }
 }
