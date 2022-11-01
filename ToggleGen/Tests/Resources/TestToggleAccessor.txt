@@ -1,5 +1,7 @@
 //  TestToggleAccessor.swift
 
+// swiftlint:disable file_length
+
 import Foundation
 import Toggles
 
@@ -60,3 +62,5 @@ extension TestToggleAccessor {
     }
 
 }
+
+// swiftlint:enable file_length

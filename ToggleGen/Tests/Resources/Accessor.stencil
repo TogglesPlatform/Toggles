@@ -1,5 +1,7 @@
 //  {{ className }}.swift
 
+// swiftlint:disable file_length
+
 import Foundation
 import Toggles
 
@@ -20,3 +22,5 @@ extension {{ className }} {
     }
 {% endfor %}
 }
+
+// swiftlint:enable file_length

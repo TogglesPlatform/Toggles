@@ -1,5 +1,7 @@
 //  TestVariables.swift
 
+// swiftlint:disable file_length
+
 import Foundation
 
 public struct TestVariables {
@@ -23,3 +25,5 @@ public struct TestVariables {
     public static let stringToggle2 = "string_toggle_2"
 
 }
+
+// swiftlint:enable file_length

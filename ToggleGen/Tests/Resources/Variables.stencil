@@ -1,5 +1,7 @@
 //  {{ enumName }}.swift
 
+// swiftlint:disable file_length
+
 import Foundation
 
 public struct {{ enumName }} {
@@ -7,3 +9,5 @@ public struct {{ enumName }} {
     public static let {{ variable.name }} = "{{ variable.value }}"
 {% endfor %}
 }
+
+// swiftlint:enable file_length
