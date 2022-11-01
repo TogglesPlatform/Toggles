@@ -7,7 +7,7 @@ import Toggles
 
 public class TestToggleAccessor {
     
-    private let manager: ToggleManager
+    private(set) var manager: ToggleManager
     
     public init(manager: ToggleManager) {
         self.manager = manager
