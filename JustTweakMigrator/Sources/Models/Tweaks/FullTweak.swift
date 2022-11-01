@@ -4,7 +4,6 @@ import Foundation
 
 struct FullTweak {
     let title: String
-    let description: String
     let group: String
     let value: Any
     let encrypted: Bool
@@ -17,7 +16,6 @@ extension FullTweak: Equatable {
     
     static func == (lhs: FullTweak, rhs: FullTweak) -> Bool {
         guard lhs.title == rhs.title else { return false }
-        guard lhs.description == rhs.description else { return false }
         guard lhs.group == rhs.group else { return false }
         guard lhs.encrypted == rhs.encrypted else { return false }
         guard lhs.generatedPropertyName == rhs.generatedPropertyName else { return false }

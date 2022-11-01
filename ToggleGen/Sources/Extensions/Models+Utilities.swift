@@ -10,7 +10,7 @@ extension Toggle.Variable {
 
 extension Toggle {
     var computedPropertyName: String {
-        if let propertyName = propertyName {
+        if let propertyName = metadata?.propertyName {
             return propertyName
         }
         return variable.codeVariableValue

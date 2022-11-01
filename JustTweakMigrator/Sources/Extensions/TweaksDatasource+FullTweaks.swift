@@ -10,7 +10,6 @@ extension TweaksDatasource {
         for (feature, togglesByVariable) in tweaks {
             for (variable, tweak) in togglesByVariable {
                 let fullTweak = FullTweak(title: tweak.title,
-                                          description: tweak.description,
                                           group: tweak.group,
                                           value: tweak.value,
                                           encrypted: tweak.encrypted,

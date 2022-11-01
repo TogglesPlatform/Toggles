@@ -28,10 +28,12 @@ struct ToggleGen: ParsableCommand {
         let datasourceUrl = URL(fileURLWithPath: datasourcePath)
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let variablesContent = try generator.generateVariables(variablesTemplatePath: variablesTemplatePath,
-                                                               variablesEnumName: variablesEnumName)
+                                                               variablesEnumName: variablesEnumName,
+                                                               accessControl: .public)
         let accessorContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplatePath,
                                                              variablesEnumName: variablesEnumName,
-                                                             accessorClassName: accessorClassName)
+                                                             accessorClassName: accessorClassName,
+                                                             accessControl: .public)
         let writer = Writer()
         try writer.saveVariables(variablesContent,
                                  outputPath: outputPath,

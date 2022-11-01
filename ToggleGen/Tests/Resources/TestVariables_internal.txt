@@ -1,0 +1,29 @@
+//  TestVariables.swift
+
+// swiftlint:disable file_length
+
+import Foundation
+
+internal struct TestVariables {
+
+    internal static let booleanToggle = "boolean_toggle"
+
+    internal static let integerToggle = "integer_toggle"
+
+    internal static let numericToggle = "numeric_toggle"
+
+    internal static let stringToggle = "string_toggle"
+
+    internal static let encryptedToggle = "encrypted_toggle"
+
+    internal static let booleanToggle2 = "boolean_toggle_2"
+
+    internal static let integerToggle2 = "integer_toggle_2"
+
+    internal static let numericToggle2 = "numeric_toggle_2"
+
+    internal static let stringToggle2 = "string_toggle_2"
+
+}
+
+// swiftlint:enable file_length

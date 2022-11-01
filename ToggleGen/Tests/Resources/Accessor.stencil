@@ -1,22 +1,26 @@
 //  {{ className }}.swift
 
+// swiftlint:disable file_length
+
 import Foundation
 import Toggles
 
-public class {{ className }} {
+{{ accessControl }} class {{ className }} {
     
-    private let manager: ToggleManager
+    private(set) var manager: ToggleManager
     
-    public init(manager: ToggleManager) {
+    {{ accessControl }} init(manager: ToggleManager) {
         self.manager = manager
     }
 }
 
 extension {{ className }} {
 {% for accessorInfo in accessorInfos %}
-    public var {{ accessorInfo.propertyName }}: {{ accessorInfo.type }} {
+    {{ accessControl }} var {{ accessorInfo.propertyName }}: {{ accessorInfo.type }} {
         get { manager.value(for: {{ enumName }}.{{ accessorInfo.constant.name }}).{{ accessorInfo.toggleType }}Value! }
         set { manager.set(.{{ accessorInfo.toggleType }}(newValue), for: {{ enumName }}.{{ accessorInfo.constant.name }}) }
     }
 {% endfor %}
 }
+
+// swiftlint:enable file_length

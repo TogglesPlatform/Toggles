@@ -10,7 +10,6 @@ extension Tweak: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case title = "Title"
-        case description = "Description"
         case group = "Group"
         case value = "Value"
         case encrypted = "Encrypted"
@@ -20,7 +19,6 @@ extension Tweak: Decodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.title = try values.decode(String.self, forKey: .title)
-        self.description = try values.decode(String.self, forKey: .description)
         self.group = try values.decode(String.self, forKey: .group)
         self.encrypted = (try? values.decodeIfPresent(Bool.self, forKey: .encrypted)) ?? false
         self.generatedPropertyName = try? values.decodeIfPresent(String.self, forKey: .generatedPropertyName)
