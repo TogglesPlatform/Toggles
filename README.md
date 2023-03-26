@@ -6,6 +6,10 @@
 
 Toggles is an elegant and powerful solution to feature flagging for Apple platforms.
 
+![Platform Compatibility](https://img.shields.io/badge/Platform%20Compatibility-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS-red)
+![Swift Compatibility](https://img.shields.io/badge/Swift%20Compatibility-5.x-red)
+
+
 ![Toggles CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-Toggles.yml/badge.svg)
 ![TogglesDemo CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/build-TogglesDemo.yml/badge.svg)
 ![ToggleGen CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-ToggleGen.yml/badge.svg)
