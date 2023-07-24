@@ -5,7 +5,7 @@ import Foundation
 extension ToggleManager {
     
     /// Set of variables of overridden toggles if a mutable value provider was provided during initialization, empty set otherwise.
-    public var overriddedVariables: Set<Variable> {
+    public var overriddes: Set<Variable> {
         queue.sync {
             guard let mutableValueProvider = mutableValueProvider else { return [] }
             return mutableValueProvider.variables
