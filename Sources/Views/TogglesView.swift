@@ -57,34 +57,32 @@ public struct TogglesView: View {
     }
 
     public var body: some View {
-        NavigationView {
-            List {
-                ForEach(searchResults) { group in
-                    Section(header: Text(group.title)) {
-                        ForEach(group.toggles) { toggle in
-                            navigationLink(toggle: toggle)
-                        }
+        List {
+            ForEach(searchResults) { group in
+                Section(header: Text(group.title)) {
+                    ForEach(group.toggles) { toggle in
+                        navigationLink(toggle: toggle)
                     }
-                    .accessibilityLabel(group.accessibilityLabel)
                 }
+                .accessibilityLabel(group.accessibilityLabel)
             }
+        }
 #if os(iOS)
-            .listStyle(.insetGrouped)
+        .listStyle(.insetGrouped)
 #endif
-            .accessibilityLabel("Toggles list")
-            .navigationTitle("Toggles")
-            .toolbar {
-                if manager.hasOverrides {
-                    toolbarView
-                }
+        .accessibilityLabel("Toggles list")
+        .navigationTitle("Toggles")
+        .toolbar {
+            if manager.hasOverrides {
+                toolbarView
             }
-            .searchable(text: $searchText, prompt: "Filter toggles")
-            .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
-                Button("OK!", role: .cancel) {}
-            } message: {
-                let variables = overriddenVariables.joined(separator: "\n")
-                Text("The overrides for the following variables have been deleted:\n\n\(variables)")
-            }
+        }
+        .searchable(text: $searchText, prompt: "Filter toggles")
+        .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
+            Button("OK!", role: .cancel) {}
+        } message: {
+            let variables = overriddenVariables.joined(separator: "\n")
+            Text("The overrides for the following variables have been deleted:\n\n\(variables)")
         }
     }
     
