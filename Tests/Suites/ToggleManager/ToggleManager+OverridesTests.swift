@@ -9,13 +9,13 @@ final class ToggleManager_OverridesTests: XCTestCase {
     
     func test_hasNoMutableValueProviderHenceNoOverrides() throws {
         let toggleManager = try ToggleManager(datasourceUrl: url)
-        XCTAssertEqual(toggleManager.overriddes, [])
+        XCTAssertEqual(toggleManager.overrides, [])
     }
     
     func test_hasNoOverrides() throws {
         let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
                                               datasourceUrl: url)
-        XCTAssertEqual(toggleManager.overriddes, [])
+        XCTAssertEqual(toggleManager.overrides, [])
     }
     
     func test_hasOverrides() throws {
@@ -23,7 +23,7 @@ final class ToggleManager_OverridesTests: XCTestCase {
         let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
                                               datasourceUrl: url)
         toggleManager.set(.int(42), for: variable)
-        XCTAssertEqual(toggleManager.overriddes, [variable])
+        XCTAssertEqual(toggleManager.overrides, [variable])
         
     }
     
@@ -32,6 +32,6 @@ final class ToggleManager_OverridesTests: XCTestCase {
                                               datasourceUrl: url)
         toggleManager.set(.int(42), for: "integer_toggle")
         toggleManager.removeOverrides()
-        XCTAssertEqual(toggleManager.overriddes, [])
+        XCTAssertEqual(toggleManager.overrides, [])
     }
 }
