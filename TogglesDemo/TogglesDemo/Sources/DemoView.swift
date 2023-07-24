@@ -9,10 +9,12 @@ struct DemoView: View {
     
     var body: some View {
         TabView {
-            TogglesView(manager: viewModel.manager, datasourceUrl: viewModel.datasourceUrl)
-                .tabItem {
-                    Label("Toggles", systemImage: "switch.2")
-                }
+            NavigationView {
+                TogglesView(manager: viewModel.manager, datasourceUrl: viewModel.datasourceUrl)
+                    .tabItem {
+                        Label("Toggles", systemImage: "switch.2")
+                    }
+            }
             RemoteValueProviderView(provider: viewModel.remoteValueProvider, manager: viewModel.manager)
                 .tabItem {
                     Label("Config update", systemImage: "icloud.and.arrow.down")
