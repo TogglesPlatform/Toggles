@@ -15,10 +15,10 @@ swift package --allow-writing-to-directory docs \
     --output-path docs
 ```
 
-The branch used for GitHub Pages is [DocC](https://github.com/albertodebortoli/Toggles/tree/DocC) that should be kept up-to-date with [master](https://github.com/albertodebortoli/Toggles/tree/master).
+The branch used for GitHub Pages is [DocC](https://github.com/albertodebortoli/Toggles/tree/DocC) that should be kept up-to-date with [main](https://github.com/albertodebortoli/Toggles/tree/main).
 
 Since DocC doesn't allow versioning the documentation, it's ok to:
 
-1. rebase on top of master
+1. rebase on top of main
 2. regenerate the documentation
 3. force push the changes
