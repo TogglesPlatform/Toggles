@@ -5,7 +5,7 @@ import Foundation
 private let userDefaultsKeyPrefix = "com.toggles"
 
 /// Mutable value provider that persists toggles in the user defaults.
-/// Alterations to toggles are therefore persisted across app restars and installations.
+/// Alterations to toggles are therefore persisted across app restarts and updates.
 final public class PersistentValueProvider {
     
     public var name: String = "Persistent"
