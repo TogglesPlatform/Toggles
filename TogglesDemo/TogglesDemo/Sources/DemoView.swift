@@ -11,9 +11,8 @@ struct DemoView: View {
         TabView {
             NavigationView {
                 TogglesView(manager: viewModel.manager, datasourceUrl: viewModel.datasourceUrl)
-                    .tabItem {
-                        Label("Toggles", systemImage: "switch.2")
-                    }
+            }.tabItem {
+                Label("Toggles", systemImage: "switch.2")
             }
             RemoteValueProviderView(provider: viewModel.remoteValueProvider, manager: viewModel.manager)
                 .tabItem {
