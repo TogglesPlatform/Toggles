@@ -76,7 +76,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--datasource-path /Users/alexander.lotsu/src/JustEat/Modules/Addresses/Demo/DemoApp/Resources/Toggles.json"
+            argument = "--datasource-path &lt;DATASOURCE_PATH&gt;"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
