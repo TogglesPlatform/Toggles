@@ -10,9 +10,9 @@ class Writer {
         case swift
     }
     
-    func saveVariables(_ content: Content, outputPath: String, variablesEnumName: String) throws {
+    func saveVariables(_ content: Content, outputPath: String, variablesStructName: String) throws {
         let vriablesFileName = URL(fileURLWithPath: outputPath)
-            .appendingPathComponent(variablesEnumName)
+            .appendingPathComponent(variablesStructName)
             .appendingPathExtension(Constants.swift.rawValue)
         try write(content, to: vriablesFileName)
     }

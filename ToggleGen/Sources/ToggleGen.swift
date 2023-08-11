@@ -13,7 +13,7 @@ struct ToggleGen: ParsableCommand {
     var accessorTemplatePath: String
     
     @Option(name: .long, help: "The name of the variables enum to generate.")
-    var variablesEnumName: String
+    var variablesStructName: String
     
     @Option(name: .long, help: "The name of the accessor class to generate.")
     var accessorClassName: String
@@ -28,16 +28,16 @@ struct ToggleGen: ParsableCommand {
         let datasourceUrl = URL(fileURLWithPath: datasourcePath)
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let variablesContent = try generator.generateVariables(variablesTemplatePath: variablesTemplatePath,
-                                                               variablesEnumName: variablesEnumName,
+                                                               variablesStructName: variablesStructName,
                                                                accessControl: .public)
         let accessorContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplatePath,
-                                                             variablesEnumName: variablesEnumName,
+                                                             variablesStructName: variablesStructName,
                                                              accessorClassName: accessorClassName,
                                                              accessControl: .public)
         let writer = Writer()
         try writer.saveVariables(variablesContent,
                                  outputPath: outputPath,
-                                 variablesEnumName: variablesEnumName)
+                                 variablesStructName: variablesStructName)
         try writer.saveAccessor(accessorContent,
                                 outputPath: outputPath,
                                 accessorClassName: accessorClassName)

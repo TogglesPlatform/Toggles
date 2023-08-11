@@ -76,7 +76,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--datasource-path &lt;DATASOURCE_PATH&gt;"
+            argument = "--datasource-path /Users/alexander.lotsu/src/JustEat/Modules/Addresses/Demo/DemoApp/Resources/Toggles.json"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -84,7 +84,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--variables-enum-name ToggleVariables"
+            argument = "--variables-struct-name ToggleVariables"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
