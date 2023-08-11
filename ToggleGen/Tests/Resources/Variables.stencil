@@ -1,10 +1,10 @@
-//  {{ structName }}.swift
+//  {{ enumName }}.swift
 
 // swiftlint:disable file_length
 
 import Foundation
 
-{{ accessControl }} struct {{ structName }} {
+{{ accessControl }} struct {{ enumName }} {
 {% for variable in variables %}
     {{ accessControl }} static let {{ variable.name }} = "{{ variable.value }}"
 {% endfor %}

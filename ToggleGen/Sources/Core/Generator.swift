@@ -25,7 +25,7 @@ class Generator {
     
     private enum Constants: String {
         case className
-        case structName
+        case enumName
         case accessorInfos
         case variables
         case accessControl
@@ -45,12 +45,12 @@ class Generator {
     }
     
     func generateVariables(variablesTemplatePath: String,
-                           variablesStructName: String,
+                           variablesEnumName: String,
                            accessControl: AccessControl) throws -> String {
         let templater = Templater()
         let variablesTemplateUrl = URL(fileURLWithPath: variablesTemplatePath)
         let variablesContext: [String: Any] = [
-            Constants.structName.rawValue: variablesStructName,
+            Constants.enumName.rawValue: variablesEnumName,
             Constants.variables.rawValue: loadVariables(),
             Constants.accessControl.rawValue: accessControl.rawValue
         ]
@@ -58,14 +58,14 @@ class Generator {
     }
     
     func generateAccessor(accessorTemplatePath: String,
-                          variablesStructName: String,
+                          variablesEnumName: String,
                           accessorClassName: String,
                           accessControl: AccessControl) throws -> String {
         let templater = Templater()
         let accessorTemplateUrl = URL(fileURLWithPath: accessorTemplatePath)
         let accessorContext: [String: Any] = [
             Constants.className.rawValue: accessorClassName,
-            Constants.structName.rawValue: variablesStructName,
+            Constants.enumName.rawValue: variablesEnumName,
             Constants.accessorInfos.rawValue: loadAccessorInfos(),
             Constants.accessControl.rawValue: accessControl.rawValue
         ]

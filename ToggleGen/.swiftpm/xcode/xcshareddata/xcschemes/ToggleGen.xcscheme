@@ -84,7 +84,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--variables-struct-name ToggleVariables"
+            argument = "--variables-enum-name ToggleVariables"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

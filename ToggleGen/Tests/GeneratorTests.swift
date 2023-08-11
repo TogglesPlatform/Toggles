@@ -10,7 +10,7 @@ final class GeneratorTests: XCTestCase {
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let variablesTemplateUrl = Bundle.module.path(forResource: "Variables", ofType: "stencil")!
         let generatedContent = try generator.generateVariables(variablesTemplatePath: variablesTemplateUrl,
-                                                               variablesStructName: "TestVariables",
+                                                               variablesEnumName: "TestVariables",
                                                                accessControl: .open)
         let variablesUrl = Bundle.module.url(forResource: "TestVariables_open", withExtension: "txt")!
         let expectedContent = try String(contentsOf: variablesUrl)
@@ -22,7 +22,7 @@ final class GeneratorTests: XCTestCase {
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let accessorTemplateUrl = Bundle.module.path(forResource: "Accessor", ofType: "stencil")!
         let generatedContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplateUrl,
-                                                              variablesStructName: "TestVariables",
+                                                              variablesEnumName: "TestVariables",
                                                               accessorClassName: "TestToggleAccessor",
                                                               accessControl: .open)
         let variablesUrl = Bundle.module.url(forResource: "TestToggleAccessor_open", withExtension: "txt")!
@@ -35,7 +35,7 @@ final class GeneratorTests: XCTestCase {
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let variablesTemplateUrl = Bundle.module.path(forResource: "Variables", ofType: "stencil")!
         let generatedContent = try generator.generateVariables(variablesTemplatePath: variablesTemplateUrl,
-                                                               variablesStructName: "TestVariables",
+                                                               variablesEnumName: "TestVariables",
                                                                accessControl: .public)
         let variablesUrl = Bundle.module.url(forResource: "TestVariables_public", withExtension: "txt")!
         let expectedContent = try String(contentsOf: variablesUrl)
@@ -47,7 +47,7 @@ final class GeneratorTests: XCTestCase {
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let accessorTemplateUrl = Bundle.module.path(forResource: "Accessor", ofType: "stencil")!
         let generatedContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplateUrl,
-                                                              variablesStructName: "TestVariables",
+                                                              variablesEnumName: "TestVariables",
                                                               accessorClassName: "TestToggleAccessor",
                                                               accessControl: .public)
         let variablesUrl = Bundle.module.url(forResource: "TestToggleAccessor_public", withExtension: "txt")!
@@ -60,7 +60,7 @@ final class GeneratorTests: XCTestCase {
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let variablesTemplateUrl = Bundle.module.path(forResource: "Variables", ofType: "stencil")!
         let generatedContent = try generator.generateVariables(variablesTemplatePath: variablesTemplateUrl,
-                                                               variablesStructName: "TestVariables",
+                                                               variablesEnumName: "TestVariables",
                                                                accessControl: .internal)
         let variablesUrl = Bundle.module.url(forResource: "TestVariables_internal", withExtension: "txt")!
         let expectedContent = try String(contentsOf: variablesUrl)
@@ -72,7 +72,7 @@ final class GeneratorTests: XCTestCase {
         let generator = try Generator(datasourceUrl: datasourceUrl)
         let accessorTemplateUrl = Bundle.module.path(forResource: "Accessor", ofType: "stencil")!
         let generatedContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplateUrl,
-                                                              variablesStructName: "TestVariables",
+                                                              variablesEnumName: "TestVariables",
                                                               accessorClassName: "TestToggleAccessor",
                                                               accessControl: .internal)
         let variablesUrl = Bundle.module.url(forResource: "TestToggleAccessor_internal", withExtension: "txt")!
