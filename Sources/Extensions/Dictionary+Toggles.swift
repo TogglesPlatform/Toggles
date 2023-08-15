@@ -8,7 +8,7 @@ extension Dictionary where Key == String, Value == Any {
     }
     
     public func convertToTogglesDataSource() throws -> [Variable: Toggles.Value] {
-        return try mapValues { value in
+        try mapValues { value in
             switch value {
             case let stringValue as String:
                 return Toggles.Value.string(stringValue)

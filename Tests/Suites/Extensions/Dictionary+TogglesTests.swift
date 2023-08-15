@@ -5,13 +5,13 @@ import XCTest
 
 final class Dictionary_TogglesTests: XCTestCase {
     
-    func testEmptyDictionaryConversion() {
+    func test_EmptyDictionaryConversion() {
         let emptyDictionary: [String: Any] = [:]
         
         XCTAssertTrue( (try emptyDictionary.convertToTogglesDataSource()).isEmpty)
     }
     
-    func testInvalidFormatDictionaryConversion_multipleValues() {
+    func test_UnsupportedValueTypeDictionaryConversion() {
         let invalidDictionary: [String: Any] = ["key": 4, "key2": [4,5]]
         
         XCTAssertThrowsError(try invalidDictionary.convertToTogglesDataSource()) { error in
@@ -19,7 +19,7 @@ final class Dictionary_TogglesTests: XCTestCase {
         }
     }
     
-    func testValidDictionaryConversion() {
+    func test_ValidDictionaryConversion() {
         let validDictionary: [String: Any] = [
             "key1": "string value",
             "key2": true,
