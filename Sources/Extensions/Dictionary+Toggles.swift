@@ -5,20 +5,10 @@ import Foundation
 extension Dictionary where Key == String, Value == Any {
     internal enum ToggleConversionError: Error, Equatable {
         case unsupportedValueType(String)
-        
-        public static func ==(lhs: Dictionary.ToggleConversionError, rhs: Dictionary.ToggleConversionError) -> Bool {
-            switch (lhs, rhs) {
-            case (.unsupportedValueType(let leftValue), .unsupportedValueType(let rightValue)):
-                return leftValue == rightValue
-            }
-        }
     }
     
     public func convertToTogglesDataSource() throws -> [Variable: Toggles.Value] {
-        
-        var resultDictionary: [Variable: Toggles.Value] = [:]
-        
-        try resultDictionary = self.mapValues { value in
+        return try mapValues { value in
             switch value {
             case let stringValue as String:
                 return Toggles.Value.string(stringValue)
@@ -33,7 +23,5 @@ extension Dictionary where Key == String, Value == Any {
                 throw ToggleConversionError.unsupportedValueType(valueType)
             }
         }
-        
-        return resultDictionary
     }
 }

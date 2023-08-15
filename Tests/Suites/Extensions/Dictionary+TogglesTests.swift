@@ -11,14 +11,6 @@ final class Dictionary_TogglesTests: XCTestCase {
         XCTAssertTrue( (try emptyDictionary.convertToTogglesDataSource()).isEmpty)
     }
     
-    func testInvalidFormatDictionaryConversion() {
-        let invalidDictionary: [String: Any] = ["key": [4,5]]
-        
-        XCTAssertThrowsError(try invalidDictionary.convertToTogglesDataSource()) { error in
-            XCTAssertEqual(error as? Dictionary.ToggleConversionError, Dictionary.ToggleConversionError.unsupportedValueType("Array<Int>"))
-        }
-    }
-    
     func testInvalidFormatDictionaryConversion_multipleValues() {
         let invalidDictionary: [String: Any] = ["key": 4, "key2": [4,5]]
         
