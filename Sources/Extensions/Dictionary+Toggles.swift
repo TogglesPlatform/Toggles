@@ -7,20 +7,22 @@ extension Dictionary where Key == String, Value == Any {
         case unsupportedValueType(String)
     }
     
-    public func convertToTogglesDataSource() throws -> [Variable: Toggles.Value] {
-        try mapValues { value in
-            switch value {
-            case let stringValue as String:
-                return Toggles.Value.string(stringValue)
-            case let boolValue as Bool:
-                return Toggles.Value.bool(boolValue)
-            case let intValue as Int:
-                return Toggles.Value.int(intValue)
-            case let numberValue as Double:
-                return Toggles.Value.number(numberValue)
-            default:
-                let valueType = String(describing: type(of: value))
-                throw ToggleConversionError.unsupportedValueType(valueType)
+    public var togglesDataSource: [Variable: Toggles.Value] {
+        get throws {
+            try mapValues { value in
+                switch value {
+                case let stringValue as String:
+                    return Toggles.Value.string(stringValue)
+                case let boolValue as Bool:
+                    return Toggles.Value.bool(boolValue)
+                case let intValue as Int:
+                    return Toggles.Value.int(intValue)
+                case let numberValue as Double:
+                    return Toggles.Value.number(numberValue)
+                default:
+                    let valueType = String(describing: type(of: value))
+                    throw ToggleConversionError.unsupportedValueType(valueType)
+                }
             }
         }
     }
