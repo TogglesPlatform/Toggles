@@ -11,10 +11,10 @@ class Writer {
     }
     
     func saveVariables(_ content: Content, outputPath: String, variablesEnumName: String) throws {
-        let vriablesFileName = URL(fileURLWithPath: outputPath)
+        let variablesFileName = URL(fileURLWithPath: outputPath)
             .appendingPathComponent(variablesEnumName)
             .appendingPathExtension(Constants.swift.rawValue)
-        try write(content, to: vriablesFileName)
+        try write(content, to: variablesFileName)
     }
     
     func saveAccessor(_ content: Content, outputPath: String, accessorClassName: String) throws {
