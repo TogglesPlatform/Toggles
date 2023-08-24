@@ -96,7 +96,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--output-path &lt;OUTPUT_PATH&gt;"
+            argument = "--accessor-output-path &lt;ACCESSOR_OUTPUT_PATH&gt;"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--variables-output-path &lt;VARIABLES_OUTPUT_PATH&gt;"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
