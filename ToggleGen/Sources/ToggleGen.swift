@@ -21,8 +21,11 @@ struct ToggleGen: ParsableCommand {
     @Option(name: .long, help: "The path of the datas ource to use.")
     var datasourcePath: String
     
-    @Option(name: .long, help: "The path to the folder to write the output to.")
-    var outputPath: String
+    @Option(name: .long, help: "The path to the folder to write the ToggleAccessor file to.")
+    var accessorOutputPath: String
+    
+    @Option(name: .long, help: "The path to the folder to write the ToggleVariables file to.")
+    var variablesOutputPath: String
     
     mutating func run() throws {
         let datasourceUrl = URL(fileURLWithPath: datasourcePath)
@@ -35,11 +38,12 @@ struct ToggleGen: ParsableCommand {
                                                              accessorClassName: accessorClassName,
                                                              accessControl: .public)
         let writer = Writer()
-        try writer.saveVariables(variablesContent,
-                                 outputPath: outputPath,
-                                 variablesEnumName: variablesEnumName)
         try writer.saveAccessor(accessorContent,
-                                outputPath: outputPath,
+                                outputPath: accessorOutputPath,
                                 accessorClassName: accessorClassName)
+        try writer.saveVariables(variablesContent,
+                                 outputPath: variablesOutputPath,
+                                 variablesEnumName: variablesEnumName)
+        
     }
 }
