@@ -103,10 +103,12 @@ public struct TogglesView: View {
         }
         .confirmationDialog("Select an action", isPresented: $showingOptions) {
             Button("Clear overrides") {
-                DispatchQueue.main.async {
-                    overriddenVariables = manager.removeOverrides()
+                Task {
+                    await MainActor.run {
+                        overriddenVariables = manager.removeOverrides()
+                        presentDeleteAlert = true
+                    }
                 }
-                presentDeleteAlert = true
             }
         }
     }
