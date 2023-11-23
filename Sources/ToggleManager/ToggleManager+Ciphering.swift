@@ -1,5 +1,7 @@
 //  ToggleManager+Ciphering.swift
 
+import CryptoKit
+
 extension ToggleManager {
     
     enum FetchError: Error {
@@ -42,6 +44,11 @@ extension ToggleManager {
         guard let cipherConfiguration = cipherConfiguration else {
             throw FetchError.missingCipherConfiguration
         }
+        
+        if value.isEmpty && cipherConfiguration.ignoreEmptyStrings {
+            return ""
+        }
+        
         let cipher: Ciphering
         switch cipherConfiguration.algorithm {
         case Algorithm.chaCha20Poly1305:
