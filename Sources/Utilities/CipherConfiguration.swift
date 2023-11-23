@@ -16,9 +16,11 @@ public typealias CipherKey = String
 public struct CipherConfiguration {
     let algorithm: Algorithm
     let key: CipherKey
+    let ignoreEmptyStrings: Bool
     
-    public init(algorithm: Algorithm, key: CipherKey) {
+    public init(algorithm: Algorithm, key: CipherKey, ignoreEmptyStrings: Bool = false) {
         self.algorithm = algorithm
         self.key = key
+        self.ignoreEmptyStrings = ignoreEmptyStrings
     }
 }
