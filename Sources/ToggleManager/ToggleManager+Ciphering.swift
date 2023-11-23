@@ -45,7 +45,7 @@ extension ToggleManager {
             throw FetchError.missingCipherConfiguration
         }
         
-        if value == "" && cipherConfiguration.ignoreEmptyStrings {
+        if value.isEmpty && cipherConfiguration.ignoreEmptyStrings {
             return ""
         }
         
