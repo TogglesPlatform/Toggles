@@ -6,6 +6,11 @@ import Foundation
 /// Thread-safe facade to interface with toggles.
 final public class ToggleManager: ObservableObject {
     
+    public enum ToggleManagerOptions {
+        case skipInvalidValueTypes
+        case skipInvalidSecureValues
+    }
+    
     var mutableValueProvider: MutableValueProvider?
     var valueProviders: [ValueProvider]
     var defaultValueProvider: DefaultValueProvider
@@ -14,6 +19,7 @@ final public class ToggleManager: ObservableObject {
     let queue = DispatchQueue(label: "com.albertodebortoli.Toggles.ToggleManager", attributes: .concurrent)
     let cache = ValueCache<Variable, Value>()
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
+    let options: [ToggleManagerOptions]
     
     @Published var hasOverrides: Bool = false
     
@@ -30,7 +36,8 @@ final public class ToggleManager: ObservableObject {
     public init(mutableValueProvider: MutableValueProvider? = nil,
                 valueProviders: [ValueProvider] = [],
                 datasourceUrl: URL,
-                cipherConfiguration: CipherConfiguration? = nil) throws {
+                cipherConfiguration: CipherConfiguration? = nil,
+                options: [ToggleManagerOptions] = []) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
         self.defaultValueProvider = try DefaultValueProvider(jsonURL: datasourceUrl)
@@ -38,6 +45,7 @@ final public class ToggleManager: ObservableObject {
         if let mutableValueProvider = self.mutableValueProvider {
             self.hasOverrides = !mutableValueProvider.variables.isEmpty
         }
+        self.options = options
     }
 }
 
@@ -62,15 +70,38 @@ extension ToggleManager {
     }
     
     private func fetchValueFromProviders(for variable: Variable) -> Value {
-        if let value = mutableValueProvider?.value(for: variable) {
+        let defaultValue = defaultValueProvider.value(for: variable)
+        
+        if let value = mutableValueProvider?.value(for: variable), isValueValid(value: value, defaultValue: defaultValue) {
             return value
         }
+        
         for provider in valueProviders {
-            if let value = provider.value(for: variable) {
+            if let value = provider.value(for: variable), isValueValid(value: value, defaultValue: defaultValue) {
                 return value
             }
         }
-        return defaultValueProvider.value(for: variable)
+        return defaultValue
+    }
+    
+    private var shouldCheckInvalidSecureValues: Bool {
+        return options.contains(.skipInvalidSecureValues)
+    }
+
+    private var shouldCheckInvalidValueTypes: Bool {
+        return options.contains(.skipInvalidValueTypes)
+    }
+    
+    private func isValueValid(value: Value, defaultValue: Value) -> Bool {
+        if shouldCheckInvalidValueTypes, value.toggleTypeDescription != defaultValue.toggleTypeDescription {
+            return false
+        }
+        
+        if shouldCheckInvalidSecureValues, ((try? readValue(for: value)) == nil) {
+            return false
+        }
+        
+        return true
     }
 }
 
