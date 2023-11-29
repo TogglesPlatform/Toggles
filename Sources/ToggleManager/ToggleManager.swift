@@ -70,18 +70,17 @@ extension ToggleManager {
     }
     
     private func fetchValueFromProviders(for variable: Variable) -> Value {
-        let defaultValue = defaultValueProvider.value(for: variable)
+        let defaultValue: Value? = defaultValueProvider.optionalValue(for: variable)
         
         if let value = mutableValueProvider?.value(for: variable), isValueValid(value: value, defaultValue: defaultValue) {
             return value
         }
-        
         for provider in valueProviders {
             if let value = provider.value(for: variable), isValueValid(value: value, defaultValue: defaultValue) {
                 return value
             }
         }
-        return defaultValue
+        return defaultValue!
     }
     
     private var shouldCheckInvalidSecureValues: Bool {
@@ -92,8 +91,8 @@ extension ToggleManager {
         return options.contains(.skipInvalidValueTypes)
     }
     
-    private func isValueValid(value: Value, defaultValue: Value) -> Bool {
-        if shouldCheckInvalidValueTypes, value.toggleTypeDescription != defaultValue.toggleTypeDescription {
+    private func isValueValid(value: Value, defaultValue: Value?) -> Bool {
+        if shouldCheckInvalidValueTypes, let defaultValue, value.toggleTypeDescription != defaultValue.toggleTypeDescription {
             return false
         }
         
