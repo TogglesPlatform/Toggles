@@ -92,7 +92,7 @@ extension ToggleManager {
     }
     
     private func isValueValid(value: Value, defaultValue: Value?) -> Bool {
-        if shouldCheckInvalidValueTypes, let defaultValue, value.toggleTypeDescription != defaultValue.toggleTypeDescription {
+        if shouldCheckInvalidValueTypes, let defaultValue, !(value ~= defaultValue) {
             return false
         }
         
