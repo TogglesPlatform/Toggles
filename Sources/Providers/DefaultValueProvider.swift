@@ -25,4 +25,11 @@ final class DefaultValueProvider {
         }
         return value
     }
+    
+    func optionalValue(for variable: Variable) -> Value? {
+        guard let value = toggles[variable] else {
+            return nil
+        }
+        return value
+    }
 }
