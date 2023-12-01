@@ -1,7 +1,7 @@
 //  ToggleManagerTests.swift
 
 import XCTest
-@testable import Toggles
+import Toggles
 
 final class ToggleManagerTests: XCTestCase {
     
