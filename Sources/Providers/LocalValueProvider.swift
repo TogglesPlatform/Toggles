@@ -28,4 +28,8 @@ extension LocalValueProvider: ValueProvider {
     public func value(for variable: Variable) -> Value? {
         toggles[variable]
     }
+    
+    func getAllValues() -> [Variable: Value] {
+        toggles
+    }
 }

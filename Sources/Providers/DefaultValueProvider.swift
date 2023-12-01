@@ -25,7 +25,4 @@ final class DefaultValueProvider {
         }
         return value
     }
-    func getAllValues() -> [Variable: Value] {
-        toggles
-    }
 }
