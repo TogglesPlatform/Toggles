@@ -29,7 +29,7 @@ extension LocalValueProvider: ValueProvider {
         toggles[variable]
     }
     
-    func getAllValues() -> [Variable: Value] {
+    public func getAllValues() -> [Variable: Value] {
         toggles
     }
 }
