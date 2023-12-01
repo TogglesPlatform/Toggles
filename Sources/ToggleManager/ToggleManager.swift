@@ -55,6 +55,10 @@ extension ToggleManager {
         }
     }
     
+    public func getDefaultValues() -> [Variable: Value] {
+        defaultValueProvider.getAllValues()
+    }
+    
     private func nonSyncValue(for variable: Variable) -> Value {
         let value = cache[variable] ?? fetchValueFromProviders(for: variable)
         cache[variable] = value

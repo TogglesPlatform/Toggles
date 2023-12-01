@@ -1,7 +1,7 @@
 //  ToggleManagerTests.swift
 
 import XCTest
-import Toggles
+@testable import Toggles
 
 final class ToggleManagerTests: XCTestCase {
     
@@ -20,6 +20,25 @@ final class ToggleManagerTests: XCTestCase {
         toggleManager = try ToggleManager(datasourceUrl: url)
         let variable = "integer_toggle"
         XCTAssertEqual(toggleManager.value(for: variable), Value.int(42))
+    }
+    
+    func test_getDefaultValues() throws {
+        let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
+        toggleManager = try ToggleManager(datasourceUrl: url, cipherConfiguration: CipherConfiguration.chaChaPoly)
+        let variable1 = "boolean_toggle"
+        let variable2 = "integer_toggle"
+        let variable3 = "numeric_toggle"
+        let variable4 = "string_toggle"
+        let variable5 = "secure_toggle"
+        let secureValue = try toggleManager.readValue(for: .secure("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK"))
+        
+        XCTAssertEqual(toggleManager.value(for: variable1), Value.bool(true))
+        XCTAssertEqual(toggleManager.value(for: variable2), Value.int(42))
+        XCTAssertEqual(toggleManager.value(for: variable3), Value.number(3.1416))
+        XCTAssertEqual(toggleManager.value(for: variable4), Value.string("Hello World"))
+        XCTAssertEqual(toggleManager.value(for: variable5), secureValue)
+        
+        XCTAssert(toggleManager.getDefaultValues().count == 5)
     }
     
     // MARK: - ValueProviders & DefaultValueProvider
