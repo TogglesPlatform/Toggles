@@ -8,14 +8,15 @@ private let userDefaultsKeyPrefix = "com.toggles"
 /// Alterations to toggles are therefore persisted across app restarts and updates.
 final public class PersistentValueProvider {
     
-    public var name: String = "Persistent"
+    public let name: String
     
     private let userDefaults: UserDefaults
     
     /// The default initializer.
     ///
     /// - Parameter userDefaults: The user defaults to store the toggles to.
-    public init(userDefaults: UserDefaults) {
+    public init(name: String = "Persistent", userDefaults: UserDefaults) {
+        self.name = name
         self.userDefaults = userDefaults
     }
 }
