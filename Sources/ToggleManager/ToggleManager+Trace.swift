@@ -7,7 +7,7 @@ extension ToggleManager {
     typealias ProviderName = String
     
     struct Trace: Equatable, Identifiable {
-        var id: String { providerName }
+        let id = UUID()
         let providerName: ProviderName
         let value: Value?
     }
