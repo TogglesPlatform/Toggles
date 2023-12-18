@@ -4,15 +4,16 @@ import Foundation
 
 final class DefaultValueProvider {
     
-    var name: String = "Default"
+    let name: String
     
     private let toggles: [Variable: Value]
     
-    init(jsonURL: URL) throws {
+    init(name: String = "Default", jsonURL: URL) throws {
         let content = try Data(contentsOf: jsonURL)
         let datasource = try JSONDecoder().decode(Datasource.self, from: content)
         let groupedToggles = Dictionary(grouping: datasource.toggles, by: \.variable)
         try TogglesValidator.validate(groupedToggles)
+        self.name = name
         self.toggles = groupedToggles
             .mapValues { $0.first! }
             .mapValues { $0.value }
