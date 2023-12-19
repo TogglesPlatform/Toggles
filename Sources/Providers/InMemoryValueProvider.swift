@@ -6,14 +6,15 @@ import Foundation
 /// Alterations to toggles are not persisted.
 final public class InMemoryValueProvider {
     
-    public var name: String = "InMemory"
+    public let name: String
     
     private var storage: [Variable: Value]
     
     /// The default initializer.
     ///
     /// - Parameter datasource: The toggles datasource in the form of dictionary of `Variable`s and `Value`s.
-    public init(datasource: [Variable: Value] = [Variable: Value]()) {
+    public init(name: String = "InMemory", datasource: [Variable: Value] = [Variable: Value]()) {
+        self.name = name
         self.storage = datasource
     }
 }

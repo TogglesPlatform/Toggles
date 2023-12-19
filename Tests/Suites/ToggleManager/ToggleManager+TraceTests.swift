@@ -18,19 +18,19 @@ final class ToggleManager_TraceTests: XCTestCase {
         let trace = toggleManager.stackTrace(for: variable)
         
         let inMemory = trace[0]
-        XCTAssertEqual(inMemory.id, "InMemory")
-        XCTAssertEqual(inMemory, ToggleManager.Trace(providerName: "InMemory", value: .int(1)))
+        XCTAssertEqual(inMemory.providerName, "InMemory")
+        XCTAssertEqual(inMemory.value, .int(1))
         
         let mock1 = trace[1]
-        XCTAssertEqual(mock1.id, "SingleValue (mock)")
-        XCTAssertEqual(mock1, ToggleManager.Trace(providerName: "SingleValue (mock)", value: .int(104)))
+        XCTAssertEqual(mock1.providerName, "SingleValue (mock)")
+        XCTAssertEqual(mock1.value, .int(104))
         
         let mock2 = trace[2]
-        XCTAssertEqual(mock2.id, "SingleValue (mock)")
-        XCTAssertEqual(mock2, ToggleManager.Trace(providerName: "SingleValue (mock)", value: .int(108)))
+        XCTAssertEqual(mock2.providerName, "SingleValue (mock)")
+        XCTAssertEqual(mock2.value, .int(108))
         
         let `default` = trace[3]
-        XCTAssertEqual(`default`.id, "Default")
-        XCTAssertEqual(`default`, ToggleManager.Trace(providerName: "Default", value: .int(42)))
+        XCTAssertEqual(`default`.providerName, "Default")
+        XCTAssertEqual(`default`.value, .int(42))
     }
 }
