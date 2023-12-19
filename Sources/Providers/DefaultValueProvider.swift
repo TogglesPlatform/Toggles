@@ -6,7 +6,7 @@ final class DefaultValueProvider {
     
     let name: String
     
-    private let toggles: [Variable: Value]
+    let toggles: [Variable: Value]
     
     init(name: String = "Default", jsonURL: URL) throws {
         let content = try Data(contentsOf: jsonURL)

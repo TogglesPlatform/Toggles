@@ -7,7 +7,7 @@ final public class LocalValueProvider {
     
     public let name: String
     
-    private let toggles: [Variable: Value]
+    let toggles: [Variable: Value]
     
     /// The default initializer.
     ///
