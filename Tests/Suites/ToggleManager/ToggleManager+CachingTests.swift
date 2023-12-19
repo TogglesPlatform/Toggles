@@ -23,4 +23,15 @@ final class ToggleManager_CachingTests: XCTestCase {
         toggleManager.set(.int(42), for: variable)
         XCTAssertNotNil(toggleManager.getCachedValue(for: variable))
     }
+    
+    func test_cacheIsClearedAfterSet() throws {
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        let variable = "integer_toggle"
+        XCTAssertNil(toggleManager.getCachedValue(for: variable))
+        toggleManager.set(.int(42), for: variable)
+        XCTAssertNotNil(toggleManager.getCachedValue(for: variable))
+        toggleManager.clearCache()
+        XCTAssertNil(toggleManager.getCachedValue(for: variable))
+    }
 }

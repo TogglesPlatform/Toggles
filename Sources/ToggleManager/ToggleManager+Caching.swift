@@ -9,4 +9,10 @@ extension ToggleManager {
             cache[variable]
         }
     }
+    
+    public func clearCache() {
+        queue.sync(flags: .barrier) {
+            do { cache.evict() }
+        }
+    }
 }
