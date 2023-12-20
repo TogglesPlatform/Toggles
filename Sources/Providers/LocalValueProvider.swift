@@ -7,7 +7,11 @@ final public class LocalValueProvider {
     
     public let name: String
     
-    let toggles: [Variable: Value]
+    private let toggles: [Variable: Value]
+    
+    public var variables: [Variable] {
+        toggles.map(\.key)
+    }
     
     /// The default initializer.
     ///
