@@ -29,4 +29,12 @@ final class LocalValueProviderTests: XCTestCase {
             XCTAssertEqual(error as! TogglesValidator.LoaderError, TogglesValidator.LoaderError.foundDuplicateVariables(["boolean_toggle", "integer_toggle"]))
         }
     }
+    
+    func test_variables() throws {
+        let url = Bundle.toggles.url(forResource: "TestDatasource", withExtension: "json")!
+        let provider = try LocalValueProvider(jsonUrl: url)
+        for variable in provider.variables {
+            XCTAssertNotNil(provider.value(for: variable))
+        }
+    }
 }
