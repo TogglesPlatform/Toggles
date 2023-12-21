@@ -9,6 +9,7 @@ final public class ToggleManager: ObservableObject {
     public enum ToggleManagerOptions {
         case skipInvalidValueTypes
         case skipInvalidSecureValues
+        case noCaching
     }
     
     var mutableValueProvider: MutableValueProvider?
@@ -65,7 +66,7 @@ extension ToggleManager {
     
     private func nonSyncValue(for variable: Variable) -> Value {
         let value = cache[variable] ?? fetchValueFromProviders(for: variable)
-        cache[variable] = value
+        cache[variable] = shouldCache ? value : nil
         return try! readValue(for: value)
     }
     
@@ -89,6 +90,10 @@ extension ToggleManager {
 
     private var shouldCheckInvalidValueTypes: Bool {
         return options.contains(.skipInvalidValueTypes)
+    }
+    
+    private var shouldCache: Bool {
+        return !options.contains(.noCaching)
     }
     
     private func isValueValid(value: Value, defaultValue: Value?) -> Bool {
@@ -119,7 +124,7 @@ extension ToggleManager {
                 return
             }
             let writeValue = try! self.writeValue(for: value)
-            self.cache[variable] = writeValue
+            self.cache[variable] = self.shouldCache ? writeValue : nil
             mutableValueProvider.set(writeValue, for: variable)
             DispatchQueue.main.async {
                 self.subjectsRefs[variable]?.send(value)
