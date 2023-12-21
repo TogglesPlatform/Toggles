@@ -9,6 +9,10 @@ final public class LocalValueProvider {
     
     private let toggles: [Variable: Value]
     
+    public var variables: [Variable] {
+        toggles.map(\.key)
+    }
+    
     /// The default initializer.
     ///
     /// - Parameter jsonUrl: The url to the file containing the toggles.
