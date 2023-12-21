@@ -6,10 +6,16 @@ import Foundation
 /// Thread-safe facade to interface with toggles.
 final public class ToggleManager: ObservableObject {
     
-    public enum ToggleManagerOptions {
-        case skipInvalidValueTypes
-        case skipInvalidSecureValues
-        case noCaching
+    public struct ToggleManagerOptions: OptionSet {
+        public var rawValue: UInt
+        
+        public init(rawValue: UInt) {
+            self.rawValue = rawValue
+        }
+        
+        static let skipInvalidValueTypes = ToggleManagerOptions(rawValue: 1 << 0)
+        static let skipInvalidSecureValues = ToggleManagerOptions(rawValue: 1 << 1)
+        static let noCaching = ToggleManagerOptions(rawValue: 1 << 2)
     }
     
     var mutableValueProvider: MutableValueProvider?
