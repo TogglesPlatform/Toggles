@@ -13,9 +13,9 @@ final public class ToggleManager: ObservableObject {
             self.rawValue = rawValue
         }
         
-        static let skipInvalidValueTypes = ToggleManagerOptions(rawValue: 1 << 0)
-        static let skipInvalidSecureValues = ToggleManagerOptions(rawValue: 1 << 1)
-        static let noCaching = ToggleManagerOptions(rawValue: 1 << 2)
+        public static let skipInvalidValueTypes = ToggleManagerOptions(rawValue: 1 << 0)
+        public static let skipInvalidSecureValues = ToggleManagerOptions(rawValue: 1 << 1)
+        public static let noCaching = ToggleManagerOptions(rawValue: 1 << 2)
     }
     
     var mutableValueProvider: MutableValueProvider?
