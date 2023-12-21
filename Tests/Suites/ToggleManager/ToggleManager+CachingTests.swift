@@ -62,7 +62,7 @@ final class ToggleManager_CachingTests: XCTestCase {
         let variable = "integer_toggle"
         XCTAssertNil(toggleManager.getCachedValue(for: variable))
         
-        let testValue = toggleManager.value(for: variable)
+        let testValue = toggleManager.set(.int(100), for: variable)
         XCTAssertNotNil(toggleManager.getCachedValue(for: variable))
     }
     
