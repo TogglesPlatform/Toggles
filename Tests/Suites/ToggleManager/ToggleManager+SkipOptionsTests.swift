@@ -1,9 +1,9 @@
-//  ToggleManager+OptionsTests.swift
+//  ToggleManager+SkipOptionsTests.swift
 
 @testable import Toggles
 import XCTest
 
-final class ToggleManager_OptionsTests: XCTestCase {
+final class ToggleManager_SkipOptionsTests: XCTestCase {
     private var toggleManager: ToggleManager!
     
     override func tearDown() {
