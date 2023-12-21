@@ -6,9 +6,16 @@ import Foundation
 /// Thread-safe facade to interface with toggles.
 final public class ToggleManager: ObservableObject {
     
-    public enum ToggleManagerOptions {
-        case skipInvalidValueTypes
-        case skipInvalidSecureValues
+    public struct ToggleManagerOptions: OptionSet {
+        public var rawValue: UInt
+        
+        public init(rawValue: UInt) {
+            self.rawValue = rawValue
+        }
+        
+        static let skipInvalidValueTypes = ToggleManagerOptions(rawValue: 1 << 0)
+        static let skipInvalidSecureValues = ToggleManagerOptions(rawValue: 1 << 1)
+        static let noCaching = ToggleManagerOptions(rawValue: 1 << 2)
     }
     
     var mutableValueProvider: MutableValueProvider?
@@ -65,7 +72,7 @@ extension ToggleManager {
     
     private func nonSyncValue(for variable: Variable) -> Value {
         let value = cache[variable] ?? fetchValueFromProviders(for: variable)
-        cache[variable] = value
+        cache[variable] = shouldCache ? value : nil
         return try! readValue(for: value)
     }
     
@@ -89,6 +96,10 @@ extension ToggleManager {
 
     private var shouldCheckInvalidValueTypes: Bool {
         return options.contains(.skipInvalidValueTypes)
+    }
+    
+    private var shouldCache: Bool {
+        return !options.contains(.noCaching)
     }
     
     private func isValueValid(value: Value, defaultValue: Value?) -> Bool {
@@ -119,7 +130,7 @@ extension ToggleManager {
                 return
             }
             let writeValue = try! self.writeValue(for: value)
-            self.cache[variable] = writeValue
+            self.cache[variable] = self.shouldCache ? writeValue : nil
             mutableValueProvider.set(writeValue, for: variable)
             DispatchQueue.main.async {
                 self.subjectsRefs[variable]?.send(value)

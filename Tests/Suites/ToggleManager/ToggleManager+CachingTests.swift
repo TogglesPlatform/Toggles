@@ -34,4 +34,46 @@ final class ToggleManager_CachingTests: XCTestCase {
         toggleManager.clearCache()
         XCTAssertNil(toggleManager.getCachedValue(for: variable))
     }
+    
+    func test_cacheValueIsNotNilAfterGet() throws {
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        let variable = "integer_toggle"
+        XCTAssertNil(toggleManager.getCachedValue(for: variable))
+        
+        _ = toggleManager.value(for: variable)
+        XCTAssertNotNil(toggleManager.getCachedValue(for: variable))
+    }
+    
+    func test_cacheValueIsNilAfterGet_withNoCachingOption() throws {
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url,
+                                              options: [.noCaching])
+        let variable = "integer_toggle"
+        XCTAssertNil(toggleManager.getCachedValue(for: variable))
+        
+        _ = toggleManager.value(for: variable)
+        XCTAssertNil(toggleManager.getCachedValue(for: variable))
+    }
+    
+    func test_cacheValueIsNotNilAfterSet() throws {
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        let variable = "integer_toggle"
+        XCTAssertNil(toggleManager.getCachedValue(for: variable))
+        
+        toggleManager.set(.int(100), for: variable)
+        XCTAssertNotNil(toggleManager.getCachedValue(for: variable))
+    }
+    
+    func test_cacheValueIsNilAfterSet_withNoCachingOption() throws {
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url,
+                                              options: [.noCaching])
+        let variable = "integer_toggle"
+        XCTAssertNil(toggleManager.getCachedValue(for: variable))
+        
+        toggleManager.set(.int(5), for: variable)
+        XCTAssertNil(toggleManager.getCachedValue(for: variable))
+    }
 }
