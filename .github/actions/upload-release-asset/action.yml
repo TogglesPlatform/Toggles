@@ -1,0 +1,40 @@
+name: Upload release asset
+
+inputs:
+  asset-filename:
+    description: The filename of the asset to upload
+    required: true
+  asset-path:
+    description: The local path to the asset to upload
+    required: true
+  gh-token:
+    description: A token to perform REST API calls to GitHub
+    required: true
+  repository:
+    description: The repository name including the org
+    required: true
+  release-id:
+    description: The ID of the release
+    required: true
+
+outputs:
+  zip-filename:
+    description: "Filename of the generated .zip"
+    value: ${{ steps.zip-fat-binary.outputs.zip_filename }}
+  zip-path:
+    description: "Path to .zip containing fat binary"
+    value: ${{ steps.zip-fat-binary.outputs.zip_path }}
+
+runs:
+  using: composite
+  steps:
+    - name: Upload release asset (${{ inputs.asset-path }})
+      shell: bash
+      run: |
+        curl -L \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ inputs.gh-token }}" \
+          -H "Content-Type: application/octet-stream" \
+          "https://uploads.github.com/repos/${{ inputs.repository }}/releases/${{ inputs.release-id }}/assets?name=${{ inputs.asset-filename }}" \
+          --data-binary "@${{ inputs.asset-path }}"
