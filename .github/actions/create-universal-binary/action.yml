@@ -1,0 +1,53 @@
+name: Create universal binary
+
+inputs:
+  tool-name:
+    description: The name of the tool
+    required: true
+
+outputs:
+  zip-filename:
+    description: The filename of the generated .zip
+    value: ${{ steps.zip-universal-binary.outputs.zip_filename }}
+  zip-path:
+    description: The path to .zip containing the universal binary
+    value: ${{ steps.zip-universal-binary.outputs.zip_path }}
+
+runs:
+  using: composite
+  steps:
+    - name: Create tmp/universal-binary folder
+      shell: bash
+      run: rm -rf tmp/universal-binary && mkdir -p tmp/universal-binary
+    - name: Delete build artifacts
+      shell: bash
+      run: swift package clean
+    - name: Build binary (arm64)
+      shell: bash
+      working-directory: ./${{ inputs.tool-name }}
+      run: swift build -c release --arch arm64
+    - name: Build binary (x86_64)
+      shell: bash
+      working-directory: ./${{ inputs.tool-name }}
+      run: swift build -c release --arch x86_64
+    - name: Create universal binary
+      shell: bash
+      working-directory: ./${{ inputs.tool-name }}
+      run: |
+        lipo -create -output \
+          ${{ inputs.tool-name }} .build/arm64-apple-macosx/release/${{ inputs.tool-name }} \
+          .build/x86_64-apple-macosx/release/${{ inputs.tool-name }}
+    - name: Move universal binary to tmp/universal-binary folder
+      shell: bash
+      run: |
+        mv ${{ inputs.tool-name }} tmp/universal-binary/${{ inputs.tool-name }}
+    - name: Zip universal binary
+      id: zip-universal-binary
+      shell: bash
+      working-directory: tmp/universal-binary
+      run: |
+        zip -r ${{ env.ZIP_FILE }} ${{ inputs.tool-name }}/${{ inputs.tool-name }}
+        echo "zip_filename=${{ env.ZIP_FILE }}" >> $GITHUB_OUTPUT
+        echo "zip_path=tmp/universal-binary/${{ env.ZIP_FILE }}" >> $GITHUB_OUTPUT
+      env:
+        ZIP_FILE: ${{ inputs.tool-name }}-macOS-universal-binary.zip
