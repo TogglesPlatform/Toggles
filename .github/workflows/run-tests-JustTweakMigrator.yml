@@ -8,35 +8,20 @@ on:
     branches:
       - main
 
+env:
+  XCODE_VERSION: 14.0.1
+
 jobs:
   test:
-    name: Run tests for ${{ matrix.destination }}
-    runs-on: ${{ matrix.macos }} 
-    strategy:
-      fail-fast: false
-      matrix:
-        macos: ['macos-12']
-        xcode: ['14.0.1']
-        command: ['test']
-        scheme: ['JustTweakMigrator']
-        destination: ['platform=macOS']
+    name: Run tests
+    runs-on: macos-12
     steps:
-    - name: Switch xcode to ${{ matrix.xcode }}
-      run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
-    - name: Show macOS version (${{ matrix.macos }})
-      run: sw_vers
     - name: Code Checkout
       uses: actions/checkout@v2
-    - name: Check xcodebuild version
-      run: xcodebuild -version
-    - name: Check xcode embedded SDKs
-      run: xcodebuild -showsdks
-    - name: Show buildable schemes
+    - name: Select Xcode
+      uses: ./.github/actions/select-xcode
+      with:
+        xcode-version: ${{ env.XCODE_VERSION }}
+    - name: Run tests
       working-directory: ./JustTweakMigrator
-      run: xcodebuild -list
-    - name: Show eligible build destinations for ${{ matrix.scheme }}
-      working-directory: ./JustTweakMigrator
-      run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
-    - name: Run tests for destination ${{ matrix.destination }}
-      working-directory: ./JustTweakMigrator
-      run: xcodebuild ${{ matrix.command }} -scheme ${{ matrix.scheme }} -destination "${{ matrix.destination }}"
+      run: swift test
