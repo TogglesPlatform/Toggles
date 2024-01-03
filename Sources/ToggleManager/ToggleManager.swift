@@ -6,6 +6,11 @@ import Foundation
 /// Thread-safe facade to interface with toggles.
 final public class ToggleManager: ObservableObject {
     
+    public enum ProviderValueError: Error {
+        case invalidValueType(String)
+        case insecureValue(String)
+    }
+    
     public struct ToggleManagerOptions: OptionSet {
         public var rawValue: UInt
         
@@ -27,7 +32,7 @@ final public class ToggleManager: ObservableObject {
     let cache = ValueCache<Variable, Value>()
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
     let options: [ToggleManagerOptions]
-    var errorLogger: ((String) -> Void)? = nil
+    var errorLogger: ErrorLogger?
     
     @Published var hasOverrides: Bool = false
     
@@ -45,7 +50,7 @@ final public class ToggleManager: ObservableObject {
                 valueProviders: [ValueProvider] = [],
                 datasourceUrl: URL,
                 cipherConfiguration: CipherConfiguration? = nil,
-                errorLogger: ((String) -> Void)? = nil,
+                errorLogger: ErrorLogger? = nil,
                 options: [ToggleManagerOptions] = []) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
@@ -107,12 +112,12 @@ extension ToggleManager {
     
     private func isValueValid(value: Value, defaultValue: Value?, variableName: Variable, providerName: String) -> Bool {
         if shouldCheckInvalidValueTypes, let defaultValue, value.toggleTypeDescription != defaultValue.toggleTypeDescription {
-            errorLogger?("\(variableName) was found with an invalid type (\(value.toggleTypeDescription)) in Provider: \(providerName)")
+            errorLogger?.logError(ProviderValueError.invalidValueType("\(variableName) was found with an invalid type (\(value.toggleTypeDescription)) in Provider: \(providerName)"))
             return false
         }
         
         if shouldCheckInvalidSecureValues, ((try? readValue(for: value)) == nil) {
-            errorLogger?("\(variableName) was found with an invalid secure value in Provider: \(providerName)")
+            errorLogger?.logError(ProviderValueError.insecureValue("\(variableName) was found with an invalid secure value in Provider: \(providerName)"))
             return false
         }
         
