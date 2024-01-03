@@ -27,6 +27,7 @@ final public class ToggleManager: ObservableObject {
     let cache = ValueCache<Variable, Value>()
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
     let options: [ToggleManagerOptions]
+    var errorLogger: ((String) -> Void)? = nil
     
     @Published var hasOverrides: Bool = false
     
@@ -44,6 +45,7 @@ final public class ToggleManager: ObservableObject {
                 valueProviders: [ValueProvider] = [],
                 datasourceUrl: URL,
                 cipherConfiguration: CipherConfiguration? = nil,
+                errorLogger: ((String) -> Void)? = nil,
                 options: [ToggleManagerOptions] = []) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
@@ -53,6 +55,7 @@ final public class ToggleManager: ObservableObject {
             self.hasOverrides = !mutableValueProvider.variables.isEmpty
         }
         self.options = options
+        self.errorLogger = errorLogger
     }
 }
 
@@ -79,11 +82,11 @@ extension ToggleManager {
     private func fetchValueFromProviders(for variable: Variable) -> Value {
         let defaultValue: Value? = defaultValueProvider.optionalValue(for: variable)
         
-        if let value = mutableValueProvider?.value(for: variable), isValueValid(value: value, defaultValue: defaultValue) {
+        if let value = mutableValueProvider?.value(for: variable), isValueValid(value: value, defaultValue: defaultValue, variableName: variable, providerName: mutableValueProvider!.name) {
             return value
         }
         for provider in valueProviders {
-            if let value = provider.value(for: variable), isValueValid(value: value, defaultValue: defaultValue) {
+            if let value = provider.value(for: variable), isValueValid(value: value, defaultValue: defaultValue, variableName: variable, providerName: provider.name) {
                 return value
             }
         }
@@ -102,12 +105,14 @@ extension ToggleManager {
         return !options.contains(.noCaching)
     }
     
-    private func isValueValid(value: Value, defaultValue: Value?) -> Bool {
-        if shouldCheckInvalidValueTypes, let defaultValue, !(value ~= defaultValue) {
+    private func isValueValid(value: Value, defaultValue: Value?, variableName: Variable, providerName: String) -> Bool {
+        if shouldCheckInvalidValueTypes, let defaultValue, value.toggleTypeDescription != defaultValue.toggleTypeDescription {
+            errorLogger?("\(variableName) was found with an invalid type (\(value.toggleTypeDescription)) in Provider: \(providerName)")
             return false
         }
         
         if shouldCheckInvalidSecureValues, ((try? readValue(for: value)) == nil) {
+            errorLogger?("\(variableName) was found with an invalid secure value in Provider: \(providerName)")
             return false
         }
         

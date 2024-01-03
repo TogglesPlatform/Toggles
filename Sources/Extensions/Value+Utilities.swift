@@ -36,6 +36,21 @@ extension Value {
         }
     }
     
+    var toggleTypeDescription: String {
+        switch self {
+        case .bool:
+            return "Bool"
+        case .int:
+            return "Int"
+        case .number:
+            return "Double"
+        case .string:
+            return "String"
+        case .secure:
+            return "Secure"
+        }
+    }
+    
     var sfSymbolId: SFSymbolId {
         switch self {
         case .bool:
