@@ -19,4 +19,3 @@ extension Value {
         return false
     }
 }
-
