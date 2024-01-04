@@ -82,8 +82,8 @@ extension ToggleManager {
     private func fetchValueFromProviders(for variable: Variable) -> Value {
         let defaultValue: Value? = defaultValueProvider.optionalValue(for: variable)
         
-        if let value = mutableValueProvider?.value(for: variable) {
-            if isValueValid(value: value, defaultValue: defaultValue, variableName: variable, provider: mutableValueProvider!) {
+        if let mutableValueProvider, let value = mutableValueProvider.value(for: variable) {
+            if isValueValid(value: value, defaultValue: defaultValue, variableName: variable, provider: mutableValueProvider) {
                 return value
             }
         }
