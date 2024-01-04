@@ -6,11 +6,6 @@ import Foundation
 /// Thread-safe facade to interface with toggles.
 final public class ToggleManager: ObservableObject {
     
-    public enum ProviderValueError: Error {
-        case invalidValueType(String)
-        case insecureValue(String)
-    }
-    
     public struct ToggleManagerOptions: OptionSet {
         public var rawValue: UInt
         
@@ -32,7 +27,7 @@ final public class ToggleManager: ObservableObject {
     let cache = ValueCache<Variable, Value>()
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
     let options: [ToggleManagerOptions]
-    var errorLogger: ErrorLogger?
+    var logger: Logger?
     
     @Published var hasOverrides: Bool = false
     
@@ -50,7 +45,7 @@ final public class ToggleManager: ObservableObject {
                 valueProviders: [ValueProvider] = [],
                 datasourceUrl: URL,
                 cipherConfiguration: CipherConfiguration? = nil,
-                errorLogger: ErrorLogger? = nil,
+                logger: Logger? = nil,
                 options: [ToggleManagerOptions] = []) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
@@ -60,7 +55,7 @@ final public class ToggleManager: ObservableObject {
             self.hasOverrides = !mutableValueProvider.variables.isEmpty
         }
         self.options = options
-        self.errorLogger = errorLogger
+        self.logger = logger
     }
 }
 
@@ -87,11 +82,14 @@ extension ToggleManager {
     private func fetchValueFromProviders(for variable: Variable) -> Value {
         let defaultValue: Value? = defaultValueProvider.optionalValue(for: variable)
         
-        if let value = mutableValueProvider?.value(for: variable), isValueValid(value: value, defaultValue: defaultValue, variableName: variable, providerName: mutableValueProvider?.name ?? "MutableValueProvider") {
-            return value
+        if let value = mutableValueProvider?.value(for: variable) {
+            if isValueValid(value: value, defaultValue: defaultValue, variableName: variable, provider: mutableValueProvider!) {
+                return value
+            }
         }
+        
         for provider in valueProviders {
-            if let value = provider.value(for: variable), isValueValid(value: value, defaultValue: defaultValue, variableName: variable, providerName: provider.name) {
+            if let value = provider.value(for: variable), isValueValid(value: value, defaultValue: defaultValue, variableName: variable, provider: provider) {
                 return value
             }
         }
@@ -110,14 +108,14 @@ extension ToggleManager {
         return !options.contains(.noCaching)
     }
     
-    private func isValueValid(value: Value, defaultValue: Value?, variableName: Variable, providerName: String) -> Bool {
-        if shouldCheckInvalidValueTypes, let defaultValue, value.toggleTypeDescription != defaultValue.toggleTypeDescription {
-            errorLogger?.logError(ProviderValueError.invalidValueType("\(variableName) was found with an invalid type (\(value.toggleTypeDescription)) in Provider: \(providerName)"))
+    private func isValueValid(value: Value, defaultValue: Value?, variableName: Variable, provider: ValueProvider) -> Bool {
+        if shouldCheckInvalidValueTypes, let defaultValue, !(value ~= defaultValue) {
+            logger?.log(ToggleError.invalidValueType(variableName, value, provider))
             return false
         }
         
         if shouldCheckInvalidSecureValues, ((try? readValue(for: value)) == nil) {
-            errorLogger?.logError(ProviderValueError.insecureValue("\(variableName) was found with an invalid secure value in Provider: \(providerName)"))
+            logger?.log(ToggleError.insecureValue(variableName, provider))
             return false
         }
         
