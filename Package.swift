@@ -32,7 +32,9 @@ let package = Package(
         ),
         .target(
             name: "ToggleGen",
-            dependencies: [],
+            dependencies: [
+                .target(name: "Toggles")
+            ],
             path: "ToggleGen/Sources",
             resources: [.process("Resources")]
         ),
