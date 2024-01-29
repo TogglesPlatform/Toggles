@@ -44,9 +44,14 @@ public class ToggleObservable: ObservableObject {
         subscribe(on: variable)
     }
     
+    deinit {
+        cancellables.removeAll()
+    }
+    
     private func subscribe(on variable: Variable) {
         manager.publisher(for: variable)
-            .sink { value in
+            .sink { [weak self] value in
+                guard let self else { return }
                 self.value = value
                 switch value {
                 case .bool(let value):
