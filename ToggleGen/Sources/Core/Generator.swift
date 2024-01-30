@@ -1,6 +1,7 @@
 //  Generator.swift
 
 import Foundation
+import Toggles
 
 enum AccessControl: String {
     case `open`
@@ -14,7 +15,7 @@ struct Constant {
 }
 
 struct AccessorInfo {
-    var variable: Toggle.Variable
+    var variable: Variable
     var type: String
     var propertyName: String
     var constant: Constant
@@ -32,7 +33,7 @@ class Generator {
     }
     
     enum LoaderError: Error, Equatable {
-        case foundDuplicateVariables([Toggle.Variable])
+        case foundDuplicateVariables([Variable])
         case foundDuplicatePropertyNames([String])
     }
     

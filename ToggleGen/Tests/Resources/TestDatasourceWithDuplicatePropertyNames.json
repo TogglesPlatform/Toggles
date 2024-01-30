@@ -4,7 +4,9 @@
       "variable": "boolean_toggle",
       "bool": true,
       "metadata": {
-        "propertyName": "userDefinedBooleanToggle"
+        "propertyName": "userDefinedBooleanToggle",
+        "group": "",
+        "description": ""
       }
     },
     {
@@ -23,7 +25,9 @@
       "variable": "boolean_toggle_2",
       "bool": true,
       "metadata": {
-        "propertyName": "userDefinedBooleanToggle"
+        "propertyName": "userDefinedBooleanToggle",
+        "group": "",
+        "description": ""
       }
     }
   ]

@@ -1,8 +1,9 @@
 //  Models+Utilities.swift
 
 import Foundation
+import Toggles
 
-extension Toggle.Variable {
+extension Variable {
     var codeVariableValue: String {
         camelCased()
     }
@@ -10,7 +11,7 @@ extension Toggle.Variable {
 
 extension Toggle {
     var computedPropertyName: String {
-        if let propertyName = metadata?.propertyName {
+        if let propertyName = metadata.propertyName {
             return propertyName
         }
         return variable.codeVariableValue

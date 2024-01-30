@@ -16,6 +16,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/stencilproject/Stencil.git", exact: "0.15.1"),
+        .package(name: "Toggles", path: "../")
     ],
     targets: [
         .executableTarget(
@@ -23,6 +24,7 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Stencil", package: "Stencil"),
+                .product(name: "Toggles", package: "Toggles"),
             ],
             path: "Sources"),
         .testTarget(
