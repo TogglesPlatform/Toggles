@@ -14,11 +14,7 @@ let package = Package(
     products: [
         .library(
             name: "Toggles",
-            targets: ["Toggles"]),
-        .library(
-            name: "ToggleGen",
-            targets: ["ToggleGen"]
-        )
+            targets: ["Toggles"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
@@ -28,12 +24,6 @@ let package = Package(
             name: "Toggles",
             dependencies: [],
             path: "Sources",
-            resources: [.process("Resources")]
-        ),
-        .target(
-            name: "ToggleGen",
-            dependencies: [],
-            path: "ToggleGen/Sources",
             resources: [.process("Resources")]
         ),
         .testTarget(
