@@ -58,6 +58,24 @@ final class Toggle_CodableTests: XCTestCase {
         XCTAssertEqual(toggle, decodedToggle)
     }
     
+    func test_codableObjectToggle() throws {
+        let toggle = Toggle(
+            variable: "var",
+            value: .object(
+                Object(map: [
+                    "var_bool": .bool(true),
+                    "var_string": .string("val"),
+                    "var_int": .int(420),
+                    "var_number": .number(13.5),
+                ])
+            ),
+            metadata: Metadata(description: "", group: "")
+        )
+        let data = try! JSONEncoder().encode(toggle)
+        let decodedToggle = try JSONDecoder().decode(Toggle.self, from: data)
+        XCTAssertEqual(toggle, decodedToggle)
+    }
+    
     // Note: Performance Test Baselines not available for Swift Packages
     // https://forums.swift.org/t/performance-test-baselines-not-available-for-swift-packages/45621
     

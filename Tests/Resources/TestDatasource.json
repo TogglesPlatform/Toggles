@@ -39,6 +39,19 @@
         "group": "group_3",
         "description": "Secure toggle"
       }
+    },
+    {
+        "variable": "object_toggle",
+        "object": {
+            "boolProperty" : true,
+            "stringProperty" : "value",
+            "intProperty" : 421,
+            "numberProperty" : 12.3,
+        },
+        "metadata": {
+            "group": "group_3",
+            "description": "Object toggle"
+        }
     }
   ]
 }

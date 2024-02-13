@@ -61,6 +61,18 @@ final class InputValidationHelperTests: XCTestCase {
         XCTAssertTrue(inputValidationHelper.isInputValid("***"))
     }
     
+    func test_inputValidObjectTrue() throws {
+        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let inputValidationHelper = InputValidationHelper(toggle: toggle)
+        XCTAssertTrue(inputValidationHelper.isInputValid("{\"var\":400}"))
+    }
+    
+    func test_inputInvalidObjectTrue() throws {
+        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let inputValidationHelper = InputValidationHelper(toggle: toggle)
+        XCTAssertFalse(inputValidationHelper.isInputValid("***"))
+    }
+    
     func test_overridingValueBoolTrue() throws {
         let toggle = factory.booleanEmptyMetadataToggle(true)
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
@@ -95,6 +107,24 @@ final class InputValidationHelperTests: XCTestCase {
         XCTAssertEqual(inputValidationHelper.overridingValue(for: "***"), .secure("***"))
     }
     
+    func test_overridingValueObject() throws {
+        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let inputValidationHelper = InputValidationHelper(toggle: toggle)
+        XCTAssertEqual(
+            inputValidationHelper.overridingValue(for: "{\"var\":400}"),
+            .object(Object(map: ["var": .int(400)]))
+        )
+    }
+    
+    func test_overridingInvalidValueObject() throws {
+        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let inputValidationHelper = InputValidationHelper(toggle: toggle)
+        XCTAssertEqual(
+            inputValidationHelper.overridingValue(for: "--"),
+            .object(Object(map: ["var": .int(300)]))
+        )
+    }
+    
 #if os(iOS)
     func test_keyboardTypeBool() throws {
         let toggle = factory.booleanEmptyMetadataToggle(true)
@@ -122,6 +152,12 @@ final class InputValidationHelperTests: XCTestCase {
     
     func test_keyboardTypeSecure() throws {
         let toggle = factory.secureEmptyMetadataToggle("...")
+        let inputValidationHelper = InputValidationHelper(toggle: toggle)
+        XCTAssertEqual(inputValidationHelper.keyboardType, .default)
+    }
+    
+    func test_keyboardTypeObject() throws {
+        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertEqual(inputValidationHelper.keyboardType, .default)
     }

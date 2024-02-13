@@ -18,6 +18,8 @@ extension Value {
             return value
         case .secure(let value):
             return value
+        case .object(let object):
+            return object.description ?? ""
         }
     }
     
@@ -33,6 +35,8 @@ extension Value {
             return "String"
         case .secure:
             return "String"
+        case .object:
+            return "Object"
         }
     }
     
@@ -48,6 +52,8 @@ extension Value {
             return "textformat"
         case .secure:
             return "eye.slash"
+        case .object:
+            return "aqi.medium"
         }
     }
 }

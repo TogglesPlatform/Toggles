@@ -34,6 +34,12 @@ class ToggleFactory {
                metadata: Metadata(description: "Secure toggle", group: "group_3"))
     }
     
+    func objetToggle(_ value: Object) -> Toggle {
+        Toggle(variable: "object_toggle",
+               value: .object(value),
+               metadata: Metadata(description: "Object toggle", group: "group_3"))
+    }
+    
     func booleanEmptyMetadataToggle(_ value: Bool) -> Toggle {
         Toggle(variable: "boolean_toggle",
                value: .bool(value),
@@ -64,13 +70,25 @@ class ToggleFactory {
                metadata: Metadata(description: "", group: ""))
     }
     
+    func objetEmptyMetadataToggle(_ value: Object) -> Toggle {
+        Toggle(variable: "object_toggle",
+               value: .object(value),
+               metadata: Metadata(description: "", group: ""))
+    }
+    
     func makeToggles() -> [Toggle] {
         [
             booleanToggle(true),
             integerToggle(42),
             numericToggle(3.1416),
             stringToggle("Hello World"),
-            secureToggle("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK")
+            secureToggle("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK"),
+            objetToggle(Object(map: [
+                "boolProperty": .bool(true),
+                "stringProperty": .string("value"),
+                "intProperty": .int(421),
+                "numberProperty": .number(12.3)])
+            )
         ]
     }
     
