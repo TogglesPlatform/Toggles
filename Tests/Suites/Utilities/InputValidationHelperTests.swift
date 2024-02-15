@@ -62,13 +62,13 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_inputValidObjectTrue() throws {
-        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let toggle = factory.objectEmptyMetadataToggle(Object(map: ["var": .int(300)]))
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertTrue(inputValidationHelper.isInputValid("{\"var\":400}"))
     }
     
     func test_inputInvalidObjectTrue() throws {
-        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let toggle = factory.objectEmptyMetadataToggle(Object(map: ["var": .int(300)]))
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertFalse(inputValidationHelper.isInputValid("***"))
     }
@@ -108,7 +108,7 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_overridingValueObject() throws {
-        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let toggle = factory.objectEmptyMetadataToggle(Object(map: ["var": .int(300)]))
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertEqual(
             inputValidationHelper.overridingValue(for: "{\"var\":400}"),
@@ -117,7 +117,7 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_overridingInvalidValueObject() throws {
-        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let toggle = factory.objectEmptyMetadataToggle(Object(map: ["var": .int(300)]))
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertEqual(
             inputValidationHelper.overridingValue(for: "--"),
@@ -157,7 +157,7 @@ final class InputValidationHelperTests: XCTestCase {
     }
     
     func test_keyboardTypeObject() throws {
-        let toggle = factory.objetEmptyMetadataToggle(Object(map: ["var": .int(300)]))
+        let toggle = factory.objectEmptyMetadataToggle(Object(map: ["var": .int(300)]))
         let inputValidationHelper = InputValidationHelper(toggle: toggle)
         XCTAssertEqual(inputValidationHelper.keyboardType, .default)
     }

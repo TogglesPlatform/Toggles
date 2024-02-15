@@ -13,7 +13,7 @@ final class Value_AccessorsTests: XCTestCase {
         XCTAssertNil(factory.numericToggle(3.1416).value.boolValue)
         XCTAssertNil(factory.stringToggle("Hello World").value.boolValue)
         XCTAssertNil(factory.secureToggle("secret").value.boolValue)
-        XCTAssertNil(factory.objetToggle(Object(map: ["var": .int(333)])).value.boolValue)
+        XCTAssertNil(factory.objectToggle(Object(map: ["var": .int(333)])).value.boolValue)
     }
     
     func test_toggleIntAccessor() throws {
@@ -22,7 +22,7 @@ final class Value_AccessorsTests: XCTestCase {
         XCTAssertNil(factory.numericToggle(3.1416).value.intValue)
         XCTAssertNil(factory.stringToggle("Hello World").value.intValue)
         XCTAssertNil(factory.secureToggle("secret").value.intValue)
-        XCTAssertNil(factory.objetToggle(Object(map: ["var": .int(333)])).value.intValue)
+        XCTAssertNil(factory.objectToggle(Object(map: ["var": .int(333)])).value.intValue)
     }
     
     func test_toggleNumberAccessor() throws {
@@ -31,7 +31,7 @@ final class Value_AccessorsTests: XCTestCase {
         XCTAssertEqual(factory.numericToggle(3.1416).value.numberValue, 3.1416)
         XCTAssertNil(factory.stringToggle("Hello World").value.numberValue)
         XCTAssertNil(factory.secureToggle("secret").value.numberValue)
-        XCTAssertNil(factory.objetToggle(Object(map: ["var": .int(333)])).value.numberValue)
+        XCTAssertNil(factory.objectToggle(Object(map: ["var": .int(333)])).value.numberValue)
     }
     
     func test_toggleStringAccessor() throws {
@@ -40,7 +40,7 @@ final class Value_AccessorsTests: XCTestCase {
         XCTAssertNil(factory.numericToggle(3.1416).value.stringValue)
         XCTAssertEqual(factory.stringToggle("Hello World").value.stringValue, "Hello World")
         XCTAssertNil(factory.secureToggle("secret").value.stringValue)
-        XCTAssertNil(factory.objetToggle(Object(map: ["var": .int(333)])).value.stringValue)
+        XCTAssertNil(factory.objectToggle(Object(map: ["var": .int(333)])).value.stringValue)
     }
     
     func test_toggleSecureAccessor() throws {
@@ -49,7 +49,7 @@ final class Value_AccessorsTests: XCTestCase {
         XCTAssertNil(factory.numericToggle(3.1416).value.secureValue)
         XCTAssertNil(factory.stringToggle("Hello World").value.secureValue)
         XCTAssertEqual(factory.secureToggle("secret").value.secureValue, "secret")
-        XCTAssertNil(factory.objetToggle(Object(map: ["var": .int(333)])).value.secureValue)
+        XCTAssertNil(factory.objectToggle(Object(map: ["var": .int(333)])).value.secureValue)
     }
     
     func test_toggleObjectAccessor() throws {
@@ -59,7 +59,7 @@ final class Value_AccessorsTests: XCTestCase {
         XCTAssertNil(factory.stringToggle("Hello World").value.objectValue)
         XCTAssertNil(factory.secureToggle("secret").value.objectValue)
         XCTAssertEqual(
-            factory.objetToggle(Object(map: ["var": .int(333)])).value.objectValue,
+            factory.objectToggle(Object(map: ["var": .int(333)])).value.objectValue,
             Object(map: ["var": .int(333)])
         )
     }
