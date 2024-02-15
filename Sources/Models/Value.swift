@@ -9,4 +9,5 @@ public enum Value: Equatable, Codable {
     case number(Double)
     case string(String)
     case secure(String)
+    case object(Object)
 }

@@ -64,6 +64,9 @@ public class ToggleObservable: ObservableObject {
                     self.stringValue = value
                 case .secure(let value):
                     self.secureValue = value
+                case .object:
+                    // TODO: Changes in upcoming PR
+                    break
                 }
             }
             .store(in: &cancellables)

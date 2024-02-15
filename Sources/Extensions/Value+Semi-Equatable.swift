@@ -15,6 +15,8 @@ extension Value {
             if case .string = rhs { return true }
         case .secure:
             if case .secure = rhs { return true }
+        case .object:
+            if case .object = rhs { return true }
         }
         return false
     }

@@ -37,6 +37,9 @@ final class MockRemoteValueProvider: ValueProvider {
                 let decryptedValue = try! cipher.decrypt(v)
                 let updatedValue = decryptedValue + "!"
                 return .secure(try! cipher.encrypt(updatedValue))
+            case .object(let object):
+                // TODO: Change fake data
+                return .object(object)
             }
         }
         completion()

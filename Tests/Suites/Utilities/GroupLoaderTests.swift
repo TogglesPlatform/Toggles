@@ -18,6 +18,15 @@ final class GroupLoaderTests: XCTestCase {
                 Toggle(variable: "string_toggle", value: .string("Hello World"), metadata: Metadata(description: "String toggle", group: "group_2"))
             ]),
             Group(title: "group_3", toggles: [
+                Toggle(
+                    variable: "object_toggle",
+                    value: .object(Object(map: [
+                        "boolProperty": .bool(true),
+                        "stringProperty": .string("value"),
+                        "intProperty": .int(421),
+                        "numberProperty": .number(12.3)])),
+                    metadata: Metadata(description: "Object toggle", group: "group_3")
+                ),
                 Toggle(variable: "secure_toggle", value: .secure("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK"), metadata: Metadata(description: "Secure toggle", group: "group_3"))
             ])
         ]

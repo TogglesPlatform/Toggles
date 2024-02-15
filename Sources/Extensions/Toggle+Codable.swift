@@ -16,6 +16,7 @@ extension Toggle: Codable {
         case string
         case secure
         case metadata
+        case object
     }
     
     public init(from decoder: Decoder) throws {
@@ -35,6 +36,9 @@ extension Toggle: Codable {
         }
         else if let secureValue = try? values.decode(String.self, forKey: .secure) {
             self.value = .secure(secureValue)
+        }
+        else if let objectValue = try? values.decode(Object.self, forKey: .object) {
+            self.value = .object(objectValue)
         }
         else {
             throw CodingError.missingValue
@@ -57,6 +61,8 @@ extension Toggle: Codable {
             try container.encode(value, forKey: .string)
         case .secure(let value):
             try container.encode(value, forKey: .secure)
+        case .object(let value):
+            try container.encode(value, forKey: .object)
         }
         try container.encode(metadata, forKey: .metadata)
     }

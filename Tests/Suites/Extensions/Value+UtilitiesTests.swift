@@ -25,6 +25,10 @@ final class Value_UtilitiesTests: XCTestCase {
         XCTAssertEqual(Value.secure("secret").description, "secret")
     }
     
+    func test_objectValueDescription() throws {
+        XCTAssertEqual(Value.object(Object(map: ["var": .int(333)])).description,"{\"var\":333}")
+    }
+    
     func test_booleanValueTypeDescription() throws {
         XCTAssertEqual(Value.bool(true).typeDescription, "Bool")
     }
@@ -45,6 +49,10 @@ final class Value_UtilitiesTests: XCTestCase {
         XCTAssertEqual(Value.secure("secret").typeDescription, "String")
     }
     
+    func test_objectValueTypeDescription() throws {
+        XCTAssertEqual(Value.object(Object(map: [:])).typeDescription, "Object")
+    }
+    
     func test_booleanValueSFSybol() throws {
         XCTAssertEqual(Value.bool(true).sfSymbolId, "switch.2")
     }
@@ -63,5 +71,9 @@ final class Value_UtilitiesTests: XCTestCase {
     
     func test_secureValueSFSybol() throws {
         XCTAssertEqual(Value.secure("secret").sfSymbolId, "eye.slash")
+    }
+    
+    func test_ObjectValueSFSybol() throws {
+        XCTAssertEqual(Value.object(Object(map: [:])).sfSymbolId, "aqi.medium")
     }
 }

@@ -1,8 +1,8 @@
-//  Object+Decodable.swift
+//  Object+Codable.swift
 
 import Foundation
 
-extension Object: Decodable {
+extension Object: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
@@ -22,5 +22,14 @@ extension Object: Decodable {
         } else {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unsupported type. Invalid data.")
         }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        guard !map.isEmpty else {
+            throw EncodingError.invalidValue(map, .init(codingPath: [], debugDescription: "Empty object. Can not be encoded."))
+        }
+        
+        var container = encoder.singleValueContainer()
+        try container.encode(map)
     }
 }

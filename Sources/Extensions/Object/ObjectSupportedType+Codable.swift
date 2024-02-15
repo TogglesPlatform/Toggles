@@ -1,8 +1,8 @@
-//  ObjectSupportedType+Decodable.swift
+//  ObjectSupportedType+Codable.swift
 
 import Foundation
 
-extension ObjectSupportedType: Decodable {
+extension ObjectSupportedType: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 
@@ -16,6 +16,21 @@ extension ObjectSupportedType: Decodable {
             self = .string(string)
         } else {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "ObjectSupportedType tried to decode unsupported type, could not decode")
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        
+        switch self {
+        case .bool(let bool):
+            try container.encode(bool)
+        case .int(let int):
+            try container.encode(int)
+        case .number(let number):
+            try container.encode(number)
+        case .string(let string):
+            try container.encode(string)
         }
     }
 }

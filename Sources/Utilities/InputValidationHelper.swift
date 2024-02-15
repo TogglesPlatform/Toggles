@@ -21,6 +21,8 @@ struct InputValidationHelper {
             return true
         case .secure:
             return true
+        case .object:
+            return input.isValidJSON
         }
     }
     
@@ -36,6 +38,9 @@ struct InputValidationHelper {
             return .string(input)
         case .secure:
             return .secure(input)
+        case .object:
+            guard let newValue = input.asObject else { return toggle.value }
+            return .object(newValue)
         }
     }
     
@@ -51,6 +56,8 @@ struct InputValidationHelper {
         case .string:
             return .default
         case .secure:
+            return .default
+        case .object:
             return .default
         }
     }

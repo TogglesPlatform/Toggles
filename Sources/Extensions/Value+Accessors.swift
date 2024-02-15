@@ -33,4 +33,10 @@ public extension Value {
         guard case let .secure(v) = self else { return nil }
         return v
     }
+    
+    /// The raw value of the toggle if it's of object type, nil otherwise.
+    var objectValue: Object? {
+        guard case let .object(v) = self else { return nil }
+        return v
+    }
 }
