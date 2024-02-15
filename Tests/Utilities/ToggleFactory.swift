@@ -98,7 +98,13 @@ class ToggleFactory {
             integerEmptyMetadataToggle(42),
             numericEmptyMetadataToggle(3.1416),
             stringEmptyMetadataToggle("Hello World"),
-            secureEmptyMetadataToggle("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK")
+            secureEmptyMetadataToggle("YXe+Ev76FbdwCeDCVpZNZ1RItWZwKTLXF3/Yi+x62n3JWbvPo6YK"),
+            objectEmptyMetadataToggle(Object(map: [
+                "boolProperty": .bool(true),
+                "stringProperty": .string("value"),
+                "intProperty": .int(421),
+                "numberProperty": .number(12.3)])
+            )
         ]
     }
     
