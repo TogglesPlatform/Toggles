@@ -88,6 +88,12 @@ final class ToggleObservableTests: XCTestCase {
             }
             .store(in: &cancellables)
         
+        toggleObservable.$objectValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
         toggleManager.set(.bool(newValue), for: variable)
         
         wait(for: [rawValueExpectation, valueExpectation], timeout: 5.0)
@@ -154,6 +160,12 @@ final class ToggleObservableTests: XCTestCase {
             .store(in: &cancellables)
         
         toggleObservable.$secureValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
+        toggleObservable.$objectValue
             .sink { value in
                 XCTAssertNil(value)
             }
@@ -230,6 +242,12 @@ final class ToggleObservableTests: XCTestCase {
             }
             .store(in: &cancellables)
         
+        toggleObservable.$objectValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
         toggleManager.set(.number(newValue), for: variable)
         
         wait(for: [rawValueExpectation, valueExpectation], timeout: 5.0)
@@ -296,6 +314,12 @@ final class ToggleObservableTests: XCTestCase {
             .store(in: &cancellables)
         
         toggleObservable.$secureValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
+        toggleObservable.$objectValue
             .sink { value in
                 XCTAssertNil(value)
             }
@@ -372,7 +396,90 @@ final class ToggleObservableTests: XCTestCase {
             }
             .store(in: &cancellables)
         
-        toggleManager.set(.secure("secret"), for: variable)
+        toggleObservable.$objectValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
+        toggleManager.set(.secure(newValue), for: variable)
+        
+        wait(for: [rawValueExpectation, valueExpectation], timeout: 5.0)
+    }
+    
+    func test_objectObservable() throws {
+        let variable = "object_toggle"
+        let toggleObservable = ToggleObservable(manager: toggleManager, variable: variable)
+        
+        let valueExpectation = self.expectation(description: #function)
+        var receiveValueCount = 0
+        
+        let rawValueExpectation = self.expectation(description: #function)
+        var receiveRawValueCount = 0
+        
+        let oldValue = Object(map: [
+            "boolProperty": .bool(true),
+            "stringProperty": .string("value"),
+            "intProperty": .int(421),
+            "numberProperty": .number(12.3)]
+        )
+        let newValue = Object(map: ["var": .int(400)])
+        
+        toggleObservable.$value
+            .sink { value in
+                receiveValueCount += 1
+                switch receiveValueCount {
+                case 1:
+                    XCTAssertEqual(value, .object(oldValue))
+                case 2:
+                    XCTAssertEqual(value, .object(newValue))
+                    valueExpectation.fulfill()
+                default:
+                    XCTFail("Received more than 2 messages.")
+                }
+            }
+            .store(in: &cancellables)
+        
+        toggleObservable.$objectValue
+            .sink { value in
+                receiveRawValueCount += 1
+                switch receiveRawValueCount {
+                case 1:
+                    XCTAssertEqual(value, oldValue)
+                case 2:
+                    XCTAssertEqual(value, newValue)
+                    rawValueExpectation.fulfill()
+                default:
+                    XCTFail("Received more than 2 messages.")
+                }
+            }
+            .store(in: &cancellables)
+        
+        toggleObservable.$boolValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
+        toggleObservable.$intValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
+        toggleObservable.$numberValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
+        toggleObservable.$stringValue
+            .sink { value in
+                XCTAssertNil(value)
+            }
+            .store(in: &cancellables)
+        
+        toggleManager.set(.object(newValue), for: variable)
         
         wait(for: [rawValueExpectation, valueExpectation], timeout: 5.0)
     }
