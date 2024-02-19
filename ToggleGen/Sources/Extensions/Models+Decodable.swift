@@ -15,6 +15,7 @@ extension Toggle: Decodable {
         case number
         case string
         case secure
+        case object
         case metadata
     }
     
@@ -35,6 +36,9 @@ extension Toggle: Decodable {
         }
         else if let secureValue = try? values.decode(String.self, forKey: .secure) {
             self.value = .secure(secureValue)
+        }
+        else if let objectValue = try? values.decode(Object.self, forKey: .object) {
+            self.value = .object(objectValue)
         }
         else {
             throw CodingError.missingValue

@@ -20,7 +20,7 @@ public struct Object {
     
     /// Object description represented as plain json string. 
     /// Returns nil if object cant be represented as json string.
-    var description: String? {
+    public var description: String? {
         let encoder = JSONEncoder()
         guard let value = try? encoder.encode(map) else {
             return nil

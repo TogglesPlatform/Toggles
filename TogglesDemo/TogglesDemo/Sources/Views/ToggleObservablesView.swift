@@ -15,6 +15,7 @@ The view will show the values updating when overrides or new configurations are 
     @ObservedObject var numericObservable: ToggleObservable
     @ObservedObject var stringObservable: ToggleObservable
     @ObservedObject var secureObservable: ToggleObservable
+    @ObservedObject var objectObservable: ToggleObservable
 
     init(manager: ToggleManager) {
         self.booleanObservable = ToggleObservable(manager: manager, variable: ToggleVariables.booleanToggle)
@@ -22,6 +23,7 @@ The view will show the values updating when overrides or new configurations are 
         self.numericObservable = ToggleObservable(manager: manager, variable: ToggleVariables.numericToggle)
         self.stringObservable = ToggleObservable(manager: manager, variable: ToggleVariables.stringToggle)
         self.secureObservable = ToggleObservable(manager: manager, variable: ToggleVariables.encryptedToggle)
+        self.objectObservable = ToggleObservable(manager: manager, variable: ToggleVariables.objectToggle)
     }
         
     var body: some View {
@@ -35,42 +37,32 @@ The view will show the values updating when overrides or new configurations are 
                 .padding()
             Text(message)
                 .padding()
-            HStack {
-                VStack(alignment: .trailing) {
-                    HStack {
-                        Text(ToggleVariables.booleanToggle)
-                    }
-                    HStack {
-                        Text(ToggleVariables.integerToggle)
-                    }
-                    HStack {
-                        Text(ToggleVariables.numericToggle)
-                    }
-                    HStack {
-                        Text(ToggleVariables.stringToggle)
-                    }
-                    HStack {
-                        Text(ToggleVariables.encryptedToggle)
-                    }
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("\(ToggleVariables.booleanToggle):")
+                    Text(String(booleanObservable.boolValue!))
                 }
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(String(booleanObservable.boolValue!))
-                    }
-                    HStack {
-                        Text(String(intObservable.intValue!))
-                    }
-                    HStack {
-                        Text(String(numericObservable.numberValue!))
-                    }
-                    HStack {
-                        Text(stringObservable.stringValue!)
-                    }
-                    HStack {
-                        Text(secureObservable.secureValue!)
-                    }
+                HStack {
+                    Text("\(ToggleVariables.integerToggle):")
+                    Text(String(intObservable.intValue!))
                 }
-            }
+                HStack {
+                    Text("\(ToggleVariables.numericToggle):")
+                    Text(String(numericObservable.numberValue!))
+                }
+                HStack {
+                    Text("\(ToggleVariables.stringToggle):")
+                    Text(stringObservable.stringValue!)
+                }
+                HStack {
+                    Text("\(ToggleVariables.encryptedToggle):")
+                    Text(secureObservable.secureValue!)
+                }
+                HStack {
+                    Text("\(ToggleVariables.objectToggle):")
+                    Text(objectObservable.objectValue?.description ?? "unknown")
+                }
+            }.padding(.horizontal, 24)
         }
     }
 }

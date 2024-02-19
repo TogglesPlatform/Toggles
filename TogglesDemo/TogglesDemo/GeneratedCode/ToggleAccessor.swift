@@ -1,11 +1,13 @@
 //  ToggleAccessor.swift
 
+// swiftlint:disable file_length
+
 import Foundation
 import Toggles
 
 public class ToggleAccessor {
     
-    private let manager: ToggleManager
+    private(set) var manager: ToggleManager
     
     public init(manager: ToggleManager) {
         self.manager = manager
@@ -13,6 +15,11 @@ public class ToggleAccessor {
 }
 
 extension ToggleAccessor {
+
+    public var objectToggle: Object {
+        get { manager.value(for: ToggleVariables.objectToggle).objectValue! }
+        set { manager.set(.object(newValue), for: ToggleVariables.objectToggle) }
+    }
 
     public var booleanToggle: Bool {
         get { manager.value(for: ToggleVariables.booleanToggle).boolValue! }
@@ -50065,3 +50072,5 @@ extension ToggleAccessor {
     }
 
 }
+
+// swiftlint:enable file_length

@@ -18,7 +18,7 @@ struct ToggleGen: ParsableCommand {
     @Option(name: .long, help: "The name of the accessor class to generate.")
     var accessorClassName: String
     
-    @Option(name: .long, help: "The path of the datas ource to use.")
+    @Option(name: .long, help: "The path of the datas source to use.")
     var datasourcePath: String
     
     @Option(name: .long, help: "The path to the folder to write the ToggleAccessor file to.")
