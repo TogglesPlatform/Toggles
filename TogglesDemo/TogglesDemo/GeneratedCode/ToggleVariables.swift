@@ -1,8 +1,12 @@
 //  ToggleVariables.swift
 
+// swiftlint:disable file_length
+
 import Foundation
 
-public struct ToggleVariables {
+public enum ToggleVariables {
+
+    public static let objectToggle = "object_toggle"
 
     public static let booleanToggle = "boolean_toggle"
 
@@ -20025,3 +20029,5 @@ public struct ToggleVariables {
     public static let string9999 = "String_9999"
 
 }
+
+// swiftlint:enable file_length

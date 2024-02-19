@@ -9,16 +9,16 @@
       }
     },
     {
-        "variable": "object_toggle",
-        "object": {
-            "boolProperty" : true,
-            "stringProperty" : "value",
-            "intProperty" : 420
-        },
-        "metadata": {
-            "group": "Raw toggles",
-            "description": "Object toggle"
-        }
+      "variable": "object_toggle",
+      "object": {
+        "boolProperty" : true,
+        "stringProperty" : "value",
+        "intProperty" : 420
+      },
+      "metadata": {
+        "group": "Raw toggles",
+        "description": "Object toggle"
+      }
     },
     {
       "variable": "integer_toggle",

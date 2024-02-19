@@ -15,6 +15,7 @@ The view will show the values updating when overrides or new configurations are 
     @ObservedObject var numericObservable: ToggleObservable
     @ObservedObject var stringObservable: ToggleObservable
     @ObservedObject var secureObservable: ToggleObservable
+    @ObservedObject var objectObservable: ToggleObservable
 
     init(manager: ToggleManager) {
         self.booleanObservable = ToggleObservable(manager: manager, variable: ToggleVariables.booleanToggle)
@@ -22,6 +23,7 @@ The view will show the values updating when overrides or new configurations are 
         self.numericObservable = ToggleObservable(manager: manager, variable: ToggleVariables.numericToggle)
         self.stringObservable = ToggleObservable(manager: manager, variable: ToggleVariables.stringToggle)
         self.secureObservable = ToggleObservable(manager: manager, variable: ToggleVariables.encryptedToggle)
+        self.objectObservable = ToggleObservable(manager: manager, variable: ToggleVariables.objectToggle)
     }
         
     var body: some View {
@@ -52,6 +54,9 @@ The view will show the values updating when overrides or new configurations are 
                     HStack {
                         Text(ToggleVariables.encryptedToggle)
                     }
+                    HStack {
+                        Text(ToggleVariables.objectToggle)
+                    }
                 }
                 VStack(alignment: .leading) {
                     HStack {
@@ -68,6 +73,9 @@ The view will show the values updating when overrides or new configurations are 
                     }
                     HStack {
                         Text(secureObservable.secureValue!)
+                    }
+                    HStack {
+                        Text(objectObservable.objectValue?.description ?? "unknown")
                     }
                 }
             }

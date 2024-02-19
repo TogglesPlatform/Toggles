@@ -16,6 +16,7 @@ struct Toggle: Equatable {
         case number(Double)
         case string(String)
         case secure(String)
+        case object(Object)
     }
     
     let variable: Variable

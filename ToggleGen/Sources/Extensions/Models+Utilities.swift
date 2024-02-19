@@ -30,6 +30,8 @@ extension Toggle {
             return "String"
         case .secure:
             return "String"
+        case .object:
+            return "Object"
         }
     }
     
@@ -45,6 +47,8 @@ extension Toggle {
             return "string"
         case .secure:
             return "secure"
+        case .object:
+            return "object"
         }
     }
 }
