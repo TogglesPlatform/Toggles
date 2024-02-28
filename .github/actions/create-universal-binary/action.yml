@@ -46,7 +46,7 @@ runs:
       shell: bash
       working-directory: tmp/universal-binary
       run: |
-        zip -r ${{ env.ZIP_FILE }} ${{ inputs.tool-name }}/${{ inputs.tool-name }}
+        zip -r ${{ env.ZIP_FILE }} ${{ inputs.tool-name }}
         echo "zip_filename=${{ env.ZIP_FILE }}" >> $GITHUB_OUTPUT
         echo "zip_path=tmp/universal-binary/${{ env.ZIP_FILE }}" >> $GITHUB_OUTPUT
       env:
