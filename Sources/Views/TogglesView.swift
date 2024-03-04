@@ -78,6 +78,10 @@ public struct TogglesView: View {
             }
         }
         .searchable(text: $searchText, prompt: "Filter toggles")
+#if os(iOS)
+        .textInputAutocapitalization(.never)
+        .autocorrectionDisabled()
+#endif
         .alert("Cleared overrides", isPresented: $presentDeleteAlert) {
             Button("OK!", role: .cancel) {}
         } message: {
