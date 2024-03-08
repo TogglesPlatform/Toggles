@@ -141,6 +141,8 @@ struct ToggleDetailView: View {
                     TextField("Override value", text: $textValue)
 #if os(iOS)
                         .keyboardType(inputValidationHelper.keyboardType)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
 #endif
                 }
                 Spacer()
