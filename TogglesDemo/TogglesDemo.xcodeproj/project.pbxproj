@@ -302,7 +302,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -enable-actor-data-race-checks";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -enable-actor-data-race-checks -enable-upcoming-feature ConciseMagicFile -enable-upcoming-feature ForwardTrailingClosures -enable-upcoming-feature BareSlashRegexLiterals -enable-upcoming-feature DeprecateApplicationMain -enable-upcoming-feature ImportObjcForwardDeclarations -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature ExistentialAny -enable-upcoming-feature ImplicitOpenExistentials -warn-concurrency";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
