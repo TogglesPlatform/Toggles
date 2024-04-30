@@ -3,6 +3,7 @@
 import SwiftUI
 import Toggles
 
+@MainActor
 struct ToggleObservablesView: View {
     
     let message = """
