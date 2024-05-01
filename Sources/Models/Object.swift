@@ -4,7 +4,7 @@ import Foundation
 
 /// Model representing object value for a Toggle.
 /// It container to access a object as a dictionary or a concrete type `T`
-public struct Object {
+public struct Object: Sendable {
     public let map: [Variable: ObjectSupportedType]
     
     public init(map: [Variable: ObjectSupportedType]) {

@@ -4,7 +4,7 @@ import Foundation
 
 /// Mutable value provider that stores toggles in memory.
 /// Alterations to toggles are not persisted.
-final public class InMemoryValueProvider {
+final public class InMemoryValueProvider: @unchecked Sendable {
     
     public let name: String
     

@@ -9,12 +9,12 @@ on:
       - main
 
 env:
-  XCODE_VERSION: 14.0.1
+  XCODE_VERSION: 15.2.0
 
 jobs:
   test:
     name: Build
-    runs-on: macos-12
+    runs-on: macos-14
     steps:
     - name: Show macOS version
       run: sw_vers
@@ -36,4 +36,4 @@ jobs:
       run: xcodebuild -showdestinations -scheme TogglesDemo
     - name: Build for destination TogglesDemo
       working-directory: ./TogglesDemo
-      run: xcodebuild build -scheme TogglesDemo -destination "platform=iOS Simulator,OS=16.0,name=iPhone 14 Pro"
+      run: xcodebuild build -scheme TogglesDemo -destination "platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro"

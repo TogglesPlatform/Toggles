@@ -4,7 +4,7 @@ import Combine
 import Foundation
 
 /// Thread-safe facade to interface with toggles.
-final public class ToggleManager: ObservableObject {
+final public class ToggleManager: ObservableObject, @unchecked Sendable {
     
     public struct ToggleManagerOptions: OptionSet {
         public var rawValue: UInt

@@ -4,7 +4,7 @@ import Foundation
 
 /// Protocol to be implemented by custom mutable value providers.
 /// A MutableValueProvider is a ValueProvider that allows settings and deleting values for given variables.
-public protocol MutableValueProvider: ValueProvider {
+public protocol MutableValueProvider: ValueProvider & Sendable {
     
     /// Sets the value for a variable.
     ///

@@ -9,12 +9,12 @@ on:
       - main
 
 env:
-  XCODE_VERSION: 14.0.1
+  XCODE_VERSION: 15.2.0
 
 jobs:
   test:
     name: Run tests
-    runs-on: macos-12
+    runs-on: macos-14
     steps:
     - name: Code Checkout
       uses: actions/checkout@v2

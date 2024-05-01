@@ -3,9 +3,9 @@
 import Foundation
 @testable import Toggles
 
-final class MockRemoteValueProvider: ValueProvider {
+final class MockRemoteValueProvider: ValueProvider, @unchecked Sendable {
     
-    var name: String = "Remote (mock)"
+    let name: String = "Remote (mock)"
     
     private var toggles: [Variable: Value]
     

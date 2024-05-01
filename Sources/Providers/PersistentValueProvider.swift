@@ -6,7 +6,7 @@ private let userDefaultsKeyPrefix = "com.toggles"
 
 /// Mutable value provider that persists toggles in the user defaults.
 /// Alterations to toggles are therefore persisted across app restarts and updates.
-final public class PersistentValueProvider {
+final public class PersistentValueProvider: @unchecked Sendable {
     
     public let name: String
     
