@@ -3,7 +3,7 @@
 import Foundation
 
 /// Value associated with a toggle.
-public enum Value: Equatable, Codable {
+public enum Value: Equatable, Codable, Sendable {
     case bool(Bool)
     case int(Int)
     case number(Double)

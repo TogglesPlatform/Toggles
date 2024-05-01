@@ -3,9 +3,9 @@
 import Foundation
 import Toggles
 
-class MockSingleValueProvider: ValueProvider {
+final class MockSingleValueProvider: ValueProvider {
     
-    var name: String = "SingleValue (mock)"
+    let name: String = "SingleValue (mock)"
     
     private let value: Value
     

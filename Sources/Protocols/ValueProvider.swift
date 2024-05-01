@@ -4,7 +4,7 @@ import Foundation
 
 /// Protocol to be implemented by custom value providers.
 /// A ValueProvider allows retrieving values for given variables.
-public protocol ValueProvider {
+public protocol ValueProvider: Sendable {
     var name: String { get }
     
     /// Retrieve the value for a variable.
