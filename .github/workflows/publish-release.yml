@@ -6,12 +6,12 @@ on:
       - '*'
 
 env:
-  XCODE_VERSION: 14.0.1
+  XCODE_VERSION: 15.2.0
 
 jobs:
   publish-release:
     name: Publish release ${{ github.ref_name }}
-    runs-on: macos-12
+    runs-on: macos-14.2.1
     steps:
     - name: Show macOS version (${{ env.XCODE_VERSION }})
       run: sw_vers
