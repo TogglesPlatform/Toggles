@@ -24,37 +24,13 @@ let package = Package(
             name: "Toggles",
             dependencies: [],
             path: "Sources",
-            resources: [.process("Resources")],
-            swiftSettings: [
-                .enableExperimentalFeature("ConciseMagicFile"),
-                .enableExperimentalFeature("ForwardTrailingClosures"),
-                .enableExperimentalFeature("BareSlashRegexLiterals"),
-                .enableExperimentalFeature("DeprecateApplicationMain"),
-                .enableExperimentalFeature("ImportObjcForwardDeclarations"),
-                .enableExperimentalFeature("DisableOutwardActorInference"),
-                .enableExperimentalFeature("InternalImportsByDefault"),
-                .enableExperimentalFeature("ExistentialAny"),
-                .enableExperimentalFeature("ImplicitOpenExistentials"),
-                .enableExperimentalFeature("StrictConcurrency")
-            ]
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "TogglesTests",
             dependencies: ["Toggles"],
             path: "Tests",
-            resources: [.process("Resources")],
-            swiftSettings: [
-                .enableExperimentalFeature("ConciseMagicFile"),
-                .enableExperimentalFeature("ForwardTrailingClosures"),
-                .enableExperimentalFeature("BareSlashRegexLiterals"),
-                .enableExperimentalFeature("DeprecateApplicationMain"),
-                .enableExperimentalFeature("ImportObjcForwardDeclarations"),
-                .enableExperimentalFeature("DisableOutwardActorInference"),
-                .enableExperimentalFeature("InternalImportsByDefault"),
-                .enableExperimentalFeature("ExistentialAny"),
-                .enableExperimentalFeature("ImplicitOpenExistentials"),
-                .enableExperimentalFeature("StrictConcurrency")
-            ]
+            resources: [.process("Resources")]
         )
     ]
 )
