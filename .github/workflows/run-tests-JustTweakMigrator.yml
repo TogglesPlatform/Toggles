@@ -14,7 +14,7 @@ env:
 jobs:
   test:
     name: Run tests
-    runs-on: macos-14.2.1
+    runs-on: macos-14
     steps:
     - name: Code Checkout
       uses: actions/checkout@v2
