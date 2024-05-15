@@ -34,4 +34,12 @@ final class ToggleManager_OverridesTests: XCTestCase {
         toggleManager.removeOverrides()
         XCTAssertEqual(toggleManager.overrides, [])
     }
+    
+    func test_removeOverrides_doesNotDeleteCache() throws {
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        _ = toggleManager.value(for: "string_toggle")
+        toggleManager.removeOverrides()
+        XCTAssertNotNil(toggleManager.cache.value(forKey: "string_toggle"))
+    }
 }
