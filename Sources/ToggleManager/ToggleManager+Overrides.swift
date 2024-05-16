@@ -13,11 +13,9 @@ extension ToggleManager {
     }
     
     /// Removes all overridden toggles in the mutable value provider, if one was provided during initialization.
-    /// This method also clears the cache.
     @discardableResult
     public func removeOverrides() -> Set<Variable> {
         queue.sync(flags: .barrier) {
-            defer { cache.evict() }
             guard let mutableValueProvider = mutableValueProvider else { return  [] }
             let variables = mutableValueProvider.variables
             for variable in variables {
