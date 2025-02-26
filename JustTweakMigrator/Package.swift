@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -12,7 +12,7 @@ let package = Package(
         .executable(name: "JustTweakMigrator", targets: ["JustTweakMigrator"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.0.0"))
+        .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMinor(from: "1.5.0"))
     ],
     targets: [
         .executableTarget(
@@ -20,13 +20,23 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
             ],
-            path: "Sources"),
+            path: "Sources",
+            swiftSettings: [
+                .enableExperimentalFeature("InternalImportsByDefault"),
+                .enableExperimentalFeature("ExistentialAny")
+            ]
+        ),
         .testTarget(
             name: "JustTweakMigratorTests",
             dependencies: ["JustTweakMigrator"],
             path: "Tests",
             resources: [
                 .process("Resources")
-            ])
+            ],
+            swiftSettings: [
+                .enableExperimentalFeature("InternalImportsByDefault"),
+                .enableExperimentalFeature("ExistentialAny")
+            ]
+        )
     ]
 )
