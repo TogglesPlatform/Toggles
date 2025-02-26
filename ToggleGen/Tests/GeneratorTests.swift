@@ -42,6 +42,18 @@ final class GeneratorTests: XCTestCase {
         XCTAssertEqual(generatedContent, expectedContent)
     }
 
+    func test_variablesContent_accessControlPackage() throws {
+        let datasourceUrl = Bundle.module.url(forResource: "TestDatasource", withExtension: "json")!
+        let generator = try Generator(datasourceUrl: datasourceUrl)
+        let variablesTemplateUrl = Bundle.module.path(forResource: "Variables", ofType: "stencil")!
+        let generatedContent = try generator.generateVariables(variablesTemplatePath: variablesTemplateUrl,
+                                                               variablesEnumName: "TestVariables",
+                                                               accessControl: .package)
+        let variablesUrl = Bundle.module.url(forResource: "TestVariables_package", withExtension: "txt")!
+        let expectedContent = try String(contentsOf: variablesUrl)
+        XCTAssertEqual(generatedContent, expectedContent)
+    }
+
     func test_accessorContent_accessControlPublic() throws {
         let datasourceUrl = Bundle.module.url(forResource: "TestDatasource", withExtension: "json")!
         let generator = try Generator(datasourceUrl: datasourceUrl)
@@ -79,7 +91,19 @@ final class GeneratorTests: XCTestCase {
         let expectedContent = try String(contentsOf: variablesUrl)
         XCTAssertEqual(generatedContent, expectedContent)
     }
-    
+
+    func test_accessorContent_accessControlPackage() throws {
+        let datasourceUrl = Bundle.module.url(forResource: "TestDatasource", withExtension: "json")!
+        let generator = try Generator(datasourceUrl: datasourceUrl)
+        let accessorTemplateUrl = Bundle.module.path(forResource: "Accessor", ofType: "stencil")!
+        let generatedContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplateUrl,
+                                                              variablesEnumName: "TestVariables",
+                                                              accessorClassName: "TestToggleAccessor",
+                                                              accessControl: .package)
+        let variablesUrl = Bundle.module.url(forResource: "TestToggleAccessor_package", withExtension: "txt")!
+        let expectedContent = try String(contentsOf: variablesUrl)
+        XCTAssertEqual(generatedContent, expectedContent)
+    }
     func test_accessorDoesNotSupportDatasourceWithDuplicateVariables() throws {
         let datasourceUrl = Bundle.module.url(forResource: "TestDatasourceWithDuplicateVariables", withExtension: "json")!
         XCTAssertThrowsError(try Generator(datasourceUrl: datasourceUrl)) { error in
