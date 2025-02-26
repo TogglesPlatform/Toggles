@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -12,7 +12,7 @@ let package = Package(
         .executable(name: "ToggleCipher", targets: ["ToggleCipher"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.0.0"))
+        .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMinor(from: "1.5.0"))
     ],
     targets: [
         .executableTarget(
@@ -22,32 +22,18 @@ let package = Package(
             ],
             path: "Sources",
             swiftSettings: [
-                            .enableExperimentalFeature("ConciseMagicFile"),
-                            .enableExperimentalFeature("ForwardTrailingClosures"),
-                            .enableExperimentalFeature("BareSlashRegexLiterals"),
-                            .enableExperimentalFeature("DeprecateApplicationMain"),
-                            .enableExperimentalFeature("ImportObjcForwardDeclarations"),
-                            .enableExperimentalFeature("DisableOutwardActorInference"),
-                            .enableExperimentalFeature("InternalImportsByDefault"),
-                            .enableExperimentalFeature("ExistentialAny"),
-                            .enableExperimentalFeature("ImplicitOpenExistentials"),
-                            .enableExperimentalFeature("StrictConcurrency")
-                        ]),
+                .enableExperimentalFeature("InternalImportsByDefault"),
+                .enableExperimentalFeature("ExistentialAny")
+            ]
+        ),
         .testTarget(
             name: "ToggleCipherTests",
             dependencies: ["ToggleCipher"],
             path: "Tests",
             swiftSettings: [
-                            .enableExperimentalFeature("ConciseMagicFile"),
-                            .enableExperimentalFeature("ForwardTrailingClosures"),
-                            .enableExperimentalFeature("BareSlashRegexLiterals"),
-                            .enableExperimentalFeature("DeprecateApplicationMain"),
-                            .enableExperimentalFeature("ImportObjcForwardDeclarations"),
-                            .enableExperimentalFeature("DisableOutwardActorInference"),
-                            .enableExperimentalFeature("InternalImportsByDefault"),
-                            .enableExperimentalFeature("ExistentialAny"),
-                            .enableExperimentalFeature("ImplicitOpenExistentials"),
-                            .enableExperimentalFeature("StrictConcurrency")
-                        ])
+                .enableExperimentalFeature("InternalImportsByDefault"),
+                .enableExperimentalFeature("ExistentialAny")
+            ]
+        )
     ]
 )
