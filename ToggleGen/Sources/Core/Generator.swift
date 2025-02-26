@@ -47,29 +47,35 @@ class Generator {
     
     func generateVariables(variablesTemplatePath: String,
                            variablesEnumName: String,
-                           accessControl: AccessControl) throws -> String {
+                           accessControl: AccessControl?) throws -> String {
         let templater = Templater()
         let variablesTemplateUrl = URL(fileURLWithPath: variablesTemplatePath)
-        let variablesContext: [String: Any] = [
+        var variablesContext: [String: Any] = [
             Constants.enumName.rawValue: variablesEnumName,
-            Constants.variables.rawValue: loadVariables(),
-            Constants.accessControl.rawValue: accessControl.rawValue
+            Constants.variables.rawValue: loadVariables()
         ]
+        if let accessControlValue = accessControl?.rawValue {
+            variablesContext[Constants.accessControl.rawValue] = accessControlValue
+        }
+
         return try templater.renderTemplate(at: variablesTemplateUrl, with: variablesContext)
     }
     
     func generateAccessor(accessorTemplatePath: String,
                           variablesEnumName: String,
                           accessorClassName: String,
-                          accessControl: AccessControl) throws -> String {
+                          accessControl: AccessControl?) throws -> String {
         let templater = Templater()
         let accessorTemplateUrl = URL(fileURLWithPath: accessorTemplatePath)
-        let accessorContext: [String: Any] = [
+        var accessorContext: [String: Any] = [
             Constants.className.rawValue: accessorClassName,
             Constants.enumName.rawValue: variablesEnumName,
-            Constants.accessorInfos.rawValue: loadAccessorInfos(),
-            Constants.accessControl.rawValue: accessControl.rawValue
+            Constants.accessorInfos.rawValue: loadAccessorInfos()
         ]
+        if let accessControlValue = accessControl?.rawValue {
+            accessorContext[Constants.accessControl.rawValue] = accessControlValue
+        }
+
         return try templater.renderTemplate(at: accessorTemplateUrl, with: accessorContext)
     }
     
