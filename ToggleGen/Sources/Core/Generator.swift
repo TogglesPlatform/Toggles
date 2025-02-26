@@ -46,13 +46,13 @@ class Generator {
     
     func generateVariables(variablesTemplatePath: String,
                            variablesEnumName: String,
-                           accessControl: AccessControl) throws -> String {
+                           accessControl: AccessControl?) throws -> String {
         let templater = Templater()
         let variablesTemplateUrl = URL(fileURLWithPath: variablesTemplatePath)
-        let variablesContext: [String: Any] = [
+        let variablesContext: [String: Any?] = [
             Constants.enumName.rawValue: variablesEnumName,
             Constants.variables.rawValue: loadVariables(),
-            Constants.accessControl.rawValue: accessControl.rawValue
+            Constants.accessControl.rawValue: accessControl?.rawValue
         ]
         return try templater.renderTemplate(at: variablesTemplateUrl, with: variablesContext)
     }
@@ -60,14 +60,14 @@ class Generator {
     func generateAccessor(accessorTemplatePath: String,
                           variablesEnumName: String,
                           accessorClassName: String,
-                          accessControl: AccessControl) throws -> String {
+                          accessControl: AccessControl?) throws -> String {
         let templater = Templater()
         let accessorTemplateUrl = URL(fileURLWithPath: accessorTemplatePath)
-        let accessorContext: [String: Any] = [
+        let accessorContext: [String: Any?] = [
             Constants.className.rawValue: accessorClassName,
             Constants.enumName.rawValue: variablesEnumName,
             Constants.accessorInfos.rawValue: loadAccessorInfos(),
-            Constants.accessControl.rawValue: accessControl.rawValue
+            Constants.accessControl.rawValue: accessControl?.rawValue
         ]
         return try templater.renderTemplate(at: accessorTemplateUrl, with: accessorContext)
     }
