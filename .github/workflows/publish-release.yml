@@ -6,17 +6,17 @@ on:
       - '*'
 
 env:
-  XCODE_VERSION: 15.2.0
+  XCODE_VERSION: 16.2.0
 
 jobs:
   publish-release:
     name: Publish release ${{ github.ref_name }}
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
     - name: Show macOS version (${{ env.XCODE_VERSION }})
       run: sw_vers
     - name: Code Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Select Xcode
       uses: ./.github/actions/select-xcode
       with:
