@@ -3,10 +3,21 @@
 import Foundation
 
 enum AccessControl: String {
+    enum Error: Swift.Error {
+        case unknownAccessControl
+    }
+
     case `open`
     case `public`
     case `package`
     case `internal`
+
+    init(value: String) throws {
+        guard let accessControl = AccessControl(rawValue: value) else {
+            throw Error.unknownAccessControl
+        }
+        self = accessControl
+    }
 }
 
 struct Constant {

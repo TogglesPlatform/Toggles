@@ -26,17 +26,27 @@ struct ToggleGen: ParsableCommand {
     
     @Option(name: .long, help: "The path to the folder to write the ToggleVariables file to.")
     var variablesOutputPath: String
-    
+
+    @Option(name: .long, help: "Access control level for the variables enum.")
+    var variablesAccessControl: String?
+
+    @Option(name: .long, help: "Access control level for the accessor class.")
+    var accessorAccessControl: String?
+
     mutating func run() throws {
         let datasourceUrl = URL(fileURLWithPath: datasourcePath)
         let generator = try Generator(datasourceUrl: datasourceUrl)
+
+        let variablesAccessControl = try variablesAccessControl.flatMap { try AccessControl(value: $0) }
+        let accessorAccessControl = try accessorAccessControl.flatMap { try AccessControl(value: $0) }
+
         let variablesContent = try generator.generateVariables(variablesTemplatePath: variablesTemplatePath,
                                                                variablesEnumName: variablesEnumName,
-                                                               accessControl: .public)
+                                                               accessControl: variablesAccessControl)
         let accessorContent = try generator.generateAccessor(accessorTemplatePath: accessorTemplatePath,
                                                              variablesEnumName: variablesEnumName,
                                                              accessorClassName: accessorClassName,
-                                                             accessControl: .public)
+                                                             accessControl: accessorAccessControl)
         let writer = Writer()
         try writer.saveAccessor(accessorContent,
                                 outputPath: accessorOutputPath,
