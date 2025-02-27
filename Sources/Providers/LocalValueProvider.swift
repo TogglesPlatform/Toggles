@@ -1,6 +1,6 @@
 //  LocalValueProvider.swift
 
-import Foundation
+public import Foundation
 
 /// Value provider with a local datasource.
 final public class LocalValueProvider {

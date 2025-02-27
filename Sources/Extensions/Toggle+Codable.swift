@@ -19,7 +19,7 @@ extension Toggle: Codable {
         case object
     }
     
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         variable = try values.decode(Variable.self, forKey: .variable)
         if let boolValue = try? values.decode(Bool.self, forKey: .bool) {
@@ -46,7 +46,7 @@ extension Toggle: Codable {
         metadata = (try? values.decode(Metadata.self, forKey: .metadata)) ?? Metadata(description: "", group: "")
     }
     
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(variable, forKey: .variable)
         

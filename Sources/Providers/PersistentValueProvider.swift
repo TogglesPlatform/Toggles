@@ -1,6 +1,6 @@
 //  PersistentValueProvider.swift
 
-import Foundation
+public import Foundation
 
 private let userDefaultsKeyPrefix = "com.toggles"
 

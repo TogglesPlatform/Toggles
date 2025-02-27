@@ -1,6 +1,6 @@
 //  ToggleObservable.swift
 
-import Combine
+public import Combine
 import Foundation
 
 /// `ObservableObject` tied to a toggle that publishes updates whenever its value changes.

@@ -22,8 +22,8 @@ let package = Package(
             ],
             path: "Sources",
             swiftSettings: [
-                .enableExperimentalFeature("InternalImportsByDefault"),
-                .enableExperimentalFeature("ExistentialAny")
+                .enableUpcomingFeature("InternalImportsByDefault"),
+                .enableUpcomingFeature("ExistentialAny")
             ]
         ),
         .testTarget(
@@ -31,8 +31,8 @@ let package = Package(
             dependencies: ["ToggleCipher"],
             path: "Tests",
             swiftSettings: [
-                .enableExperimentalFeature("InternalImportsByDefault"),
-                .enableExperimentalFeature("ExistentialAny")
+                .enableUpcomingFeature("InternalImportsByDefault"),
+                .enableUpcomingFeature("ExistentialAny")
             ]
         )
     ]
