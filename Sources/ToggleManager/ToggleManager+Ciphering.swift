@@ -22,7 +22,7 @@ extension ToggleManager {
         guard let cipherConfiguration = cipherConfiguration else {
             throw FetchError.missingCipherConfiguration
         }
-        let cipher: Ciphering
+        let cipher: any Ciphering
         switch cipherConfiguration.algorithm {
         case Algorithm.chaCha20Poly1305:
             cipher = ChaCha20Poly1305(key: cipherConfiguration.key)
@@ -49,7 +49,7 @@ extension ToggleManager {
             return ""
         }
         
-        let cipher: Ciphering
+        let cipher: any Ciphering
         switch cipherConfiguration.algorithm {
         case Algorithm.chaCha20Poly1305:
             cipher = ChaCha20Poly1305(key: cipherConfiguration.key)

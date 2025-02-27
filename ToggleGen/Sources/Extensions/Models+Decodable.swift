@@ -19,7 +19,7 @@ extension Toggle: Decodable {
         case metadata
     }
     
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         variable = try values.decode(Variable.self, forKey: .variable)
         if let boolValue = try? values.decode(Bool.self, forKey: .bool) {

@@ -5,7 +5,7 @@ import Foundation
 struct Object: Equatable, Decodable {
     let map: [String: ObjectSupportedType]
     
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         
         if let dictionary = try? container.decode([String: ObjectSupportedType].self) {

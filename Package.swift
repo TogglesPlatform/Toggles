@@ -26,8 +26,8 @@ let package = Package(
             path: "Sources",
             resources: [.process("Resources")],
             swiftSettings: [
-                .enableExperimentalFeature("InternalImportsByDefault"),
-                .enableExperimentalFeature("ExistentialAny")
+                .enableUpcomingFeature("InternalImportsByDefault"),
+                .enableUpcomingFeature("ExistentialAny")
             ]
         ),
         .testTarget(
@@ -36,8 +36,8 @@ let package = Package(
             path: "Tests",
             resources: [.process("Resources")],
             swiftSettings: [
-                .enableExperimentalFeature("InternalImportsByDefault"),
-                .enableExperimentalFeature("ExistentialAny")
+                .enableUpcomingFeature("InternalImportsByDefault"),
+                .enableUpcomingFeature("ExistentialAny")
             ]
         )
     ]

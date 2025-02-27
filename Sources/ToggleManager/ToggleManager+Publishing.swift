@@ -1,6 +1,6 @@
 //  ToggleManager+Publishing.swift
 
-import Combine
+public import Combine
 import Foundation
 
 extension ToggleManager: Publishing {

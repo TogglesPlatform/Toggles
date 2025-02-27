@@ -1,7 +1,7 @@
 //  ToggleManager.swift
 
-import Combine
-import Foundation
+public import Combine
+public import Foundation
 
 /// Thread-safe facade to interface with toggles.
 final public class ToggleManager: ObservableObject, @unchecked Sendable {
@@ -18,8 +18,8 @@ final public class ToggleManager: ObservableObject, @unchecked Sendable {
         public static let noCaching = ToggleManagerOptions(rawValue: 1 << 2)
     }
     
-    var mutableValueProvider: MutableValueProvider?
-    var valueProviders: [ValueProvider]
+    var mutableValueProvider: (any MutableValueProvider)?
+    var valueProviders: [any ValueProvider]
     var defaultValueProvider: DefaultValueProvider
     var cipherConfiguration: CipherConfiguration?
     
@@ -27,7 +27,7 @@ final public class ToggleManager: ObservableObject, @unchecked Sendable {
     let cache = ValueCache<Variable, Value>()
     var subjectsRefs = [Variable: CurrentValueSubject<Value, Never>]()
     let options: [ToggleManagerOptions]
-    var logger: Logger?
+    var logger: (any Logger)?
     
     @Published var hasOverrides: Bool = false
     
@@ -41,11 +41,11 @@ final public class ToggleManager: ObservableObject, @unchecked Sendable {
     ///   - valueProviders: An array or providers that can retrieve toggle values. The providers must be listed in order of priority.
     ///   - datasourceUrl: The url to a file containing the datasource used the base. If no mutableValueProvider and no valueProviders are provided, the manager will always return the values from the datasource.
     ///   - cipherConfiguration: An optional configuration that needs to be provided in the case any toggle is secure (meaning it needs encryption and decryption).
-    public init(mutableValueProvider: MutableValueProvider? = nil,
-                valueProviders: [ValueProvider] = [],
+    public init(mutableValueProvider: (any MutableValueProvider)? = nil,
+                valueProviders: [any ValueProvider] = [],
                 datasourceUrl: URL,
                 cipherConfiguration: CipherConfiguration? = nil,
-                logger: Logger? = nil,
+                logger: (any Logger)? = nil,
                 options: [ToggleManagerOptions] = []) throws {
         self.mutableValueProvider = mutableValueProvider
         self.valueProviders = valueProviders
@@ -108,7 +108,7 @@ extension ToggleManager {
         return !options.contains(.noCaching)
     }
     
-    private func isValueValid(value: Value, defaultValue: Value?, variableName: Variable, provider: ValueProvider) -> Bool {
+    private func isValueValid(value: Value, defaultValue: Value?, variableName: Variable, provider: any ValueProvider) -> Bool {
         if shouldCheckInvalidValueTypes, let defaultValue, !(value ~= defaultValue) {
             logger?.log(ToggleError.invalidValueType(variableName, value, provider))
             return false

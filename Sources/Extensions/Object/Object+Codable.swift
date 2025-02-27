@@ -3,7 +3,7 @@
 import Foundation
 
 extension Object: Codable {
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         
         if let dictionary = try? container.decode([Variable: ObjectSupportedType].self) {
@@ -24,7 +24,7 @@ extension Object: Codable {
         }
     }
     
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         guard !map.isEmpty else {
             throw EncodingError.invalidValue(map, .init(codingPath: [], debugDescription: "Empty object. Can not be encoded."))
         }

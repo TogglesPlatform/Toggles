@@ -7,6 +7,6 @@ public protocol Logger {
 }
 
 public enum ToggleError: Error {
-    case invalidValueType(Variable, Value, ValueProvider)
-    case insecureValue(Variable, ValueProvider)
+    case invalidValueType(Variable, Value, any ValueProvider)
+    case insecureValue(Variable, any ValueProvider)
 }

@@ -1,6 +1,6 @@
 //  TogglesView.swift
 
-import SwiftUI
+public import SwiftUI
 
 /// A view showcasing all toggles from a provided datasource.
 public struct TogglesView: View {
