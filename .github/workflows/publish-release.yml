@@ -5,65 +5,17 @@ on:
     tags:
       - '*'
 
-env:
-  XCODE_VERSION: 16.2.0
-
 jobs:
   publish-release:
     name: Publish release ${{ github.ref_name }}
-    runs-on: macos-15
+    runs-on: ubuntu-latest
+    
     steps:
-    - name: Show macOS version (${{ env.XCODE_VERSION }})
-      run: sw_vers
-    - name: Code Checkout
-      uses: actions/checkout@v4
-    - name: Select Xcode
-      uses: ./.github/actions/select-xcode
-      with:
-        xcode-version: ${{ env.XCODE_VERSION }}
     - name: Create release
       id: create-release
-      uses: ./.github/actions/create-release
+      uses: TogglesPlatform/Pipelines/actions/create-release@v1
       with:
         gh-token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ github.repository }}
         tag-name: ${{ github.ref_name }}
-    - name: Create universal binary (ToggleGen)
-      id: create-universal-binary-ToggleGen
-      uses: ./.github/actions/create-universal-binary
-      with:
-        tool-name: ToggleGen
-    - name: Upload universal binary (ToggleGen)
-      uses: ./.github/actions/upload-release-asset
-      with:
-        asset-filename: ${{ steps.create-universal-binary-ToggleGen.outputs.zip-filename }}
-        asset-path: ${{ steps.create-universal-binary-ToggleGen.outputs.zip-path }}
-        gh-token: ${{ secrets.GITHUB_TOKEN }}
-        repository: ${{ github.repository }}
-        release-id: ${{ steps.create-release.outputs.release-id }}
-    - name: Create universal binary (ToggleCipher)
-      id: create-universal-binary-ToggleCipher
-      uses: ./.github/actions/create-universal-binary
-      with:
-        tool-name: ToggleCipher
-    - name: Upload universal binary (ToggleCipher)
-      uses: ./.github/actions/upload-release-asset
-      with:
-        asset-filename: ${{ steps.create-universal-binary-ToggleCipher.outputs.zip-filename }}
-        asset-path: ${{ steps.create-universal-binary-ToggleCipher.outputs.zip-path }}
-        gh-token: ${{ secrets.GITHUB_TOKEN }}
-        repository: ${{ github.repository }}
-        release-id: ${{ steps.create-release.outputs.release-id }}
-    - name: Create universal binary (JustTweakMigrator)
-      id: create-universal-binary-JustTweakMigrator
-      uses: ./.github/actions/create-universal-binary
-      with:
-        tool-name: JustTweakMigrator
-    - name: Upload universal binary (JustTweakMigrator)
-      uses: ./.github/actions/upload-release-asset
-      with:
-        asset-filename: ${{ steps.create-universal-binary-JustTweakMigrator.outputs.zip-filename }}
-        asset-path: ${{ steps.create-universal-binary-JustTweakMigrator.outputs.zip-path }}
-        gh-token: ${{ secrets.GITHUB_TOKEN }}
-        repository: ${{ github.repository }}
-        release-id: ${{ steps.create-release.outputs.release-id }}
+        

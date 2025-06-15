@@ -8,32 +8,37 @@ on:
     branches:
       - main
 
-env:
-  XCODE_VERSION: 16.2.0
-
 jobs:
   test:
-    name: Build
+    name: Build TogglesDemo
     runs-on: macos-15
+    
     steps:
     - name: Show macOS version
       run: sw_vers
+
     - name: Code Checkout
       uses: actions/checkout@v4
+
     - name: Select Xcode
-      uses: ./.github/actions/select-xcode
+      uses: TogglesPlatform/Pipelines/actions/select-xcode@v1
       with:
-        xcode-version: ${{ env.XCODE_VERSION }}
+        xcode-version: 16.4.0
+
     - name: Check xcodebuild version
       run: xcodebuild -version
+
     - name: Check xcode embedded SDKs
       run: xcodebuild -showsdks
+
     - name: Show buildable schemes
       working-directory: ./TogglesDemo
       run: xcodebuild -list
+
     - name: Show eligible build destinations for TogglesDemo
       working-directory: ./TogglesDemo
       run: xcodebuild -showdestinations -scheme TogglesDemo
+      
     - name: Build for destination TogglesDemo
       working-directory: ./TogglesDemo
-      run: xcodebuild build -scheme TogglesDemo -destination "platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro"
+      run: xcodebuild build -scheme TogglesDemo -destination "platform=iOS Simulator,OS=18.4,name=iPhone 16 Pro"

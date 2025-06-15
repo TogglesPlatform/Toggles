@@ -1,0 +1,16 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    uses: TogglesPlatform/Pipelines/.github/workflows/run-tests.yml@v1
+    with:
+      xcode-version: 16.4.0
+      runner: 'macos-15'
