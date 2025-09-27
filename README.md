@@ -52,7 +52,7 @@ let datasourceUrl = Bundle.main.url(forResource: "DefaultDatasource", withExtens
 try ToggleManager(valueProviders: [], datasourceUrl: datasourceUrl)
 ```
 
-Optionally set a mutable value provider and multiple value providers needed for you use case: 
+Optionally set a mutable value provider and multiple value providers needed for your use case: 
 
 ```swift
 let mutableValueProvider = PersistentValueProvider(userDefaults: .standard)
@@ -77,7 +77,7 @@ Please refer to the [DocC documentation](https://togglesplatform.github.io/Toggl
 
 ## Demo app
 
-A demo app showcasing all the features is available and we encourage the reader to play with it. 
+A demo app showcasing all the features is available. We encourage the reader to play with it. 
 
 ![Toggles view in Demo app](Sources/Toggles.docc/Resources/DemoApp_iPad.png)
 
