@@ -10,11 +10,8 @@ Toggles is an elegant and powerful solution to feature flagging for Apple platfo
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FTogglesPlatform%2FToggles%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/TogglesPlatform/Toggles)
 
 
-![Toggles CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-Toggles.yml/badge.svg)
+![Toggles CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests.yml/badge.svg)
 ![TogglesDemo CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/build-TogglesDemo.yml/badge.svg)
-![ToggleGen CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-ToggleGen.yml/badge.svg)
-![ToggleCipher CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-ToggleCipher.yml/badge.svg)
-![JustTweakMigrator CI status](https://github.com/TogglesPlatform/Toggles/actions/workflows/run-tests-JustTweakMigrator.yml/badge.svg)
 
 
 ## Overview
