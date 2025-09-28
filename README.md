@@ -19,6 +19,12 @@ Toggles is an elegant and powerful solution to feature flagging for Apple platfo
 Feature flags (or feature toggles) are an important capability in modern applications. They allow apps to support different code paths and multiple features. Remote configuration of feature flags is what enables changing the behaviour of apps and the enabling/disabling of features without the need for expensive releases.
 Feature flags are at the core of A/B testing and experimentation.
 
+## Related Tools
+
+- [ToggleGen](https://github.com/TogglesPlatform/ToggleGen): a tool to generate type-safe Swift code for Toggles
+- [ToggleCipher](https://github.com/TogglesPlatform/ToggleCipher): a tool to encrypt and decrypt secure values for Toggles
+- [JustTweakMigrator](https://github.com/TogglesPlatform/JustTweakMigrator): a tool to help migrate from [JustTweak](https://github.com/justeat/JustTweak) to Toggles
+
 ## Usage
 
 Here is a quick and basic usage example.
