@@ -54,11 +54,11 @@ final class Value_UtilitiesTests: XCTestCase {
     }
     
     func test_booleanValueSFSybol() throws {
-        XCTAssertEqual(Value.bool(true).sfSymbolId, "power")
+        XCTAssertEqual(Value.bool(true).sfSymbolId, "switch.2")
     }
     
     func test_intValueSFSybol() throws {
-        XCTAssertEqual(Value.int(42).sfSymbolId, "number")
+        XCTAssertEqual(Value.int(42).sfSymbolId, "number.square")
     }
     
     func test_numberValueSFSybol() throws {
@@ -66,7 +66,7 @@ final class Value_UtilitiesTests: XCTestCase {
     }
     
     func test_stringValueSFSybol() throws {
-        XCTAssertEqual(Value.string("Hello World").sfSymbolId, "textformat.abc")
+        XCTAssertEqual(Value.string("Hello World").sfSymbolId, "textformat")
     }
     
     func test_secureValueSFSybol() throws {
