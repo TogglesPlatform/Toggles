@@ -47,13 +47,13 @@ extension Value {
         case .int:
             return "number.square"
         case .number:
-            return "number.square.fill"
+            return "function"
         case .string:
             return "textformat"
         case .secure:
-            return "eye.slash"
+            return "lock.fill"
         case .object:
-            return "aqi.medium"
+            return "curlybraces"
         }
     }
 }

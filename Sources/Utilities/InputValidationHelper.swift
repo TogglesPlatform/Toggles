@@ -70,6 +70,13 @@ struct InputValidationHelper {
         return false
     }
     
+    var isObjectToggle: Bool {
+        if case .object = toggle.value {
+            return true
+        }
+        return false
+    }
+    
     var toggleNeedsValidation: Bool {
         if case .bool = toggle.value { return false }
         if case .string = toggle.value { return false }

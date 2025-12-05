@@ -62,7 +62,7 @@ final class Value_UtilitiesTests: XCTestCase {
     }
     
     func test_numberValueSFSybol() throws {
-        XCTAssertEqual(Value.number(3.1416).sfSymbolId, "number.square.fill")
+        XCTAssertEqual(Value.number(3.1416).sfSymbolId, "function")
     }
     
     func test_stringValueSFSybol() throws {
@@ -70,10 +70,10 @@ final class Value_UtilitiesTests: XCTestCase {
     }
     
     func test_secureValueSFSybol() throws {
-        XCTAssertEqual(Value.secure("secret").sfSymbolId, "eye.slash")
+        XCTAssertEqual(Value.secure("secret").sfSymbolId, "lock.fill")
     }
     
     func test_ObjectValueSFSybol() throws {
-        XCTAssertEqual(Value.object(Object(map: [:])).sfSymbolId, "aqi.medium")
+        XCTAssertEqual(Value.object(Object(map: [:])).sfSymbolId, "curlybraces")
     }
 }
