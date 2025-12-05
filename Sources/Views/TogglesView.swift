@@ -5,33 +5,85 @@ public import SwiftUI
 /// A view showcasing all toggles from a provided datasource.
 public struct TogglesView: View {
     
+    // MARK: - Unified Toggle Row
+    
     private struct ToggleRow: View {
+        let manager: ToggleManager
+        let toggle: Toggle
+        let canOverride: Bool
         
-        private var toggle: Toggle
-
         @ObservedObject var toggleObservable: ToggleObservable
         
-        init(manager: ToggleManager, toggle: Toggle) {
+        private var isOverridden: Bool {
+            manager.isOverridden(toggle.variable)
+        }
+        
+        private var isBooleanToggle: Bool {
+            if case .bool = toggle.value { return true }
+            return false
+        }
+        
+        init(manager: ToggleManager, toggle: Toggle, canOverride: Bool) {
+            self.manager = manager
             self.toggle = toggle
+            self.canOverride = canOverride
             self.toggleObservable = ToggleObservable(manager: manager, variable: toggle.variable)
         }
         
         var body: some View {
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 12) {
+                // Type icon
                 Image(systemName: toggle.value.sfSymbolId)
-                    .padding(.trailing, 5.0)
-                VStack(alignment: .leading) {
+                    .font(.title3)
+                    .foregroundStyle(isOverridden ? .orange : .secondary)
+                    .frame(width: 28)
+                
+                // Toggle info
+                VStack(alignment: .leading, spacing: 2) {
                     Text(toggle.metadata.description)
-                        .bold()
-                        .multilineTextAlignment(.leading)
-                    Text(toggle.variable)
-                        .multilineTextAlignment(.leading)
+                        .font(.body)
+                        .fontWeight(.medium)
+                    
+                    HStack(spacing: 4) {
+                        Text(toggle.variable)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                        
+                        if isOverridden {
+                            Image(systemName: "pencil.circle.fill")
+                                .font(.caption2)
+                                .foregroundStyle(.orange)
+                        }
+                    }
                 }
-                .padding([.all], 5.0)
+                
                 Spacer()
-                Text(toggleObservable.value.description)
-                    .multilineTextAlignment(.trailing)
+                
+                // Value display / control
+                if isBooleanToggle && canOverride {
+                    SwiftUI.Toggle("", isOn: Binding(
+                        get: { toggleObservable.boolValue ?? false },
+                        set: { manager.set(.bool($0), for: toggle.variable) }
+                    ))
+                    .labelsHidden()
+                    .tint(.green)
+                } else {
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text(toggleObservable.value.description)
+                            .font(.system(.subheadline, design: .monospaced))
+                            .fontWeight(.medium)
+                            .foregroundStyle(isOverridden ? .orange : .primary)
+                        
+                        if isOverridden && !isBooleanToggle {
+                            Text("overridden")
+                                .font(.caption2)
+                                .foregroundStyle(.orange)
+                        }
+                    }
+                }
             }
+            .padding(.vertical, 4)
         }
     }
     
@@ -43,9 +95,13 @@ public struct TogglesView: View {
     @State private var showingOptions = false
     @State private var presentDeleteAlert = false
     @State private var overriddenVariables: Set<Variable> = []
-
+    
+    private var canOverride: Bool {
+        manager.mutableValueProvider != nil
+    }
+    
     /// The default initializer for the view.
-    /// 
+    ///
     /// - Parameters:
     ///   - manager: The manager used to retrieve and update the toggles. The manager should be setup using the same datasource provded to this view.
     ///   - datasourceUul: The url to the datasource.
@@ -55,13 +111,13 @@ public struct TogglesView: View {
         let groups = try! GroupLoader.loadGroups(datasourceUrl: datasourceUrl)
         self._groups = State(initialValue: groups)
     }
-
+    
     public var body: some View {
         List {
             ForEach(searchResults) { group in
                 Section(header: Text(group.title)) {
                     ForEach(group.toggles) { toggle in
-                        navigationLink(toggle: toggle)
+                        toggleRowView(for: toggle)
                     }
                 }
                 .accessibilityLabel(group.accessibilityLabel)
@@ -90,11 +146,11 @@ public struct TogglesView: View {
         }
     }
     
-    private func navigationLink(toggle: Toggle) -> some View {
+    private func toggleRowView(for toggle: Toggle) -> some View {
         NavigationLink {
             ToggleDetailView(manager: manager, toggle: toggle)
         } label: {
-            ToggleRow(manager: manager, toggle: toggle)
+            ToggleRow(manager: manager, toggle: toggle, canOverride: canOverride)
         }
         .accessibilityLabel(toggle.accessibilityLabel)
     }
@@ -129,6 +185,8 @@ struct TogglesView_Previews: PreviewProvider {
         let mutableValueProvider = PersistentValueProvider(userDefaults: .standard)
         let manager = try! ToggleManager(mutableValueProvider: mutableValueProvider,
                                          datasourceUrl: datasourceUrl)
-        return TogglesView(manager: manager, datasourceUrl: datasourceUrl)
+        NavigationView {
+            TogglesView(manager: manager, datasourceUrl: datasourceUrl)
+        }
     }
 }
