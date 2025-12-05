@@ -18,14 +18,24 @@ extension ToggleManager {
         queue.sync(flags: .barrier) {
             guard let mutableValueProvider = mutableValueProvider else { return  [] }
             let variables = mutableValueProvider.variables
-            for variable in variables {
-                DispatchQueue.main.async {
-                    self.subjectsRefs[variable]?.send(completion: .finished)
-                    self.subjectsRefs[variable] = nil
-                }
-            }
             log("Deleting all overrides.")
             mutableValueProvider.deleteAll()
+            
+            // Clear cache for all variables that had overrides
+            for variable in variables {
+                cache[variable] = nil
+            }
+            
+            // Send updated values to existing subjects
+            for variable in variables {
+                DispatchQueue.main.async {
+                    if let subject = self.subjectsRefs[variable] {
+                        let newValue = self.value(for: variable)
+                        subject.send(newValue)
+                    }
+                }
+            }
+            
             hasOverrides = false
             return variables
         }

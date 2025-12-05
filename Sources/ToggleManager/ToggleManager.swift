@@ -160,8 +160,11 @@ extension ToggleManager {
             self.cache[variable] = nil
             mutableValueProvider.delete(variable)
             DispatchQueue.main.async {
-                self.subjectsRefs[variable]?.send(completion: .finished)
-                self.subjectsRefs[variable] = nil
+                // Send the new default value to the subject
+                if let subject = self.subjectsRefs[variable] {
+                    let newValue = self.value(for: variable)
+                    subject.send(newValue)
+                }
                 self.hasOverrides = !mutableValueProvider.variables.isEmpty
             }
         }
