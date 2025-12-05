@@ -12,6 +12,16 @@ extension ToggleManager {
         }
     }
     
+    /// Returns whether the given variable has an active override.
+    /// - Parameter variable: The variable to check.
+    /// - Returns: `true` if the variable is overridden, `false` otherwise.
+    func isOverridden(_ variable: Variable) -> Bool {
+        queue.sync {
+            guard let mutableValueProvider = mutableValueProvider else { return false }
+            return mutableValueProvider.value(for: variable) != nil
+        }
+    }
+    
     /// Removes all overridden toggles in the mutable value provider, if one was provided during initialization.
     @discardableResult
     public func removeOverrides() -> Set<Variable> {

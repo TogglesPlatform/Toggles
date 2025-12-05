@@ -42,4 +42,57 @@ final class ToggleManager_OverridesTests: XCTestCase {
         toggleManager.removeOverrides()
         XCTAssertNotNil(toggleManager.cache.value(forKey: "string_toggle"))
     }
+    
+    // MARK: - isOverridden method tests
+    
+    func test_isOverridden_returnsFalse_whenNoMutableValueProvider() throws {
+        let toggleManager = try ToggleManager(datasourceUrl: url)
+        XCTAssertFalse(toggleManager.isOverridden("integer_toggle"))
+    }
+    
+    func test_isOverridden_returnsFalse_whenVariableHasNoOverride() throws {
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        XCTAssertFalse(toggleManager.isOverridden("integer_toggle"))
+    }
+    
+    func test_isOverridden_returnsTrue_whenVariableHasOverride() throws {
+        let variable = "integer_toggle"
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        toggleManager.set(.int(999), for: variable)
+        XCTAssertTrue(toggleManager.isOverridden(variable))
+    }
+    
+    func test_isOverridden_returnsFalse_afterDelete() throws {
+        let variable = "integer_toggle"
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        toggleManager.set(.int(999), for: variable)
+        XCTAssertTrue(toggleManager.isOverridden(variable))
+        
+        toggleManager.delete(variable)
+        XCTAssertFalse(toggleManager.isOverridden(variable))
+    }
+    
+    func test_isOverridden_returnsFalse_afterRemoveOverrides() throws {
+        let variable = "integer_toggle"
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        toggleManager.set(.int(999), for: variable)
+        XCTAssertTrue(toggleManager.isOverridden(variable))
+        
+        toggleManager.removeOverrides()
+        XCTAssertFalse(toggleManager.isOverridden(variable))
+    }
+    
+    func test_isOverridden_onlyAffectsSpecificVariable() throws {
+        let toggleManager = try ToggleManager(mutableValueProvider: InMemoryValueProvider(),
+                                              datasourceUrl: url)
+        toggleManager.set(.int(999), for: "integer_toggle")
+        
+        XCTAssertTrue(toggleManager.isOverridden("integer_toggle"))
+        XCTAssertFalse(toggleManager.isOverridden("string_toggle"))
+        XCTAssertFalse(toggleManager.isOverridden("boolean_toggle"))
+    }
 }
