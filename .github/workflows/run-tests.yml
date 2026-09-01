@@ -12,5 +12,5 @@ jobs:
   run-tests:
     uses: TogglesPlatform/Pipelines/.github/workflows/run-tests.yml@v1
     with:
-      xcode-version: 16.4.0
-      runner: 'macos-15'
+      xcode-version: 26.6.0
+      runner: 'macos-26'
