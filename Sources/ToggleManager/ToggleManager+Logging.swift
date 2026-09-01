@@ -3,8 +3,8 @@
 import Foundation
 
 extension ToggleManager {
-    
-    func log(_ message: String) {
-        if verbose { print("[ToggleManager] \(message)") }
+
+    func log(_ message: @autoclosure () -> String) {
+        if verbose { print("[ToggleManager] \(message())") }
     }
 }
